@@ -25,7 +25,7 @@ import { ConceptSwitcherDock } from './components/ConceptSwitcherDock';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const WISHES_STORAGE_KEY = 'wedding_wishes_long_huyen_persistent_v1';
+const WISHES_STORAGE_KEY = 'wedding_wishes_long_huyen_clean_v2';
 
 function mergeUniqueWishes(...lists: WishItem[][]): WishItem[] {
   const seen = new Set<string>();
@@ -85,22 +85,24 @@ export function App() {
   const [isMusicPlaying, setIsMusicPlaying] = useState<boolean>(false);
   const [weddingData, setWeddingData] = useState<WeddingData>(DEFAULT_WEDDING_DATA);
 
-  // Khởi tạo lời chúc từ localStorage kết hợp dữ liệu mặc định
+  // Khởi tạo lời chúc từ localStorage (không tự động sinh dữ liệu mẫu/test)
   const [wishes, setWishes] = useState<WishItem[]>(() => {
     if (typeof window !== 'undefined') {
       try {
+        // Xóa bộ nhớ đệm chứa dữ liệu mẫu/test cũ nếu có
+        window.localStorage.removeItem('wedding_wishes_long_huyen_persistent_v1');
         const raw = window.localStorage.getItem(WISHES_STORAGE_KEY);
         if (raw) {
           const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            return mergeUniqueWishes(parsed, DEFAULT_WEDDING_DATA.initialWishes);
+          if (Array.isArray(parsed)) {
+            return mergeUniqueWishes(parsed);
           }
         }
       } catch {
         // ignore
       }
     }
-    return DEFAULT_WEDDING_DATA.initialWishes;
+    return [];
   });
 
   const [scrollProgress, setScrollProgress] = useState<number>(0);

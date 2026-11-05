@@ -380,24 +380,5 @@ export const DEFAULT_WEDDING_DATA: WeddingData = {
     message:
       'Sự xuất hiện của bạn sẽ làm cho ngày cưới của chúng tôi trở nên đặc biệt hơn bao giờ hết. Chúng tôi rất mong được đón tiếp bạn trong ngày trọng đại, để cùng nhau chứng kiến và sẻ chia niềm hạnh phúc trọn vẹn.',
   },
-  initialWishes: [
-    {
-      id: 'w1',
-      name: 'Hội bạn thân Hưng Yên',
-      message: 'Chúc mừng hạnh phúc Thành Long & Thanh Huyền! Chúc hai bạn trăm năm tình viên mãn, bạc đầu nghĩa phu thê nhé!',
-      createdAt: 'Hôm nay',
-    },
-    {
-      id: 'w2',
-      name: 'Anh chị Minh Tuấn',
-      message: 'Bộ ảnh cưới của hai em đẹp xuất sắc! Hẹn gặp hai em ngày 27-28/11 cùng nâng ly chúc mừng hạnh phúc nhé!',
-      createdAt: 'Hôm nay',
-    },
-    {
-      id: 'w3',
-      name: 'Gia đình chú Hòa',
-      message: 'Chúc hai cháu Thành Long - Thanh Huyền tân hôn hạnh phúc, luôn yêu thương và đồng hành cùng nhau suốt cuộc đời.',
-      createdAt: 'Hôm nay',
-    },
-  ],
+  initialWishes: [],
 };

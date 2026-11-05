@@ -275,24 +275,38 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                 </div>
 
                 <div className="flex-1 overflow-y-auto space-y-3.5 pr-1.5">
-                  {wishes.map((w) => (
-                    <motion.div
-                      key={w.id}
-                      initial={{ opacity: 0, y: 12, scale: 0.96 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      className="rounded-2xl bg-white/10 border border-white/15 p-4 sm:p-4.5"
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <h4 className="font-serif-luxury text-lg sm:text-xl font-semibold text-amber-200">
-                          {w.name}
-                        </h4>
-                        <span className="text-[11px] text-white/60">{w.createdAt}</span>
+                  {wishes.length === 0 ? (
+                    <div className="h-full flex flex-col items-center justify-center text-center px-4 py-10 text-white/75">
+                      <div className="w-12 h-12 rounded-full bg-amber-300/15 border border-amber-300/35 flex items-center justify-center mb-3 text-amber-300">
+                        <MessageSquareHeart className="w-6 h-6" />
                       </div>
-                      <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-light">
-                        “{w.message}”
+                      <p className="font-serif-luxury text-xl text-amber-200 mb-1">
+                        Sổ Lưu Bút Đang Chờ Lời Chúc Đầu Tiên
                       </p>
-                    </motion.div>
-                  ))}
+                      <p className="text-xs sm:text-sm text-white/70 max-w-xs leading-relaxed">
+                        Hãy là người đầu tiên gửi lời chúc tốt đẹp nhất tới Thành Long &amp; Thanh Huyền trong ngày trọng đại nhé!
+                      </p>
+                    </div>
+                  ) : (
+                    wishes.map((w) => (
+                      <motion.div
+                        key={w.id}
+                        initial={{ opacity: 0, y: 12, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        className="rounded-2xl bg-white/10 border border-white/15 p-4 sm:p-4.5"
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <h4 className="font-serif-luxury text-lg sm:text-xl font-semibold text-amber-200">
+                            {w.name}
+                          </h4>
+                          <span className="text-[11px] text-white/60">{w.createdAt}</span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-light">
+                          “{w.message}”
+                        </p>
+                      </motion.div>
+                    ))
+                  )}
                 </div>
 
                 <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-amber-200/80 shrink-0">

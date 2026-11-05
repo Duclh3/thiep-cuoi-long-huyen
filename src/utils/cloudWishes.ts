@@ -49,7 +49,7 @@ async function kvSet(key: string, val: string): Promise<boolean> {
  */
 export async function fetchCloudWishes(): Promise<WishItem[]> {
   try {
-    const countStr = await kvGet('w_cnt');
+    const countStr = await kvGet('lh26_cnt');
     const count = countStr ? parseInt(countStr, 10) : 0;
     if (!count || isNaN(count) || count <= 0) return [];
 
@@ -60,10 +60,10 @@ export async function fetchCloudWishes(): Promise<WishItem[]> {
       promises.push(
         (async () => {
           const [n, m1, m2, t] = await Promise.all([
-            kvGet(`w_${i}_n`),
-            kvGet(`w_${i}_m1`),
-            kvGet(`w_${i}_m2`),
-            kvGet(`w_${i}_t`),
+            kvGet(`lh26_${i}_n`),
+            kvGet(`lh26_${i}_m1`),
+            kvGet(`lh26_${i}_m2`),
+            kvGet(`lh26_${i}_t`),
           ]);
           if (!n || !m1) return null;
           const fullB64Msg = m2 && m2 !== 'NONE' ? m1 + m2 : m1;
@@ -89,7 +89,7 @@ export async function fetchCloudWishes(): Promise<WishItem[]> {
  */
 export async function saveCloudWish(wish: WishItem): Promise<void> {
   try {
-    const countStr = await kvGet('w_cnt');
+    const countStr = await kvGet('lh26_cnt');
     const currentCount = countStr ? parseInt(countStr, 10) : 0;
     const nextIdx = (isNaN(currentCount) ? 0 : currentCount) + 1;
 
@@ -100,12 +100,12 @@ export async function saveCloudWish(wish: WishItem): Promise<void> {
     const timeB64 = toBase64Url(wish.createdAt.slice(0, 35));
 
     await Promise.all([
-      kvSet(`w_${nextIdx}_n`, nameB64),
-      kvSet(`w_${nextIdx}_m1`, part1),
-      kvSet(`w_${nextIdx}_m2`, part2),
-      kvSet(`w_${nextIdx}_t`, timeB64),
+      kvSet(`lh26_${nextIdx}_n`, nameB64),
+      kvSet(`lh26_${nextIdx}_m1`, part1),
+      kvSet(`lh26_${nextIdx}_m2`, part2),
+      kvSet(`lh26_${nextIdx}_t`, timeB64),
     ]);
-    await kvSet('w_cnt', String(nextIdx));
+    await kvSet('lh26_cnt', String(nextIdx));
   } catch {
     // Fallback localStorage vẫn hoạt động
   }
