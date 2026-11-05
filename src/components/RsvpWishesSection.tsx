@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import confetti from 'canvas-confetti';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -407,36 +408,49 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
         </div>
       </section>
 
-      {/* Lightbox Phóng To Mã QR Khi Chạm Vào */}
-      <AnimatePresence>
-        {zoomQrUrl && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setZoomQrUrl(null)}
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4"
-          >
-            <button
-              type="button"
-              onClick={() => setZoomQrUrl(null)}
-              className="cursor-pointer absolute top-5 right-5 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center"
-              aria-label="Đóng"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <motion.img
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              src={zoomQrUrl}
-              alt="Mã QR Phóng To"
-              className="max-h-[82vh] max-w-[90vw] rounded-2xl bg-white p-4 object-contain shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
+      {/* Lightbox Phóng To Mã QR Khi Chạm Vào — Render qua Portal để luôn phủ toàn màn hình điện thoại */}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {zoomQrUrl && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setZoomQrUrl(null)}
+                className="fixed inset-0 z-[100] w-screen h-[100dvh] bg-black/92 backdrop-blur-xl flex flex-col items-center justify-center p-4"
+              >
+                <div className="w-full max-w-sm flex items-center justify-between mb-3">
+                  <span className="font-tall-editorial text-xs tracking-[0.2em] text-amber-200 uppercase">
+                    MÃ QR MỪNG CƯỚI
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setZoomQrUrl(null)}
+                    className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/15 hover:bg-white/30 border border-white/25 text-white text-xs font-semibold"
+                    aria-label="Đóng"
+                  >
+                    <X className="w-4 h-4" />
+                    <span>Đóng</span>
+                  </button>
+                </div>
+                <motion.img
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  src={zoomQrUrl}
+                  alt="Mã QR Phóng To"
+                  className="max-h-[75dvh] max-w-[88vw] rounded-2xl bg-white p-4 object-contain shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <p className="mt-3 text-[11px] text-white/70">
+                  Chạm vào nền tối hoặc nút Đóng để quay lại
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
 
       {/* PHẦN 2: ĐẠI TIỆC KẾT MÀN & LỜI CẢM ƠN (Ảnh nền: LVT08639.jpg) */}
       <section className="relative min-h-[82vh] w-full overflow-hidden flex flex-col items-center justify-center text-center text-white px-4 py-28">

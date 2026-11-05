@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Expand, X, ChevronLeft, ChevronRight, Sparkles, Pause, Play, Film, Crown, BookOpen } from 'lucide-react';
 import { StyleId, THEMES, WeddingData } from '../data/weddingData';
@@ -17,6 +18,23 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
   const theme = THEMES[styleId];
   const carouselCount = data.carousel3DImages.length;
   const angleStep = 360 / carouselCount;
+
+  // Danh sách toàn bộ ảnh trong Gallery để hỗ trợ bấm Qua/Lại khi xem ảnh phóng to trên điện thoại
+  const allGalleryUrls = React.useMemo(() => {
+    const urls = [
+      ...data.carousel3DImages.map((item) => item.url),
+      ...data.album9Images.map((item) => item.url),
+    ];
+    return Array.from(new Set(urls));
+  }, [data.carousel3DImages, data.album9Images]);
+
+  const handleStepLightbox = (dir: -1 | 1, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!lightboxUrl || allGalleryUrls.length === 0) return;
+    const idx = allGalleryUrls.indexOf(lightboxUrl);
+    const nextIdx = (idx + dir + allGalleryUrls.length) % allGalleryUrls.length;
+    setLightboxUrl(allGalleryUrls[nextIdx]);
+  };
 
   // Tốc độ xoay chậm rãi, êm dịu (~0.13 độ/frame)
   useEffect(() => {
@@ -323,36 +341,75 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
         </div>
       </div>
 
-      {/* Lightbox Xem Ảnh Toàn Màn Hình */}
-      <AnimatePresence>
-        {lightboxUrl && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/92 backdrop-blur-xl flex items-center justify-center p-4"
-            onClick={() => setLightboxUrl(null)}
-          >
-            <button
-              onClick={() => setLightboxUrl(null)}
-              className="cursor-pointer absolute top-5 right-5 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center z-20"
-              aria-label="Đóng"
-            >
-              <X className="w-5 h-5" />
-            </button>
+      {/* Lightbox Xem Ảnh Toàn Màn Hình — Render qua Portal ra ngoài body để không bị lỗi perspective trên iOS/Android */}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {lightboxUrl && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] w-screen h-[100dvh] bg-black/92 backdrop-blur-xl flex flex-col items-center justify-center p-4 select-none"
+                onClick={() => setLightboxUrl(null)}
+              >
+                {/* Thanh đỉnh: Số thứ tự ảnh & Nút Đóng nổi bật */}
+                <div className="w-full max-w-4xl flex items-center justify-between px-2 mb-3 z-20">
+                  <span className="font-tall-editorial text-xs tracking-[0.22em] text-amber-200 uppercase">
+                    ALBUM ẢNH CƯỚI • {allGalleryUrls.indexOf(lightboxUrl) + 1} / {allGalleryUrls.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setLightboxUrl(null)}
+                    className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/15 hover:bg-white/30 border border-white/25 text-white text-xs font-semibold"
+                    aria-label="Đóng"
+                  >
+                    <X className="w-4 h-4" />
+                    <span>Đóng</span>
+                  </button>
+                </div>
 
-            <motion.img
-              initial={{ scale: 0.92, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
-              src={lightboxUrl}
-              alt="Ảnh phóng to"
-              className="max-h-[85vh] max-w-[94vw] rounded-lg object-contain shadow-2xl border-4 border-white"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
+                {/* Khung Ảnh Chính Giữa Màn Hình + Nút Chuyển Ảnh Trái/Phải */}
+                <div className="relative flex items-center justify-center w-full max-w-4xl max-h-[76dvh]">
+                  <button
+                    type="button"
+                    onClick={(e) => handleStepLightbox(-1, e)}
+                    className="cursor-pointer absolute left-1 sm:left-4 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/65 hover:bg-black/85 border border-white/30 text-white flex items-center justify-center shadow-xl"
+                    aria-label="Ảnh trước"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+
+                  <motion.img
+                    key={lightboxUrl}
+                    initial={{ scale: 0.92, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.92, opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    src={lightboxUrl}
+                    alt="Ảnh cưới phóng to"
+                    className="max-h-[75dvh] max-w-[90vw] rounded-xl object-contain shadow-[0_25px_70px_rgba(0,0,0,0.85)] border-2 border-white/90"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+
+                  <button
+                    type="button"
+                    onClick={(e) => handleStepLightbox(1, e)}
+                    className="cursor-pointer absolute right-1 sm:right-4 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/65 hover:bg-black/85 border border-white/30 text-white flex items-center justify-center shadow-xl"
+                    aria-label="Ảnh tiếp theo"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <p className="mt-3 text-[11px] text-white/70 tracking-wider">
+                  Chạm vào nền tối hoặc nút Đóng để quay lại thiệp
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </section>
   );
 };
