@@ -22,6 +22,7 @@ import { EventsSection } from './components/EventsSection';
 import { GallerySection } from './components/GallerySection';
 import { RsvpWishesSection } from './components/RsvpWishesSection';
 import { ConceptSwitcherDock } from './components/ConceptSwitcherDock';
+import { WhiteMinimalInvitation } from './components/WhiteMinimalInvitation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,11 +47,12 @@ function mergeUniqueWishes(...lists: WishItem[][]): WishItem[] {
 }
 
 /**
- * Nhận diện phong cách từ 4 đường dẫn public độc lập:
+ * Nhận diện phong cách từ 5 đường dẫn public độc lập:
  * - /fine-art -> fairytale (01. Thơ Mộng Fine Art)
  * - /vogue -> editorial (02. Tạp Chí Vogue)
  * - /starlight -> cinematic (03. Đêm Pháo Hoa 3D)
  * - /indochine -> indochine (04. Cung Đình Đông Dương)
+ * - /minimal hoặc /tone-trang -> minimal (05. Tone Trắng Minimal giống video mẫu)
  */
 function detectInitialRouteStyle(): { style: StyleId; isLockedSingleStyle: boolean } {
   if (typeof window === 'undefined') {
@@ -72,6 +74,14 @@ function detectInitialRouteStyle(): { style: StyleId; isLockedSingleStyle: boole
   }
   if (pathname.includes('/indochine') || queryStyle === 'indochine') {
     return { style: 'indochine', isLockedSingleStyle: true };
+  }
+  if (
+    pathname.includes('/minimal') ||
+    pathname.includes('/tone-trang') ||
+    queryStyle === 'minimal' ||
+    queryStyle === 'tone-trang'
+  ) {
+    return { style: 'minimal', isLockedSingleStyle: true };
   }
 
   return { style: 'fairytale', isLockedSingleStyle: false };
@@ -272,53 +282,94 @@ export function App() {
         />
       </div>
 
-      {/* LỚP 1: CẢNH 3D WEBGL THỜI GIAN THỰC (CẶP NHẪN CƯỚI VÀNG KIM 3D & THIÊN HÀ SAO 3D) */}
-      <ThreeWeddingScene styleId={styleId} />
+      {/* PHONG CÁCH 05 (TONE TRẮNG MINIMAL): GIAO DIỆN NGUYÊN BẢN 100% GIỐNG VIDEO MẪU */}
+      {styleId === 'minimal' ? (
+        <>
+          <WhiteMinimalInvitation
+            data={weddingData}
+            wishes={wishes}
+            onAddWish={handleAddWish}
+            isMusicPlaying={isMusicPlaying}
+            onToggleMusic={handleToggleMusic}
+            onStartMusic={() => {
+              if (!soundEngine.getIsPlaying()) {
+                soundEngine.startMusic(0);
+                setIsMusicPlaying(true);
+              }
+            }}
+          />
+          {!isLockedSingleStyle && (
+            <ConceptSwitcherDock
+              styleId={styleId}
+              onSelectStyle={(id) => setStyleId(id)}
+              isMusicPlaying={isMusicPlaying}
+              onToggleMusic={handleToggleMusic}
+              onReplayGate={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              data={weddingData}
+              onUpdateData={setWeddingData}
+              guestName={guestName}
+              onUpdateGuestName={setGuestName}
+              onResetDefault={handleResetDefault}
+              hideStyleSwitcher={isLockedSingleStyle}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          {/* LỚP 1: CẢNH 3D WEBGL THỜI GIAN THỰC (CẶP NHẪN CƯỚI VÀNG KIM 3D & THIÊN HÀ SAO 3D) */}
+          <ThreeWeddingScene styleId={styleId} />
 
-      {/* LỚP 2: ĐỘNG CƠ PHÁO HOA & HẠT BAY ĐẶC TRƯNG CHO TỪNG PHONG CÁCH */}
-      <AmbientCanvas styleId={styleId} />
+          {/* LỚP 2: ĐỘNG CƠ PHÁO HOA & HẠT BAY ĐẶC TRƯNG CHO TỪNG PHONG CÁCH */}
+          <AmbientCanvas styleId={styleId} />
 
-      {/* Màn hình Mở Thiệp Tự Động (8.8s) */}
-      <OpeningGate
-        isOpen={isGateOpen}
-        onUnlock={handleUnlockGate}
-        styleId={styleId}
-        onSelectStyle={(id) => setStyleId(id)}
-        data={weddingData}
-        guestName={guestName}
-        hideStyleSwitcher={isLockedSingleStyle}
-      />
+          {/* Màn hình Mở Thiệp Tự Động (8.8s) */}
+          <OpeningGate
+            isOpen={isGateOpen}
+            onUnlock={handleUnlockGate}
+            styleId={styleId}
+            onSelectStyle={(id) => {
+              setStyleId(id);
+              if (id === 'minimal') {
+                setIsGateOpen(true);
+              }
+            }}
+            data={weddingData}
+            guestName={guestName}
+            hideStyleSwitcher={isLockedSingleStyle}
+          />
 
-      {/* Nội dung chính với hiệu ứng 3D Scrollytelling tối ưu Mobile-First */}
-      <main className="relative z-20">
-        <HeroSection styleId={styleId} data={weddingData} guestName={guestName} />
-        <CoupleSection styleId={styleId} data={weddingData} />
-        <CountdownSection styleId={styleId} data={weddingData} />
-        <EventsSection styleId={styleId} data={weddingData} />
-        <LoveStorySection styleId={styleId} data={weddingData} />
-        <GallerySection styleId={styleId} data={weddingData} />
-        <RsvpWishesSection
-          styleId={styleId}
-          data={weddingData}
-          wishes={wishes}
-          onAddWish={handleAddWish}
-        />
-      </main>
+          {/* Nội dung chính với hiệu ứng 3D Scrollytelling tối ưu Mobile-First */}
+          <main className="relative z-20">
+            <HeroSection styleId={styleId} data={weddingData} guestName={guestName} />
+            <CoupleSection styleId={styleId} data={weddingData} />
+            <CountdownSection styleId={styleId} data={weddingData} />
+            <EventsSection styleId={styleId} data={weddingData} />
+            <LoveStorySection styleId={styleId} data={weddingData} />
+            <GallerySection styleId={styleId} data={weddingData} />
+            <RsvpWishesSection
+              styleId={styleId}
+              data={weddingData}
+              wishes={wishes}
+              onAddWish={handleAddWish}
+            />
+          </main>
 
-      {/* Dynamic Island Music Player (5 bài hát thật) & Thanh Điều Khiển */}
-      <ConceptSwitcherDock
-        styleId={styleId}
-        onSelectStyle={(id) => setStyleId(id)}
-        isMusicPlaying={isMusicPlaying}
-        onToggleMusic={handleToggleMusic}
-        onReplayGate={() => setIsGateOpen(false)}
-        data={weddingData}
-        onUpdateData={setWeddingData}
-        guestName={guestName}
-        onUpdateGuestName={setGuestName}
-        onResetDefault={handleResetDefault}
-        hideStyleSwitcher={isLockedSingleStyle}
-      />
+          {/* Dynamic Island Music Player (5 bài hát thật) & Thanh Điều Khiển */}
+          <ConceptSwitcherDock
+            styleId={styleId}
+            onSelectStyle={(id) => setStyleId(id)}
+            isMusicPlaying={isMusicPlaying}
+            onToggleMusic={handleToggleMusic}
+            onReplayGate={() => setIsGateOpen(false)}
+            data={weddingData}
+            onUpdateData={setWeddingData}
+            guestName={guestName}
+            onUpdateGuestName={setGuestName}
+            onResetDefault={handleResetDefault}
+            hideStyleSwitcher={isLockedSingleStyle}
+          />
+        </>
+      )}
     </div>
   );
 }

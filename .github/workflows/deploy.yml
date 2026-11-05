@@ -33,11 +33,13 @@ jobs:
       - name: Build production bundle
         run: |
           pnpm build
-          mkdir -p dist/fine-art dist/vogue dist/starlight dist/indochine
+          mkdir -p dist/fine-art dist/vogue dist/starlight dist/indochine dist/minimal dist/tone-trang
           cp dist/index.html dist/fine-art/index.html
           cp dist/index.html dist/vogue/index.html
           cp dist/index.html dist/starlight/index.html
           cp dist/index.html dist/indochine/index.html
+          cp dist/index.html dist/minimal/index.html
+          cp dist/index.html dist/tone-trang/index.html
           cp dist/index.html dist/404.html
           touch dist/.nojekyll
 

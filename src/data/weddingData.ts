@@ -1,4 +1,4 @@
-export type StyleId = 'fairytale' | 'editorial' | 'cinematic' | 'indochine';
+export type StyleId = 'fairytale' | 'editorial' | 'cinematic' | 'indochine' | 'minimal';
 
 export interface ThemeConfig {
   id: StyleId;
@@ -121,6 +121,30 @@ export const THEMES: Record<StyleId, ThemeConfig> = {
     secondaryHex: '#D4AF37',
     confettiColors: ['#F7CE68', '#D4AF37', '#FF4D4D', '#FFF8EC'],
     isDark: true,
+  },
+  minimal: {
+    id: 'minimal',
+    code: '05',
+    name: 'White Minimal Envelope',
+    vietnameseName: 'Tone Trắng Minimal',
+    tagline: 'Phong bì trắng sáp bướm • Lịch ảnh • Tinh tế tối giản',
+    badgeText: 'THIỆP MỜI CƯỚI • 28.11.2026',
+    gateTitle: 'Thiệp Mời',
+    gateActionText: 'Nhấp để mở...',
+    bgPrimary: 'bg-[#FAF8F5]',
+    bgSecondary: 'bg-[#F4EFEA]',
+    bgCard: 'bg-[#F5EFEA]',
+    textPrimary: 'text-[#2B2523]',
+    textSecondary: 'text-[#6E625C]',
+    textAccent: 'text-[#5A1824]',
+    borderSubtle: 'border-[#E6DDD4]',
+    borderAccent: 'border-[#D5C7B8]',
+    btnPrimary: 'bg-[#1C1C1C] text-white hover:bg-[#333333] shadow-md',
+    btnSecondary: 'border border-[#2B2523] text-[#2B2523] hover:bg-[#2B2523] hover:text-white',
+    accentHex: '#5A1824',
+    secondaryHex: '#C5A059',
+    confettiColors: ['#5A1824', '#D4AF37', '#F4ACB7', '#FFF8F0'],
+    isDark: false,
   },
 };
 
