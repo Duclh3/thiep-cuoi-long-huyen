@@ -40,17 +40,17 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header thay đổi theo 4 Phong Cách */}
         <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
-          <div className="inline-flex items-center gap-2 mb-1">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 mb-1 max-w-full">
             {styleId === 'indochine' ? (
-              <Crown className="w-4 h-4 text-[#F7CE68]" />
+              <Crown className="w-4 h-4 text-[#F7CE68] shrink-0" />
             ) : styleId === 'cinematic' ? (
-              <Film className="w-4 h-4 text-[#F0AD64]" />
+              <Film className="w-4 h-4 text-[#F0AD64] shrink-0" />
             ) : styleId === 'editorial' ? (
-              <BookOpen className="w-4 h-4 text-[#9E7B3B]" />
+              <BookOpen className="w-4 h-4 text-[#9E7B3B] shrink-0" />
             ) : (
-              <Sparkles className="w-4 h-4" style={{ color: theme.accentHex }} />
+              <Sparkles className="w-4 h-4 shrink-0" style={{ color: theme.accentHex }} />
             )}
-            <span className={`font-tall-editorial text-xs uppercase tracking-[0.3em] ${theme.textAccent}`}>
+            <span className={`font-tall-editorial text-[10px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.28em] whitespace-nowrap ${theme.textAccent}`}>
               {styleId === 'editorial'
                 ? 'VOGUE LOOKBOOK ARCHIVE • 2026'
                 : styleId === 'cinematic'
@@ -132,17 +132,17 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
             <button
               type="button"
               onClick={() => setAutoRotate((prev) => !prev)}
-              className={`cursor-pointer px-5 py-2 rounded-full text-[11px] uppercase tracking-[0.18em] font-semibold flex items-center gap-2 shadow-lg transition-transform hover:scale-105 ${theme.btnPrimary}`}
+              className={`cursor-pointer px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.15em] font-semibold flex items-center justify-center gap-2 whitespace-nowrap shadow-lg transition-transform hover:scale-105 ${theme.btnPrimary}`}
             >
               {autoRotate ? (
                 <>
-                  <Pause className="w-3.5 h-3.5 fill-current" />
-                  <span>Tạm Dừng Xoay</span>
+                  <Pause className="w-3.5 h-3.5 fill-current shrink-0" />
+                  <span className="whitespace-nowrap">Tạm Dừng Xoay</span>
                 </>
               ) : (
                 <>
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Tiếp Tục Xoay 3D</span>
+                  <Play className="w-3.5 h-3.5 fill-current shrink-0" />
+                  <span className="whitespace-nowrap">Tiếp Tục Xoay 3D</span>
                 </>
               )}
             </button>
@@ -172,7 +172,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
                 ? 'Bách Niên Giai Lão'
                 : 'Sweet Memories'}
             </p>
-            <h3 className={`font-serif-luxury text-3xl sm:text-5xl font-semibold uppercase tracking-wider ${theme.textPrimary}`}>
+            <h3 className={`font-serif-luxury text-2xl sm:text-5xl font-semibold uppercase tracking-[0.06em] sm:tracking-wider ${theme.textPrimary}`}>
               {styleId === 'editorial'
                 ? 'ẤN PHẨM THỜI TRANG VOGUE'
                 : styleId === 'cinematic'
@@ -298,9 +298,9 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
                   </div>
 
                   {/* Chân khung ảnh đặc trưng theo từng phong cách */}
-                  <div className="mt-3 px-1 flex items-center justify-between">
+                  <div className="mt-3 px-1 flex items-center justify-between gap-2 whitespace-nowrap">
                     <span
-                      className={`font-script-luxury text-2xl leading-none ${
+                      className={`font-script-luxury text-2xl whitespace-nowrap ${
                         styleId === 'cinematic' || styleId === 'indochine'
                           ? 'text-amber-200'
                           : 'text-[#5A4638]'
@@ -308,7 +308,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
                     >
                       Thành Long &amp; Thanh Huyền
                     </span>
-                    <span className="font-tall-editorial text-[11px] tracking-[0.22em] opacity-75">
+                    <span className="font-tall-editorial text-[11px] tracking-[0.2em] opacity-75 whitespace-nowrap">
                       {styleId === 'indochine'
                         ? `囍 0${idx + 1}`
                         : styleId === 'cinematic'

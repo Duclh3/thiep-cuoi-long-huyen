@@ -108,18 +108,20 @@ export const LoveStorySection: React.FC<LoveStorySectionProps> = ({ styleId, dat
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         {/* Tiêu đề lớn: Ngày nên duyên (Thứ 7, 28/11/2026) */}
-        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-amber-300/40 mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span className="text-[11px] uppercase tracking-[0.28em] text-amber-200 font-semibold">
+        <div className="text-center max-w-2xl mx-auto mb-14 md:mb-24">
+          <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-amber-300/40 mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.12em] sm:tracking-[0.26em] text-amber-200 font-semibold whitespace-nowrap">
               THỨ BẢY • 28 . 11 . 2026 (20/10 BÍNH NGỌ)
             </span>
           </div>
 
-          <h2 className="font-serif-luxury text-5xl sm:text-6xl md:text-7xl font-bold tracking-wide shimmer-gold-text mb-3">
-            {data.ceremonySection.title}
-          </h2>
-          <p className="text-xs sm:text-sm text-white/85 font-light">
+          <div>
+            <h2 className="font-serif-luxury text-4xl sm:text-6xl md:text-7xl font-bold tracking-wide shimmer-gold-text mb-2">
+              {data.ceremonySection.title}
+            </h2>
+          </div>
+          <p className="text-xs sm:text-sm text-white/85 font-light max-w-md mx-auto">
             Khoảnh khắc thiêng liêng khi hai gia đình chính thức đón dâu hiền, rể thảo về chung một nhà.
           </p>
         </div>
@@ -180,38 +182,38 @@ export const LoveStorySection: React.FC<LoveStorySectionProps> = ({ styleId, dat
 
                   {/* Thẻ Thông Tin Lớn Rõ Ràng */}
                   <div className="w-full md:w-1/2">
-                    <div className="rounded-[32px] bg-black/45 backdrop-blur-2xl border border-amber-300/40 p-7 sm:p-10 shadow-2xl space-y-4">
-                      <span className="inline-block text-[11px] uppercase tracking-[0.28em] text-amber-300 font-semibold">
+                    <div className="rounded-[28px] sm:rounded-[32px] bg-black/50 backdrop-blur-2xl border border-amber-300/40 p-6 sm:p-10 shadow-2xl space-y-4">
+                      <span className="inline-block text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.26em] text-amber-300 font-semibold whitespace-nowrap">
                         {item.badge}
                       </span>
 
-                      <h3 className="font-serif-luxury text-4xl sm:text-5xl font-bold tracking-wider uppercase text-white">
+                      <h3 className="font-serif-luxury text-3xl sm:text-5xl font-bold tracking-wider uppercase text-white">
                         {item.title}
                       </h3>
 
-                      <div className="py-2 border-y border-white/15">
-                        <p className="font-serif-luxury text-2xl sm:text-3xl font-semibold text-amber-200">
+                      <div className="py-2.5 border-y border-white/15">
+                        <p className="font-serif-luxury text-xl sm:text-3xl font-semibold text-amber-200 whitespace-nowrap">
                           {item.timeAndDateSolar}
                         </p>
-                        <p className="font-serif-luxury italic text-base sm:text-lg text-white/80 mt-1">
+                        <p className="font-serif-luxury italic text-sm sm:text-lg text-white/80 mt-1">
                           {item.dateLunar}
                         </p>
                       </div>
 
-                      <div className="flex items-start gap-2.5 text-sm sm:text-base text-white/95 leading-relaxed pt-1">
-                        <MapPin className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" />
+                      <div className="flex items-start gap-2.5 text-xs sm:text-base text-white/95 leading-relaxed pt-1">
+                        <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 shrink-0 mt-0.5" />
                         <span>{item.location}</span>
                       </div>
 
-                      <div className="pt-3">
+                      <div className="pt-2">
                         <a
                           href={item.mapUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-bold text-xs uppercase tracking-[0.2em] shadow-lg hover:brightness-110 transition-all"
+                          className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-bold text-xs uppercase tracking-[0.14em] sm:tracking-[0.2em] whitespace-nowrap shadow-lg hover:brightness-110 transition-all"
                         >
-                          <Navigation className="w-4 h-4" />
-                          <span>Chỉ Đường Tới Lễ Đường</span>
+                          <Navigation className="w-4 h-4 shrink-0" />
+                          <span className="whitespace-nowrap">Chỉ Đường Tới Lễ Đường</span>
                         </a>
                       </div>
                     </div>

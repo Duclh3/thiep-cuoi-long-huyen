@@ -31,7 +31,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
             ) : (
               <Sparkles className="w-4 h-4" style={{ color: theme.accentHex }} />
             )}
-            <span className={`font-tall-editorial text-xs uppercase tracking-[0.3em] ${theme.textAccent}`}>
+            <span className={`font-tall-editorial text-[10px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.3em] whitespace-nowrap ${theme.textAccent}`}>
               THỨ SÁU • 27 . 11 . 2026 (19/10 BÍNH NGỌ)
             </span>
           </div>
@@ -69,12 +69,12 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
                 {/* Cột Thông Tin Chính (5/12) */}
                 <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between text-left border-b-2 lg:border-b-0 lg:border-r-2 border-dashed border-stone-400">
                   <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="px-3 py-1 bg-stone-950 text-[#F5E1A4] font-tall-editorial text-[10px] tracking-[0.25em] uppercase">
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="px-3 py-1 bg-stone-950 text-[#F5E1A4] font-tall-editorial text-[10px] tracking-[0.08em] sm:tracking-[0.2em] uppercase whitespace-nowrap shrink-0">
                         {ev.badge}
                       </span>
-                      <span className="font-tall-editorial text-xs tracking-[0.22em] text-stone-500">
-                        VIP PASS // 0{index + 1}
+                      <span className="font-tall-editorial text-[11px] sm:text-xs tracking-[0.14em] sm:tracking-[0.22em] text-stone-500 whitespace-nowrap shrink-0">
+                        VIP // 0{index + 1}
                       </span>
                     </div>
                     <h3 className="font-serif-luxury text-3xl sm:text-4xl font-bold uppercase tracking-wide text-stone-950 mb-2">
@@ -141,15 +141,15 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
                 }`}
               >
                 <div>
-                  {/* Nhãn trên cùng */}
-                  <div className="flex items-center justify-between mb-5 pb-3 border-b border-current/10">
+                  {/* Nhãn trên cùng — Luôn nằm gọn trên 1 hàng ngang, không bao giờ rớt dòng trên Mobile */}
+                  <div className="flex items-center justify-between gap-2 mb-5 pb-3 border-b border-current/10">
                     <span
-                      className={`px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] ${theme.btnPrimary}`}
+                      className={`px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-[0.08em] sm:tracking-[0.16em] whitespace-nowrap shrink-0 ${theme.btnPrimary}`}
                     >
                       {ev.badge}
                     </span>
-                    <span className={`font-tall-editorial text-sm tracking-[0.22em] ${theme.textAccent}`}>
-                      {styleId === 'indochine' ? `囍 ${ev.dayMonth}.${ev.year}` : `0${index + 1} // ${ev.dayMonth}.${ev.year}`}
+                    <span className={`font-tall-editorial text-xs sm:text-sm tracking-[0.18em] whitespace-nowrap shrink-0 ${theme.textAccent}`}>
+                      {styleId === 'indochine' ? `囍 0${index + 1}` : `NO. 0${index + 1}`}
                     </span>
                   </div>
 
@@ -228,10 +228,12 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
                     href={ev.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`cursor-pointer w-full py-4 px-6 rounded-full text-xs sm:text-sm uppercase tracking-[0.2em] font-semibold flex items-center justify-center gap-2 shadow-xl ${theme.btnPrimary}`}
+                    className={`cursor-pointer w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.18em] font-semibold flex items-center justify-center gap-2 whitespace-nowrap text-center shadow-xl ${theme.btnPrimary}`}
                   >
-                    <Navigation className="w-4 h-4" />
-                    <span>Mở Bản Đồ Chỉ Đường ({ev.type === 'groom' ? 'Nhà Trai' : 'Nhà Gái'})</span>
+                    <Navigation className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                    <span className="whitespace-nowrap">
+                      Mở Bản Đồ Chỉ Đường ({ev.type === 'groom' ? 'Nhà Trai' : 'Nhà Gái'})
+                    </span>
                   </a>
                 </div>
               </motion.div>

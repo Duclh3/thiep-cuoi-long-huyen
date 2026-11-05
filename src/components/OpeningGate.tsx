@@ -310,30 +310,30 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
               )}
               {styleId === 'editorial' && (
                 <div>
-                  <span className="font-tall-editorial text-[10px] tracking-[0.38em] text-[#C5A059] uppercase block">
+                  <span className="font-tall-editorial text-[10px] tracking-[0.16em] sm:tracking-[0.34em] text-[#C5A059] uppercase block whitespace-nowrap">
                     VOGUE EXCLUSIVE EDITION • NOVEMBER 2026
                   </span>
-                  <p className="font-serif-luxury text-2xl sm:text-3xl text-white tracking-wider uppercase mt-0.5">
+                  <p className="font-serif-luxury text-2xl sm:text-3xl text-white tracking-wider uppercase mt-0.5 whitespace-nowrap">
                     {stage === 'kiss' ? 'THE COUTURE KISS' : 'UNFOLDING THE ISSUE'}
                   </p>
                 </div>
               )}
               {styleId === 'cinematic' && (
                 <div>
-                  <span className="font-tall-editorial text-[10px] tracking-[0.35em] text-[#F0AD64] uppercase block">
+                  <span className="font-tall-editorial text-[10px] tracking-[0.18em] sm:tracking-[0.32em] text-[#F0AD64] uppercase block whitespace-nowrap">
                     ★ A STARLIGHT MOTION PICTURE ★
                   </span>
-                  <p className="font-script-luxury text-3xl sm:text-4xl text-amber-200">
+                  <p className="font-script-luxury text-3xl sm:text-4xl text-amber-200 whitespace-nowrap">
                     {stage === 'kiss' ? 'Dưới bầu trời pháo hoa rực sáng...' : 'Màn nhung điện ảnh đang mở...'}
                   </p>
                 </div>
               )}
               {styleId === 'indochine' && (
                 <div>
-                  <span className="font-tall-editorial text-[10px] tracking-[0.35em] text-[#F7CE68] uppercase block">
+                  <span className="font-tall-editorial text-[10px] tracking-[0.14em] sm:tracking-[0.32em] text-[#F7CE68] uppercase block whitespace-nowrap">
                     ✦ LỄ THÀNH HÔN &amp; VU QUY • BÍNH NGỌ 2026 ✦
                   </span>
-                  <p className="font-serif-luxury text-2xl sm:text-3xl text-[#FFF8EC] font-bold tracking-widest mt-0.5">
+                  <p className="font-serif-luxury text-xl sm:text-3xl text-[#FFF8EC] font-bold tracking-widest mt-0.5 whitespace-nowrap">
                     {stage === 'kiss' ? 'DUYÊN TIỀN ĐỊNH • TƠ HỒNG KẾT' : 'KHAI MỞ ẤN SONG HỶ'}
                   </p>
                 </div>
@@ -485,7 +485,7 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
                       Sweet Kiss • Forever Love
                     </span>
                   </div>
-                  <p className="font-tall-editorial text-[11px] tracking-[0.22em] text-[#4A3B31] uppercase">
+                  <p className="font-tall-editorial text-[10px] sm:text-[11px] tracking-[0.1em] sm:tracking-[0.2em] text-[#4A3B31] uppercase whitespace-nowrap">
                     THÀNH LONG &amp; THANH HUYỀN • 28.11.2026
                   </p>
                 </motion.div>
@@ -585,17 +585,17 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
                   className="absolute inset-y-0 left-0 w-1/2 bg-[#141210] border-y-2 border-l-2 border-r border-[#C5A059] z-20 p-3.5 sm:p-4 flex flex-col justify-between items-start text-left shadow-2xl"
                 >
                   <div className="w-full">
-                    <span className="font-tall-editorial text-[9px] tracking-[0.28em] text-[#C5A059] block mb-1">
+                    <span className="font-tall-editorial text-[9px] tracking-[0.16em] sm:tracking-[0.24em] text-[#C5A059] block mb-1 whitespace-nowrap">
                       NO. 28 // GROOM
                     </span>
-                    <div className="font-serif-luxury text-lg sm:text-xl font-semibold text-white tracking-[0.12em] leading-snug pr-4">
+                    <div className="font-serif-luxury text-lg sm:text-xl font-semibold text-white tracking-[0.1em] leading-snug pr-4 whitespace-nowrap">
                       THÀNH
                       <br />
                       LONG
                     </div>
                   </div>
                   <div className="w-8 h-[1px] bg-[#C5A059]/50" />
-                  <span className="font-tall-editorial text-[9px] tracking-[0.25em] text-stone-400">
+                  <span className="font-tall-editorial text-[9px] tracking-[0.16em] sm:tracking-[0.24em] text-stone-400 whitespace-nowrap">
                     BORN • 2000
                   </span>
                 </motion.div>
@@ -606,17 +606,17 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
                   style={{ transformOrigin: 'right center', transformStyle: 'preserve-3d' }}
                   className="absolute inset-y-0 right-0 w-1/2 bg-[#141210] border-y-2 border-r-2 border-l border-[#C5A059] z-20 p-3.5 sm:p-4 flex flex-col justify-between items-end text-right shadow-2xl"
                 >
-                  <span className="font-tall-editorial text-[9px] tracking-[0.28em] text-[#C5A059]">
+                  <span className="font-tall-editorial text-[9px] tracking-[0.16em] sm:tracking-[0.24em] text-[#C5A059] whitespace-nowrap">
                     NOV 2026
                   </span>
                   <div className="w-8 h-[1px] bg-[#C5A059]/50" />
                   <div className="w-full">
-                    <div className="font-serif-luxury text-lg sm:text-xl font-semibold text-white tracking-[0.12em] leading-snug pl-4 mb-1">
+                    <div className="font-serif-luxury text-lg sm:text-xl font-semibold text-white tracking-[0.1em] leading-snug pl-4 mb-1 whitespace-nowrap">
                       THANH
                       <br />
                       HUYỀN
                     </div>
-                    <span className="font-tall-editorial text-[9px] tracking-[0.25em] text-stone-400 block">
+                    <span className="font-tall-editorial text-[9px] tracking-[0.16em] sm:tracking-[0.24em] text-stone-400 block whitespace-nowrap">
                       BRIDE • 2000
                     </span>
                   </div>
@@ -680,7 +680,7 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
 
                 {/* Thân hộp nhung đêm ánh vàng đồng */}
                 <div className="absolute inset-x-0 bottom-0 h-[72%] rounded-b-xl bg-gradient-to-b from-[#241B18] to-[#120D0B] border-2 border-[#F0AD64]/65 z-20 flex flex-col items-center justify-end pb-3 shadow-2xl">
-                  <span className="font-tall-editorial text-[10px] tracking-[0.35em] text-[#F0AD64]">
+                  <span className="font-tall-editorial text-[10px] tracking-[0.16em] sm:tracking-[0.32em] text-[#F0AD64] whitespace-nowrap">
                     ★ VIP PREMIERE TICKET • 28.11.2026 ★
                   </span>
                 </div>
@@ -840,9 +840,9 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
           </div>
 
           {/* Thanh tiến trình tự động mở thiệp (8.8s) ở đáy màn hình */}
-          <div className="relative z-20 w-full max-w-xs mx-auto text-center pb-1">
+          <div className="relative z-20 w-full max-w-md mx-auto text-center pb-1 px-2">
             <div
-              className={`w-full h-1.5 rounded-full overflow-hidden mb-1.5 ${
+              className={`w-full max-w-xs mx-auto h-1.5 rounded-full overflow-hidden mb-1.5 ${
                 styleId === 'fairytale' ? 'bg-[#E2D7C5]' : 'bg-white/20'
               }`}
             >
@@ -852,7 +852,7 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
               />
             </div>
             <p
-              className={`text-[11px] tracking-wider ${
+              className={`text-[10px] sm:text-[11px] tracking-wider whitespace-nowrap ${
                 styleId === 'fairytale' ? 'text-[#7A6858]' : 'text-white/75'
               }`}
             >

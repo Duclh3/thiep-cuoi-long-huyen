@@ -134,17 +134,17 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
         </div>
 
         <div className="relative z-10 w-full max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-amber-300/40 mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span className="font-tall-editorial text-[11px] uppercase tracking-[0.28em] text-amber-200">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-amber-300/40 mb-2 max-w-full">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+              <span className="font-tall-editorial text-[10px] sm:text-[11px] uppercase tracking-[0.14em] sm:tracking-[0.26em] text-amber-200 whitespace-nowrap">
                 SWEET BLESSINGS • SỔ LƯU BÚT VĨNH CỬU
               </span>
             </div>
             <p className="font-script-luxury text-4xl sm:text-5xl text-amber-200 -mb-1">
               Lời Chúc Trăm Năm
             </p>
-            <h2 className="font-serif-luxury text-4xl sm:text-6xl font-bold text-white drop-shadow-lg">
+            <h2 className="font-serif-luxury text-3xl sm:text-6xl font-bold text-white drop-shadow-lg">
               Gửi Lời Chúc Đến Cặp Đôi
             </h2>
           </div>
@@ -254,10 +254,10 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
 
                   <button
                     type="submit"
-                    className="cursor-pointer w-full py-4 px-6 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-bold text-xs sm:text-sm uppercase tracking-[0.22em] flex items-center justify-center gap-2 shadow-xl hover:brightness-110 transition-all"
+                    className="cursor-pointer w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-bold text-xs sm:text-sm uppercase tracking-[0.1em] sm:tracking-[0.2em] flex items-center justify-center gap-2 whitespace-nowrap shadow-xl hover:brightness-110 transition-all"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Gửi Lời Chúc &amp; Bắn Pháo Hoa 🎆</span>
+                    <Send className="w-4 h-4 shrink-0" />
+                    <span className="whitespace-nowrap">Gửi Lời Chúc &amp; Bắn Pháo Hoa 🎆</span>
                   </button>
                 </div>
               </form>
@@ -265,12 +265,12 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
 
             {/* Cột Phải: Danh Sách Lời Chúc Pha Lê (Bằng đúng chiều cao lg:h-[570px] của Cột Trái) */}
             <div className="lg:col-span-6 flex">
-              <div className="w-full h-full lg:h-[570px] rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-6 sm:p-8 shadow-2xl text-white flex flex-col justify-between">
-                <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/15 shrink-0">
-                  <h3 className="font-serif-luxury text-2xl sm:text-3xl font-semibold text-amber-100">
+              <div className="w-full h-[500px] lg:h-[570px] rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-6 sm:p-8 shadow-2xl text-white flex flex-col justify-between">
+                <div className="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-white/15 shrink-0">
+                  <h3 className="font-serif-luxury text-xl sm:text-3xl font-semibold text-amber-100 whitespace-nowrap">
                     Lời Chúc Từ Người Thương ({wishes.length})
                   </h3>
-                  <Heart className="w-5 h-5 fill-rose-500 text-rose-500 animate-pulse" />
+                  <Heart className="w-5 h-5 fill-rose-500 text-rose-500 animate-pulse shrink-0" />
                 </div>
 
                 <div className="flex-1 overflow-y-auto space-y-3.5 pr-1.5">
@@ -375,17 +375,17 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                         onClick={() =>
                           handleCopyBankAccount(card.key, card.info.accountNumber)
                         }
-                        className={`cursor-pointer col-span-3 py-2.5 px-3 rounded-xl text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 transition-all shadow-sm ${card.btnBg}`}
+                        className={`cursor-pointer col-span-3 py-2.5 px-2.5 sm:px-3 rounded-xl text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1.5 whitespace-nowrap transition-all shadow-sm ${card.btnBg}`}
                       >
                         {isCopied ? (
                           <>
-                            <Check className="w-3.5 h-3.5 text-emerald-300" />
-                            <span>Đã Chép STK</span>
+                            <Check className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
+                            <span className="whitespace-nowrap">Đã Chép STK</span>
                           </>
                         ) : (
                           <>
-                            <Copy className="w-3.5 h-3.5" />
-                            <span>Sao Chép STK</span>
+                            <Copy className="w-3.5 h-3.5 shrink-0" />
+                            <span className="whitespace-nowrap">Sao Chép STK</span>
                           </>
                         )}
                       </button>
@@ -393,10 +393,10 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                       <a
                         href={card.info.qrImageUrl}
                         download={card.downloadName}
-                        className="cursor-pointer col-span-2 py-2.5 px-3 rounded-xl border border-stone-300 bg-stone-100 hover:bg-stone-200 text-stone-800 text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1 transition-all"
+                        className="cursor-pointer col-span-2 py-2.5 px-2.5 sm:px-3 rounded-xl border border-stone-300 bg-stone-100 hover:bg-stone-200 text-stone-800 text-[11px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1 whitespace-nowrap transition-all"
                       >
-                        <Download className="w-3.5 h-3.5" />
-                        <span>Tải QR</span>
+                        <Download className="w-3.5 h-3.5 shrink-0" />
+                        <span className="whitespace-nowrap">Tải QR</span>
                       </a>
                     </div>
                   </div>
@@ -462,42 +462,44 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
             “{data.thankYouText.message}”
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-3.5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
             <button
               type="button"
               onClick={() => {
                 triggerCelebration();
               }}
-              className="cursor-pointer inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-bold text-xs uppercase tracking-[0.2em] shadow-2xl hover:scale-105 transition-transform"
+              className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-bold text-xs uppercase tracking-[0.14em] sm:tracking-[0.2em] whitespace-nowrap shadow-2xl hover:scale-105 transition-transform"
             >
-              <Sparkles className="w-4 h-4" />
-              <span>🎆 Bắn Pháo Hoa Chúc Phúc</span>
+              <Sparkles className="w-4 h-4 shrink-0" />
+              <span className="whitespace-nowrap">🎆 Bắn Pháo Hoa Chúc Phúc</span>
             </button>
 
             <button
               type="button"
               onClick={handleShareLink}
-              className="cursor-pointer inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/80 bg-black/35 hover:bg-white hover:text-stone-900 text-xs uppercase tracking-[0.2em] transition-all duration-300"
+              className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/80 bg-black/35 hover:bg-white hover:text-stone-900 text-xs uppercase tracking-[0.14em] sm:tracking-[0.2em] whitespace-nowrap transition-all duration-300"
             >
               {copiedLink ? (
                 <>
-                  <Check className="w-4 h-4 text-emerald-400" />
-                  <span>Đã Sao Chép Link Thiệp!</span>
+                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span className="whitespace-nowrap">Đã Sao Chép Link Thiệp!</span>
                 </>
               ) : (
                 <>
-                  <Share2 className="w-4 h-4" />
-                  <span>Chia Sẻ Thiệp Cưới</span>
+                  <Share2 className="w-4 h-4 shrink-0" />
+                  <span className="whitespace-nowrap">Chia Sẻ Thiệp Cưới</span>
                 </>
               )}
             </button>
           </div>
 
-          <div className="mt-14 pt-6 border-t border-white/20 text-xs text-white/80 flex items-center justify-center gap-2">
-            <span className="font-script-luxury text-2xl text-amber-200">{data.groom.fullName}</span>
-            <Heart className="w-4 h-4 fill-rose-500 text-rose-500 animate-bounce" />
-            <span className="font-script-luxury text-2xl text-amber-200">{data.bride.fullName}</span>
-            <span className="opacity-70 font-tall-editorial tracking-widest">• 28.11.2026</span>
+          <div className="mt-12 pt-6 pb-8 border-t border-white/20 text-xs text-white/80 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2.5">
+            <div className="flex items-center justify-center gap-2 whitespace-nowrap">
+              <span className="font-script-luxury text-2xl sm:text-3xl text-amber-200">{data.groom.fullName}</span>
+              <Heart className="w-4 h-4 fill-rose-500 text-rose-500 animate-bounce shrink-0" />
+              <span className="font-script-luxury text-2xl sm:text-3xl text-amber-200">{data.bride.fullName}</span>
+            </div>
+            <span className="opacity-75 font-tall-editorial tracking-[0.22em] whitespace-nowrap">• 28 . 11 . 2026 •</span>
           </div>
         </div>
       </section>

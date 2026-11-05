@@ -20,19 +20,19 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ styleId, data }) =
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header Nghệ Thuật */}
         <div className="text-center max-w-2xl mx-auto mb-14 md:mb-20">
-          <div className="inline-flex items-center gap-2 mb-1">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 mb-1 max-w-full">
             {styleId === 'indochine' ? (
-              <Crown className="w-4 h-4 text-[#F7CE68]" />
+              <Crown className="w-4 h-4 text-[#F7CE68] shrink-0" />
             ) : styleId === 'cinematic' ? (
-              <Film className="w-4 h-4 text-[#F0AD64]" />
+              <Film className="w-4 h-4 text-[#F0AD64] shrink-0" />
             ) : styleId === 'editorial' ? (
-              <BookOpen className="w-4 h-4 text-[#9E7B3B]" />
+              <BookOpen className="w-4 h-4 text-[#9E7B3B] shrink-0" />
             ) : (
-              <Sparkles className="w-4 h-4" style={{ color: theme.accentHex }} />
+              <Sparkles className="w-4 h-4 shrink-0" style={{ color: theme.accentHex }} />
             )}
-            <span className={`font-tall-editorial text-xs uppercase tracking-[0.32em] ${theme.textAccent}`}>
+            <span className={`font-tall-editorial text-[10px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.28em] whitespace-nowrap ${theme.textAccent}`}>
               {styleId === 'editorial'
-                ? 'VOGUE EXCLUSIVE PROFILES // GROOM & BRIDE'
+                ? 'VOGUE PROFILES // GROOM & BRIDE'
                 : styleId === 'cinematic'
                 ? 'STARRING CAST // THE LEADING COUPLE'
                 : styleId === 'indochine'
@@ -198,17 +198,17 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ styleId, data }) =
             STYLE 01 (FINE ART) & STYLE 04 (ĐÔNG DƯƠNG): Khung Chân Dung Đôi Sang Trọng
            ========================================================================= */}
         {(styleId === 'fairytale' || styleId === 'indochine') && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-stretch">
             {[
               {
-                no: styleId === 'indochine' ? '囍 TÂN LANG // CHÚ RỂ' : 'NO. 01 // CHÚ RỂ (THE GROOM)',
+                no: styleId === 'indochine' ? '囍 TÂN LANG • CHÚ RỂ' : 'NO. 01 // THE GROOM',
                 role: 'CHÚ RỂ',
                 script: 'The Groom',
                 person: data.groom,
                 tilt: '-rotate-1',
               },
               {
-                no: styleId === 'indochine' ? '囍 TÂN NƯƠNG // CÔ DÂU' : 'NO. 02 // CÔ DÂU (THE BRIDE)',
+                no: styleId === 'indochine' ? '囍 TÂN NƯƠNG • CÔ DÂU' : 'NO. 02 // THE BRIDE',
                 role: 'CÔ DÂU',
                 script: 'The Bride',
                 person: data.bride,
@@ -235,19 +235,19 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ styleId, data }) =
 
                   <div>
                     <div
-                      className={`flex items-center justify-between mb-3 pb-2 border-b ${
+                      className={`flex items-center justify-between gap-2 mb-3 pb-2 border-b whitespace-nowrap ${
                         styleId === 'indochine' ? 'border-[#F7CE68]/30' : 'border-stone-200'
                       }`}
                     >
                       <span
-                        className={`font-tall-editorial text-xs uppercase tracking-[0.26em] font-medium ${
+                        className={`font-tall-editorial text-[11px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.22em] font-medium whitespace-nowrap ${
                           styleId === 'indochine' ? 'text-[#F7CE68]' : 'text-[#7C2334]'
                         }`}
                       >
                         {item.no}
                       </span>
-                      <span className="font-tall-editorial text-xs tracking-[0.2em] opacity-75">
-                        BORN IN {item.person.birthYear}
+                      <span className="font-tall-editorial text-[11px] sm:text-xs tracking-[0.16em] opacity-75 whitespace-nowrap">
+                        BORN • {item.person.birthYear}
                       </span>
                     </div>
 

@@ -248,7 +248,7 @@ export const ConceptSwitcherDock: React.FC<ConceptSwitcherDockProps> = ({
               <button
                 type="button"
                 onClick={() => setShowQuickMenu((prev) => !prev)}
-                className="cursor-pointer px-3 py-2.5 rounded-full bg-stone-950/90 backdrop-blur-xl border border-amber-300/45 text-amber-200 text-[11px] font-semibold shadow-xl hover:bg-stone-900 transition-all"
+                className="cursor-pointer px-3.5 py-2 rounded-full bg-stone-950/90 backdrop-blur-xl border border-amber-300/45 text-amber-200 text-[11px] font-semibold shadow-xl hover:bg-stone-900 transition-all whitespace-nowrap shrink-0"
               >
                 {showQuickMenu ? 'Đóng Menu' : 'Mục Lục Nhanh'}
               </button>
@@ -258,7 +258,7 @@ export const ConceptSwitcherDock: React.FC<ConceptSwitcherDockProps> = ({
                 onClick={() => scrollToTarget('hero-quick-nav')}
                 title="Cuộn lên mục Điều hướng: Lịch trình & Bản đồ, Gửi lời chúc & Mừng cưới"
                 aria-label="Cuộn lên đầu trang"
-                className="cursor-pointer w-11 h-11 rounded-full bg-gradient-to-br from-amber-300 via-amber-200 to-amber-400 text-stone-950 border-2 border-white shadow-[0_10px_25px_rgba(0,0,0,0.45)] flex items-center justify-center hover:scale-108 transition-transform"
+                className="cursor-pointer w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-amber-300 via-amber-200 to-amber-400 text-stone-950 border-2 border-white shadow-[0_10px_25px_rgba(0,0,0,0.45)] flex items-center justify-center shrink-0 hover:scale-108 transition-transform"
               >
                 <ArrowUp className="w-5 h-5 stroke-[2.5]" />
               </button>
@@ -270,10 +270,16 @@ export const ConceptSwitcherDock: React.FC<ConceptSwitcherDockProps> = ({
       {/* THANH CHUYỂN ĐỔI 4 PHONG CÁCH 3D & PHÁO HOA Ở CẠNH DƯỚI MÀN HÌNH */}
       <div
         className={`fixed bottom-3 left-1/2 -translate-x-1/2 z-40 ${
-          hideStyleSwitcher ? 'w-auto' : 'w-[96%] max-w-2xl'
+          hideStyleSwitcher ? 'w-max max-w-[94vw]' : 'w-[95%] max-w-2xl'
         }`}
       >
-        <div className="bg-stone-950/90 backdrop-blur-2xl border border-white/15 rounded-2xl sm:rounded-full p-1.5 sm:p-2 shadow-[0_20px_60px_rgba(0,0,0,0.65)] flex flex-col sm:flex-row items-center gap-1.5">
+        <div
+          className={`bg-stone-950/92 backdrop-blur-2xl border border-amber-300/25 shadow-[0_20px_60px_rgba(0,0,0,0.65)] ${
+            hideStyleSwitcher
+              ? 'rounded-full p-1.5 flex flex-row items-center gap-2'
+              : 'rounded-2xl sm:rounded-full p-1.5 sm:p-2 flex flex-col sm:flex-row items-center gap-1.5'
+          }`}
+        >
           {/* 4 Nút Chọn Phong Cách (Ẩn khi mở bằng link đơn phong cách) */}
           {!hideStyleSwitcher && (
             <div className="grid grid-cols-4 gap-1 w-full sm:flex-1">
@@ -283,13 +289,14 @@ export const ConceptSwitcherDock: React.FC<ConceptSwitcherDockProps> = ({
                 return (
                   <button
                     key={id}
+                    type="button"
                     onClick={() => {
                       onSelectStyle(id);
                       window.triggerWeddingFireworks?.(3);
                     }}
-                    className={`cursor-pointer py-2 px-1.5 sm:px-3 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-medium transition-all duration-300 flex items-center justify-center gap-1 ${
+                    className={`cursor-pointer h-8 sm:h-9 px-1.5 sm:px-3 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-medium transition-all duration-300 flex items-center justify-center gap-1 whitespace-nowrap ${
                       active
-                        ? 'bg-gradient-to-r from-amber-300 via-amber-100 to-white text-stone-950 font-bold shadow-md scale-[1.02]'
+                        ? 'bg-gradient-to-r from-amber-300 via-amber-100 to-white text-stone-950 font-bold shadow-md'
                         : 'text-stone-300 hover:text-white hover:bg-white/10'
                     }`}
                   >
@@ -301,30 +308,30 @@ export const ConceptSwitcherDock: React.FC<ConceptSwitcherDockProps> = ({
             </div>
           )}
 
-          {/* Nút Pháo Hoa & Nút Mở Lại Thiệp */}
+          {/* Nút Pháo Hoa & Nút Mở Lại Thiệp — Luôn nằm gọn trên 1 dòng, bằng nhau tuyệt đối */}
           <div
-            className={`flex items-center gap-1.5 w-full sm:w-auto justify-end ${
+            className={`flex items-center gap-2 ${
               hideStyleSwitcher
-                ? 'px-1'
-                : 'border-t sm:border-t-0 sm:border-l border-white/15 pt-1 sm:pt-0 sm:pl-2'
+                ? 'w-auto'
+                : 'w-full sm:w-auto border-t sm:border-t-0 sm:border-l border-white/15 pt-1.5 sm:pt-0 sm:pl-2'
             }`}
           >
             <button
               type="button"
               onClick={() => window.triggerWeddingFireworks?.(6)}
-              className="cursor-pointer flex-1 sm:flex-initial inline-flex items-center justify-center gap-1 px-3.5 py-1.5 rounded-xl sm:rounded-full bg-amber-400/20 hover:bg-amber-400/35 border border-amber-300/40 text-amber-200 text-[11px] font-semibold"
+              className="cursor-pointer flex-1 sm:flex-initial h-9 px-4 rounded-full bg-amber-400/20 hover:bg-amber-400/35 border border-amber-300/45 text-amber-200 text-xs font-semibold inline-flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 transition-colors"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>🎆 Pháo Hoa</span>
+              <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+              <span className="whitespace-nowrap">Pháo Hoa</span>
             </button>
 
             <button
               type="button"
               onClick={onReplayGate}
-              className="cursor-pointer flex-1 sm:flex-initial inline-flex items-center justify-center gap-1 px-3.5 py-1.5 rounded-xl sm:rounded-full bg-white/10 hover:bg-white/20 text-white text-[11px]"
+              className="cursor-pointer flex-1 sm:flex-initial h-9 px-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-medium inline-flex items-center justify-center gap-1.5 whitespace-nowrap shrink-0 transition-colors"
             >
-              <MailOpen className="w-3.5 h-3.5 text-amber-300" />
-              <span>Mở Thiệp</span>
+              <MailOpen className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+              <span className="whitespace-nowrap">Mở Thiệp</span>
             </button>
           </div>
         </div>

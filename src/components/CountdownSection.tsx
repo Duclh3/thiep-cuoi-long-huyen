@@ -110,7 +110,7 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Cột Trái: Khung Ảnh Lễ Đường 3D (LVT08589.jpg) + Đồng Hồ Lật Số */}
           <div ref={leftBlockRef} className="lg:col-span-7 space-y-6">
-            <div className="relative rounded-[32px] overflow-hidden border-2 border-amber-300/50 shadow-2xl aspect-[16/11] sm:aspect-[16/10]">
+            <div className="relative rounded-[28px] sm:rounded-[32px] overflow-hidden border-2 border-amber-300/50 shadow-2xl min-h-[340px] sm:min-h-0 sm:aspect-[16/10]">
               <img
                 src={data.sectionImages.countdown}
                 alt="Save the Date"
@@ -119,25 +119,25 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20" />
 
               {/* Nội dung nổi trên ảnh */}
-              <div className="absolute inset-0 p-5 sm:p-8 flex flex-col justify-between text-white">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-black/45 backdrop-blur-md border border-white/25 text-[10px] sm:text-xs uppercase tracking-[0.25em]">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <div className="absolute inset-0 p-4 sm:p-8 flex flex-col justify-between text-white">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1 rounded-full bg-black/45 backdrop-blur-md border border-white/25 text-[10px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.24em] whitespace-nowrap">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
                     CÙNG ĐẾM NGƯỢC THỜI GIAN
                   </span>
-                  <Heart className="w-6 h-6 fill-rose-500 text-rose-500 animate-bounce" />
+                  <Heart className="w-5 h-5 sm:w-6 sm:h-6 fill-rose-500 text-rose-500 animate-bounce shrink-0" />
                 </div>
 
                 <div>
-                  <p className="font-script-luxury text-3xl sm:text-4xl text-amber-200 mb-1">
+                  <p className="font-script-luxury text-3xl sm:text-4xl text-amber-200 mb-0.5">
                     Counting every heartbeat...
                   </p>
-                  <h2 className="font-serif-luxury text-3xl sm:text-5xl font-bold tracking-wider uppercase mb-4">
+                  <h2 className="font-serif-luxury text-3xl sm:text-5xl font-bold tracking-wider uppercase mb-3 sm:mb-4 whitespace-nowrap">
                     SAVE THE DATE
                   </h2>
 
                   {/* 4 Ô Đếm Ngược Kính Mờ 3D Flip */}
-                  <div className="grid grid-cols-4 gap-2.5 sm:gap-4">
+                  <div className="grid grid-cols-4 gap-2 sm:gap-4">
                     {[
                       { label: 'Ngày', value: timeLeft.days },
                       { label: 'Giờ', value: timeLeft.hours },
@@ -146,7 +146,7 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
                     ].map((item, idx) => (
                       <div
                         key={idx}
-                        className="rounded-2xl bg-white/15 backdrop-blur-xl border border-white/35 py-3.5 sm:py-5 px-2 text-center shadow-lg"
+                        className="rounded-2xl bg-white/15 backdrop-blur-xl border border-white/35 py-3 sm:py-5 px-1.5 sm:px-2 text-center shadow-lg"
                       >
                         <AnimatePresence mode="popLayout">
                           <motion.span
@@ -160,7 +160,7 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
                             {String(item.value).padStart(2, '0')}
                           </motion.span>
                         </AnimatePresence>
-                        <span className="block text-[10px] sm:text-xs uppercase tracking-[0.2em] text-amber-200 mt-1.5">
+                        <span className="block text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-amber-200 mt-1.5 whitespace-nowrap">
                           {item.label}
                         </span>
                       </div>
@@ -175,14 +175,14 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
               <button
                 type="button"
                 onClick={handleAddToCalendar}
-                className={`cursor-pointer inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs uppercase tracking-[0.2em] font-semibold ${theme.btnPrimary}`}
+                className={`cursor-pointer inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.2em] font-semibold whitespace-nowrap ${theme.btnPrimary}`}
               >
-                <CalendarPlus className="w-4 h-4" />
+                <CalendarPlus className="w-4 h-4 shrink-0" />
                 <span>Lưu Ngày Cưới Vào Điện Thoại</span>
               </button>
 
-              <span className={`inline-flex items-center gap-1.5 text-xs ${theme.textSecondary}`}>
-                <Clock className="w-4 h-4" style={{ color: theme.accentHex }} />
+              <span className={`inline-flex items-center gap-1.5 text-xs whitespace-nowrap ${theme.textSecondary}`}>
+                <Clock className="w-4 h-4 shrink-0" style={{ color: theme.accentHex }} />
                 <span>27 &amp; 28/11/2026 (19 &amp; 20/10 Bính Ngọ)</span>
               </span>
             </div>
@@ -258,23 +258,23 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
               </div>
 
               {/* Chú thích 2 ngày trọng đại */}
-              <div className={`mt-5 pt-4 border-t ${theme.borderSubtle} space-y-2 text-xs`}>
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-2 font-medium">
+              <div className={`mt-5 pt-4 border-t ${theme.borderSubtle} space-y-2 text-[11px] sm:text-xs`}>
+                <div className="flex items-center justify-between gap-2 whitespace-nowrap">
+                  <span className="inline-flex items-center gap-1.5 font-medium shrink-0">
                     <span
                       style={{ borderColor: theme.accentHex }}
-                      className="w-3 h-3 rounded-full border-2 inline-block"
+                      className="w-3 h-3 rounded-full border-2 inline-block shrink-0"
                     />
                     Thứ 6 (27/11):
                   </span>
-                  <span className={theme.textSecondary}>Tiệc Cưới Thân Mật (16h30 &amp; 17h00)</span>
+                  <span className={`${theme.textSecondary} truncate`}>Tiệc Thân Mật (16h30 &amp; 17h00)</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-2 font-semibold">
-                    <Heart className="w-3.5 h-3.5 fill-rose-500 text-rose-500" />
+                <div className="flex items-center justify-between gap-2 whitespace-nowrap">
+                  <span className="inline-flex items-center gap-1.5 font-semibold shrink-0">
+                    <Heart className="w-3.5 h-3.5 fill-rose-500 text-rose-500 shrink-0" />
                     Thứ 7 (28/11):
                   </span>
-                  <span className={`font-semibold ${theme.textAccent}`}>
+                  <span className={`font-semibold ${theme.textAccent} truncate`}>
                     Lễ Vu Quy (11h15) &amp; Thành Hôn (13h05)
                   </span>
                 </div>
