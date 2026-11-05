@@ -32,7 +32,7 @@ export const THEMES: Record<StyleId, ThemeConfig> = {
     name: 'Fine Art Romance',
     vietnameseName: 'Thơ Mộng Fine Art',
     tagline: 'Phong bì sáp cánh bướm • Khung Polaroid • Cánh hoa 3D rơi',
-    badgeText: 'FINE ART INVITATION • THÀNH LONG & THANH HUYỀN',
+    badgeText: 'FINE ART WEDDING • 28.11.2026',
     gateTitle: 'Thiệp Mời',
     gateActionText: 'Thiệp đang tự động mở dần...',
     bgPrimary: 'bg-[#FBF8F6]',

@@ -479,12 +479,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
             {guestName}
           </p>
 
-          {/* Lưới 2x2 cân đối tuyệt đối trên Mobile, hàng ngang trên Desktop */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2 sm:gap-3">
+          {/* Bố cục Mobile-First chống tràn tuyệt đối: 2 nút chính full-width ở trên, 2 nút ngắn chia đôi ở dưới; trên Desktop xếp hàng ngang */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2.5 sm:gap-3">
             <button
               type="button"
               onClick={() => scrollToSection('section-events')}
-              className={`cursor-pointer inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 py-2.5 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.15em] font-semibold whitespace-nowrap ${theme.btnPrimary}`}
+              className={`cursor-pointer col-span-2 sm:col-span-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-2.5 rounded-full text-xs uppercase tracking-[0.12em] sm:tracking-[0.15em] font-semibold whitespace-nowrap ${theme.btnPrimary}`}
             >
               <MapPin className="w-3.5 h-3.5 shrink-0" />
               <span>Lịch Trình &amp; Bản Đồ</span>
@@ -493,16 +493,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
             <button
               type="button"
               onClick={() => scrollToSection('section-wishes')}
-              className={`cursor-pointer inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 py-2.5 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.15em] font-semibold whitespace-nowrap ${theme.btnSecondary}`}
+              className={`cursor-pointer col-span-2 sm:col-span-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-2.5 rounded-full text-xs uppercase tracking-[0.12em] sm:tracking-[0.15em] font-semibold whitespace-nowrap ${theme.btnSecondary}`}
             >
               <Heart className="w-3.5 h-3.5 shrink-0" />
-              <span>Lời Chúc &amp; Mừng Cưới</span>
+              <span>Gửi Lời Chúc &amp; Mừng Cưới</span>
             </button>
 
             <button
               type="button"
               onClick={() => scrollToSection('section-qr-gift')}
-              className={`cursor-pointer inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.14em] whitespace-nowrap ${theme.btnSecondary}`}
+              className={`cursor-pointer col-span-1 w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-4 py-2.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.05em] sm:tracking-[0.14em] font-medium whitespace-nowrap ${theme.btnSecondary}`}
             >
               <Gift className="w-3.5 h-3.5 shrink-0" />
               <span>Mã QR Mừng Cưới</span>
@@ -511,7 +511,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
             <button
               type="button"
               onClick={() => window.triggerWeddingFireworks?.(6)}
-              className={`cursor-pointer inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.14em] whitespace-nowrap ${theme.btnSecondary}`}
+              className={`cursor-pointer col-span-1 w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-4 py-2.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.05em] sm:tracking-[0.14em] font-medium whitespace-nowrap ${theme.btnSecondary}`}
             >
               <Sparkles className="w-3.5 h-3.5 shrink-0" />
               <span>Bắn Pháo Hoa 🎆</span>
