@@ -197,7 +197,7 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
                 <p className={`font-serif-italic text-xs tracking-[0.22em] font-semibold mb-1 ${theme.textAccent}`}>
                   Tháng 11 • Năm 2026
                 </p>
-                <h3 className={`font-script-luxury text-4xl font-normal ${theme.textPrimary}`}>
+                <h3 className={`font-script-luxury text-3xl sm:text-4xl font-normal ${theme.textPrimary}`}>
                   {data.groom.shortName} &amp; {data.bride.shortName}
                 </h3>
                 <p className={`text-xs mt-1 opacity-75 ${theme.textSecondary}`}>

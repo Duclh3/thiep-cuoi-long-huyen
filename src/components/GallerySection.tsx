@@ -318,7 +318,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
                   {/* Chân khung ảnh đặc trưng theo từng phong cách */}
                   <div className="mt-3 px-1 flex items-center justify-between gap-2 whitespace-nowrap">
                     <span
-                      className={`font-script-luxury text-2xl whitespace-nowrap ${
+                      className={`font-script-luxury text-xl sm:text-2xl whitespace-nowrap ${
                         styleId === 'cinematic' || styleId === 'indochine'
                           ? 'text-amber-200'
                           : 'text-[#5A4638]'
@@ -326,7 +326,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
                     >
                       Thành Long &amp; Thanh Huyền
                     </span>
-                    <span className="font-tall-editorial text-[11px] tracking-[0.2em] opacity-75 whitespace-nowrap">
+                    <span className="font-tall-editorial text-[11px] tracking-[0.15em] opacity-75 whitespace-nowrap">
                       {styleId === 'indochine'
                         ? `囍 0${idx + 1}`
                         : styleId === 'cinematic'

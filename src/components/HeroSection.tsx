@@ -76,12 +76,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
                   {theme.badgeText}
                 </span>
               </motion.div>
-              <p className={`font-script-luxury text-3xl sm:text-5xl mb-1 ${theme.textAccent}`}>
+              <p className={`font-script-luxury text-2xl sm:text-5xl mb-1 whitespace-nowrap ${theme.textAccent}`}>
                 Thiệp Mời Cưới • {data.weddingDate.heroHeadline}
               </p>
-              <h1 className={`font-script-luxury text-[42px] sm:text-7xl md:text-8xl font-normal leading-[1.22] mb-2 whitespace-nowrap ${theme.textPrimary}`}>
+              <h1 className={`font-script-luxury text-[28px] sm:text-7xl md:text-8xl font-normal leading-[1.25] mb-2 whitespace-nowrap ${theme.textPrimary}`}>
                 <span>{data.groom.shortName}</span>
-                <span className={`font-script-luxury text-4xl sm:text-7xl mx-2 sm:mx-3 inline-block -translate-y-0.5 ${theme.textAccent}`}>
+                <span className={`font-script-luxury text-2xl sm:text-6xl mx-1 sm:mx-3 inline-block ${theme.textAccent}`}>
                   &amp;
                 </span>
                 <span>{data.bride.shortName}</span>
@@ -137,10 +137,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
                   <img src={data.sectionImages.hero} alt="Hero" className="w-full h-full object-cover object-[center_22%]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
                   <div className="absolute bottom-4 left-3 right-3 text-center text-white z-20">
-                    <p className="font-script-luxury text-3xl sm:text-4xl text-amber-200 mb-0.5 whitespace-nowrap">
+                    <p className="font-script-luxury text-2xl sm:text-4xl text-amber-200 mb-0.5 whitespace-nowrap">
                       Thành Long &amp; Thanh Huyền
                     </p>
-                    <p className="font-tall-editorial text-[11px] sm:text-xs tracking-[0.22em] sm:tracking-[0.28em] uppercase text-white/95 whitespace-nowrap">
+                    <p className="font-tall-editorial text-[11px] sm:text-xs tracking-[0.18em] sm:tracking-[0.26em] uppercase text-white/95 whitespace-nowrap">
                       {data.weddingDate.dayOfWeek} • 28 . 11 . 2026
                     </p>
                   </div>
@@ -295,11 +295,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
                   ★ A STARLIGHT MOTION PICTURE PREMIERE ★
                 </span>
               </div>
-              <p className="font-script-luxury text-3xl sm:text-5xl text-[#F0AD64] mb-1">
+              <p className="font-script-luxury text-2xl sm:text-5xl text-[#F0AD64] mb-1">
                 Đêm Hội Pháo Hoa &amp; Tình Yêu
               </p>
-              <h1 className="font-script-luxury text-[40px] sm:text-7xl md:text-8xl font-normal shimmer-gold-text whitespace-nowrap">
-                {data.groom.shortName} <span className="font-script-luxury text-4xl sm:text-7xl mx-1.5 sm:mx-2 text-[#F0AD64]">&amp;</span> {data.bride.shortName}
+              <h1 className="font-script-luxury text-[28px] sm:text-7xl md:text-8xl font-normal shimmer-gold-text whitespace-nowrap">
+                {data.groom.shortName} <span className="font-script-luxury text-2xl sm:text-6xl mx-1 sm:mx-2 text-[#F0AD64]">&amp;</span> {data.bride.shortName}
               </h1>
             </div>
 
@@ -325,7 +325,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
                       <span className="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#F0AD64] text-stone-950 font-tall-editorial text-[9px] sm:text-[10px] font-bold tracking-[0.18em] sm:tracking-[0.22em] uppercase whitespace-nowrap">
                         STARRING THE COUPLE
                       </span>
-                      <h2 className="font-script-luxury text-3xl sm:text-5xl text-amber-200 mt-0.5 whitespace-nowrap">
+                      <h2 className="font-script-luxury text-2xl sm:text-5xl text-amber-200 mt-0.5 whitespace-nowrap">
                         Thành Long &amp; Thanh Huyền
                       </h2>
                     </div>
@@ -389,11 +389,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
                   SONG HỶ LÂM MÔN • BÍNH NGỌ 2026
                 </span>
               </div>
-              <p className="font-script-luxury text-3xl sm:text-5xl text-[#F7CE68] mb-1">
+              <p className="font-script-luxury text-2xl sm:text-5xl text-[#F7CE68] mb-1">
                 Lễ Thành Hôn &amp; Lễ Vu Quy
               </p>
-              <h1 className="font-script-luxury text-[38px] sm:text-7xl md:text-8xl font-normal shimmer-gold-text whitespace-nowrap">
-                {data.groom.shortName} <span className="font-serif-luxury inline-block mx-1.5 sm:mx-2 text-2xl sm:text-5xl align-middle">囍</span> {data.bride.shortName}
+              <h1 className="font-script-luxury text-[27px] sm:text-7xl md:text-8xl font-normal shimmer-gold-text whitespace-nowrap">
+                {data.groom.shortName} <span className="font-serif-luxury inline-block mx-1 sm:mx-2 text-xl sm:text-5xl align-middle">囍</span> {data.bride.shortName}
               </h1>
             </div>
 

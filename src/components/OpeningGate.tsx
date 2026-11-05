@@ -304,37 +304,37 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
               className="text-center mb-2 sm:mb-3"
             >
               {styleId === 'fairytale' && (
-                <p className="font-script-luxury text-3xl sm:text-4xl text-[#524338]">
+                <p className="font-script-luxury text-2xl sm:text-4xl text-[#524338] px-2">
                   {stage === 'kiss' ? 'Nụ hôn mở lời hẹn ước...' : 'Phong bì tình yêu đang mở...'}
                 </p>
               )}
               {styleId === 'editorial' && (
                 <div>
-                  <span className="font-tall-editorial text-[10px] tracking-[0.16em] sm:tracking-[0.34em] text-[#C5A059] uppercase block whitespace-nowrap">
+                  <span className="font-tall-editorial text-[10px] tracking-[0.14em] sm:tracking-[0.3em] text-[#C5A059] uppercase block">
                     VOGUE EXCLUSIVE EDITION • NOVEMBER 2026
                   </span>
-                  <p className="font-serif-luxury text-2xl sm:text-3xl text-white tracking-wider uppercase mt-0.5 whitespace-nowrap">
-                    {stage === 'kiss' ? 'THE COUTURE KISS' : 'UNFOLDING THE ISSUE'}
+                  <p className="font-serif-luxury italic text-xl sm:text-3xl text-white tracking-wider mt-0.5">
+                    {stage === 'kiss' ? 'The Couture Kiss' : 'Unfolding The Issue'}
                   </p>
                 </div>
               )}
               {styleId === 'cinematic' && (
                 <div>
-                  <span className="font-tall-editorial text-[10px] tracking-[0.18em] sm:tracking-[0.32em] text-[#F0AD64] uppercase block whitespace-nowrap">
+                  <span className="font-tall-editorial text-[10px] tracking-[0.14em] sm:tracking-[0.28em] text-[#F0AD64] uppercase block">
                     ★ A STARLIGHT MOTION PICTURE ★
                   </span>
-                  <p className="font-script-luxury text-3xl sm:text-4xl text-amber-200 whitespace-nowrap">
+                  <p className="font-script-luxury text-2xl sm:text-4xl text-amber-200 px-2">
                     {stage === 'kiss' ? 'Dưới bầu trời pháo hoa rực sáng...' : 'Màn nhung điện ảnh đang mở...'}
                   </p>
                 </div>
               )}
               {styleId === 'indochine' && (
                 <div>
-                  <span className="font-tall-editorial text-[10px] tracking-[0.14em] sm:tracking-[0.32em] text-[#F7CE68] uppercase block whitespace-nowrap">
+                  <span className="font-tall-editorial text-[10px] tracking-[0.12em] sm:tracking-[0.28em] text-[#F7CE68] uppercase block">
                     ✦ LỄ THÀNH HÔN &amp; VU QUY • BÍNH NGỌ 2026 ✦
                   </span>
-                  <p className="font-serif-luxury text-xl sm:text-3xl text-[#FFF8EC] font-bold tracking-widest mt-0.5 whitespace-nowrap">
-                    {stage === 'kiss' ? 'DUYÊN TIỀN ĐỊNH • TƠ HỒNG KẾT' : 'KHAI MỞ ẤN SONG HỶ'}
+                  <p className="font-serif-luxury italic text-lg sm:text-3xl text-[#FFF8EC] font-semibold tracking-widest mt-0.5">
+                    {stage === 'kiss' ? 'Duyên Tiền Định • Tơ Hồng Kết' : 'Khai Mở Ấn Song Hỷ'}
                   </p>
                 </div>
               )}
@@ -793,7 +793,7 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
               className="mt-7 sm:mt-9 text-center"
             >
               <p
-                className={`font-script-luxury text-3xl sm:text-4xl mb-0.5 leading-tight ${
+                className={`font-script-luxury text-2xl sm:text-4xl mb-0.5 leading-tight ${
                   styleId === 'fairytale' ? 'text-[#7A283B]' : 'text-amber-200'
                 }`}
               >
@@ -806,7 +806,7 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
                   : 'Thiệp Mời Trăm Năm'}
               </p>
               <h1
-                className={`font-script-luxury text-4xl sm:text-5xl leading-tight ${
+                className={`font-script-luxury text-3xl sm:text-5xl leading-tight ${
                   styleId === 'fairytale' ? 'text-[#2D241E]' : 'text-white'
                 }`}
               >

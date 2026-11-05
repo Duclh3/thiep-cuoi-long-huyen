@@ -194,7 +194,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
 
                   {/* Nội dung chi tiết */}
                   <div className="text-center space-y-4">
-                    <h3 className={`font-script-luxury text-4xl sm:text-5xl font-normal ${theme.textPrimary}`}>
+                    <h3 className={`font-script-luxury text-3xl sm:text-5xl font-normal ${theme.textPrimary}`}>
                       {ev.title}
                     </h3>
 

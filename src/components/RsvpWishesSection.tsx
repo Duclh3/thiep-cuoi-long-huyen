@@ -309,10 +309,10 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                 Sweet Blessings • Sổ Lưu Bút Vĩnh Cửu
               </span>
             </div>
-            <p className="font-script-luxury text-4xl sm:text-5xl text-amber-200 -mb-1">
+            <p className="font-script-luxury text-3xl sm:text-5xl text-amber-200 -mb-1">
               Lời Chúc Trăm Năm
             </p>
-            <h2 className="font-serif-luxury italic text-4xl sm:text-6xl font-normal text-white drop-shadow-lg">
+            <h2 className="font-serif-luxury italic text-3xl sm:text-6xl font-normal text-white drop-shadow-lg">
               Gửi Lời Chúc Đến Cặp Đôi
             </h2>
           </div>
@@ -323,14 +323,14 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
             <div className="lg:col-span-6 flex">
               <form
                 onSubmit={handleSubmit}
-                className="w-full h-full lg:h-[570px] rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-6 sm:p-8 shadow-2xl flex flex-col justify-between text-white"
+                className="w-full h-full lg:h-[570px] rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-5 sm:p-8 shadow-2xl flex flex-col justify-between text-white"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between pb-3 border-b border-white/15">
-                    <h3 className="font-script-luxury text-3xl sm:text-4xl text-amber-100">
+                    <h3 className="font-script-luxury text-2xl sm:text-4xl text-amber-100">
                       Viết Lời Chúc Phúc
                     </h3>
-                    <MessageSquareHeart className="w-6 h-6 text-amber-300" />
+                    <MessageSquareHeart className="w-6 h-6 text-amber-300 shrink-0" />
                   </div>
 
                   {/* Tên */}
@@ -433,9 +433,9 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
 
             {/* Cột Phải: Danh Sách Lời Chúc Pha Lê */}
             <div className="lg:col-span-6 flex">
-              <div className="w-full h-[500px] lg:h-[570px] rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-6 sm:p-8 shadow-2xl text-white flex flex-col justify-between">
+              <div className="w-full h-[500px] lg:h-[570px] rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-5 sm:p-8 shadow-2xl text-white flex flex-col justify-between">
                 <div className="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-white/15 shrink-0">
-                  <h3 className="font-script-luxury text-3xl sm:text-4xl text-amber-100 whitespace-nowrap">
+                  <h3 className="font-script-luxury text-2xl sm:text-4xl text-amber-100">
                     Lời Chúc Từ Người Thương ({wishes.length})
                   </h3>
                   <Heart className="w-5 h-5 fill-rose-500 text-rose-500 animate-pulse shrink-0" />
@@ -447,7 +447,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                       <div className="w-12 h-12 rounded-full bg-amber-300/15 border border-amber-300/35 flex items-center justify-center mb-3 text-amber-300">
                         <MessageSquareHeart className="w-6 h-6" />
                       </div>
-                      <p className="font-script-luxury text-3xl text-amber-200 mb-1">
+                      <p className="font-script-luxury text-2xl sm:text-3xl text-amber-200 mb-1">
                         Sổ Lưu Bút Đang Chờ Lời Chúc Đầu Tiên
                       </p>
                       <p className="font-serif-italic text-sm sm:text-base text-white/75 max-w-xs leading-relaxed">
@@ -490,28 +490,25 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
               TUYỆT TÁC HỘP QUÀ MỪNG CƯỚI 3D — PHẢI MỞ HỘP MỚI HIỆN 2 MÃ QR BÊN TRONG
              ========================================================================= */}
           <div id="section-qr-gift" className="mt-20 max-w-4xl mx-auto scroll-mt-24">
-            <div className="text-center mb-8">
+            <div className="text-center mb-7">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-300/20 border border-amber-300/50 text-amber-200 text-xs font-tall-editorial tracking-[0.18em] mb-2">
                 <Gift className="w-3.5 h-3.5" />
-                <span>Wedding Gift Box • Hộp Mừng Cưới 3D</span>
+                <span>Wedding Gift • Hộp Mừng Cưới</span>
               </div>
-              <p className="font-script-luxury text-4xl sm:text-5xl text-amber-200 -mb-1">
-                Gửi Trao Tâm Ý Yêu Thương
-              </p>
-              <h3 className="font-serif-luxury italic text-3xl sm:text-5xl font-normal text-white drop-shadow">
-                Hộp Mừng Cưới Cô Dâu &amp; Chú Rể
+              <h3 className="font-script-luxury text-4xl sm:text-6xl font-normal text-amber-200 drop-shadow">
+                Hộp Quà Mừng Cưới
               </h3>
-              <p className="font-serif-italic text-sm sm:text-lg text-white/85 mt-1.5 max-w-xl mx-auto">
+              <p className="font-serif-italic text-sm sm:text-lg text-white/85 mt-1 max-w-md mx-auto">
                 {!isGiftBoxOpen
-                  ? 'Bên trong hộp quà cất giữ 2 phong bao mã QR mừng cưới của Nhà Trai & Nhà Gái — chạm vào hộp quà để mở nắp nhé!'
-                  : 'Cảm ơn tình cảm trân quý của bạn dành cho Thành Long & Thanh Huyền — chạm vào mã QR để phóng to hoặc sao chép nhanh STK'}
+                  ? 'Chạm vào hộp quà bên dưới để mở mã QR mừng cưới'
+                  : 'Chạm vào từng mã QR để phóng to hoặc sao chép nhanh số tài khoản'}
               </p>
             </div>
 
             <AnimatePresence mode="wait">
               {!isGiftBoxOpen ? (
                 /* =====================================================================
-                   TRẠNG THÁI 1: HỘP QUÀ HỶ SỰ 3D ĐÓNG KÍN KÈM NƠ LỤA VÀNG KIM & HÀO QUANG
+                   TRẠNG THÁI 1: HỘP QUÀ HỶ SỰ 3D TINH GỌN — CHỈ HƯỚNG DẪN CHẠM ĐỂ MỞ
                    ===================================================================== */
                 <motion.div
                   key="closed-3d-gift-box"
@@ -525,34 +522,18 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                   }}
                   className="relative flex flex-col items-center justify-center py-4 sm:py-6 select-none"
                 >
-                  {/* Hào quang ánh kim tỏa sáng xoay tròn phía sau hộp quà */}
-                  <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-r from-amber-300/30 via-rose-400/20 to-amber-500/30 blur-3xl animate-pulse" />
-
-                  <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[310px] h-[310px] sm:w-[410px] sm:h-[410px] opacity-40">
-                    <svg viewBox="0 0 200 200" className="w-full h-full animate-spin-halo">
-                      <defs>
-                        <path
-                          id="giftCircleHalo"
-                          d="M 100, 100 m -84, 0 a 84,84 0 1,1 168,0 a 84,84 0 1,1 -168,0"
-                        />
-                      </defs>
-                      <text fill="#FDE68A" fontSize="7.5" letterSpacing="3.4px">
-                        <textPath href="#giftCircleHalo">
-                          ✦ HỘP QUÀ HỶ SỰ ✦ THÀNH LONG &amp; THANH HUYỀN ✦ CHẠM ĐỂ MỞ ✦
-                        </textPath>
-                      </text>
-                    </svg>
-                  </div>
+                  {/* Hào quang ánh kim tỏa sáng phía sau hộp quà */}
+                  <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-r from-amber-300/30 via-rose-400/20 to-amber-500/30 blur-3xl animate-pulse" />
 
                   {/* Các hạt kim tuyến & trái tim bay lơ lửng quanh hộp quà */}
-                  {[...Array(8)].map((_, idx) => (
+                  {[...Array(6)].map((_, idx) => (
                     <motion.span
                       key={idx}
                       animate={{
-                        y: [0, -28 - (idx % 3) * 12, 0],
-                        x: [0, (idx % 2 === 0 ? 1 : -1) * (10 + idx * 3), 0],
+                        y: [0, -24 - (idx % 3) * 10, 0],
+                        x: [0, (idx % 2 === 0 ? 1 : -1) * (8 + idx * 3), 0],
                         opacity: [0.3, 0.95, 0.3],
-                        scale: [0.8, 1.2, 0.8],
+                        scale: [0.8, 1.15, 0.8],
                       }}
                       transition={{
                         duration: 2.6 + (idx % 3) * 0.6,
@@ -560,8 +541,8 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                         delay: idx * 0.25,
                       }}
                       style={{
-                        top: `${15 + (idx * 10) % 70}%`,
-                        left: `${12 + (idx * 13) % 76}%`,
+                        top: `${16 + (idx * 12) % 68}%`,
+                        left: `${16 + (idx * 14) % 68}%`,
                       }}
                       className="pointer-events-none absolute text-amber-200 text-sm sm:text-base z-20"
                     >
@@ -572,8 +553,8 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                   {/* KHỐI HỘP QUÀ 3D TƯƠNG TÁC (CHẠM VÀO ĐỂ BUNG NẮP) */}
                   <motion.div
                     onClick={handleOpenGiftBox}
-                    whileHover={{ scale: 1.03, y: -4 }}
-                    whileTap={{ scale: 0.97 }}
+                    whileHover={{ scale: 1.04, y: -4 }}
+                    whileTap={{ scale: 0.96 }}
                     animate={
                       isBoxUnwrapping
                         ? {
@@ -589,7 +570,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                         ? { duration: 0.55 }
                         : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }
                     }
-                    className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[330px] sm:max-w-[390px] group"
+                    className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[270px] sm:max-w-[310px] group"
                   >
                     {/* Luồng sáng vàng rực rỡ phóng lên khi nắp hộp bật mở */}
                     <AnimatePresence>
@@ -599,7 +580,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                           animate={{ opacity: 1, scale: 1.5, y: -30 }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.55 }}
-                          className="pointer-events-none absolute top-12 inset-x-4 h-44 rounded-full bg-gradient-to-t from-amber-300 via-yellow-100 to-transparent blur-2xl z-20"
+                          className="pointer-events-none absolute top-10 inset-x-4 h-40 rounded-full bg-gradient-to-t from-amber-300 via-yellow-100 to-transparent blur-2xl z-20"
                         />
                       )}
                     </AnimatePresence>
@@ -619,22 +600,17 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                       }
                       transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
                       style={{ background: boxStyleConfig.lidBg }}
-                      className="relative z-20 w-[104%] h-14 sm:h-16 rounded-2xl border-2 border-[#F5D77F] shadow-[0_14px_30px_rgba(0,0,0,0.65)] flex items-center justify-center overflow-hidden"
+                      className="relative z-20 w-[106%] h-13 sm:h-15 rounded-2xl border-2 border-[#F5D77F] shadow-[0_14px_30px_rgba(0,0,0,0.65)] flex items-center justify-center overflow-hidden"
                     >
-                      {/* Viền kim tuyến mảnh bên trong nắp hộp */}
                       <div className="pointer-events-none absolute inset-1.5 rounded-xl border border-[#FDE68A]/35" />
-
-                      {/* Dải ruy-băng ngang qua nắp hộp */}
                       <div className="pointer-events-none absolute inset-x-0 h-3 bg-gradient-to-r from-[#B88728] via-[#FFF2B2] to-[#B88728] opacity-85" />
-
-                      {/* Dải ruy-băng dọc nối từ nơ xuống thân hộp */}
-                      <div className="pointer-events-none relative z-10 w-11 sm:w-12 h-full bg-gradient-to-r from-[#B88728] via-[#FFF4C2] to-[#B88728] border-x border-white/50 shadow-md" />
+                      <div className="pointer-events-none relative z-10 w-10 sm:w-11 h-full bg-gradient-to-r from-[#B88728] via-[#FFF4C2] to-[#B88728] border-x border-white/50 shadow-md" />
                     </motion.div>
 
-                    {/* 3. THÂN HỘP QUÀ HỶ SỰ 3D CHẠM KHẮC VÀNG KIM */}
+                    {/* 3. THÂN HỘP QUÀ 3D TINH TẾ — CHỈ CÓ NƠ VÀNG & NÚT BẤM MỞ */}
                     <div
                       style={{ background: boxStyleConfig.bodyBg }}
-                      className="relative z-10 w-full rounded-b-[28px] rounded-t-[6px] border-2 border-t-0 border-[#F5D77F] pt-6 pb-6 px-5 sm:px-7 shadow-[0_30px_80px_rgba(0,0,0,0.85)] overflow-hidden"
+                      className="relative z-10 w-full h-48 sm:h-52 rounded-b-[28px] rounded-t-[6px] border-2 border-t-0 border-[#F5D77F] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.85)] flex flex-col items-center justify-center overflow-hidden"
                     >
                       {/* Khung viền hoa văn góc hộp */}
                       <div className="pointer-events-none absolute inset-2.5 rounded-[20px] border border-[#FDE68A]/35" />
@@ -644,29 +620,20 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                       <span className="pointer-events-none absolute bottom-3.5 right-3.5 w-3.5 h-3.5 border-b-2 border-r-2 border-[#FDE68A]/80" />
 
                       {/* Dải ruy-băng lụa vàng chạy dọc & ngang thân hộp */}
-                      <div className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-11 sm:w-12 bg-gradient-to-r from-[#A6781E] via-[#FFF4C2] to-[#A6781E] border-x border-white/40 opacity-95 shadow-lg" />
-                      <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 h-9 bg-gradient-to-b from-[#A6781E] via-[#FFF4C2] to-[#A6781E] border-y border-white/40 opacity-90 shadow-md" />
+                      <div className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-10 sm:w-11 bg-gradient-to-r from-[#A6781E] via-[#FFF4C2] to-[#A6781E] border-x border-white/40 opacity-95 shadow-lg" />
+                      <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 h-9 sm:h-10 bg-gradient-to-b from-[#A6781E] via-[#FFF4C2] to-[#A6781E] border-y border-white/40 opacity-95 shadow-md" />
 
-                      {/* TẤM BIỂN VÀNG HOÀNG GIA ĐÍNH GIỮA HỘP QUÀ */}
-                      <div className="relative z-20 rounded-2xl bg-[#FFFDF8] text-stone-900 border-2 border-[#D4AF37] p-4 sm:p-5 text-center shadow-[0_15px_40px_rgba(0,0,0,0.65)]">
-                        <div className="pointer-events-none absolute inset-1.5 rounded-xl border border-[#D4AF37]/45" />
+                      {/* Khóa Tròn Kim Hoàn & Nút Hướng Dẫn Chạm Mở Hộp ở Tâm */}
+                      <div className="relative z-20 flex flex-col items-center">
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#FFF6D1] via-[#E5B85B] to-[#9A6D15] p-1 shadow-[0_10px_25px_rgba(0,0,0,0.6)] border-2 border-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                          <div className="w-full h-full rounded-full bg-[#631523] flex items-center justify-center text-[#FDE68A]">
+                            <Gift className="w-6 h-6 animate-bounce" />
+                          </div>
+                        </div>
 
-                        <span className="font-tall-editorial text-[10px] sm:text-[11px] tracking-[0.18em] text-[#8C6218] block">
-                          ✦ {boxStyleConfig.subtitle} ✦
-                        </span>
-
-                        <p className="font-script-luxury text-3xl sm:text-4xl text-[#7C2334] mt-0.5 leading-tight">
-                          Thành Long &amp; Thanh Huyền
-                        </p>
-
-                        <p className="font-serif-italic text-xs sm:text-sm text-stone-600 mt-1 mb-3.5">
-                          Gửi trao tấm lòng vàng &amp; lời chúc phúc trăm năm
-                        </p>
-
-                        {/* Nút Chạm Mở Hộp Nổi Bật */}
-                        <div className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-full bg-gradient-to-r from-[#7C2334] via-[#9E2A40] to-[#631826] text-[#FFF8E7] font-serif-luxury italic text-sm sm:text-base font-semibold tracking-wide shadow-[0_8px_20px_rgba(124,35,52,0.45)] group-hover:brightness-110 transition-all">
-                          <LockOpen className="w-4 h-4 text-amber-300 animate-bounce shrink-0" />
-                          <span className="whitespace-nowrap">Chạm Để Mở Hộp Mừng Cưới</span>
+                        <div className="px-5 py-2.5 rounded-full bg-[#FFFDF8] text-[#631523] border-2 border-[#D4AF37] shadow-[0_10px_25px_rgba(0,0,0,0.55)] inline-flex items-center gap-2 font-serif-luxury italic font-bold text-sm sm:text-base whitespace-nowrap group-hover:bg-amber-50 transition-colors">
+                          <LockOpen className="w-4 h-4 text-[#B88728] shrink-0" />
+                          <span>Chạm Để Mở Hộp Quà</span>
                         </div>
                       </div>
                     </div>
@@ -864,36 +831,36 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
         )}
 
       {/* PHẦN 2: ĐẠI TIỆC KẾT MÀN & LỜI CẢM ƠN (Ảnh nền: LVT08639.jpg) */}
-      <section className="relative min-h-[82vh] w-full overflow-hidden flex flex-col items-center justify-center text-center text-white px-4 py-28">
+      <section className="relative min-h-[82vh] w-full overflow-hidden flex flex-col items-center justify-center text-center text-white px-4 pt-24 pb-36 sm:py-28">
         <div className="absolute inset-0 z-0 bg-stone-950">
           <img
             src={data.sectionImages.thankYouBg}
             alt="Thank you"
-            className="w-full h-full object-cover object-[center_25%] opacity-90"
+            className="w-full h-full object-cover object-[center_22%] opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/85" />
         </div>
 
-        <div className="relative z-10 max-w-3xl mx-auto px-4">
-          <p className="font-script-luxury text-4xl sm:text-5xl text-amber-200 mb-1">
+        <div className="relative z-10 w-full max-w-3xl mx-auto px-2 sm:px-4">
+          <p className="font-script-luxury text-3xl sm:text-5xl text-amber-200 mb-1">
             Forever &amp; Always
           </p>
 
-          <h2 className="font-script-luxury text-6xl sm:text-8xl font-normal shimmer-gold-text mb-6 drop-shadow-xl">
+          <h2 className="font-script-luxury text-5xl sm:text-8xl font-normal shimmer-gold-text mb-5 sm:mb-6 drop-shadow-xl">
             {data.thankYouText.title}
           </h2>
 
-          <p className="font-serif-italic text-base sm:text-xl leading-relaxed text-white/95 max-w-2xl mx-auto mb-10 drop-shadow">
+          <p className="font-serif-italic text-sm sm:text-xl leading-relaxed text-white/95 max-w-2xl mx-auto mb-8 sm:mb-10 px-1 drop-shadow">
             “{data.thankYouText.message}”
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xs sm:max-w-none mx-auto">
             <button
               type="button"
               onClick={() => {
                 triggerCelebration();
               }}
-              className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-semibold text-xs sm:text-sm tracking-[0.08em] sm:tracking-[0.14em] whitespace-nowrap shadow-2xl hover:scale-105 transition-transform"
+              className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-semibold text-xs sm:text-sm tracking-[0.06em] sm:tracking-[0.14em] whitespace-nowrap shadow-2xl hover:scale-105 transition-transform"
             >
               <Sparkles className="w-4 h-4 shrink-0" />
               <span className="whitespace-nowrap">🎆 Bắn Pháo Hoa Chúc Phúc</span>
@@ -902,7 +869,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
             <button
               type="button"
               onClick={handleShareLink}
-              className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/80 bg-black/35 hover:bg-white hover:text-stone-900 text-xs sm:text-sm tracking-[0.08em] sm:tracking-[0.14em] whitespace-nowrap transition-all duration-300"
+              className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-full border border-white/80 bg-black/35 hover:bg-white hover:text-stone-900 text-xs sm:text-sm tracking-[0.06em] sm:tracking-[0.14em] whitespace-nowrap transition-all duration-300"
             >
               {copiedLink ? (
                 <>
@@ -918,13 +885,13 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
             </button>
           </div>
 
-          <div className="mt-12 pt-6 pb-8 border-t border-white/20 text-xs text-white/80 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2.5">
-            <div className="flex items-center justify-center gap-2 whitespace-nowrap">
-              <span className="font-script-luxury text-3xl sm:text-4xl text-amber-200">{data.groom.fullName}</span>
+          <div className="mt-10 pt-5 border-t border-white/20 text-xs text-white/85 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2.5">
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+              <span className="font-script-luxury text-2xl sm:text-4xl text-amber-200">{data.groom.fullName}</span>
               <Heart className="w-4 h-4 fill-rose-500 text-rose-500 animate-bounce shrink-0" />
-              <span className="font-script-luxury text-3xl sm:text-4xl text-amber-200">{data.bride.fullName}</span>
+              <span className="font-script-luxury text-2xl sm:text-4xl text-amber-200">{data.bride.fullName}</span>
             </div>
-            <span className="opacity-80 font-tall-editorial text-sm tracking-[0.2em] whitespace-nowrap">• 28 . 11 . 2026 •</span>
+            <span className="opacity-80 font-tall-editorial text-xs sm:text-sm tracking-[0.2em]">• 28 . 11 . 2026 •</span>
           </div>
         </div>
       </section>

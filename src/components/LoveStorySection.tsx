@@ -117,10 +117,10 @@ export const LoveStorySection: React.FC<LoveStorySectionProps> = ({ styleId, dat
           </div>
 
           <div>
-            <p className="font-script-luxury text-3xl sm:text-5xl text-amber-200 -mb-2">
+            <p className="font-script-luxury text-2xl sm:text-5xl text-amber-200 -mb-1">
               Khoảnh Khắc Thiêng Liêng
             </p>
-            <h2 className="font-script-luxury text-5xl sm:text-7xl md:text-8xl font-normal shimmer-gold-text mb-2">
+            <h2 className="font-script-luxury text-4xl sm:text-7xl md:text-8xl font-normal shimmer-gold-text mb-2">
               {data.ceremonySection.title}
             </h2>
           </div>
@@ -190,12 +190,12 @@ export const LoveStorySection: React.FC<LoveStorySectionProps> = ({ styleId, dat
                         {item.badge}
                       </span>
 
-                      <h3 className="font-script-luxury text-4xl sm:text-6xl font-normal text-amber-100">
+                      <h3 className="font-script-luxury text-3xl sm:text-6xl font-normal text-amber-100">
                         {item.title}
                       </h3>
 
                       <div className="py-2.5 border-y border-white/15">
-                        <p className="font-serif-luxury text-xl sm:text-3xl font-semibold text-amber-200 whitespace-nowrap">
+                        <p className="font-serif-luxury text-lg sm:text-3xl font-semibold text-amber-200">
                           {item.timeAndDateSolar}
                         </p>
                         <p className="font-serif-luxury italic text-sm sm:text-lg text-white/80 mt-1">
