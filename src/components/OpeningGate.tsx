@@ -793,8 +793,8 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
               className="mt-7 sm:mt-9 text-center"
             >
               <p
-                className={`font-script-luxury text-4xl sm:text-5xl mb-0.5 leading-tight ${
-                  styleId === 'fairytale' ? 'text-[#4A3B31]' : 'text-amber-200'
+                className={`font-script-luxury text-3xl sm:text-4xl mb-0.5 leading-tight ${
+                  styleId === 'fairytale' ? 'text-[#7A283B]' : 'text-amber-200'
                 }`}
               >
                 {styleId === 'editorial'
@@ -803,21 +803,21 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
                   ? 'Starlight Invitation'
                   : styleId === 'indochine'
                   ? 'Thiệp Hồng Báo Hỷ'
-                  : 'Thiệp Mời'}
+                  : 'Thiệp Mời Trăm Năm'}
               </p>
               <h1
-                className={`font-tall-editorial text-2xl sm:text-3xl font-normal tracking-[0.14em] uppercase ${
+                className={`font-script-luxury text-4xl sm:text-5xl leading-tight ${
                   styleId === 'fairytale' ? 'text-[#2D241E]' : 'text-white'
                 }`}
               >
                 {data.groom.shortName} &amp; {data.bride.shortName}
               </h1>
               <p
-                className={`font-tall-editorial text-sm sm:text-base tracking-[0.25em] mt-1 ${
-                  styleId === 'fairytale' ? 'text-[#6E5D4F]' : 'text-amber-200/80'
+                className={`font-serif-italic text-sm sm:text-base tracking-[0.22em] mt-0.5 ${
+                  styleId === 'fairytale' ? 'text-[#6E5D4F]' : 'text-amber-200/85'
                 }`}
               >
-                28.11.2026
+                28 . 11 . 2026
               </p>
 
               {/* Tên khách mời */}

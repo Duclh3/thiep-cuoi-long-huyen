@@ -2,11 +2,11 @@
 
 @layer base {
   :root {
-    --font-serif: 'Cormorant Infant', 'Cormorant Garamond', Georgia, serif;
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-script: 'Alex Brush', 'Allura', 'Great Vibes', 'Dancing Script', cursive;
-    --font-tall: 'Oswald', sans-serif;
-    --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Cormorant Garamond', 'Cormorant Infant', 'Playfair Display', Georgia, serif;
+    --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    --font-script: 'Great Vibes', 'Alex Brush', 'Allura', 'Dancing Script', cursive;
+    --font-tall: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --font-sans: 'Lora', 'Cormorant Infant', Georgia, serif;
   }
 
   html {
@@ -25,23 +25,36 @@
 
 .font-serif-luxury {
   font-family: var(--font-serif);
+  letter-spacing: 0.01em;
 }
 
 .font-display-luxury {
   font-family: var(--font-display);
 }
 
-/* Phông chữ Calligraphy cực kỳ bay bổng — tăng line-height để không bao giờ cắt nét uốn trên/dưới */
-.font-script-luxury {
-  font-family: var(--font-script);
-  letter-spacing: 0.02em;
-  line-height: 1.35;
+.font-serif-italic {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.015em;
 }
 
-/* Phông chữ dáng cao thanh mảnh như trong ảnh mẫu phong bì */
+/* Phông chữ Calligraphy cực kỳ mềm mại, bay bổng — tăng line-height để không bao giờ cắt nét uốn trên/dưới */
+.font-script-luxury {
+  font-family: var(--font-script);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.38;
+  padding-top: 0.04em;
+  padding-bottom: 0.06em;
+}
+
+/* Phông chữ thanh mảnh nghệ thuật mềm mại (thay thế hoàn toàn kiểu chữ khối cứng) */
 .font-tall-editorial {
   font-family: var(--font-tall);
-  letter-spacing: 0.14em;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.1em;
 }
 
 .font-sans-vn {

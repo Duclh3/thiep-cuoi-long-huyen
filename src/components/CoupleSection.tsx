@@ -43,7 +43,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ styleId, data }) =
           <p className={`font-script-luxury text-4xl sm:text-5xl ${theme.textAccent} -mb-2`}>
             Hạnh Phúc Trăm Năm
           </p>
-          <h2 className={`font-serif-luxury text-4xl sm:text-6xl font-normal ${theme.textPrimary}`}>
+          <h2 className={`font-serif-luxury italic text-4xl sm:text-6xl font-normal ${theme.textPrimary}`}>
             Đôi Uyên Ương
           </h2>
         </div>
@@ -74,7 +74,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ styleId, data }) =
                     <span className="font-serif-luxury text-5xl font-bold text-stone-200 leading-none">01</span>
                   </div>
                   <p className="font-script-luxury text-4xl text-[#9E7B3B] -mb-1">The Groom</p>
-                  <h3 className="font-serif-luxury text-4xl sm:text-5xl font-bold uppercase tracking-tight text-stone-950 mb-3">
+                  <h3 className="font-serif-luxury italic text-4xl sm:text-5xl font-medium tracking-tight text-stone-950 mb-3">
                     {data.groom.fullName}
                   </h3>
                   <p className="font-serif-italic text-lg text-stone-600 leading-relaxed mb-6">
@@ -109,7 +109,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ styleId, data }) =
                     <span className="font-serif-luxury text-5xl font-bold text-stone-200 leading-none">02</span>
                   </div>
                   <p className="font-script-luxury text-4xl text-[#9E7B3B] -mb-1">The Bride</p>
-                  <h3 className="font-serif-luxury text-4xl sm:text-5xl font-bold uppercase tracking-tight text-stone-950 mb-3">
+                  <h3 className="font-serif-luxury italic text-4xl sm:text-5xl font-medium tracking-tight text-stone-950 mb-3">
                     {data.bride.fullName}
                   </h3>
                   <p className="font-serif-italic text-lg text-stone-600 leading-relaxed mb-6">
@@ -185,7 +185,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ styleId, data }) =
                 <div className="pt-3 border-t border-white/10 flex items-end justify-between">
                   <div>
                     <p className="font-script-luxury text-3xl text-amber-200 leading-none">{item.scriptTitle}</p>
-                    <h3 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-white mt-1">{item.person.fullName}</h3>
+                    <h3 className="font-script-luxury text-4xl sm:text-5xl text-white mt-1">{item.person.fullName}</h3>
                   </div>
                   <Film className="w-6 h-6 text-[#F0AD64]/70" />
                 </div>
@@ -293,10 +293,10 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ styleId, data }) =
                     }`}
                   >
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.25em] opacity-65 mb-0.5">
+                      <p className="font-serif-italic text-xs tracking-[0.2em] opacity-75 mb-0.5">
                         {item.role}
                       </p>
-                      <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold tracking-wide">
+                      <h3 className="font-script-luxury text-3xl sm:text-4xl font-normal">
                         {item.person.fullName}
                       </h3>
                     </div>

@@ -301,8 +301,8 @@ export const DEFAULT_WEDDING_DATA: WeddingData = {
     {
       id: 'tiec-nha-trai',
       type: 'groom',
-      badge: 'NHÀ TRAI • BỮA CƠM THÂN MẬT',
-      title: 'TIỆC CƯỚI NHÀ TRAI',
+      badge: 'Nhà Trai • Bữa Cơm Thân Mật',
+      title: 'Tiệc Cưới Nhà Trai',
       address: 'Tại Tư Gia - Thôn An Bình, xã Việt Tiến, tỉnh Hưng Yên',
       timeText: 'Vào lúc 16 giờ 30 phút',
       dayOfWeek: 'Thứ 6',
@@ -315,8 +315,8 @@ export const DEFAULT_WEDDING_DATA: WeddingData = {
     {
       id: 'tiec-nha-gai',
       type: 'bride',
-      badge: 'NHÀ GÁI • BỮA CƠM THÂN MẬT',
-      title: 'TIỆC CƯỚI NHÀ GÁI',
+      badge: 'Nhà Gái • Bữa Cơm Thân Mật',
+      title: 'Tiệc Cưới Nhà Gái',
       address: 'Tại Tư Gia - Xóm 16, thôn Bãi Sậy 2, xã Triệu Việt Vương, tỉnh Hưng Yên',
       timeText: 'Vào lúc 17 giờ 00 phút',
       dayOfWeek: 'Thứ 6',
@@ -332,8 +332,8 @@ export const DEFAULT_WEDDING_DATA: WeddingData = {
     items: [
       {
         id: 'le-vu-quy',
-        badge: 'NGHI LỄ NHÀ GÁI • 11:15 SÁNG',
-        title: 'LỄ VU QUY',
+        badge: 'Nghi Lễ Nhà Gái • 11:15 Sáng',
+        title: 'Lễ Vu Quy',
         timeAndDateSolar: 'Thứ 7, 11h15 ngày 28/11/2026',
         dateLunar: 'Tức ngày 20 tháng 10 năm Bính Ngọ',
         location: 'Tại Tư Gia Nhà Gái - Xóm 16, thôn Bãi Sậy 2, xã Triệu Việt Vương, tỉnh Hưng Yên',
@@ -343,8 +343,8 @@ export const DEFAULT_WEDDING_DATA: WeddingData = {
       },
       {
         id: 'le-thanh-hon',
-        badge: 'NGHI LỄ NHÀ TRAI • 13:05 CHIỀU',
-        title: 'LỄ THÀNH HÔN',
+        badge: 'Nghi Lễ Nhà Trai • 13:05 Chiều',
+        title: 'Lễ Thành Hôn',
         timeAndDateSolar: 'Thứ 7, 13h05 ngày 28/11/2026',
         dateLunar: 'Tức ngày 20 tháng 10 năm Bính Ngọ',
         location: 'Tại Tư Gia Nhà Trai - Thôn An Bình, xã Việt Tiến, tỉnh Hưng Yên',

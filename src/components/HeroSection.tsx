@@ -79,7 +79,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
               <p className={`font-script-luxury text-3xl sm:text-5xl mb-1 ${theme.textAccent}`}>
                 Thiệp Mời Cưới • {data.weddingDate.heroHeadline}
               </p>
-              <h1 className={`font-serif-luxury text-[34px] sm:text-7xl md:text-8xl font-normal tracking-tight leading-[1.2] mb-3 whitespace-nowrap ${theme.textPrimary}`}>
+              <h1 className={`font-script-luxury text-[42px] sm:text-7xl md:text-8xl font-normal leading-[1.22] mb-2 whitespace-nowrap ${theme.textPrimary}`}>
                 <span>{data.groom.shortName}</span>
                 <span className={`font-script-luxury text-4xl sm:text-7xl mx-2 sm:mx-3 inline-block -translate-y-0.5 ${theme.textAccent}`}>
                   &amp;
@@ -201,7 +201,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
                   EXCLUSIVE COVER STORY
                 </span>
 
-                <h1 className="font-serif-luxury text-4xl sm:text-6xl font-bold uppercase tracking-tight leading-[1.12] text-stone-950">
+                <h1 className="font-serif-luxury italic text-4xl sm:text-6xl font-normal tracking-tight leading-[1.15] text-stone-950">
                   {data.groom.shortName}
                   <span className="block font-script-luxury text-4xl sm:text-5xl text-[#9E7B3B] lowercase my-0.5">
                     and
@@ -298,7 +298,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
               <p className="font-script-luxury text-3xl sm:text-5xl text-[#F0AD64] mb-1">
                 Đêm Hội Pháo Hoa &amp; Tình Yêu
               </p>
-              <h1 className="font-serif-luxury text-[34px] sm:text-7xl md:text-8xl font-normal tracking-tight shimmer-gold-text whitespace-nowrap">
+              <h1 className="font-script-luxury text-[40px] sm:text-7xl md:text-8xl font-normal shimmer-gold-text whitespace-nowrap">
                 {data.groom.shortName} <span className="font-script-luxury text-4xl sm:text-7xl mx-1.5 sm:mx-2 text-[#F0AD64]">&amp;</span> {data.bride.shortName}
               </h1>
             </div>
@@ -392,8 +392,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ styleId, data, guestNa
               <p className="font-script-luxury text-3xl sm:text-5xl text-[#F7CE68] mb-1">
                 Lễ Thành Hôn &amp; Lễ Vu Quy
               </p>
-              <h1 className="font-serif-luxury text-[32px] sm:text-7xl md:text-8xl font-bold tracking-wide shimmer-gold-text whitespace-nowrap">
-                {data.groom.shortName} <span className="inline-block mx-1.5 sm:mx-2 text-3xl sm:text-6xl align-middle">囍</span> {data.bride.shortName}
+              <h1 className="font-script-luxury text-[38px] sm:text-7xl md:text-8xl font-normal shimmer-gold-text whitespace-nowrap">
+                {data.groom.shortName} <span className="font-serif-luxury inline-block mx-1.5 sm:mx-2 text-2xl sm:text-5xl align-middle">囍</span> {data.bride.shortName}
               </h1>
             </div>
 

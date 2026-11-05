@@ -81,7 +81,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
           <p className={`font-script-luxury text-4xl sm:text-5xl ${theme.textAccent} -mb-2`}>
             Khoảnh Khắc Tình Yêu
           </p>
-          <h2 className={`font-serif-luxury text-4xl sm:text-6xl font-normal mb-3 ${theme.textPrimary}`}>
+          <h2 className={`font-serif-luxury italic text-4xl sm:text-6xl font-normal mb-3 ${theme.textPrimary}`}>
             Album Kỷ Niệm 3D
           </h2>
           <p className={`font-serif-italic text-base sm:text-lg leading-relaxed ${theme.textSecondary}`}>
@@ -190,14 +190,14 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
                 ? 'Bách Niên Giai Lão'
                 : 'Sweet Memories'}
             </p>
-            <h3 className={`font-serif-luxury text-2xl sm:text-5xl font-semibold uppercase tracking-[0.06em] sm:tracking-wider ${theme.textPrimary}`}>
+            <h3 className={`font-serif-luxury italic text-3xl sm:text-5xl font-normal tracking-wide ${theme.textPrimary}`}>
               {styleId === 'editorial'
-                ? 'ẤN PHẨM THỜI TRANG VOGUE'
+                ? 'Ấn Phẩm Thời Trang Vogue'
                 : styleId === 'cinematic'
-                ? 'THƯỚC PHIM KỶ NIỆM 35MM'
+                ? 'Thước Phim Kỷ Niệm 35mm'
                 : styleId === 'indochine'
-                ? 'TRIỂN LÃM CUNG ĐÌNH ĐÔNG DƯƠNG'
-                : 'TRIỂN LÃM ẢNH CƯỚI FINE ART'}
+                ? 'Triển Lãm Cung Đình Đông Dương'
+                : 'Triển Lãm Ảnh Cưới Fine Art'}
             </h3>
           </div>
 

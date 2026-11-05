@@ -38,7 +38,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
           <p className={`font-script-luxury text-4xl sm:text-5xl ${theme.textAccent} -mb-2`}>
             Trân Trọng Kính Mời
           </p>
-          <h2 className={`font-serif-luxury text-4xl sm:text-6xl font-normal mb-3 ${theme.textPrimary}`}>
+          <h2 className={`font-serif-luxury italic text-4xl sm:text-6xl font-normal mb-3 ${theme.textPrimary}`}>
             Đêm Tiệc Thân Mật
           </h2>
           <p className={`font-serif-italic text-base sm:text-lg leading-relaxed ${theme.textSecondary}`}>
@@ -77,7 +77,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
                         VIP // 0{index + 1}
                       </span>
                     </div>
-                    <h3 className="font-serif-luxury text-3xl sm:text-4xl font-bold uppercase tracking-wide text-stone-950 mb-2">
+                    <h3 className="font-serif-luxury italic text-3xl sm:text-4xl font-medium tracking-wide text-stone-950 mb-2">
                       {ev.title}
                     </h3>
                     <p className="font-tall-editorial text-sm tracking-[0.2em] text-[#9E7B3B] uppercase mb-4">
@@ -194,7 +194,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
 
                   {/* Nội dung chi tiết */}
                   <div className="text-center space-y-4">
-                    <h3 className={`font-serif-luxury text-3xl sm:text-4xl font-bold tracking-wide uppercase ${theme.textPrimary}`}>
+                    <h3 className={`font-script-luxury text-4xl sm:text-5xl font-normal ${theme.textPrimary}`}>
                       {ev.title}
                     </h3>
 

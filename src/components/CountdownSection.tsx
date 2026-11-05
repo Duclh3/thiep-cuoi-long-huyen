@@ -129,11 +129,11 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
                 </div>
 
                 <div>
-                  <p className="font-script-luxury text-3xl sm:text-4xl text-amber-200 mb-0.5">
+                  <p className="font-script-luxury text-3xl sm:text-4xl text-amber-200 -mb-1">
                     Counting every heartbeat...
                   </p>
-                  <h2 className="font-serif-luxury text-3xl sm:text-5xl font-bold tracking-wider uppercase mb-3 sm:mb-4 whitespace-nowrap">
-                    SAVE THE DATE
+                  <h2 className="font-serif-luxury italic text-4xl sm:text-6xl font-normal tracking-wide mb-3 sm:mb-4 whitespace-nowrap">
+                    Save The Date
                   </h2>
 
                   {/* 4 Ô Đếm Ngược Kính Mờ 3D Flip */}
@@ -194,10 +194,10 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
               className={`rounded-[32px] border-2 ${theme.borderAccent} ${theme.bgCard} p-6 sm:p-8 shadow-2xl max-w-md mx-auto`}
             >
               <div className={`text-center pb-4 mb-4 border-b ${theme.borderSubtle}`}>
-                <p className={`text-xs uppercase tracking-[0.3em] font-semibold mb-1 ${theme.textAccent}`}>
-                  THÁNG 11 • NĂM 2026
+                <p className={`font-serif-italic text-xs tracking-[0.22em] font-semibold mb-1 ${theme.textAccent}`}>
+                  Tháng 11 • Năm 2026
                 </p>
-                <h3 className={`font-serif-luxury text-3xl font-semibold ${theme.textPrimary}`}>
+                <h3 className={`font-script-luxury text-4xl font-normal ${theme.textPrimary}`}>
                   {data.groom.shortName} &amp; {data.bride.shortName}
                 </h3>
                 <p className={`text-xs mt-1 opacity-75 ${theme.textSecondary}`}>
