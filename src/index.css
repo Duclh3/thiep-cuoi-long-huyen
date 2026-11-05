@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Cormorant Infant', 'Cormorant Garamond', Georgia, serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-script: 'Alex Brush', 'Allura', 'Great Vibes', 'Dancing Script', cursive;
+    --font-tall: 'Oswald', sans-serif;
+    --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: auto;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.font-serif-luxury {
+  font-family: var(--font-serif);
+}
+
+.font-display-luxury {
+  font-family: var(--font-display);
+}
+
+/* Phông chữ Calligraphy cực kỳ bay bổng */
+.font-script-luxury {
+  font-family: var(--font-script);
+  letter-spacing: 0.02em;
+}
+
+/* Phông chữ dáng cao thanh mảnh như trong ảnh mẫu phong bì */
+.font-tall-editorial {
+  font-family: var(--font-tall);
+  letter-spacing: 0.14em;
+}
+
+.font-sans-vn {
+  font-family: var(--font-sans);
+}
+
+.perspective-1500 {
+  perspective: 1500px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Hiệu ứng chữ ánh vàng kim lấp lánh */
+@keyframes shimmer-gold {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-gold-text {
+  background: linear-gradient(
+    90deg,
+    #fff6d6 0%,
+    #f5c469 25%,
+    #ffffff 50%,
+    #e2a84b 75%,
+    #fff6d6 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-gold 6s linear infinite;
+}
+
+@keyframes spin-halo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-halo {
+  animation: spin-halo 28s linear infinite;
+}
+
+.animate-spin-vinyl {
+  animation: spin-halo 7s linear infinite;
+}
+
+/* Sóng nhạc Equalizer */
+@keyframes eq-bar {
+  0%, 100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.animate-eq-1 {
+  animation: eq-bar 0.7s ease-in-out infinite;
+}
+.animate-eq-2 {
+  animation: eq-bar 0.55s ease-in-out infinite 0.15s;
+}
+.animate-eq-3 {
+  animation: eq-bar 0.8s ease-in-out infinite 0.3s;
+}
+
+/* Marquee chạy vô tận */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+/* Khung ảnh Fine Art Polaroid & Editorial Magazine (thay thế hoàn toàn vòm cung cũ) */
+.fine-art-polaroid {
+  background: #ffffff;
+  padding: 12px 12px 38px 12px;
+  border-radius: 3px;
+  box-shadow: 0 22px 50px -12px rgba(28, 20, 15, 0.22), 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.fine-art-matte-frame {
+  position: relative;
+  padding: 14px;
+  border-radius: 4px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.25);
+}
+
+.fine-art-matte-frame::after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  pointer-events: none;
+}
+
+.film-grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0),
+                    radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 0);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+.indochine-pattern {
+  background-image: radial-gradient(circle at 50% 50%, rgba(247, 206, 104, 0.09) 2px, transparent 2px);
+  background-size: 32px 32px;
+}
