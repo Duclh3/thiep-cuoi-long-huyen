@@ -129,9 +129,6 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ styleId, dat
                 </div>
 
                 <div>
-                  <p className="font-script-luxury text-3xl sm:text-4xl text-amber-200 -mb-1">
-                    Counting every heartbeat...
-                  </p>
                   <h2 className="font-serif-luxury italic text-4xl sm:text-6xl font-normal tracking-wide mb-3 sm:mb-4 whitespace-nowrap">
                     Save The Date
                   </h2>

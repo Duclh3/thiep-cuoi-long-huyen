@@ -4,7 +4,6 @@ import confetti from 'canvas-confetti';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   XCircle,
-  Share2,
   Check,
   Heart,
   Sparkles,
@@ -152,7 +151,6 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [submittedSuccess, setSubmittedSuccess] = useState(false);
-  const [copiedLink, setCopiedLink] = useState(false);
   const [copiedKey, setCopiedKey] = useState<'groom' | 'bride' | null>(null);
   const [zoomQrUrl, setZoomQrUrl] = useState<string | null>(null);
 
@@ -216,14 +214,6 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
     setTimeout(() => {
       setSubmittedSuccess(false);
     }, 4500);
-  };
-
-  const handleShareLink = () => {
-    if (typeof window !== 'undefined') {
-      navigator.clipboard.writeText(window.location.href);
-      setCopiedLink(true);
-      setTimeout(() => setCopiedLink(false), 2500);
-    }
   };
 
   const handleCopyBankAccount = (key: 'groom' | 'bride', accountNumber: string) => {
@@ -302,28 +292,19 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
         </div>
 
         <div className="relative z-10 w-full max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-amber-300/40 mb-2 max-w-full">
-              <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-              <span className="font-tall-editorial text-[11px] sm:text-xs tracking-[0.14em] sm:tracking-[0.22em] text-amber-200 whitespace-nowrap">
-                Sweet Blessings • Sổ Lưu Bút Vĩnh Cửu
-              </span>
-            </div>
-            <p className="font-script-luxury text-3xl sm:text-5xl text-amber-200 -mb-1">
-              Lời Chúc Trăm Năm
-            </p>
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h2 className="font-serif-luxury italic text-3xl sm:text-6xl font-normal text-white drop-shadow-lg">
-              Gửi Lời Chúc Đến Cặp Đôi
+              Gửi Lời Chúc Mừng
             </h2>
           </div>
 
-          {/* LƯỚI 2 CỘT CÂN ĐỐI TUYỆT ĐỐI CHIỀU CAO (items-stretch + lg:h-[570px]) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            {/* Cột Trái: Form Gửi Lời Chúc Pha Lê */}
-            <div className="lg:col-span-6 flex">
+          {/* LƯỚI FORM GỬI LỜI CHÚC (Chỉ hiển thị danh sách lời chúc khi đã có người gửi) */}
+          <div className={`grid grid-cols-1 ${wishes.length > 0 ? 'lg:grid-cols-12' : 'max-w-xl mx-auto'} gap-8 items-stretch`}>
+            {/* Form Gửi Lời Chúc Pha Lê */}
+            <div className={wishes.length > 0 ? 'lg:col-span-6 flex' : 'w-full flex'}>
               <form
                 onSubmit={handleSubmit}
-                className="w-full h-full lg:h-[570px] rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-5 sm:p-8 shadow-2xl flex flex-col justify-between text-white"
+                className="w-full h-full rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-5 sm:p-8 shadow-2xl flex flex-col justify-between text-white"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between pb-3 border-b border-white/15">
@@ -406,7 +387,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                 </div>
 
                 {/* Chân Card Trái: Nút Gửi & Thông báo */}
-                <div className="pt-3 space-y-2.5">
+                <div className="pt-4 space-y-2.5">
                   <AnimatePresence>
                     {submittedSuccess && (
                       <motion.div
@@ -415,7 +396,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                         exit={{ opacity: 0 }}
                         className="p-2.5 rounded-xl bg-emerald-500/25 border border-emerald-400/50 text-center text-xs text-emerald-100"
                       >
-                        ✨ Cảm ơn bạn! Lời chúc đã được lưu vĩnh viễn vào Sổ Lưu Bút.
+                        ✨ Cảm ơn bạn đã gửi lời chúc phúc!
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -425,37 +406,25 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                     className="cursor-pointer w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-semibold text-xs sm:text-sm tracking-[0.08em] sm:tracking-[0.14em] flex items-center justify-center gap-2 whitespace-nowrap shadow-xl hover:brightness-110 transition-all"
                   >
                     <Send className="w-4 h-4 shrink-0" />
-                    <span className="whitespace-nowrap">Gửi Lời Chúc &amp; Bắn Pháo Hoa 🎆</span>
+                    <span className="whitespace-nowrap">Gửi Lời Chúc</span>
                   </button>
                 </div>
               </form>
             </div>
 
-            {/* Cột Phải: Danh Sách Lời Chúc Pha Lê */}
-            <div className="lg:col-span-6 flex">
-              <div className="w-full h-[500px] lg:h-[570px] rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-5 sm:p-8 shadow-2xl text-white flex flex-col justify-between">
-                <div className="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-white/15 shrink-0">
-                  <h3 className="font-script-luxury text-2xl sm:text-4xl text-amber-100">
-                    Lời Chúc Từ Người Thương ({wishes.length})
-                  </h3>
-                  <Heart className="w-5 h-5 fill-rose-500 text-rose-500 animate-pulse shrink-0" />
-                </div>
+            {/* Cột Phải: Danh Sách Lời Chúc (Chỉ hiện khi đã có lời chúc) */}
+            {wishes.length > 0 && (
+              <div className="lg:col-span-6 flex">
+                <div className="w-full h-[460px] lg:h-full rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-5 sm:p-8 shadow-2xl text-white flex flex-col justify-between">
+                  <div className="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-white/15 shrink-0">
+                    <h3 className="font-script-luxury text-2xl sm:text-4xl text-amber-100">
+                      Lời Chúc ({wishes.length})
+                    </h3>
+                    <Heart className="w-5 h-5 fill-rose-500 text-rose-500 animate-pulse shrink-0" />
+                  </div>
 
-                <div className="flex-1 overflow-y-auto space-y-3.5 pr-1.5">
-                  {wishes.length === 0 ? (
-                    <div className="h-full flex flex-col items-center justify-center text-center px-4 py-10 text-white/75">
-                      <div className="w-12 h-12 rounded-full bg-amber-300/15 border border-amber-300/35 flex items-center justify-center mb-3 text-amber-300">
-                        <MessageSquareHeart className="w-6 h-6" />
-                      </div>
-                      <p className="font-script-luxury text-2xl sm:text-3xl text-amber-200 mb-1">
-                        Sổ Lưu Bút Đang Chờ Lời Chúc Đầu Tiên
-                      </p>
-                      <p className="font-serif-italic text-sm sm:text-base text-white/75 max-w-xs leading-relaxed">
-                        Hãy là người đầu tiên gửi lời chúc tốt đẹp nhất tới Thành Long &amp; Thanh Huyền trong ngày trọng đại nhé!
-                      </p>
-                    </div>
-                  ) : (
-                    wishes.map((w) => (
+                  <div className="flex-1 overflow-y-auto space-y-3.5 pr-1.5">
+                    {wishes.map((w) => (
                       <motion.div
                         key={w.id}
                         initial={{ opacity: 0, y: 12, scale: 0.96 }}
@@ -472,18 +441,11 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                           “{w.message}”
                         </p>
                       </motion.div>
-                    ))
-                  )}
-                </div>
-
-                <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between text-xs font-serif-italic text-amber-200/85 shrink-0">
-                  <span>✨ Mọi lời chúc đều được lưu trữ tự động</span>
-                  <span className="font-script-luxury text-2xl text-amber-200">
-                    Long &amp; Huyền
-                  </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* =========================================================================
@@ -491,18 +453,9 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
              ========================================================================= */}
           <div id="section-qr-gift" className="mt-20 max-w-4xl mx-auto scroll-mt-24">
             <div className="text-center mb-7">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-300/20 border border-amber-300/50 text-amber-200 text-xs font-tall-editorial tracking-[0.18em] mb-2">
-                <Gift className="w-3.5 h-3.5" />
-                <span>Wedding Gift • Hộp Mừng Cưới</span>
-              </div>
               <h3 className="font-script-luxury text-4xl sm:text-6xl font-normal text-amber-200 drop-shadow">
                 Hộp Quà Mừng Cưới
               </h3>
-              <p className="font-serif-italic text-sm sm:text-lg text-white/85 mt-1 max-w-md mx-auto">
-                {!isGiftBoxOpen
-                  ? 'Chạm vào hộp quà bên dưới để mở mã QR mừng cưới'
-                  : 'Chạm vào từng mã QR để phóng to hoặc sao chép nhanh số tài khoản'}
-              </p>
             </div>
 
             <AnimatePresence mode="wait">
@@ -831,7 +784,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
         )}
 
       {/* PHẦN 2: ĐẠI TIỆC KẾT MÀN & LỜI CẢM ƠN (Ảnh nền: LVT08639.jpg) */}
-      <section className="relative min-h-[82vh] w-full overflow-hidden flex flex-col items-center justify-center text-center text-white px-4 pt-24 pb-36 sm:py-28">
+      <section className="relative min-h-[75vh] w-full overflow-hidden flex flex-col items-center justify-center text-center text-white px-4 pt-20 pb-32 sm:py-24">
         <div className="absolute inset-0 z-0 bg-stone-950">
           <img
             src={data.sectionImages.thankYouBg}
@@ -842,57 +795,13 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
         </div>
 
         <div className="relative z-10 w-full max-w-3xl mx-auto px-2 sm:px-4">
-          <p className="font-script-luxury text-3xl sm:text-5xl text-amber-200 mb-1">
-            Forever &amp; Always
-          </p>
-
           <h2 className="font-script-luxury text-5xl sm:text-8xl font-normal shimmer-gold-text mb-5 sm:mb-6 drop-shadow-xl">
             {data.thankYouText.title}
           </h2>
 
-          <p className="font-serif-italic text-sm sm:text-xl leading-relaxed text-white/95 max-w-2xl mx-auto mb-8 sm:mb-10 px-1 drop-shadow">
+          <p className="font-serif-italic text-sm sm:text-xl leading-relaxed text-white/95 max-w-2xl mx-auto px-1 drop-shadow">
             “{data.thankYouText.message}”
           </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xs sm:max-w-none mx-auto">
-            <button
-              type="button"
-              onClick={() => {
-                triggerCelebration();
-              }}
-              className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-semibold text-xs sm:text-sm tracking-[0.06em] sm:tracking-[0.14em] whitespace-nowrap shadow-2xl hover:scale-105 transition-transform"
-            >
-              <Sparkles className="w-4 h-4 shrink-0" />
-              <span className="whitespace-nowrap">🎆 Bắn Pháo Hoa Chúc Phúc</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleShareLink}
-              className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-full border border-white/80 bg-black/35 hover:bg-white hover:text-stone-900 text-xs sm:text-sm tracking-[0.06em] sm:tracking-[0.14em] whitespace-nowrap transition-all duration-300"
-            >
-              {copiedLink ? (
-                <>
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span className="whitespace-nowrap">Đã Sao Chép Link Thiệp!</span>
-                </>
-              ) : (
-                <>
-                  <Share2 className="w-4 h-4 shrink-0" />
-                  <span className="whitespace-nowrap">Chia Sẻ Thiệp Cưới</span>
-                </>
-              )}
-            </button>
-          </div>
-
-          <div className="mt-10 pt-5 border-t border-white/20 text-xs text-white/85 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2.5">
-            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-              <span className="font-script-luxury text-2xl sm:text-4xl text-amber-200">{data.groom.fullName}</span>
-              <Heart className="w-4 h-4 fill-rose-500 text-rose-500 animate-bounce shrink-0" />
-              <span className="font-script-luxury text-2xl sm:text-4xl text-amber-200">{data.bride.fullName}</span>
-            </div>
-            <span className="opacity-80 font-tall-editorial text-xs sm:text-sm tracking-[0.2em]">• 28 . 11 . 2026 •</span>
-          </div>
         </div>
       </section>
     </>

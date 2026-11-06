@@ -20,7 +20,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14 md:mb-20">
+        <div className="text-center max-w-2xl mx-auto mb-10 md:mb-16">
           <div className="inline-flex items-center gap-2 mb-1">
             {styleId === 'indochine' ? (
               <Crown className="w-4 h-4 text-[#F7CE68]" />
@@ -35,15 +35,9 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ styleId, data }) =
               THỨ SÁU • 27 . 11 . 2026 (19/10 BÍNH NGỌ)
             </span>
           </div>
-          <p className={`font-script-luxury text-4xl sm:text-5xl ${theme.textAccent} -mb-2`}>
-            Trân Trọng Kính Mời
-          </p>
-          <h2 className={`font-serif-luxury italic text-4xl sm:text-6xl font-normal mb-3 ${theme.textPrimary}`}>
-            Đêm Tiệc Thân Mật
+          <h2 className={`font-serif-luxury italic text-4xl sm:text-6xl font-normal ${theme.textPrimary}`}>
+            Bữa Cơm Thân Mật
           </h2>
-          <p className={`font-serif-italic text-base sm:text-lg leading-relaxed ${theme.textSecondary}`}>
-            Hai bên gia đình trân trọng kính mời Quý khách tới dự bữa cơm thân mật chung vui cùng gia đình chúng tôi.
-          </p>
         </div>
 
         {/* =========================================================================

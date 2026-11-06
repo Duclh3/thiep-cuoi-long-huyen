@@ -116,17 +116,9 @@ export const LoveStorySection: React.FC<LoveStorySectionProps> = ({ styleId, dat
             </span>
           </div>
 
-          <div>
-            <p className="font-script-luxury text-2xl sm:text-5xl text-amber-200 -mb-1">
-              Khoảnh Khắc Thiêng Liêng
-            </p>
-            <h2 className="font-script-luxury text-4xl sm:text-7xl md:text-8xl font-normal shimmer-gold-text mb-2">
-              {data.ceremonySection.title}
-            </h2>
-          </div>
-          <p className="text-xs sm:text-sm text-white/85 font-light max-w-md mx-auto">
-            Khoảnh khắc thiêng liêng khi hai gia đình chính thức đón dâu hiền, rể thảo về chung một nhà.
-          </p>
+          <h2 className="font-script-luxury text-4xl sm:text-7xl md:text-8xl font-normal shimmer-gold-text">
+            {data.ceremonySection.title}
+          </h2>
         </div>
 
         {/* Trục Sợi Dây Tơ Hồng Ánh Kim nối 2 đại lễ: LỄ VU QUY & LỄ THÀNH HÔN */}

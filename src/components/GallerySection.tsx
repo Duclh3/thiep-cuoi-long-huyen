@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Expand, X, ChevronLeft, ChevronRight, Sparkles, Pause, Play, Film, Crown, BookOpen } from 'lucide-react';
+import { Expand, X, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import { StyleId, THEMES, WeddingData } from '../data/weddingData';
 
 interface GallerySectionProps {
@@ -56,39 +56,6 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Header thay đổi theo 4 Phong Cách */}
-        <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 mb-1 max-w-full">
-            {styleId === 'indochine' ? (
-              <Crown className="w-4 h-4 text-[#F7CE68] shrink-0" />
-            ) : styleId === 'cinematic' ? (
-              <Film className="w-4 h-4 text-[#F0AD64] shrink-0" />
-            ) : styleId === 'editorial' ? (
-              <BookOpen className="w-4 h-4 text-[#9E7B3B] shrink-0" />
-            ) : (
-              <Sparkles className="w-4 h-4 shrink-0" style={{ color: theme.accentHex }} />
-            )}
-            <span className={`font-tall-editorial text-[10px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.28em] whitespace-nowrap ${theme.textAccent}`}>
-              {styleId === 'editorial'
-                ? 'VOGUE LOOKBOOK ARCHIVE • 2026'
-                : styleId === 'cinematic'
-                ? '35MM MOTION PICTURE GALLERY'
-                : styleId === 'indochine'
-                ? 'CHÂU BÁU HOÀNG GIA • BỘ ẢNH CƯỚI'
-                : '3D HOLOGRAPHIC GALLERY • BỘ ẢNH CƯỚI'}
-            </span>
-          </div>
-          <p className={`font-script-luxury text-4xl sm:text-5xl ${theme.textAccent} -mb-2`}>
-            Khoảnh Khắc Tình Yêu
-          </p>
-          <h2 className={`font-serif-luxury italic text-4xl sm:text-6xl font-normal mb-3 ${theme.textPrimary}`}>
-            Album Kỷ Niệm 3D
-          </h2>
-          <p className={`font-serif-italic text-base sm:text-lg leading-relaxed ${theme.textSecondary}`}>
-            Vòng xoay 3D tự động chuyển động êm dịu — chạm vào bất kỳ bức hình nào để phóng to toàn màn hình.
-          </p>
-        </div>
-
         {/* TẦNG 1: VÒNG XOAY KHÔNG GIAN 3D */}
         <div className="flex flex-col items-center">
           <div
@@ -179,25 +146,10 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ styleId, data })
         {/* =====================================================================
             TẦNG 2: TRIỂN LÃM ẢNH CƯỚI VỚI HIỆU ỨNG XOÈ BÀI 3D & VỆT SÁNG LỤA VÀNG
            ===================================================================== */}
-        <div className="mt-20 sm:mt-26">
-          <div className="text-center mb-12 sm:mb-16">
-            <p className={`font-script-luxury text-3xl sm:text-4xl ${theme.textAccent} -mb-1`}>
-              {styleId === 'editorial'
-                ? 'Editorial Lookbook'
-                : styleId === 'cinematic'
-                ? 'Director’s Cut Frames'
-                : styleId === 'indochine'
-                ? 'Bách Niên Giai Lão'
-                : 'Sweet Memories'}
-            </p>
+        <div className="mt-16 sm:mt-20">
+          <div className="text-center mb-10 sm:mb-12">
             <h3 className={`font-serif-luxury italic text-3xl sm:text-5xl font-normal tracking-wide ${theme.textPrimary}`}>
-              {styleId === 'editorial'
-                ? 'Ấn Phẩm Thời Trang Vogue'
-                : styleId === 'cinematic'
-                ? 'Thước Phim Kỷ Niệm 35mm'
-                : styleId === 'indochine'
-                ? 'Triển Lãm Cung Đình Đông Dương'
-                : 'Triển Lãm Ảnh Cưới Fine Art'}
+              Album Hình Cưới
             </h3>
           </div>
 
