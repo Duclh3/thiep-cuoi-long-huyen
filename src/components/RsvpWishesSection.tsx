@@ -5,16 +5,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   XCircle,
   Check,
-  Heart,
   Sparkles,
   Send,
-  MessageSquareHeart,
   Gift,
   Copy,
   Download,
   X,
   LockOpen,
   RotateCcw,
+  Heart,
 } from 'lucide-react';
 import { StyleId, THEMES, WeddingData, WishItem } from '../data/weddingData';
 import { soundEngine } from '../utils/soundEngine';
@@ -25,12 +24,6 @@ interface RsvpWishesSectionProps {
   wishes: WishItem[];
   onAddWish: (wish: WishItem) => void;
 }
-
-const QUICK_WISH_TEMPLATES = [
-  'Chúc Thành Long & Thanh Huyền trăm năm hạnh phúc, trọn vẹn yêu thương!',
-  'Chúc mừng ngày chung đôi! Mong hành trình phía trước của hai bạn luôn ngập tràn tiếng cười.',
-  'Trăm năm tình viên mãn, bạc đầu nghĩa phu thê. Chúc mừng hạnh phúc hai em!',
-];
 
 /**
  * Chiếc Nơ Lụa Vàng Kim 3D Nghệ Thuật đặt trên đỉnh Hộp Quà Mừng Cưới
@@ -291,162 +284,103 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
           <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/60 to-black/88" />
         </div>
 
-        <div className="relative z-10 w-full max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <h2 className="font-serif-luxury italic text-3xl sm:text-6xl font-normal text-white drop-shadow-lg">
-              Gửi Lời Chúc Mừng
+        <div className="relative z-10 w-full max-w-4xl mx-auto">
+          <div className="text-center mb-6">
+            <h2 className="font-script-luxury text-4xl sm:text-5xl font-normal text-amber-200 drop-shadow-lg">
+              Gửi Lời Chúc
             </h2>
           </div>
 
-          {/* LƯỚI FORM GỬI LỜI CHÚC (Chỉ hiển thị danh sách lời chúc khi đã có người gửi) */}
-          <div className={`grid grid-cols-1 ${wishes.length > 0 ? 'lg:grid-cols-12' : 'max-w-xl mx-auto'} gap-8 items-stretch`}>
-            {/* Form Gửi Lời Chúc Pha Lê */}
-            <div className={wishes.length > 0 ? 'lg:col-span-6 flex' : 'w-full flex'}>
-              <form
-                onSubmit={handleSubmit}
-                className="w-full h-full rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-5 sm:p-8 shadow-2xl flex flex-col justify-between text-white"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-white/15">
-                    <h3 className="font-script-luxury text-2xl sm:text-4xl text-amber-100">
-                      Viết Lời Chúc Phúc
-                    </h3>
-                    <MessageSquareHeart className="w-6 h-6 text-amber-300 shrink-0" />
-                  </div>
-
-                  {/* Tên */}
-                  <div>
-                    <label className="block font-serif-italic text-sm tracking-wide text-amber-200/95 mb-2">
-                      Tên của bạn / Gia đình *
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        required
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Nhập tên của bạn..."
-                        className="w-full rounded-2xl border border-white/25 bg-white/10 px-4 py-3 pr-10 text-sm text-white placeholder:text-white/45 focus:outline-none focus:border-amber-300"
-                      />
-                      {name.length > 0 && (
-                        <button
-                          type="button"
-                          onClick={() => setName('')}
-                          className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white"
-                          aria-label="Xóa tên"
-                        >
-                          <XCircle className="w-4 h-4" />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Lời nhắn gửi */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="font-serif-italic text-sm tracking-wide text-amber-200/95">
-                        Lời nhắn gửi yêu thương *
-                      </label>
-                      <span className="font-serif-italic text-xs text-amber-300">Chạm chọn nhanh:</span>
-                    </div>
-
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {QUICK_WISH_TEMPLATES.map((tpl, i) => (
-                        <button
-                          type="button"
-                          key={i}
-                          onClick={() => setMessage(tpl)}
-                          className="cursor-pointer text-left text-xs font-serif-italic px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white/90 transition-colors truncate max-w-full"
-                        >
-                          + {tpl.slice(0, 44)}...
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="relative">
-                      <textarea
-                        rows={4}
-                        required
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Gửi lời chúc tốt đẹp nhất tới Thành Long & Thanh Huyền..."
-                        className="w-full rounded-2xl border border-white/25 bg-white/10 p-4 pr-10 text-sm text-white placeholder:text-white/45 focus:outline-none focus:border-amber-300 resize-none"
-                      />
-                      {message.length > 0 && (
-                        <button
-                          type="button"
-                          onClick={() => setMessage('')}
-                          className="cursor-pointer absolute right-3 top-3 text-white/60 hover:text-white"
-                          aria-label="Xóa lời chúc"
-                        >
-                          <XCircle className="w-4 h-4" />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Chân Card Trái: Nút Gửi & Thông báo */}
-                <div className="pt-4 space-y-2.5">
-                  <AnimatePresence>
-                    {submittedSuccess && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        className="p-2.5 rounded-xl bg-emerald-500/25 border border-emerald-400/50 text-center text-xs text-emerald-100"
-                      >
-                        ✨ Cảm ơn bạn đã gửi lời chúc phúc!
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  <button
-                    type="submit"
-                    className="cursor-pointer w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-semibold text-xs sm:text-sm tracking-[0.08em] sm:tracking-[0.14em] flex items-center justify-center gap-2 whitespace-nowrap shadow-xl hover:brightness-110 transition-all"
-                  >
-                    <Send className="w-4 h-4 shrink-0" />
-                    <span className="whitespace-nowrap">Gửi Lời Chúc</span>
-                  </button>
-                </div>
-              </form>
+          {/* FORM GỬI LỜI CHÚC GỌN GÀNG, TỐI GIẢN */}
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-md mx-auto rounded-3xl bg-black/50 backdrop-blur-xl border border-amber-300/35 p-5 sm:p-6 shadow-2xl space-y-3.5 text-white"
+          >
+            <div className="relative">
+              <input
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Tên của bạn..."
+                className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 pr-9 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-amber-300"
+              />
+              {name.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setName('')}
+                  className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white"
+                  aria-label="Xóa tên"
+                >
+                  <XCircle className="w-4 h-4" />
+                </button>
+              )}
             </div>
 
-            {/* Cột Phải: Danh Sách Lời Chúc (Chỉ hiện khi đã có lời chúc) */}
-            {wishes.length > 0 && (
-              <div className="lg:col-span-6 flex">
-                <div className="w-full h-[460px] lg:h-full rounded-[28px] bg-black/55 backdrop-blur-2xl border border-amber-300/45 p-5 sm:p-8 shadow-2xl text-white flex flex-col justify-between">
-                  <div className="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-white/15 shrink-0">
-                    <h3 className="font-script-luxury text-2xl sm:text-4xl text-amber-100">
-                      Lời Chúc ({wishes.length})
-                    </h3>
-                    <Heart className="w-5 h-5 fill-rose-500 text-rose-500 animate-pulse shrink-0" />
-                  </div>
+            <div className="relative">
+              <textarea
+                rows={3}
+                required
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Lời chúc gửi đến Thành Long & Thanh Huyền..."
+                className="w-full rounded-xl border border-white/20 bg-white/10 p-3.5 pr-9 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-amber-300 resize-none"
+              />
+              {message.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setMessage('')}
+                  className="cursor-pointer absolute right-3 top-3 text-white/60 hover:text-white"
+                  aria-label="Xóa lời chúc"
+                >
+                  <XCircle className="w-4 h-4" />
+                </button>
+              )}
+            </div>
 
-                  <div className="flex-1 overflow-y-auto space-y-3.5 pr-1.5">
-                    {wishes.map((w) => (
-                      <motion.div
-                        key={w.id}
-                        initial={{ opacity: 0, y: 12, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        className="rounded-2xl bg-white/10 border border-white/15 p-4 sm:p-4.5"
-                      >
-                        <div className="flex items-center justify-between mb-1">
-                          <h4 className="font-serif-luxury italic text-xl sm:text-2xl font-semibold text-amber-200">
-                            {w.name}
-                          </h4>
-                          <span className="text-[11px] text-white/60">{w.createdAt}</span>
-                        </div>
-                        <p className="font-serif-italic text-sm sm:text-base text-white/95 leading-relaxed">
-                          “{w.message}”
-                        </p>
-                      </motion.div>
-                    ))}
+            <AnimatePresence>
+              {submittedSuccess && (
+                <motion.div
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="p-2 rounded-xl bg-emerald-500/25 border border-emerald-400/50 text-center text-xs text-emerald-100"
+                >
+                  ✨ Cảm ơn bạn đã gửi lời chúc!
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <button
+              type="submit"
+              className="cursor-pointer w-full py-3 px-5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-semibold text-xs sm:text-sm tracking-[0.1em] flex items-center justify-center gap-2 shadow-lg hover:brightness-110 transition-all"
+            >
+              <Send className="w-3.5 h-3.5 shrink-0" />
+              <span>Gửi Lời Chúc</span>
+            </button>
+
+            {/* Danh sách lời chúc gọn nhẹ ngay bên dưới (chỉ hiển thị khi có lời chúc) */}
+            {wishes.length > 0 && (
+              <div className="pt-3 border-t border-white/15 max-h-56 overflow-y-auto space-y-2.5 pr-1">
+                {wishes.map((w) => (
+                  <div
+                    key={w.id}
+                    className="rounded-xl bg-white/10 border border-white/10 px-3.5 py-2.5 text-left"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-serif-luxury italic text-base font-semibold text-amber-200">
+                        {w.name}
+                      </span>
+                      <span className="text-[10px] text-white/50">{w.createdAt}</span>
+                    </div>
+                    <p className="font-serif-italic text-xs sm:text-sm text-white/90 mt-0.5 leading-relaxed">
+                      “{w.message}”
+                    </p>
                   </div>
-                </div>
+                ))}
               </div>
             )}
-          </div>
+          </form>
 
           {/* =========================================================================
               TUYỆT TÁC HỘP QUÀ MỪNG CƯỚI 3D — PHẢI MỞ HỘP MỚI HIỆN 2 MÃ QR BÊN TRONG
