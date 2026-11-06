@@ -63,23 +63,59 @@ function detectInitialRouteStyle(): { style: StyleId; isLockedSingleStyle: boole
   const params = new URLSearchParams(window.location.search);
   const queryStyle = params.get('style')?.toLowerCase();
 
-  if (pathname.includes('/fine-art') || queryStyle === 'fairytale' || queryStyle === 'fine-art') {
+  // Style 1: Fine Art
+  if (
+    pathname.includes('/fine-art') ||
+    pathname.includes('/style-1') ||
+    queryStyle === 'fairytale' ||
+    queryStyle === 'fine-art' ||
+    queryStyle === '1'
+  ) {
     return { style: 'fairytale', isLockedSingleStyle: true };
   }
-  if (pathname.includes('/vogue') || queryStyle === 'editorial' || queryStyle === 'vogue') {
+
+  // Style 2: Vogue Editorial
+  if (
+    pathname.includes('/vogue') ||
+    pathname.includes('/editorial') ||
+    pathname.includes('/style-2') ||
+    queryStyle === 'editorial' ||
+    queryStyle === 'vogue' ||
+    queryStyle === '2'
+  ) {
     return { style: 'editorial', isLockedSingleStyle: true };
   }
-  if (pathname.includes('/starlight') || queryStyle === 'cinematic' || queryStyle === 'starlight') {
+
+  // Style 3: Starlight Cinematic
+  if (
+    pathname.includes('/starlight') ||
+    pathname.includes('/cinematic') ||
+    pathname.includes('/style-3') ||
+    queryStyle === 'cinematic' ||
+    queryStyle === 'starlight' ||
+    queryStyle === '3'
+  ) {
     return { style: 'cinematic', isLockedSingleStyle: true };
   }
-  if (pathname.includes('/indochine') || queryStyle === 'indochine') {
+
+  // Style 4: Indochine Đông Dương
+  if (
+    pathname.includes('/indochine') ||
+    pathname.includes('/style-4') ||
+    queryStyle === 'indochine' ||
+    queryStyle === '4'
+  ) {
     return { style: 'indochine', isLockedSingleStyle: true };
   }
+
+  // Style 5: Minimal Tone Trắng
   if (
     pathname.includes('/minimal') ||
     pathname.includes('/tone-trang') ||
+    pathname.includes('/style-5') ||
     queryStyle === 'minimal' ||
-    queryStyle === 'tone-trang'
+    queryStyle === 'tone-trang' ||
+    queryStyle === '5'
   ) {
     return { style: 'minimal', isLockedSingleStyle: true };
   }

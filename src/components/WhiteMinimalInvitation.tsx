@@ -361,17 +361,17 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
   const totalDays = 30;
 
   return (
-    <div className="min-h-screen w-full bg-[#EFECE6] text-[#2B2523] flex justify-center overflow-x-hidden">
-      {/* Khung Thiệp Dọc Chuẩn Mobile-First Giống Hệt Video Mẫu */}
+    <div className="min-h-screen w-full bg-[#EFECE6] text-[#2B2523] flex justify-center items-start overflow-x-hidden md:py-10 md:px-6">
+      {/* Khung Thiệp Dọc Chuẩn Mobile-First, Tối Ưu Hiển Thị Sang Trọng Cả Trên Màn Hình Máy Tính */}
       <div
-        className={`w-full max-w-[460px] bg-[#FAF8F5] shadow-[0_0_60px_rgba(0,0,0,0.09)] relative overflow-hidden ${
-          isEnvelopeOpen ? 'pb-10' : 'min-h-[100dvh] flex flex-col'
+        className={`w-full max-w-[460px] md:max-w-3xl lg:max-w-4xl bg-[#FAF8F5] shadow-[0_0_60px_rgba(0,0,0,0.09)] md:shadow-[0_25px_80px_rgba(43,37,35,0.16)] md:rounded-3xl md:border md:border-[#E5DDD2] relative overflow-hidden transition-all duration-500 ${
+          isEnvelopeOpen ? 'pb-10' : 'min-h-[100dvh] md:min-h-[780px] flex flex-col justify-center'
         }`}
       >
         {/* Thanh Tiêu Đề Mảnh Trên Đỉnh Giống Hệt Video */}
-        <div className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200/80 px-4 py-3 flex items-center justify-between text-[#2B2523]">
+        <div className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200/80 px-4 md:px-8 py-3 flex items-center justify-between text-[#2B2523]">
           <ChevronLeft className="w-4 h-4 opacity-60 shrink-0" />
-          <span className="font-condensed-minimal text-xs sm:text-sm tracking-[0.08em] uppercase font-normal truncate px-2">
+          <span className="font-condensed-minimal text-xs sm:text-sm md:text-base tracking-[0.1em] uppercase font-normal truncate px-2">
             THIỆP MỜI CƯỚI {data.groom.shortName} &amp; {data.bride.shortName}
           </span>
           <MoreHorizontal className="w-4 h-4 opacity-60 shrink-0" />
@@ -383,10 +383,10 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
             - Khi ấn mở (isEnvelopeOpen): Mở nắp phong bì, đẩy 2 ảnh Polaroid lên và mở khóa toàn bộ thiệp!
            ===================================================================== */}
         <section
-          className={`px-5 flex flex-col items-center text-center relative transition-all duration-700 ${
+          className={`px-5 md:px-10 flex flex-col items-center text-center relative transition-all duration-700 ${
             isEnvelopeOpen
-              ? 'pt-10 pb-8'
-              : 'flex-1 min-h-[calc(100dvh-52px)] justify-center py-8'
+              ? 'pt-10 md:pt-14 pb-8'
+              : 'flex-1 min-h-[calc(100dvh-52px)] md:min-h-[720px] justify-center py-8'
           }`}
         >
           {/* Dòng chữ tay phía trên phong bì: "Nhấp để mở" -> đổi thành "Save our date!" khi mở */}
@@ -405,7 +405,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                 scale: { duration: 2.2, repeat: isEnvelopeOpen ? 0 : Infinity, ease: 'easeInOut' },
               }}
               onClick={handleOpenEnvelope}
-              className="cursor-pointer font-handwritten-minimal text-3xl sm:text-4xl text-[#3A302C] mb-12 select-none"
+              className="cursor-pointer font-handwritten-minimal text-3xl sm:text-4xl md:text-5xl text-[#3A302C] mb-12 md:mb-16 select-none"
             >
               {isEnvelopeOpen ? 'Save our date!' : 'Nhấp để mở'}
             </motion.p>
@@ -414,7 +414,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
           {/* Khối Phong Bì Trắng Kem + Ảnh Hoa Rum Thật Ở 2 Viền Góc + Con Dấu Sáp Bướm Vàng */}
           <div
             onClick={handleOpenEnvelope}
-            className="cursor-pointer relative w-[286px] sm:w-[320px] h-[192px] sm:h-[212px] my-2 select-none group"
+            className="cursor-pointer relative w-[286px] sm:w-[320px] h-[192px] sm:h-[212px] my-2 md:my-6 md:scale-115 transform origin-center select-none group"
             style={{ perspective: '1200px' }}
           >
             {/* ẢNH HOA VIỀN CẠNH TRÁI TRÊN PHONG BÌ (Giống hệt giây 00:00 & 00:04 trong video) */}
@@ -612,13 +612,13 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.3 }}
-                  className="font-handwritten-minimal text-3xl sm:text-4xl text-center text-[#3A302C] mb-2"
+                  className="font-handwritten-minimal text-3xl sm:text-4xl md:text-5xl text-center text-[#3A302C] mb-3"
                 >
                   Tháng 11 - 2026
                 </motion.p>
 
                 {/* Khung Lịch Đè Lên Ảnh Cưới Có Viền Mờ Trắng Trên/Dưới Giống Hệt Video */}
-                <div className="relative w-full aspect-[4/3.1] overflow-hidden">
+                <div className="relative w-full aspect-[4/3.1] md:aspect-[16/7.5] md:max-h-[460px] overflow-hidden">
                   <img
                     src={data.sectionImages.countdown}
                     alt="Tháng 11 - 2026"
@@ -628,21 +628,21 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FAF8F5] via-white/25 to-[#FAF8F5]" />
 
                   {/* Lưới Lịch Tháng 11/2026 */}
-                  <div className="absolute inset-0 px-6 sm:px-8 py-4 flex flex-col justify-center">
+                  <div className="absolute inset-0 px-6 sm:px-8 md:px-12 py-4 flex flex-col justify-center max-w-xl mx-auto">
                     <div className="grid grid-cols-7 text-center mb-2">
                       {weekDays.map((wd) => (
                         <span
                           key={wd}
-                          className="font-condensed-minimal text-[10px] sm:text-[11px] tracking-[0.08em] text-[#3A302C] font-normal"
+                          className="font-condensed-minimal text-[10px] sm:text-[11px] md:text-xs tracking-[0.08em] text-[#3A302C] font-normal"
                         >
                           {wd}
                         </span>
                       ))}
                     </div>
 
-                    <div className="grid grid-cols-7 gap-y-1.5 text-center">
+                    <div className="grid grid-cols-7 gap-y-1.5 md:gap-y-2.5 text-center">
                       {Array.from({ length: emptyLeading }).map((_, idx) => (
-                        <div key={`empty-${idx}`} className="h-6 sm:h-7" />
+                        <div key={`empty-${idx}`} className="h-6 sm:h-7 md:h-8" />
                       ))}
                       {Array.from({ length: totalDays }).map((_, idx) => {
                         const day = idx + 1;
@@ -650,11 +650,11 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                         return (
                           <div
                             key={day}
-                            className="relative h-6 sm:h-7 flex items-center justify-center"
+                            className="relative h-6 sm:h-7 md:h-8 flex items-center justify-center"
                           >
                             {isSpecial && (
                               <Heart
-                                className={`pointer-events-none absolute w-7 h-7 sm:w-8 sm:h-8 ${
+                                className={`pointer-events-none absolute w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 ${
                                   day === 28
                                     ? 'fill-white text-white drop-shadow-[0_2px_6px_rgba(90,24,36,0.35)] scale-110'
                                     : 'fill-white/85 text-white/90 drop-shadow-sm'
@@ -662,7 +662,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                               />
                             )}
                             <span
-                              className={`relative z-10 font-condensed-minimal text-xs sm:text-sm ${
+                              className={`relative z-10 font-condensed-minimal text-xs sm:text-sm md:text-base ${
                                 isSpecial ? 'font-medium text-[#5A1824]' : 'text-[#2B2523]'
                               }`}
                             >
@@ -676,11 +676,11 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                 </div>
 
                 {/* Huy Hiệu Oval Chữ Ký L & H + 4 Ô Đếm Ngược Kem Mịn + ẢNH HOA VIỀN CẠNH PHẢI */}
-                <div className="relative px-6 pt-5 pb-4 text-center">
+                <div className="relative px-6 pt-5 pb-4 text-center max-w-xl mx-auto">
                   {/* ẢNH HOA VIỀN CẠNH PHẢI XOAY RỦ XUỐNG (Giống hệt giây 00:08 - 00:10 trong video) */}
                   <MinimalCallaBouquetImg
                     flipY
-                    className="absolute -top-16 -right-8 w-36 sm:w-40 z-20 rotate-[14deg]"
+                    className="absolute -top-16 -right-8 w-36 sm:w-40 md:w-48 z-20 rotate-[14deg]"
                   />
 
                   {/* Khung Oval Đôi Chứa Chữ Ký L & H */}
@@ -696,12 +696,12 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     </div>
                   </motion.div>
 
-                  <p className="font-condensed-minimal text-xs tracking-[0.14em] uppercase text-[#3A302C] mb-4">
+                  <p className="font-condensed-minimal text-xs sm:text-sm tracking-[0.14em] uppercase text-[#3A302C] mb-4">
                     HAPPILY EVER AFTER STARTS IN...
                   </p>
 
                   {/* 4 Ô Đếm Ngược Kem Mịn (NGÀY | GIỜ | PHÚT | GIÂY) */}
-                  <div className="grid grid-cols-4 gap-2.5 max-w-xs mx-auto relative z-10">
+                  <div className="grid grid-cols-4 gap-2.5 sm:gap-3.5 max-w-xs sm:max-w-md mx-auto relative z-10">
                     {[
                       { label: 'NGÀY', val: timeLeft.days },
                       { label: 'GIỜ', val: timeLeft.hours },
@@ -714,12 +714,12 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false, amount: 0.3 }}
                         transition={{ duration: 0.45, delay: idx * 0.08 }}
-                        className="rounded-xl bg-[#F3ECE4] border border-[#E6DDD2] py-3 px-1.5 text-center shadow-sm"
+                        className="rounded-xl bg-[#F3ECE4] border border-[#E6DDD2] py-3 md:py-4 px-1.5 md:px-3 text-center shadow-sm"
                       >
-                        <span className="block font-condensed-minimal text-lg sm:text-xl font-normal text-[#2B2523]">
+                        <span className="block font-condensed-minimal text-lg sm:text-xl md:text-2xl font-normal text-[#2B2523]">
                           {String(item.val).padStart(2, '0')}
                         </span>
-                        <span className="block font-condensed-minimal text-[10px] tracking-[0.1em] uppercase text-[#6E625C] mt-0.5">
+                        <span className="block font-condensed-minimal text-[10px] sm:text-xs tracking-[0.1em] uppercase text-[#6E625C] mt-0.5">
                           {item.label}
                         </span>
                       </motion.div>
@@ -731,14 +731,14 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
               {/* =====================================================================
                   PHẦN 3: ẢNH CHÍNH + 2 POLAROID CHÚ RỂ & CÔ DÂU + HAI BÊN GIA ĐÌNH (00:10 -> 00:13)
                  ===================================================================== */}
-              <section className="px-5 py-6 text-center relative">
+              <section className="px-5 md:px-8 py-6 text-center relative max-w-3xl mx-auto">
                 {/* Ảnh Đôi Đứng Chính Giữa Có Bó Hoa Rum Thật Ở Viền Cạnh Trái Dưới (Giống hệt giây 00:10 - 00:12) */}
                 <motion.div
                   initial={{ opacity: 0, y: 28 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.25 }}
                   transition={{ duration: 0.65 }}
-                  className="relative mx-auto w-[78%] max-w-[295px] bg-white p-2.5 shadow-[0_14px_35px_rgba(0,0,0,0.08)] border border-stone-200/80 mb-10"
+                  className="relative mx-auto w-[78%] max-w-[295px] md:max-w-[340px] bg-white p-2.5 md:p-3 shadow-[0_14px_35px_rgba(0,0,0,0.08)] border border-stone-200/80 mb-10"
                 >
                   <div className="aspect-[3/4.1] overflow-hidden bg-stone-100">
                     <img
@@ -748,7 +748,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     />
                   </div>
                   {/* ẢNH HOA VIỀN CẠNH TRÁI DƯỚI KHUNG ẢNH ĐÔI */}
-                  <MinimalCallaBouquetImg className="absolute -bottom-12 -left-12 w-34 sm:w-38 z-20 rotate-[8deg]" />
+                  <MinimalCallaBouquetImg className="absolute -bottom-12 -left-12 w-34 sm:w-38 md:w-44 z-20 rotate-[8deg]" />
                 </motion.div>
 
                 {/* Lời Kính Mời */}
@@ -756,21 +756,21 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.3 }}
-                  className="font-condensed-minimal text-xs sm:text-sm tracking-[0.08em] uppercase text-[#3A302C] leading-relaxed mb-7"
+                  className="font-condensed-minimal text-xs sm:text-sm md:text-base tracking-[0.08em] uppercase text-[#3A302C] leading-relaxed mb-8 max-w-xl mx-auto"
                 >
                   <p>TRÂN TRỌNG KÍNH MỜI QUÝ KHÁCH</p>
                   <p>DÀNH THỜI GIAN QUÝ GIÁ THAM DỰ LỄ CƯỚI CỦA</p>
                 </motion.div>
 
                 {/* 2 Khung Polaroid Chú Rể & Cô Dâu Đặt Cạnh Nhau Giống Hệt Giây 00:12 */}
-                <div className="grid grid-cols-2 gap-3.5 items-start px-1 relative z-10">
+                <div className="grid grid-cols-2 gap-3.5 sm:gap-6 md:gap-8 items-start px-1 relative z-10 max-w-xl mx-auto">
                   {/* Polaroid Chú Rể */}
                   <motion.div
                     initial={{ opacity: 0, x: -28, rotate: -3 }}
                     whileInView={{ opacity: 1, x: 0, rotate: -1.5 }}
                     viewport={{ once: false, amount: 0.25 }}
                     transition={{ duration: 0.6 }}
-                    className="bg-white p-2 pb-4 shadow-[0_12px_28px_rgba(0,0,0,0.09)] border border-stone-200/80"
+                    className="bg-white p-2 md:p-3 pb-4 md:pb-6 shadow-[0_12px_28px_rgba(0,0,0,0.09)] border border-stone-200/80"
                   >
                     <div className="aspect-[3/3.8] overflow-hidden bg-stone-100 mb-2">
                       <img
@@ -779,10 +779,10 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                         className="w-full h-full object-cover object-[center_18%]"
                       />
                     </div>
-                    <p className="font-handwritten-minimal text-2xl text-[#3A302C] leading-none">
+                    <p className="font-handwritten-minimal text-2xl md:text-3xl text-[#3A302C] leading-none">
                       Chú rể
                     </p>
-                    <p className="font-condensed-minimal text-xs sm:text-sm tracking-[0.1em] uppercase text-[#2B2523] mt-1">
+                    <p className="font-condensed-minimal text-xs sm:text-sm md:text-base tracking-[0.1em] uppercase text-[#2B2523] mt-1">
                       {data.groom.shortName}
                     </p>
                   </motion.div>
@@ -793,7 +793,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     whileInView={{ opacity: 1, x: 0, rotate: 3.5 }}
                     viewport={{ once: false, amount: 0.25 }}
                     transition={{ duration: 0.6, delay: 0.08 }}
-                    className="bg-white p-2 pb-4 shadow-[0_12px_28px_rgba(0,0,0,0.09)] border border-stone-200/80 mt-2"
+                    className="bg-white p-2 md:p-3 pb-4 md:pb-6 shadow-[0_12px_28px_rgba(0,0,0,0.09)] border border-stone-200/80 mt-2"
                   >
                     <div className="aspect-[3/3.8] overflow-hidden bg-stone-100 mb-2">
                       <img
@@ -802,18 +802,18 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                         className="w-full h-full object-cover object-[center_18%]"
                       />
                     </div>
-                    <p className="font-handwritten-minimal text-2xl text-[#3A302C] leading-none">
+                    <p className="font-handwritten-minimal text-2xl md:text-3xl text-[#3A302C] leading-none">
                       Cô dâu
                     </p>
-                    <p className="font-condensed-minimal text-xs sm:text-sm tracking-[0.1em] uppercase text-[#2B2523] mt-1">
+                    <p className="font-condensed-minimal text-xs sm:text-sm md:text-base tracking-[0.1em] uppercase text-[#2B2523] mt-1">
                       {data.bride.shortName}
                     </p>
                   </motion.div>
                 </div>
 
                 {/* ẢNH 2 CÀNH HOA RUM ĐỎ RƯỢU NẰM NGHIÊNG BÊN DƯỚI ẢNH CÔ DÂU RA VIỀN CẠNH PHẢI (Giống hệt giây 00:13) */}
-                <div className="relative h-16 -mt-3 mb-2 flex justify-end">
-                  <DiagonalCallaStemsImg className="w-48 sm:w-56 -mr-4 rotate-[-6deg] z-20" />
+                <div className="relative h-16 -mt-3 mb-2 flex justify-end max-w-xl mx-auto">
+                  <DiagonalCallaStemsImg className="w-48 sm:w-56 md:w-64 -mr-4 rotate-[-6deg] z-20" />
                 </div>
 
                 {/* Thông Tin Hai Bên Gia Đình (NHÀ TRAI | NHÀ GÁI) */}
@@ -821,17 +821,17 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.3 }}
-                  className="grid grid-cols-2 gap-4 pt-1 pb-4 font-condensed-minimal text-xs tracking-[0.06em] uppercase text-[#3A302C]"
+                  className="grid grid-cols-2 gap-4 md:gap-12 pt-1 pb-4 font-condensed-minimal text-xs md:text-sm tracking-[0.06em] uppercase text-[#3A302C] max-w-xl mx-auto"
                 >
                   <div className="space-y-1">
-                    <p className="font-medium text-[#2B2523]">NHÀ TRAI</p>
-                    <p>{data.groom.fullName}</p>
-                    <p className="text-[11px] text-[#6E625C]">VIỆT TIẾN - HƯNG YÊN</p>
+                    <p className="font-medium text-[#2B2523] md:text-base">NHÀ TRAI</p>
+                    <p className="md:text-sm">{data.groom.fullName}</p>
+                    <p className="text-[11px] md:text-xs text-[#6E625C]">VIỆT TIẾN - HƯNG YÊN</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="font-medium text-[#2B2523]">NHÀ GÁI</p>
-                    <p>{data.bride.fullName}</p>
-                    <p className="text-[11px] text-[#6E625C]">TRIỆU VIỆT VƯƠNG - HƯNG YÊN</p>
+                    <p className="font-medium text-[#2B2523] md:text-base">NHÀ GÁI</p>
+                    <p className="md:text-sm">{data.bride.fullName}</p>
+                    <p className="text-[11px] md:text-xs text-[#6E625C]">TRIỆU VIỆT VƯƠNG - HƯNG YÊN</p>
                   </div>
                 </motion.div>
               </section>
@@ -839,7 +839,8 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
               {/* =====================================================================
                   PHẦN 4: CÁC THẺ SỰ KIỆN BỮA CƠM THÂN MẬT & LỄ CƯỚI (00:13 -> 00:16)
                  ===================================================================== */}
-              <section id="section-events" className="px-5 py-4 space-y-5 relative">
+              <section id="section-events" className="px-5 md:px-8 py-6 relative max-w-3xl lg:max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
                 {minimalEvents.map((ev, idx) => (
                   <motion.div
                     key={ev.id}
@@ -847,70 +848,73 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, amount: 0.22 }}
                     transition={{ duration: 0.55, delay: idx * 0.05 }}
-                    className="relative rounded-2xl bg-[#F4EFEA] border border-[#E5DDD3] px-5 py-6 text-center shadow-[0_10px_28px_rgba(43,37,35,0.06)]"
+                    className="relative rounded-2xl bg-[#F4EFEA] border border-[#E5DDD3] px-5 py-6 text-center shadow-[0_10px_28px_rgba(43,37,35,0.06)] flex flex-col justify-between"
                   >
-                    <h3 className="font-condensed-minimal text-sm sm:text-base font-normal tracking-[0.08em] uppercase text-[#2B2523]">
-                      {ev.title}
-                    </h3>
-                    <p className="font-condensed-minimal text-xs tracking-[0.06em] uppercase text-[#4E433E] mt-1">
-                      {ev.subTime}
-                    </p>
+                    <div>
+                      <h3 className="font-condensed-minimal text-sm sm:text-base font-normal tracking-[0.08em] uppercase text-[#2B2523]">
+                        {ev.title}
+                      </h3>
+                      <p className="font-condensed-minimal text-xs tracking-[0.06em] uppercase text-[#4E433E] mt-1">
+                        {ev.subTime}
+                      </p>
 
-                    {/* Ngày Dương Lịch Nằm Giữa 2 Đường Kẻ Ngang */}
-                    <div className="w-48 mx-auto border-y border-stone-500/70 py-1.5 my-3 font-condensed-minimal text-lg sm:text-xl tracking-[0.1em] text-[#2B2523]">
-                      {ev.dateSolar}
-                    </div>
-
-                    <p className="font-condensed-minimal text-[11px] tracking-[0.06em] uppercase text-[#5C504A]">
-                      {ev.dateLunar}
-                    </p>
-
-                    {/* Icon Ghim Vị Trí Đen */}
-                    <div className="my-3 flex justify-center">
-                      <div className="w-6 h-6 rounded-full bg-[#2B2523] text-white flex items-center justify-center">
-                        <MapPin className="w-3.5 h-3.5" />
+                      {/* Ngày Dương Lịch Nằm Giữa 2 Đường Kẻ Ngang */}
+                      <div className="w-48 mx-auto border-y border-stone-500/70 py-1.5 my-3 font-condensed-minimal text-lg sm:text-xl tracking-[0.1em] text-[#2B2523]">
+                        {ev.dateSolar}
                       </div>
+
+                      <p className="font-condensed-minimal text-[11px] tracking-[0.06em] uppercase text-[#5C504A]">
+                        {ev.dateLunar}
+                      </p>
+
+                      {/* Icon Ghim Vị Trí Đen */}
+                      <div className="my-3 flex justify-center">
+                        <div className="w-6 h-6 rounded-full bg-[#2B2523] text-white flex items-center justify-center">
+                          <MapPin className="w-3.5 h-3.5" />
+                        </div>
+                      </div>
+
+                      {/* Tại Tư Gia Nhà Trai / Nhà Gái (Chữ ký tay mềm mại) */}
+                      <p className="font-handwritten-minimal text-3xl text-[#2B2523] leading-tight">
+                        {ev.venueScript}
+                      </p>
+
+                      <p className="font-condensed-minimal text-[11px] tracking-[0.05em] uppercase text-[#4E433E] mt-1 mb-4 px-2">
+                        {ev.addressUpper}
+                      </p>
                     </div>
-
-                    {/* Tại Tư Gia Nhà Trai / Nhà Gái (Chữ ký tay mềm mại) */}
-                    <p className="font-handwritten-minimal text-3xl text-[#2B2523] leading-tight">
-                      {ev.venueScript}
-                    </p>
-
-                    <p className="font-condensed-minimal text-[11px] tracking-[0.05em] uppercase text-[#4E433E] mt-1 mb-4 px-2">
-                      {ev.addressUpper}
-                    </p>
 
                     <a
                       href={ev.mapUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block w-52 py-2 rounded-full border border-[#3A302C] font-condensed-minimal text-xs tracking-[0.12em] uppercase text-[#2B2523] hover:bg-[#2B2523] hover:text-white transition-colors"
+                      className="inline-block w-52 mx-auto py-2 rounded-full border border-[#3A302C] font-condensed-minimal text-xs tracking-[0.12em] uppercase text-[#2B2523] hover:bg-[#2B2523] hover:text-white transition-colors"
                     >
                       XEM BẢN ĐỒ
                     </a>
                   </motion.div>
                 ))}
+                </div>
               </section>
 
               {/* =====================================================================
-                  PHẦN 5: ALBUM HÌNH CƯỚI — LƯỚI 2 CỘT SO LE KÈM ANIMATION CUỘN (00:16 -> 00:19)
+                  PHẦN 5: ALBUM HÌNH CƯỚI — LƯỚI 2 CỘT MOBILE / 4 CỘT DESKTOP (00:16 -> 00:19)
                  ===================================================================== */}
-              <section id="section-gallery" className="px-5 pt-8 pb-6 relative">
+              <section id="section-gallery" className="px-5 md:px-8 pt-8 pb-6 relative max-w-3xl lg:max-w-4xl mx-auto">
                 {/* Tiêu đề chữ ký + Đường kẻ ngang bên phải giống hệt giây 00:16 */}
                 <div className="flex items-center gap-3 mb-3">
-                  <h2 className="font-handwritten-minimal text-3xl sm:text-4xl text-[#2B2523] shrink-0">
+                  <h2 className="font-handwritten-minimal text-3xl sm:text-4xl md:text-5xl text-[#2B2523] shrink-0">
                     Album Hình Cưới
                   </h2>
                   <span className="flex-1 h-[1px] bg-stone-400/80 mt-1" />
                 </div>
 
-                <p className="font-condensed-minimal text-[11px] sm:text-xs tracking-[0.04em] uppercase text-[#4E433E] leading-relaxed text-justify mb-6">
+                <p className="font-condensed-minimal text-[11px] sm:text-xs md:text-sm tracking-[0.04em] uppercase text-[#4E433E] leading-relaxed text-justify mb-6">
                   CUỐN ALBUM NÀY GHI LẠI NHỮNG KHOẢNH KHẮC ĐẸP NHẤT TRONG NGÀY ĐẶC BIỆT CỦA CHÚNG TÔI - TRÀN ĐẦY YÊU THƯƠNG, HẠNH PHÚC VÀ NHỮNG KỶ NIỆM KHÓ QUÊN. MỖI BỨC ẢNH ĐỀU KỂ MỘT CÂU CHUYỆN VỀ HÀNH TRÌNH CỦA CHÚNG TÔI. GIỮA VÒNG TAY CỦA GIA ĐÌNH VÀ BẠN BÈ, CHÚNG TÔI ĐÃ CÙNG NHAU ĐÁNH DẤU MỘT TÌNH YÊU BỀN VỮNG THEO NĂM THÁNG.
                 </p>
 
-                {/* Lưới 2 Cột So Le (Staggered Masonry-style Grid) */}
-                <div className="grid grid-cols-2 gap-3 items-start">
+                {/* Lưới 2 cột mobile, 3 cột tablet, 4 cột desktop */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 items-start">
                   {galleryPhotos.map((url, idx) => {
                     const isRightCol = idx % 2 === 1;
                     return (
@@ -950,18 +954,18 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
               {/* =====================================================================
                   PHẦN 6: FORM XÁC NHẬN & GỬI LỜI CHÚC + HỘP QUÀ MỪNG CƯỚI 3D (ẤN VÀO MỚI MỞ QR)
                  ===================================================================== */}
-              <section id="section-wishes" className="px-5 pt-8 pb-8 relative">
+              <section id="section-wishes" className="px-5 md:px-8 pt-8 pb-8 relative max-w-3xl lg:max-w-4xl mx-auto">
                 {/* Điểm xuyết hoa Rum ở viền cạnh phải phía trên form */}
                 <MinimalCallaBouquetImg
                   flipX
                   className="absolute -top-6 -right-9 w-28 sm:w-32 opacity-90 z-10 rotate-[-12deg]"
                 />
 
-                <p className="font-condensed-minimal text-[11px] sm:text-xs tracking-[0.04em] uppercase text-[#3A302C] leading-relaxed mb-5 pr-12">
+                <p className="font-condensed-minimal text-[11px] sm:text-xs md:text-sm tracking-[0.04em] uppercase text-[#3A302C] leading-relaxed mb-5 pr-12 max-w-xl mx-auto text-center sm:text-left">
                   HÃY XÁC NHẬN SỰ CÓ MẶT CỦA QUÝ KHÁCH ĐỂ GIA ĐÌNH CHÚNG TÔI CHUẨN BỊ ĐÓN TIẾP MỘT CÁCH CHU ĐÁO NHẤT. TRÂN TRỌNG!
                 </p>
 
-                <form onSubmit={handleSubmitForm} className="space-y-3 relative z-20">
+                <form onSubmit={handleSubmitForm} className="space-y-3 relative z-20 max-w-xl mx-auto">
                   <input
                     type="text"
                     required
@@ -1010,30 +1014,32 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     </p>
                   )}
 
-                  <button
-                    type="submit"
-                    className="cursor-pointer w-full rounded-full bg-[#1C1C1C] hover:bg-stone-800 text-white py-3.5 font-condensed-minimal text-xs tracking-[0.1em] uppercase transition-colors shadow-md"
-                  >
-                    GỬI LỜI CHÚC &amp; XÁC NHẬN THAM DỰ
-                  </button>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                    <button
+                      type="submit"
+                      className="cursor-pointer w-full rounded-full bg-[#1C1C1C] hover:bg-stone-800 text-white py-3.5 font-condensed-minimal text-xs tracking-[0.1em] uppercase transition-colors shadow-md"
+                    >
+                      GỬI LỜI CHÚC &amp; XÁC NHẬN
+                    </button>
 
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleScrollToGiftBox();
-                      if (!isGiftBoxOpen) {
-                        handleOpenGiftBox();
-                      }
-                    }}
-                    className="cursor-pointer w-full rounded-full bg-[#1C1C1C] hover:bg-stone-800 text-white py-3.5 font-condensed-minimal text-xs tracking-[0.1em] uppercase transition-colors shadow-md"
-                  >
-                    GỬI QUÀ MỪNG CƯỚI
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleScrollToGiftBox();
+                        if (!isGiftBoxOpen) {
+                          handleOpenGiftBox();
+                        }
+                      }}
+                      className="cursor-pointer w-full rounded-full bg-[#1C1C1C] hover:bg-stone-800 text-white py-3.5 font-condensed-minimal text-xs tracking-[0.1em] uppercase transition-colors shadow-md"
+                    >
+                      GỬI QUÀ MỪNG CƯỚI
+                    </button>
+                  </div>
                 </form>
 
                 {/* Danh sách lời chúc đã gửi (nếu có) */}
                 {wishes.length > 0 && (
-                  <div className="mt-6 space-y-2.5 relative z-20">
+                  <div className="mt-6 space-y-2.5 relative z-20 max-w-xl mx-auto">
                     <p className="font-condensed-minimal text-xs uppercase tracking-[0.1em] text-[#5C504A]">
                       LỜI CHÚC TỪ NGƯỜI THƯƠNG ({wishes.length})
                     </p>
@@ -1061,7 +1067,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                    ===================================================================== */}
                 <div
                   id="section-qr-gift"
-                  className="mt-10 pt-7 border-t border-stone-300/70 text-center relative scroll-mt-20"
+                  className="mt-10 pt-7 border-t border-stone-300/70 text-center relative scroll-mt-20 max-w-2xl mx-auto"
                 >
                   {/* Điểm xuyết bó hoa Rum ở viền cạnh trái của khu vực Hộp Quà */}
                   <MinimalCallaBouquetImg className="absolute -top-8 -left-9 w-28 sm:w-32 opacity-95 z-10 rotate-[10deg]" />
@@ -1071,7 +1077,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     <span>WEDDING GIFT • MỪNG CƯỚI</span>
                   </div>
 
-                  <h3 className="font-handwritten-minimal text-4xl text-[#3A302C]">
+                  <h3 className="font-handwritten-minimal text-4xl md:text-5xl text-[#3A302C]">
                     Hộp Quà Mừng Cưới
                   </h3>
                   <p className="font-condensed-minimal text-xs tracking-[0.06em] uppercase text-[#5C504A] mt-0.5 mb-5">
@@ -1158,14 +1164,14 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                         </motion.div>
                       </motion.div>
                     ) : (
-                      /* TRẠNG THÁI 2: HỘP QUÀ ĐÃ MỞ — HIỂN THỊ 2 MÃ QR CỦA CHÚ RỂ & CÔ DÂU */
+                      /* TRẠNG THÁI 2: HỘP QUÀ ĐÃ MỞ — HIỂN THỊ 2 MÃ QR CỦA CHÚ RỂ & CÔ DÂU (2 CỘT SONG SONG TRÊN DESKTOP) */
                       <motion.div
                         key="minimal-opened-qr-cards"
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 12, scale: 0.95 }}
                         transition={{ duration: 0.5 }}
-                        className="rounded-2xl bg-[#F4EFEA] border border-[#E5DDD3] p-4 sm:p-5 text-center shadow-sm"
+                        className="rounded-2xl bg-[#F4EFEA] border border-[#E5DDD3] p-4 sm:p-5 md:p-6 text-center shadow-sm"
                       >
                         <div className="flex flex-col items-center justify-center gap-2 border-b border-stone-300/80 pb-3 mb-4">
                           <span className="font-condensed-minimal text-xs uppercase tracking-[0.1em] text-[#5A1824] font-medium">
@@ -1181,7 +1187,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                           </button>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                           {[
                             {
                               key: 'groom' as const,
@@ -1200,32 +1206,34 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                           ].map((card) => (
                             <div
                               key={card.key}
-                              className="rounded-xl bg-white p-4 border border-stone-200/90 shadow-sm text-center"
+                              className="rounded-xl bg-white p-4 border border-stone-200/90 shadow-sm text-center flex flex-col justify-between"
                             >
-                              <p className="font-condensed-minimal text-xs tracking-[0.1em] uppercase text-[#5A1824] mb-0.5">
-                                {card.badge}
-                              </p>
-                              <p className="font-handwritten-minimal text-3xl text-[#2B2523] mb-2">
-                                {card.scriptTitle}
-                              </p>
+                              <div>
+                                <p className="font-condensed-minimal text-xs tracking-[0.1em] uppercase text-[#5A1824] mb-0.5">
+                                  {card.badge}
+                                </p>
+                                <p className="font-handwritten-minimal text-3xl text-[#2B2523] mb-2">
+                                  {card.scriptTitle}
+                                </p>
 
-                              <div
-                                onClick={() => setLightboxUrl(card.info.qrImageUrl)}
-                                className="cursor-pointer mx-auto w-48 h-52 rounded-xl border border-stone-200 p-2.5 flex items-center justify-center bg-[#FAF8F5] hover:scale-[1.02] transition-transform"
-                              >
-                                <img
-                                  src={card.info.qrImageUrl}
-                                  alt={card.info.accountHolder}
-                                  className="max-w-full max-h-full object-contain rounded-lg"
-                                />
+                                <div
+                                  onClick={() => setLightboxUrl(card.info.qrImageUrl)}
+                                  className="cursor-pointer mx-auto w-48 h-52 rounded-xl border border-stone-200 p-2.5 flex items-center justify-center bg-[#FAF8F5] hover:scale-[1.02] transition-transform"
+                                >
+                                  <img
+                                    src={card.info.qrImageUrl}
+                                    alt={card.info.accountHolder}
+                                    className="max-w-full max-h-full object-contain rounded-lg"
+                                  />
+                                </div>
+
+                                <p className="font-condensed-minimal text-xs text-stone-600 mt-2.5 uppercase">
+                                  {card.info.bankBranch}
+                                </p>
+                                <p className="font-condensed-minimal text-sm font-medium text-[#2B2523] mt-0.5">
+                                  {card.info.accountHolder} — STK: {card.info.accountNumber}
+                                </p>
                               </div>
-
-                              <p className="font-condensed-minimal text-xs text-stone-600 mt-2.5 uppercase">
-                                {card.info.bankBranch}
-                              </p>
-                              <p className="font-condensed-minimal text-sm font-medium text-[#2B2523] mt-0.5">
-                                {card.info.accountHolder} — STK: {card.info.accountNumber}
-                              </p>
 
                               <div className="mt-3 flex items-center justify-center gap-2">
                                 <button
@@ -1266,18 +1274,18 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
               {/* =====================================================================
                   PHẦN 7: BANNER LỜI CẢM ƠN CUỐI TRANG (ĐẶT Ở PHÍA TRÊN ĐỂ KHÔNG CHE ẢNH DÂU RỂ)
                  ===================================================================== */}
-              <section className="relative w-full aspect-[4/4.8] overflow-hidden">
+              <section className="relative w-full aspect-[4/4.8] md:aspect-[16/8] md:max-h-[520px] overflow-hidden">
                 <img
                   src={data.sectionImages.thankYouBg}
                   alt="Lời cảm ơn"
-                  className="w-full h-full object-cover object-[center_75%]"
+                  className="w-full h-full object-cover object-[center_75%] md:object-[center_68%]"
                 />
                 {/* Dải băng trắng mờ đặt ở phía trên bức hình (vùng rèm trắng) để không che cô dâu chú rể */}
-                <div className="absolute inset-x-0 top-3 bg-white/78 backdrop-blur-[2px] py-3.5 px-5 text-center shadow-sm">
-                  <h2 className="font-handwritten-minimal text-3xl sm:text-4xl text-[#2B2523] mb-1">
+                <div className="absolute inset-x-0 top-3 md:top-5 bg-white/85 backdrop-blur-[3px] py-3.5 md:py-5 px-5 md:px-8 text-center shadow-sm max-w-2xl mx-auto md:rounded-2xl md:border md:border-stone-200/60">
+                  <h2 className="font-handwritten-minimal text-3xl sm:text-4xl md:text-5xl text-[#2B2523] mb-1">
                     Lời cảm ơn!
                   </h2>
-                  <p className="font-condensed-minimal text-[11px] sm:text-xs tracking-[0.04em] uppercase text-[#2B2523] leading-relaxed">
+                  <p className="font-condensed-minimal text-[11px] sm:text-xs md:text-sm tracking-[0.04em] uppercase text-[#2B2523] leading-relaxed">
                     CẢM ƠN QUÝ KHÁCH ĐÃ DÀNH TÌNH CẢM CHO GIA ĐÌNH CHÚNG TÔI! SỰ HIỆN DIỆN CỦA QUÝ KHÁCH CHÍNH LÀ MÓN QUÀ Ý NGHĨA NHẤT, GIA ĐÌNH CHÚNG TÔI VÔ CÙNG TRÂN QUÝ KHI ĐƯỢC CÙNG QUÝ KHÁCH CHIA SẺ NIỀM HẠNH PHÚC TRONG NGÀY TRỌNG ĐẠI NÀY.
                   </p>
                 </div>
@@ -1286,12 +1294,12 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
           )}
         </AnimatePresence>
 
-        {/* Nút Nhạc Tròn Nổi Ở Góc Dưới Phải Giống Hệt Video Mẫu */}
+        {/* Nút Nhạc Tròn Nổi Ở Góc Dưới Phải */}
         <button
           type="button"
           onClick={onToggleMusic}
           aria-label="Bật/Tắt nhạc"
-          className="cursor-pointer fixed bottom-20 right-4 z-40 w-11 h-11 rounded-full bg-white/92 border border-[#2B2523] shadow-lg flex items-center justify-center text-[#2B2523] hover:scale-105 transition-transform"
+          className="cursor-pointer fixed bottom-20 md:bottom-8 right-4 md:right-8 z-40 w-11 h-11 md:w-13 md:h-13 rounded-full bg-white/92 border border-[#2B2523] shadow-lg flex items-center justify-center text-[#2B2523] hover:scale-105 transition-transform"
         >
           <Music className={`w-5 h-5 ${isMusicPlaying ? 'animate-spin-vinyl text-[#5A1824]' : ''}`} />
         </button>
