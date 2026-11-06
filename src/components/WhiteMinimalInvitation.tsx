@@ -555,7 +555,10 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                   <p className="font-handwritten-minimal text-3xl sm:text-4xl text-[#3A302C]">
                     Thiệp Mời
                   </p>
-                  <h1 className="font-condensed-minimal text-lg sm:text-xl tracking-[0.08em] uppercase text-[#2B2523]">
+                  <h1
+                    style={{ fontFamily: "'Lobster Two', cursive" }}
+                    className="text-2xl sm:text-3xl font-normal tracking-wide text-[#2B2523]"
+                  >
                     {data.groom.shortName} &amp; {data.bride.shortName}
                   </h1>
                   <p className="font-condensed-minimal text-xs tracking-[0.14em] text-[#5C504A]">
@@ -1164,17 +1167,17 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                         transition={{ duration: 0.5 }}
                         className="rounded-2xl bg-[#F4EFEA] border border-[#E5DDD3] p-4 sm:p-5 text-center shadow-sm"
                       >
-                        <div className="flex items-center justify-between border-b border-stone-300/80 pb-2.5 mb-4">
+                        <div className="flex flex-col items-center justify-center gap-2 border-b border-stone-300/80 pb-3 mb-4">
                           <span className="font-condensed-minimal text-xs uppercase tracking-[0.1em] text-[#5A1824] font-medium">
                             MÃ QR MỪNG CƯỚI NHÀ TRAI &amp; NHÀ GÁI
                           </span>
                           <button
                             type="button"
                             onClick={() => setIsGiftBoxOpen(false)}
-                            className="cursor-pointer inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-stone-300 text-[11px] font-condensed-minimal uppercase text-stone-700 hover:bg-stone-100"
+                            className="cursor-pointer inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-white border border-stone-300 text-[11px] font-condensed-minimal uppercase text-stone-700 hover:bg-stone-100 shadow-xs"
                           >
                             <RotateCcw className="w-3 h-3" />
-                            <span>Đóng hộp quà</span>
+                            <span>Đóng hộp quà lại</span>
                           </button>
                         </div>
 
@@ -1261,17 +1264,17 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
               </section>
 
               {/* =====================================================================
-                  PHẦN 7: BANNER LỜI CẢM ƠN CUỐI TRANG GIỐNG HỆT GIÂY 00:22 -> 00:24
+                  PHẦN 7: BANNER LỜI CẢM ƠN CUỐI TRANG (ĐẶT Ở NỬA DƯỚI ĐỂ KHÔNG CHE MẶT DÂU RỂ)
                  ===================================================================== */}
-              <section className="relative w-full aspect-[4/4.2] overflow-hidden">
+              <section className="relative w-full aspect-[4/4.8] overflow-hidden">
                 <img
                   src={data.sectionImages.thankYouBg}
                   alt="Lời cảm ơn"
-                  className="w-full h-full object-cover object-[center_24%]"
+                  className="w-full h-full object-cover object-[center_16%]"
                 />
-                {/* Dải băng trắng mờ ngang giữa bức hình giống hệt giây 00:23 */}
-                <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 bg-white/68 backdrop-blur-[2px] py-5 px-5 text-center shadow-sm">
-                  <h2 className="font-handwritten-minimal text-3xl sm:text-4xl text-[#2B2523] mb-1.5">
+                {/* Dải băng trắng mờ đặt ở phần dưới bức hình (ngang bàn tiệc) để lộ rõ gương mặt cô dâu chú rể phía trên */}
+                <div className="absolute inset-x-0 bottom-5 bg-white/78 backdrop-blur-[2px] py-4 px-5 text-center shadow-sm">
+                  <h2 className="font-handwritten-minimal text-3xl sm:text-4xl text-[#2B2523] mb-1">
                     Lời cảm ơn!
                   </h2>
                   <p className="font-condensed-minimal text-[11px] sm:text-xs tracking-[0.04em] uppercase text-[#2B2523] leading-relaxed">

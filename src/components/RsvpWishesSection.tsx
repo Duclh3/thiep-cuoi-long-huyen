@@ -142,7 +142,9 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
   const theme = THEMES[styleId];
 
   const [name, setName] = useState('');
+  const [relation, setRelation] = useState('');
   const [message, setMessage] = useState('');
+  const [attendance, setAttendance] = useState('Có, chắc chắn mình sẽ tham dự!');
   const [submittedSuccess, setSubmittedSuccess] = useState(false);
   const [copiedKey, setCopiedKey] = useState<'groom' | 'bride' | null>(null);
   const [zoomQrUrl, setZoomQrUrl] = useState<string | null>(null);
@@ -191,10 +193,14 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
       minute: '2-digit',
     })} • ${now.toLocaleDateString('vi-VN')}`;
 
+    const displayName = relation.trim()
+      ? `${name.trim()} (${relation.trim()})`
+      : name.trim();
+
     const newWish: WishItem = {
       id: `wish-${Date.now()}`,
-      name: name.trim(),
-      message: message.trim(),
+      name: displayName,
+      message: `${message.trim()} — [${attendance}]`,
       createdAt: formattedTime,
     };
 
@@ -202,6 +208,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
     triggerCelebration();
     setSubmittedSuccess(true);
     setName('');
+    setRelation('');
     setMessage('');
 
     setTimeout(() => {
@@ -291,10 +298,10 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
             </h2>
           </div>
 
-          {/* FORM GỬI LỜI CHÚC GỌN GÀNG, TỐI GIẢN */}
+          {/* FORM GỬI LỜI CHÚC & XÁC NHẬN THAM DỰ GỌN GÀNG, TỐI GIẢN */}
           <form
             onSubmit={handleSubmit}
-            className="w-full max-w-md mx-auto rounded-3xl bg-black/50 backdrop-blur-xl border border-amber-300/35 p-5 sm:p-6 shadow-2xl space-y-3.5 text-white"
+            className="w-full max-w-md mx-auto rounded-3xl bg-black/50 backdrop-blur-xl border border-amber-300/35 p-5 sm:p-6 shadow-2xl space-y-3 text-white"
           >
             <div className="relative">
               <input
@@ -302,7 +309,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Tên của bạn..."
+                placeholder="Tên của bạn là gì?"
                 className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 pr-9 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-amber-300"
               />
               {name.length > 0 && (
@@ -318,12 +325,32 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
             </div>
 
             <div className="relative">
+              <input
+                type="text"
+                value={relation}
+                onChange={(e) => setRelation(e.target.value)}
+                placeholder="Bạn là gì của Dâu Rể?"
+                className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 pr-9 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-amber-300"
+              />
+              {relation.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setRelation('')}
+                  className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white"
+                  aria-label="Xóa mối quan hệ"
+                >
+                  <XCircle className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            <div className="relative">
               <textarea
                 rows={3}
                 required
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Lời chúc gửi đến Thành Long & Thanh Huyền..."
+                placeholder="Gửi lời chúc đến Dâu Rể..."
                 className="w-full rounded-xl border border-white/20 bg-white/10 p-3.5 pr-9 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-amber-300 resize-none"
               />
               {message.length > 0 && (
@@ -338,6 +365,22 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
               )}
             </div>
 
+            <div className="relative">
+              <select
+                value={attendance}
+                onChange={(e) => setAttendance(e.target.value)}
+                className="w-full rounded-xl border border-white/20 bg-stone-900/90 px-4 py-2.5 text-sm text-amber-100 focus:outline-none focus:border-amber-300"
+              >
+                <option value="Có, chắc chắn mình sẽ tham dự!">
+                  Bạn có tham dự không? — Có, chắc chắn tham dự
+                </option>
+                <option value="Mình bận mất rồi, xin gửi lời chúc hạnh phúc!">
+                  Mình bận mất rồi, xin gửi lời chúc hạnh phúc
+                </option>
+                <option value="Đang sắp xếp thời gian">Đang sắp xếp thời gian</option>
+              </select>
+            </div>
+
             <AnimatePresence>
               {submittedSuccess && (
                 <motion.div
@@ -346,17 +389,17 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                   exit={{ opacity: 0 }}
                   className="p-2 rounded-xl bg-emerald-500/25 border border-emerald-400/50 text-center text-xs text-emerald-100"
                 >
-                  ✨ Cảm ơn bạn đã gửi lời chúc!
+                  ✨ Cảm ơn bạn! Lời chúc &amp; xác nhận đã được gửi.
                 </motion.div>
               )}
             </AnimatePresence>
 
             <button
               type="submit"
-              className="cursor-pointer w-full py-3 px-5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-semibold text-xs sm:text-sm tracking-[0.1em] flex items-center justify-center gap-2 shadow-lg hover:brightness-110 transition-all"
+              className="cursor-pointer w-full py-3 px-5 rounded-full bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 text-stone-950 font-semibold text-xs sm:text-sm tracking-[0.08em] flex items-center justify-center gap-2 shadow-lg hover:brightness-110 transition-all"
             >
               <Send className="w-3.5 h-3.5 shrink-0" />
-              <span>Gửi Lời Chúc</span>
+              <span>Gửi Lời Chúc &amp; Xác Nhận</span>
             </button>
 
             {/* Danh sách lời chúc gọn nhẹ ngay bên dưới (chỉ hiển thị khi có lời chúc) */}
@@ -537,15 +580,15 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                   exit={{ opacity: 0 }}
                   className="space-y-6"
                 >
-                  {/* Thanh trạng thái Nắp Hộp Đã Mở + Nút Đóng Hộp Lại */}
+                  {/* Thanh trạng thái Nắp Hộp Đã Mở + Nút Đóng Hộp Lại (Căn giữa) */}
                   <motion.div
                     initial={{ opacity: 0, y: -16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 rounded-2xl bg-black/50 backdrop-blur-xl border border-amber-300/45 text-amber-100 shadow-xl"
+                    className="flex flex-col items-center justify-center text-center gap-2.5 px-5 py-3.5 rounded-2xl bg-black/50 backdrop-blur-xl border border-amber-300/45 text-amber-100 shadow-xl"
                   >
-                    <div className="flex items-center gap-2.5">
-                      <span className="w-8 h-8 rounded-full bg-amber-300/20 border border-amber-300/50 flex items-center justify-center text-amber-300">
-                        <Gift className="w-4 h-4" />
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="w-7 h-7 rounded-full bg-amber-300/20 border border-amber-300/50 flex items-center justify-center text-amber-300 shrink-0">
+                        <Gift className="w-3.5 h-3.5" />
                       </span>
                       <span className="font-serif-italic text-sm sm:text-base text-amber-100">
                         Hộp quà mừng cưới đã mở — Chọn Nhà Trai hoặc Nhà Gái bên dưới
@@ -555,7 +598,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                     <button
                       type="button"
                       onClick={() => setIsGiftBoxOpen(false)}
-                      className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-amber-300/40 text-xs font-serif-italic text-amber-200 transition-colors"
+                      className="cursor-pointer inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-amber-300/45 text-xs font-serif-italic text-amber-200 transition-colors mx-auto"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>Đóng Hộp Quà Lại</span>
