@@ -60,18 +60,140 @@ const LuxuryWaxSeal: React.FC<{ theme: 'emerald' | 'burgundy'; isOpening?: boole
 };
 
 /**
- * Chùm hoa cưới và dải ruy-băng ren buông rủ ở góc phong bì
+ * Chùm hoa cưới và dải ruy-băng ren buông rủ ở góc dưới bên phải phong bì
  */
 const EnvelopeFloralSpray: React.FC<{ theme: 'emerald' | 'burgundy' }> = ({ theme }) => {
   const isEmerald = theme === 'emerald';
   return (
     <div className="pointer-events-none select-none">
       <svg
-        viewBox="0 0 130 160"
-        className="w-28 sm:w-34 h-34 sm:h-42 drop-shadow-[0_12px_24px_rgba(0,0,0,0.28)]"
+        viewBox="0 0 140 170"
+        className="w-32 sm:w-38 h-38 sm:h-46 drop-shadow-[0_16px_30px_rgba(0,0,0,0.32)]"
       >
         <defs>
           <linearGradient id={`sprayCallaPetal-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            {isEmerald ? (
+              <>
+                <stop offset="0%" stopColor="#FFFFFF" />
+                <stop offset="55%" stopColor="#F5FAF6" />
+                <stop offset="100%" stopColor="#D2E8D7" />
+              </>
+            ) : (
+              <>
+                <stop offset="0%" stopColor="#C42A4A" />
+                <stop offset="55%" stopColor="#7E1428" />
+                <stop offset="100%" stopColor="#430713" />
+              </>
+            )}
+          </linearGradient>
+          <linearGradient id={`sprayRoseGrad-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            {isEmerald ? (
+              <>
+                <stop offset="0%" stopColor="#FFFFFF" />
+                <stop offset="100%" stopColor="#E3EFE5" />
+              </>
+            ) : (
+              <>
+                <stop offset="0%" stopColor="#E54B6E" />
+                <stop offset="100%" stopColor="#8A152E" />
+              </>
+            )}
+          </linearGradient>
+        </defs>
+
+        {/* 3 Dải ruy băng lụa mềm mại buông rủ dài thướt tha */}
+        <path
+          d="M 68 70 Q 42 120 54 165"
+          fill="none"
+          stroke={isEmerald ? '#FFFFFF' : '#8A152E'}
+          strokeWidth="3.5"
+          strokeDasharray="4,2"
+          opacity="0.95"
+        />
+        <path
+          d="M 72 70 Q 90 115 78 160"
+          fill="none"
+          stroke={isEmerald ? '#E2ECE3' : '#B83250'}
+          strokeWidth="2.5"
+          opacity="0.85"
+        />
+        <path
+          d="M 70 70 Q 60 125 64 168"
+          fill="none"
+          stroke={isEmerald ? '#FFFFFF' : '#DDA0B0'}
+          strokeWidth="1.8"
+          opacity="0.95"
+        />
+
+        {/* Cành lá khuynh diệp xanh ngát */}
+        <path d="M 68 70 Q 95 60 115 50" fill="none" stroke="#2F5C38" strokeWidth="2.2" strokeLinecap="round" />
+        <ellipse cx="90" cy="58" rx="8" ry="4.5" fill="#588D64" transform="rotate(-15 90 58)" />
+        <ellipse cx="106" cy="52" rx="7" ry="4" fill="#42784F" transform="rotate(-20 106 52)" />
+
+        <path d="M 68 70 Q 40 60 20 48" fill="none" stroke="#2F5C38" strokeWidth="2.2" strokeLinecap="round" />
+        <ellipse cx="44" cy="56" rx="8" ry="4.5" fill="#588D64" transform="rotate(20 44 56)" />
+        <ellipse cx="28" cy="50" rx="7" ry="4" fill="#42784F" transform="rotate(25 28 50)" />
+
+        {/* Cuống hoa vươn cao */}
+        <path d="M 68 70 Q 78 45 84 22" fill="none" stroke="#3D6846" strokeWidth="3" strokeLinecap="round" />
+        <path d="M 68 70 Q 56 42 46 18" fill="none" stroke="#2E5236" strokeWidth="2.8" strokeLinecap="round" />
+
+        {/* Bông hoa Calla vươn thẳng */}
+        <path
+          d="M 84 22 C 104 15 110 -5 88 -11 C 71 -13 67 6 77 21 Z"
+          fill={`url(#sprayCallaPetal-${theme})`}
+          stroke={isEmerald ? '#BFD7C3' : '#9E1C37'}
+          strokeWidth="0.8"
+        />
+        <path d="M 85 9 Q 86 -1 87 -7" stroke="#FCE79C" strokeWidth="2" strokeLinecap="round" />
+
+        {/* Bông hoa Calla nghiêng trái */}
+        <path
+          d="M 46 18 C 30 13 22 -5 40 -10 C 54 -10 56 6 49 20 Z"
+          fill={`url(#sprayCallaPetal-${theme})`}
+          stroke={isEmerald ? '#BFD7C3' : '#9E1C37'}
+          strokeWidth="0.8"
+        />
+        <path d="M 44 7 Q 42 -1 40 -6" stroke="#FCE79C" strokeWidth="1.8" strokeLinecap="round" />
+
+        {/* Bông hoa hồng lớn ở tâm bó hoa */}
+        <circle cx="68" cy="62" r="14" fill={`url(#sprayRoseGrad-${theme})`} stroke={isEmerald ? '#CDE5D2' : '#BD2F4F'} strokeWidth="0.8" />
+        <path d="M 62 58 Q 68 52 74 58 Q 78 64 72 68 Q 64 70 60 64 Z" fill="none" stroke={isEmerald ? '#8AB894' : '#6E0E22'} strokeWidth="1.2" />
+
+        {/* Chùm hoa baby trắng xum xuê */}
+        <circle cx="50" cy="50" r="3.2" fill="#FFFFFF" />
+        <circle cx="56" cy="44" r="2.8" fill="#FFFFFF" />
+        <circle cx="84" cy="52" r="3.2" fill="#FFFFFF" />
+        <circle cx="90" cy="46" r="2.8" fill="#FFFFFF" />
+        <circle cx="76" cy="78" r="3" fill="#FFFFFF" />
+        <circle cx="60" cy="78" r="2.8" fill="#FFFFFF" />
+
+        {/* Nơ buộc lụa sang trọng */}
+        <path
+          d="M 68 70 C 50 63 50 78 68 73 C 86 78 86 63 68 70 Z"
+          fill={isEmerald ? '#FFFFFF' : '#A32442'}
+          stroke={isEmerald ? '#CDE5D2' : '#E8A5B5'}
+          strokeWidth="1.2"
+        />
+        <circle cx="68" cy="71" r="3" fill={isEmerald ? '#E0F0E3' : '#D45371'} />
+      </svg>
+    </div>
+  );
+};
+
+/**
+ * Chùm hoa cưới vươn nhẹ nhàng ở góc trên bên trái phong bì (tạo thế đối xứng thượng lưu)
+ */
+const EnvelopeTopLeftFloral: React.FC<{ theme: 'emerald' | 'burgundy' }> = ({ theme }) => {
+  const isEmerald = theme === 'emerald';
+  return (
+    <div className="pointer-events-none select-none">
+      <svg
+        viewBox="0 0 120 120"
+        className="w-26 sm:w-32 h-26 sm:h-32 drop-shadow-[0_12px_24px_rgba(0,0,0,0.25)]"
+      >
+        <defs>
+          <linearGradient id={`topLeftCallaGrad-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
             {isEmerald ? (
               <>
                 <stop offset="0%" stopColor="#FFFFFF" />
@@ -88,65 +210,25 @@ const EnvelopeFloralSpray: React.FC<{ theme: 'emerald' | 'burgundy' }> = ({ them
           </linearGradient>
         </defs>
 
-        {/* Dải ruy băng ren buông rủ dài thướt tha xuống dưới (như video frame_001/002) */}
-        <path
-          d="M 65 65 Q 45 110 55 155"
-          fill="none"
-          stroke={isEmerald ? '#FFFFFF' : '#8A152E'}
-          strokeWidth="3.5"
-          strokeDasharray="4,2"
-          opacity="0.9"
-        />
-        <path
-          d="M 70 65 Q 85 105 75 150"
-          fill="none"
-          stroke={isEmerald ? '#E2ECE3' : '#B83250'}
-          strokeWidth="2.5"
-          opacity="0.85"
-        />
-        <path
-          d="M 68 65 Q 60 115 62 158"
-          fill="none"
-          stroke={isEmerald ? '#FFFFFF' : '#DDA0B0'}
-          strokeWidth="1.8"
-          opacity="0.95"
-        />
+        {/* Cành lá khuynh diệp xòe góc trên trái */}
+        <path d="M 65 65 Q 40 40 20 25" fill="none" stroke="#2F5C38" strokeWidth="2" strokeLinecap="round" />
+        <ellipse cx="45" cy="38" rx="8" ry="4.5" fill="#588D64" transform="rotate(-35 45 38)" />
+        <ellipse cx="30" cy="28" rx="7" ry="4" fill="#42784F" transform="rotate(-40 30 28)" />
 
-        {/* Cuống hoa xanh */}
-        <path d="M 65 65 Q 75 45 80 25" fill="none" stroke="#3D6846" strokeWidth="3" strokeLinecap="round" />
-        <path d="M 65 65 Q 55 40 45 20" fill="none" stroke="#2E5236" strokeWidth="2.8" strokeLinecap="round" />
-
-        {/* Bông hoa Calla 1 (chính diện vươn lên) */}
+        <path d="M 65 65 Q 55 35 45 12" fill="none" stroke="#3D6846" strokeWidth="2.5" strokeLinecap="round" />
         <path
-          d="M 80 25 C 98 18 104 -2 84 -8 C 68 -10 64 8 74 24 Z"
-          fill={`url(#sprayCallaPetal-${theme})`}
-          stroke={isEmerald ? '#C2DAC6' : '#9E1C37'}
+          d="M 45 12 C 30 8 24 -6 38 -10 C 50 -10 52 4 47 14 Z"
+          fill={`url(#topLeftCallaGrad-${theme})`}
+          stroke={isEmerald ? '#BFD7C3' : '#9E1C37'}
           strokeWidth="0.8"
         />
-        <path d="M 81 12 Q 82 2 83 -4" stroke="#FCE79C" strokeWidth="2" strokeLinecap="round" />
+        <path d="M 43 3 Q 41 -3 39 -8" stroke="#FCE79C" strokeWidth="1.8" strokeLinecap="round" />
 
-        {/* Bông hoa Calla 2 (nghiêng trái) */}
-        <path
-          d="M 45 20 C 30 15 22 -3 40 -8 C 54 -8 56 8 48 22 Z"
-          fill={`url(#sprayCallaPetal-${theme})`}
-          stroke={isEmerald ? '#C2DAC6' : '#9E1C37'}
-          strokeWidth="0.8"
-        />
-        <path d="M 43 9 Q 41 1 39 -4" stroke="#FCE79C" strokeWidth="1.8" strokeLinecap="round" />
-
-        {/* Chùm cẩm tú cầu & nụ hoa nhỏ ở tâm bó hoa */}
-        <circle cx="62" cy="55" r="7" fill={isEmerald ? '#E0F0E3' : '#8A152E'} />
-        <circle cx="70" cy="52" r="6" fill={isEmerald ? '#CDE5D2' : '#A82542'} />
-        <circle cx="58" cy="62" r="5.5" fill={isEmerald ? '#FFFFFF' : '#5E0C1C'} />
-        <circle cx="68" cy="63" r="6" fill={isEmerald ? '#EEF8F0' : '#BD2F4F'} />
-
-        {/* Nơ buộc lụa ở gốc bó hoa */}
-        <path
-          d="M 65 65 C 50 60 50 72 65 68 C 80 72 80 60 65 65 Z"
-          fill={isEmerald ? '#FFFFFF' : '#B82A48'}
-          stroke={isEmerald ? '#CDE5D2' : '#E8A5B5'}
-          strokeWidth="1"
-        />
+        {/* Bông hoa nhỏ và nụ hoa baby */}
+        <circle cx="58" cy="52" r="7" fill={isEmerald ? '#EDF6EF' : '#8A152E'} stroke={isEmerald ? '#CDE5D2' : '#BD2F4F'} strokeWidth="0.8" />
+        <circle cx="52" cy="62" r="3" fill="#FFFFFF" />
+        <circle cx="68" cy="46" r="2.8" fill="#FFFFFF" />
+        <circle cx="42" cy="50" r="2.5" fill="#FFFFFF" />
       </svg>
     </div>
   );
@@ -435,10 +517,31 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
           </svg>
         </motion.div>
 
+        {/* CHÙM HOA CƯỚI GÓC TRÊN BÊN TRÁI PHONG BÌ (Tạo vẻ đẹp cân xứng, lộng lẫy thượng lưu) */}
+        <div className="absolute -top-7 -left-7 z-30 pointer-events-none">
+          <EnvelopeTopLeftFloral theme={theme} />
+        </div>
+
         {/* CHÙM HOA CƯỚI & RUY BĂNG REN GÓC DƯỚI BÊN PHẢI PHONG BÌ (frame_001 & 002) */}
         <div className="absolute -bottom-12 -right-8 z-30 pointer-events-none">
           <EnvelopeFloralSpray theme={theme} />
         </div>
+
+        {/* HẠT BỤI VÀNG VÀ CÁNH HOA LƠ LỬNG LÃNG MẠN (Sparkles & Floating Petals) */}
+        <motion.div
+          animate={{ y: [-4, 6, -4], opacity: [0.6, 0.9, 0.6] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute -top-4 right-1/4 pointer-events-none z-20"
+        >
+          <Sparkles className="w-4 h-4 text-[#FCE79C]" />
+        </motion.div>
+        <motion.div
+          animate={{ y: [6, -5, 6], opacity: [0.5, 0.85, 0.5] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          className="absolute -bottom-6 left-1/4 pointer-events-none z-20"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-[#FCE79C]" />
+        </motion.div>
 
         {/* CON DẤU SÁP 3D GẮN Ở ĐỈNH V CỦA TÚI PHONG BÌ */}
         <div className="absolute top-[51%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">

@@ -491,53 +491,113 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
 
               {/* KHUNG GƯƠNG OVAL REN HOA NGỌC TRAI 3D THƯỢNG HẠNG (frame_004) */}
               <CrochetLaceMirrorFrame theme="burgundy">
-                {/* Tên dâu rể bằng chữ script mềm mại bay bổng */}
-                <h3 className="font-script-luxury text-4xl sm:text-5xl text-[#7D1E3A] leading-tight mb-2 drop-shadow-xs">
-                  {data.groom.fullName}
-                  <span className="block text-2xl sm:text-3xl font-serif-italic text-[#A84A64] my-0.5">&amp;</span>
-                  {data.bride.fullName}
-                </h3>
-
-                <p className="font-serif-luxury text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-[#8C3A50] mt-1 font-medium">
-                  ĐƯỢC TỔ CHỨC VÀO LÚC
-                </p>
-                <p className="font-serif-luxury font-bold text-sm sm:text-base text-[#331B23] tracking-wider mt-0.5">
-                  11:00, CHỦ NHẬT
-                </p>
-
-                {/* Bảng ô lịch Ngày - Tháng - Năm */}
-                <div className="flex items-center justify-center gap-2 sm:gap-3 my-2.5 text-xs sm:text-sm font-serif-luxury text-[#7D1E3A] border-y border-[#C991A5]/50 py-1.5 w-full max-w-[220px]">
-                  <span>THÁNG 03</span>
-                  <span className="font-bold text-xl sm:text-2xl text-[#7D1E3A] px-2.5 border-x border-[#C991A5]/50">
-                    03
-                  </span>
-                  <span>NĂM 2024</span>
-                </div>
-
-                <p className="text-[11px] sm:text-xs font-serif-italic text-[#694853] mb-2.5">
-                  (Tức ngày 23 tháng 01 năm Giáp Thìn)
-                </p>
-
-                <p className="font-serif-luxury font-bold text-xs uppercase tracking-wider text-[#7D1E3A]">
-                  TẠI TƯ GIA NHÀ TRAI
-                </p>
-                {/* Địa chỉ ngắn gọn, trang nhã, không bao giờ bị tràn hay gãy chữ */}
-                <p className="text-xs sm:text-sm text-[#331B23] mt-0.5 mb-3 font-medium">
-                  Phú Xá - Văn Môn - Bắc Ninh
-                </p>
-
-                {/* Nút Chỉ Đường Google Maps thanh lịch, nhỏ gọn */}
-                <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  href="https://maps.google.com/?q=V%C4%83n+M%C3%B4n,+Y%C3%AAn+Phong,+B%E1%BA%AFc+Ninh"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-[#7D1E3A] text-white text-[11px] font-serif-luxury uppercase tracking-wider font-semibold shadow-sm hover:bg-[#60152B] transition-all"
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: {
+                        staggerChildren: 0.14,
+                        delayChildren: 0.15,
+                      },
+                    },
+                  }}
+                  className="flex flex-col items-center justify-center text-center w-full px-2"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-[#FFE082]" />
-                  <span>CHỈ ĐƯỜNG</span>
-                </motion.a>
+                  {/* Tên dâu rể bằng chữ script mềm mại bay bổng */}
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 12, scale: 0.95 },
+                      visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+                    }}
+                    className="mb-1.5 sm:mb-2"
+                  >
+                    <h3 className="font-script-luxury text-4xl sm:text-5xl text-[#7D1E3A] leading-tight drop-shadow-xs">
+                      {data.groom.fullName}
+                      <span className="block text-2xl sm:text-3xl font-serif-italic text-[#A84A64] my-0.5">&amp;</span>
+                      {data.bride.fullName}
+                    </h3>
+                  </motion.div>
+
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 8 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                    }}
+                    className="space-y-0.5"
+                  >
+                    <p className="font-serif-luxury text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#8C3A50] font-medium">
+                      ĐƯỢC TỔ CHỨC VÀO LÚC
+                    </p>
+                    <p className="font-serif-luxury font-bold text-sm sm:text-base text-[#331B23] tracking-wider">
+                      11:00, CHỦ NHẬT
+                    </p>
+                  </motion.div>
+
+                  {/* Bảng ô lịch Ngày - Tháng - Năm */}
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.92 },
+                      visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
+                    }}
+                    className="flex items-center justify-center gap-2 sm:gap-3 my-2 text-xs sm:text-sm font-serif-luxury text-[#7D1E3A] border-y border-[#C991A5]/50 py-1.5 w-full max-w-[230px]"
+                  >
+                    <span>THÁNG 03</span>
+                    <span className="font-bold text-xl sm:text-2xl text-[#7D1E3A] px-3 border-x border-[#C991A5]/50">
+                      03
+                    </span>
+                    <span>NĂM 2024</span>
+                  </motion.div>
+
+                  <motion.p
+                    variants={{
+                      hidden: { opacity: 0 },
+                      visible: { opacity: 1, transition: { duration: 0.5 } },
+                    }}
+                    className="text-[11px] sm:text-xs font-serif-italic text-[#694853] mb-2"
+                  >
+                    (Tức ngày 23 tháng 01 năm Giáp Thìn)
+                  </motion.p>
+
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, y: 8 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                    }}
+                    className="space-y-0.5 mb-2.5"
+                  >
+                    <p className="font-serif-luxury font-bold text-xs uppercase tracking-wider text-[#7D1E3A]">
+                      TẠI TƯ GIA NHÀ TRAI
+                    </p>
+                    {/* Địa chỉ ngắn gọn, trang nhã, không bao giờ bị tràn hay gãy chữ */}
+                    <p className="text-xs sm:text-sm text-[#331B23] font-medium">
+                      Phú Xá - Văn Môn - Bắc Ninh
+                    </p>
+                  </motion.div>
+
+                  {/* Nút Chỉ Đường Google Maps thanh lịch, nhỏ gọn */}
+                  <motion.div
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.9 },
+                      visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+                    }}
+                  >
+                    <motion.a
+                      whileHover={{ scale: 1.06 }}
+                      whileTap={{ scale: 0.94 }}
+                      href="https://maps.google.com/?q=V%C4%83n+M%C3%B4n,+Y%C3%AAn+Phong,+B%E1%BA%AFc+Ninh"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cursor-pointer inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-[#7D1E3A] text-white text-[11px] font-serif-luxury uppercase tracking-wider font-semibold shadow-md hover:bg-[#60152B] transition-all"
+                    >
+                      <MapPin className="w-3.5 h-3.5 text-[#FFE082]" />
+                      <span>CHỈ ĐƯỜNG</span>
+                    </motion.a>
+                  </motion.div>
+                </motion.div>
               </CrochetLaceMirrorFrame>
 
               {/* Dòng chữ "Hân hạnh được đón tiếp" */}
@@ -970,18 +1030,45 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
             </section>
 
             {/* =====================================================================
-                PHẦN 8: LỜI CẢM ƠN (THANK YOU)
+                PHẦN 8: LỜI CẢM ƠN (THANK YOU - NỀN ẢNH CÔNG CHÚA HOA LỘNG LẪY)
                ===================================================================== */}
-            <section className="px-6 sm:px-12 py-8 text-center bg-gradient-to-b from-transparent via-[#F7EDF1] to-[#F2E1E8] rounded-3xl mx-4 sm:mx-8">
-              <h4 className="font-script-luxury text-4xl sm:text-5xl text-[#7D1E3A] mb-2">
-                Lời cảm ơn!
-              </h4>
-              <p className="font-serif-italic text-xs sm:text-sm leading-relaxed text-[#593944] max-w-md mx-auto">
-                {data.thankYouText.message}
-              </p>
-              <p className="font-serif-luxury text-xs tracking-[0.2em] text-[#8C3A50] mt-4 font-semibold uppercase">
-                {data.groom.shortName} &amp; {data.bride.shortName}
-              </p>
+            <section className="relative overflow-hidden rounded-3xl mx-4 sm:mx-8 my-6 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-2 border-white/80 group">
+              <div className="relative w-full min-h-[380px] sm:min-h-[440px] flex items-end justify-center pb-8 pt-20 px-6 sm:px-10">
+                <img
+                  src={data.sectionImages.thankYouBg}
+                  alt="Lời Cảm Ơn"
+                  className="absolute inset-0 w-full h-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Lớp phủ chuyển sắc nghệ thuật */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/45 to-black/15 backdrop-blur-[0.5px]" />
+
+                {/* Khối thiệp cảm ơn nổi bật sang trọng */}
+                <motion.div
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="relative z-10 text-center max-w-md mx-auto p-5 sm:p-6 rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] text-white"
+                >
+                  <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-white/20 flex items-center justify-center border border-white/40">
+                    <Heart className="w-5 h-5 text-[#FFE082] fill-current" />
+                  </div>
+                  <h4 className="font-script-luxury text-4xl sm:text-5xl text-[#FFF3D6] mb-2 drop-shadow-md">
+                    Lời cảm ơn!
+                  </h4>
+                  <p className="font-serif-italic text-xs sm:text-sm leading-relaxed text-white/95 drop-shadow-sm">
+                    {data.thankYouText.message}
+                  </p>
+                  <div className="mt-4 pt-3 border-t border-white/25 flex flex-col items-center">
+                    <p className="font-serif-luxury text-xs sm:text-sm tracking-[0.24em] text-[#FFE082] font-semibold uppercase drop-shadow-sm">
+                      {data.groom.shortName} &amp; {data.bride.shortName}
+                    </p>
+                    <p className="font-serif-luxury text-[10px] tracking-[0.16em] text-white/75 uppercase mt-0.5">
+                      Forever &amp; Always • 03.03.2024
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
             </section>
           </motion.div>
         )}
