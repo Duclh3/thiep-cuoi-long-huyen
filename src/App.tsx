@@ -327,6 +327,7 @@ export function App() {
             onAddWish={handleAddWish}
             isMusicPlaying={isMusicPlaying}
             onToggleMusic={handleToggleMusic}
+            guestName={guestName}
             onStartMusic={() => {
               if (!soundEngine.getIsPlaying()) {
                 soundEngine.startMusic(0);
@@ -387,6 +388,7 @@ export function App() {
               data={weddingData}
               wishes={wishes}
               onAddWish={handleAddWish}
+              guestName={guestName}
             />
           </main>
 

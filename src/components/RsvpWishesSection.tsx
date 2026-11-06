@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import confetti from 'canvas-confetti';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -23,6 +23,7 @@ interface RsvpWishesSectionProps {
   data: WeddingData;
   wishes: WishItem[];
   onAddWish: (wish: WishItem) => void;
+  guestName?: string;
 }
 
 /**
@@ -133,21 +134,43 @@ const LuxurySilkBowSVG: React.FC<{ isUnwrapping: boolean; isIndochine: boolean }
   </motion.div>
 );
 
+function getInitialGuestName(propName?: string): string {
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const paramName = params.get('guest') || params.get('name') || params.get('u');
+    if (paramName && paramName.trim()) {
+      return paramName.trim();
+    }
+  }
+  if (propName && propName.trim() && propName !== 'Bạn & Người Thương') {
+    return propName.trim();
+  }
+  return '';
+}
+
 export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
   styleId,
   data,
   wishes,
   onAddWish,
+  guestName,
 }) => {
   const theme = THEMES[styleId];
 
-  const [name, setName] = useState('');
-  const [relation, setRelation] = useState('');
+  const [name, setName] = useState(() => getInitialGuestName(guestName));
   const [message, setMessage] = useState('');
   const [attendance, setAttendance] = useState('Có, chắc chắn mình sẽ tham dự!');
   const [submittedSuccess, setSubmittedSuccess] = useState(false);
   const [copiedKey, setCopiedKey] = useState<'groom' | 'bride' | null>(null);
   const [zoomQrUrl, setZoomQrUrl] = useState<string | null>(null);
+
+  // Tự động điền tên người chúc nếu param link có tên khách
+  useEffect(() => {
+    const initial = getInitialGuestName(guestName);
+    if (initial) {
+      setName(initial);
+    }
+  }, [guestName]);
 
   // Trạng thái Hộp Quà Mừng Cưới 3D: Mặc định đóng kín, phải mở hộp mới thấy mã QR
   const [isGiftBoxOpen, setIsGiftBoxOpen] = useState(false);
@@ -193,13 +216,9 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
       minute: '2-digit',
     })} • ${now.toLocaleDateString('vi-VN')}`;
 
-    const displayName = relation.trim()
-      ? `${name.trim()} (${relation.trim()})`
-      : name.trim();
-
     const newWish: WishItem = {
       id: `wish-${Date.now()}`,
-      name: displayName,
+      name: name.trim(),
       message: `${message.trim()} — [${attendance}]`,
       createdAt: formattedTime,
     };
@@ -207,8 +226,6 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
     onAddWish(newWish);
     triggerCelebration();
     setSubmittedSuccess(true);
-    setName('');
-    setRelation('');
     setMessage('');
 
     setTimeout(() => {
@@ -318,26 +335,6 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                   onClick={() => setName('')}
                   className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white"
                   aria-label="Xóa tên"
-                >
-                  <XCircle className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-
-            <div className="relative">
-              <input
-                type="text"
-                value={relation}
-                onChange={(e) => setRelation(e.target.value)}
-                placeholder="Bạn là gì của Dâu Rể?"
-                className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 pr-9 text-sm text-white placeholder:text-white/50 focus:outline-none focus:border-amber-300"
-              />
-              {relation.length > 0 && (
-                <button
-                  type="button"
-                  onClick={() => setRelation('')}
-                  className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white"
-                  aria-label="Xóa mối quan hệ"
                 >
                   <XCircle className="w-4 h-4" />
                 </button>

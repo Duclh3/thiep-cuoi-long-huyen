@@ -28,6 +28,21 @@ interface WhiteMinimalInvitationProps {
   isMusicPlaying: boolean;
   onToggleMusic: () => void;
   onStartMusic: () => void;
+  guestName?: string;
+}
+
+function getInitialGuestName(propName?: string): string {
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const paramName = params.get('guest') || params.get('name') || params.get('u');
+    if (paramName && paramName.trim()) {
+      return paramName.trim();
+    }
+  }
+  if (propName && propName.trim() && propName !== 'Bạn & Người Thương') {
+    return propName.trim();
+  }
+  return '';
 }
 
 const assetUrl = (path: string) => {
@@ -178,6 +193,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
   isMusicPlaying,
   onToggleMusic,
   onStartMusic,
+  guestName,
 }) => {
   // Trạng thái mở thiệp: Phải nhấp vào phong bì mới mở khóa toàn bộ nội dung thiệp bên dưới
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
@@ -204,12 +220,18 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
     return () => clearInterval(timer);
   }, [data.weddingDate.isoDate]);
 
-  // Form gửi lời chúc & xác nhận tham dự (4 ô tròn giống hệt video)
-  const [guestInputName, setGuestInputName] = useState('');
-  const [guestRelation, setGuestRelation] = useState('');
+  // Form gửi lời chúc & xác nhận tham dự (tự động điền tên từ param link)
+  const [guestInputName, setGuestInputName] = useState(() => getInitialGuestName(guestName));
   const [guestWish, setGuestWish] = useState('');
   const [attendance, setAttendance] = useState('Có, chắc chắn mình sẽ tham dự!');
   const [wishSubmitted, setWishSubmitted] = useState(false);
+
+  useEffect(() => {
+    const initial = getInitialGuestName(guestName);
+    if (initial) {
+      setGuestInputName(initial);
+    }
+  }, [guestName]);
 
   // Hộp quà mừng cưới 3D (Hiển thị sẵn phần hộp quà, ấn vào hộp mới mở ra 2 mã QR)
   const [isGiftBoxOpen, setIsGiftBoxOpen] = useState(false);
@@ -266,13 +288,9 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
       minute: '2-digit',
     })} • ${now.toLocaleDateString('vi-VN')}`;
 
-    const displayName = guestRelation.trim()
-      ? `${guestInputName.trim()} (${guestRelation.trim()})`
-      : guestInputName.trim();
-
     const newWish: WishItem = {
       id: `wish-${Date.now()}`,
-      name: displayName,
+      name: guestInputName.trim(),
       message: `${guestWish.trim()} — [${attendance}]`,
       createdAt: formattedTime,
     };
@@ -285,8 +303,6 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
       colors: ['#5A1824', '#D4AF37', '#F4ACB7'],
     });
     setWishSubmitted(true);
-    setGuestInputName('');
-    setGuestRelation('');
     setGuestWish('');
     setTimeout(() => setWishSubmitted(false), 4000);
   };
@@ -556,7 +572,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     Thiệp Mời
                   </p>
                   <h1
-                    style={{ fontFamily: "'Lobster Two', cursive" }}
+                    style={{ fontFamily: "'Lobster', 'Dancing Script', cursive" }}
                     className="text-2xl sm:text-3xl font-normal tracking-wide text-[#2B2523]"
                   >
                     {data.groom.shortName} &amp; {data.bride.shortName}
@@ -910,7 +926,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                 </div>
 
                 <p className="font-condensed-minimal text-[11px] sm:text-xs md:text-sm tracking-[0.04em] uppercase text-[#4E433E] leading-relaxed text-justify mb-6">
-                  CUỐN ALBUM NÀY GHI LẠI NHỮNG KHOẢNH KHẮC ĐẸP NHẤT TRONG NGÀY ĐẶC BIỆT CỦA CHÚNG TÔI - TRÀN ĐẦY YÊU THƯƠNG, HẠNH PHÚC VÀ NHỮNG KỶ NIỆM KHÓ QUÊN. MỖI BỨC ẢNH ĐỀU KỂ MỘT CÂU CHUYỆN VỀ HÀNH TRÌNH CỦA CHÚNG TÔI. GIỮA VÒNG TAY CỦA GIA ĐÌNH VÀ BẠN BÈ, CHÚNG TÔI ĐÃ CÙNG NHAU ĐÁNH DẤU MỘT TÌNH YÊU BỀN VỮNG THEO NĂM THÁNG.
+                  CUỐN ALBUM NÀY GHI LẠI NHỮNG KHOẢNH KHẮC ĐẸP NHẤT TRONG NGÀY ĐẶC BIỆT CỦA CHÚNG MÌNH - TRÀN ĐẦY YÊU THƯƠNG, HẠNH PHÚC VÀ NHỮNG KỶ NIỆM KHÓ QUÊN. MỖI BỨC ẢNH ĐỀU KỂ MỘT CÂU CHUYỆN VỀ HÀNH TRÌNH CỦA CHÚNG MÌNH. GIỮA VÒNG TAY CỦA GIA ĐÌNH VÀ BẠN BÈ, CHÚNG MÌNH ĐÃ CÙNG NHAU ĐÁNH DẤU MỘT TÌNH YÊU BỀN VỮNG THEO NĂM THÁNG.
                 </p>
 
                 {/* Lưới 2 cột mobile, 3 cột tablet, 4 cột desktop */}
@@ -962,7 +978,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                 />
 
                 <p className="font-condensed-minimal text-[11px] sm:text-xs md:text-sm tracking-[0.04em] uppercase text-[#3A302C] leading-relaxed mb-5 pr-12 max-w-xl mx-auto text-center sm:text-left">
-                  HÃY XÁC NHẬN SỰ CÓ MẶT CỦA QUÝ KHÁCH ĐỂ GIA ĐÌNH CHÚNG TÔI CHUẨN BỊ ĐÓN TIẾP MỘT CÁCH CHU ĐÁO NHẤT. TRÂN TRỌNG!
+                  HÃY XÁC NHẬN SỰ CÓ MẶT CỦA QUÝ KHÁCH ĐỂ GIA ĐÌNH CHÚNG MÌNH CHUẨN BỊ ĐÓN TIẾP MỘT CÁCH CHU ĐÁO NHẤT. TRÂN TRỌNG!
                 </p>
 
                 <form onSubmit={handleSubmitForm} className="space-y-3 relative z-20 max-w-xl mx-auto">
@@ -972,14 +988,6 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     value={guestInputName}
                     onChange={(e) => setGuestInputName(e.target.value)}
                     placeholder="TÊN CỦA BẠN LÀ GÌ?"
-                    className="w-full rounded-full border border-stone-600/80 bg-white px-5 py-3 font-condensed-minimal text-xs tracking-[0.06em] text-[#2B2523] placeholder:text-stone-500 focus:outline-none focus:border-stone-900"
-                  />
-
-                  <input
-                    type="text"
-                    value={guestRelation}
-                    onChange={(e) => setGuestRelation(e.target.value)}
-                    placeholder="BẠN LÀ GÌ CỦA DÂU RỂ?"
                     className="w-full rounded-full border border-stone-600/80 bg-white px-5 py-3 font-condensed-minimal text-xs tracking-[0.06em] text-[#2B2523] placeholder:text-stone-500 focus:outline-none focus:border-stone-900"
                   />
 
@@ -1286,7 +1294,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     Lời cảm ơn!
                   </h2>
                   <p className="font-condensed-minimal text-[11px] sm:text-xs md:text-sm tracking-[0.04em] uppercase text-[#2B2523] leading-relaxed">
-                    CẢM ƠN QUÝ KHÁCH ĐÃ DÀNH TÌNH CẢM CHO GIA ĐÌNH CHÚNG TÔI! SỰ HIỆN DIỆN CỦA QUÝ KHÁCH CHÍNH LÀ MÓN QUÀ Ý NGHĨA NHẤT, GIA ĐÌNH CHÚNG TÔI VÔ CÙNG TRÂN QUÝ KHI ĐƯỢC CÙNG QUÝ KHÁCH CHIA SẺ NIỀM HẠNH PHÚC TRONG NGÀY TRỌNG ĐẠI NÀY.
+                    CẢM ƠN QUÝ KHÁCH ĐÃ DÀNH TÌNH CẢM CHO GIA ĐÌNH CHÚNG MÌNH! SỰ HIỆN DIỆN CỦA QUÝ KHÁCH CHÍNH LÀ MÓN QUÀ Ý NGHĨA NHẤT, GIA ĐÌNH CHÚNG MÌNH VÔ CÙNG TRÂN QUÝ KHI ĐƯỢC CÙNG QUÝ KHÁCH CHIA SẺ NIỀM HẠNH PHÚC TRONG NGÀY TRỌNG ĐẠI NÀY.
                   </p>
                 </div>
               </section>

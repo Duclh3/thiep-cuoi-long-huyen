@@ -402,7 +402,7 @@ export const DEFAULT_WEDDING_DATA: WeddingData = {
   thankYouText: {
     title: 'Thank you!',
     message:
-      'Sự xuất hiện của bạn sẽ làm cho ngày cưới của chúng tôi trở nên đặc biệt hơn bao giờ hết. Chúng tôi rất mong được đón tiếp bạn trong ngày trọng đại, để cùng nhau chứng kiến và sẻ chia niềm hạnh phúc trọn vẹn.',
+      'Sự xuất hiện của bạn sẽ làm cho ngày cưới của chúng mình trở nên đặc biệt hơn bao giờ hết. Chúng mình rất mong được đón tiếp bạn trong ngày trọng đại, để cùng nhau chứng kiến và sẻ chia niềm hạnh phúc trọn vẹn.',
   },
   initialWishes: [],
 };
