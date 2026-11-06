@@ -165,6 +165,42 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
           color: i % 2 === 0 ? '#FFD166' : '#FF9E64',
           alpha: 0.8,
         });
+      } else if (styleId === 'garden') {
+        // Phong cách 06 (Khu Vườn Xanh Ngọc): Cánh hoa hồng trắng bay lượn + lá ngọc biếc + đốm nắng lung linh
+        const kind: AmbientParticleKind = i % 3 === 0 ? 'diamond-star' : 'petal';
+        particles.push({
+          kind,
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: kind === 'diamond-star' ? Math.random() * 5 + 4 : Math.random() * 7 + 6,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: Math.random() * 0.75 + 0.35,
+          angle: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.02,
+          phase: Math.random() * Math.PI * 2,
+          phaseSpeed: 0.035,
+          color: i % 2 === 0 ? 'rgba(255, 255, 255, 0.88)' : 'rgba(235, 247, 238, 0.82)',
+          secondaryColor: '#C8E6C9',
+          alpha: 0.85,
+        });
+      } else if (styleId === 'calla') {
+        // Phong cách 07 (Calla Đỏ Bordeaux): Cánh hoa hồng nhung đỏ bordeaux + bụi vàng kim 24K + trái tim
+        const kind: AmbientParticleKind = i % 3 === 0 ? 'diamond-star' : i % 2 === 0 ? 'heart' : 'petal';
+        particles.push({
+          kind,
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: kind === 'diamond-star' ? Math.random() * 6 + 4 : Math.random() * 7 + 6,
+          vx: (Math.random() - 0.5) * 0.55,
+          vy: Math.random() * 0.8 + 0.4,
+          angle: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.025,
+          phase: Math.random() * Math.PI * 2,
+          phaseSpeed: 0.04,
+          color: i % 2 === 0 ? 'rgba(168, 40, 69, 0.88)' : 'rgba(125, 30, 58, 0.92)',
+          secondaryColor: '#D4AF37',
+          alpha: 0.88,
+        });
       } else {
         // Phong cách 04 (Đông Dương Cung Đình): Đèn lồng Hội An bay lên trời + Hoa mai vàng 5 cánh
         const isLantern = i % 3 === 0;
@@ -288,6 +324,66 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
             gravity: 0.03,
           });
         }
+      } else if (styleId === 'garden') {
+        // PHÁO HOA XANH NGỌC & VÀNG KIM (Emerald Sparkle Garden)
+        const total = 46;
+        const gardenPalette = ['#4E8A5E', '#83C294', '#D4AF37', '#FFFDF9', '#A8D5BA'];
+        for (let i = 0; i < total; i++) {
+          const angle = (Math.PI * 2 * i) / total + (Math.random() - 0.5) * 0.15;
+          const speed = Math.random() * 4.2 + 1.6;
+          sparks.push({
+            x: cx,
+            y: cy,
+            prevX: cx,
+            prevY: cy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            alpha: 1,
+            decay: 0.012 + Math.random() * 0.006,
+            color: gardenPalette[i % gardenPalette.length],
+            size: Math.random() * 3.5 + 2.2,
+            shape: 'star',
+            gravity: 0.045,
+          });
+        }
+        symbolFlashes.push({
+          x: cx,
+          y: cy,
+          alpha: 1,
+          scale: 0.65,
+          text: '🌿',
+          color: '#83C294',
+        });
+      } else if (styleId === 'calla') {
+        // PHÁO HOA RƯỢU BORDEAUX & VÀNG HOÀNG GIA (Burgundy Calla Romance)
+        const total = 46;
+        const callaPalette = ['#9B2240', '#681427', '#D4AF37', '#FCE79C', '#FFD1DC'];
+        for (let i = 0; i < total; i++) {
+          const angle = (Math.PI * 2 * i) / total + (Math.random() - 0.5) * 0.15;
+          const speed = Math.random() * 4.4 + 1.8;
+          sparks.push({
+            x: cx,
+            y: cy,
+            prevX: cx,
+            prevY: cy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            alpha: 1,
+            decay: 0.012 + Math.random() * 0.006,
+            color: callaPalette[i % callaPalette.length],
+            size: Math.random() * 3.6 + 2.2,
+            shape: 'heart',
+            gravity: 0.05,
+          });
+        }
+        symbolFlashes.push({
+          x: cx,
+          y: cy,
+          alpha: 1,
+          scale: 0.65,
+          text: '♥',
+          color: '#D4AF37',
+        });
       } else {
         // PHÁO HOA CUNG ĐÌNH ĐÔNG DƯƠNG: NỔ ẤN SONG HỶ (囍) VÀ HOA MAI VÀNG ĐỎ SON
         const total = 44;
