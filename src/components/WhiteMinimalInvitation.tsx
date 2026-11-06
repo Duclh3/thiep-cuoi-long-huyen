@@ -1264,16 +1264,16 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
               </section>
 
               {/* =====================================================================
-                  PHẦN 7: BANNER LỜI CẢM ƠN CUỐI TRANG (ĐẶT Ở NỬA DƯỚI ĐỂ KHÔNG CHE MẶT DÂU RỂ)
+                  PHẦN 7: BANNER LỜI CẢM ƠN CUỐI TRANG (ĐẶT Ở PHÍA TRÊN ĐỂ KHÔNG CHE ẢNH DÂU RỂ)
                  ===================================================================== */}
               <section className="relative w-full aspect-[4/4.8] overflow-hidden">
                 <img
                   src={data.sectionImages.thankYouBg}
                   alt="Lời cảm ơn"
-                  className="w-full h-full object-cover object-[center_16%]"
+                  className="w-full h-full object-cover object-[center_75%]"
                 />
-                {/* Dải băng trắng mờ đặt ở phần dưới bức hình (ngang bàn tiệc) để lộ rõ gương mặt cô dâu chú rể phía trên */}
-                <div className="absolute inset-x-0 bottom-5 bg-white/78 backdrop-blur-[2px] py-4 px-5 text-center shadow-sm">
+                {/* Dải băng trắng mờ đặt ở phía trên bức hình (vùng rèm trắng) để không che cô dâu chú rể */}
+                <div className="absolute inset-x-0 top-3 bg-white/78 backdrop-blur-[2px] py-3.5 px-5 text-center shadow-sm">
                   <h2 className="font-handwritten-minimal text-3xl sm:text-4xl text-[#2B2523] mb-1">
                     Lời cảm ơn!
                   </h2>

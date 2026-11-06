@@ -760,23 +760,23 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
           document.body
         )}
 
-      {/* PHẦN 2: ĐẠI TIỆC KẾT MÀN & LỜI CẢM ƠN (Ảnh nền: LVT08639.jpg) */}
-      <section className="relative min-h-[75vh] w-full overflow-hidden flex flex-col items-center justify-center text-center text-white px-4 pt-20 pb-32 sm:py-24">
+      {/* PHẦN 2: ĐẠI TIỆC KẾT MÀN & LỜI CẢM ƠN (Đặt chữ ở phía trên vùng rèm để không che cô dâu chú rể) */}
+      <section className="relative min-h-[82vh] w-full overflow-hidden flex flex-col items-center justify-start text-center text-white px-4 pt-8 sm:pt-12 pb-64">
         <div className="absolute inset-0 z-0 bg-stone-950">
           <img
             src={data.sectionImages.thankYouBg}
             alt="Thank you"
-            className="w-full h-full object-cover object-[center_22%] opacity-90"
+            className="w-full h-full object-cover object-[center_68%] opacity-95"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/20 to-black/55" />
         </div>
 
-        <div className="relative z-10 w-full max-w-3xl mx-auto px-2 sm:px-4">
-          <h2 className="font-script-luxury text-5xl sm:text-8xl font-normal shimmer-gold-text mb-5 sm:mb-6 drop-shadow-xl">
+        <div className="relative z-10 w-full max-w-2xl mx-auto px-2 sm:px-4">
+          <h2 className="font-script-luxury text-5xl sm:text-7xl font-normal shimmer-gold-text mb-2 sm:mb-3 drop-shadow-xl">
             {data.thankYouText.title}
           </h2>
 
-          <p className="font-serif-italic text-sm sm:text-xl leading-relaxed text-white/95 max-w-2xl mx-auto px-1 drop-shadow">
+          <p className="font-serif-italic text-xs sm:text-lg leading-relaxed text-white/95 max-w-xl mx-auto px-1 drop-shadow">
             “{data.thankYouText.message}”
           </p>
         </div>

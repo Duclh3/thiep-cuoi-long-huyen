@@ -7,7 +7,7 @@ import path from 'node:path'
 const wishesFilePath = path.resolve(__dirname, 'data/wishes.json')
 
 export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/thiep-cuoi-long-huyen/' : '/',
+  base: process.env.VERCEL ? '/' : command === 'build' ? '/thiep-cuoi-long-huyen/' : '/',
   server: {
     watch: {
       // Ngăn Vite tự động reload lại trang khi lưu lời chúc vào thư mục data/
