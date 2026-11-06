@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { StyleId, THEMES, WeddingData, WishItem } from '../data/weddingData';
 import { soundEngine } from '../utils/soundEngine';
+import { parseWishItem } from '../utils/wishHelper';
 
 interface RsvpWishesSectionProps {
   styleId: StyleId;
@@ -219,7 +220,8 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
     const newWish: WishItem = {
       id: `wish-${Date.now()}`,
       name: name.trim(),
-      message: `${message.trim()} — [${attendance}]`,
+      message: message.trim(),
+      attendance: attendance,
       createdAt: formattedTime,
     };
 
@@ -399,25 +401,28 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
               <span>Gửi Lời Chúc &amp; Xác Nhận</span>
             </button>
 
-            {/* Danh sách lời chúc gọn nhẹ ngay bên dưới (chỉ hiển thị khi có lời chúc) */}
+            {/* Danh sách lời chúc gọn nhẹ ngay bên dưới (chỉ hiển thị khi có lời chúc, ẩn thông tin tham dự) */}
             {wishes.length > 0 && (
               <div className="pt-3 border-t border-white/15 max-h-56 overflow-y-auto space-y-2.5 pr-1">
-                {wishes.map((w) => (
-                  <div
-                    key={w.id}
-                    className="rounded-xl bg-white/10 border border-white/10 px-3.5 py-2.5 text-left"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-serif-luxury italic text-base font-semibold text-amber-200">
-                        {w.name}
-                      </span>
-                      <span className="text-[10px] text-white/50">{w.createdAt}</span>
+                {wishes.map((w) => {
+                  const parsed = parseWishItem(w);
+                  return (
+                    <div
+                      key={w.id}
+                      className="rounded-xl bg-white/10 border border-white/10 px-3.5 py-2.5 text-left"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-serif-luxury italic text-base font-semibold text-amber-200">
+                          {parsed.name}
+                        </span>
+                        <span className="text-[10px] text-white/50">{parsed.createdAt}</span>
+                      </div>
+                      <p className="font-serif-italic text-xs sm:text-sm text-white/90 mt-0.5 leading-relaxed">
+                        “{parsed.cleanMessage}”
+                      </p>
                     </div>
-                    <p className="font-serif-italic text-xs sm:text-sm text-white/90 mt-0.5 leading-relaxed">
-                      “{w.message}”
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </form>
@@ -435,132 +440,130 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
             <AnimatePresence mode="wait">
               {!isGiftBoxOpen ? (
                 /* =====================================================================
-                   TRẠNG THÁI 1: HỘP QUÀ HỶ SỰ 3D TINH GỌN — CHỈ HƯỚNG DẪN CHẠM ĐỂ MỞ
+                   TRẠNG THÁI 1: BIỂU TƯỢNG HỘP QUÀ / PHONG BAO MỪNG CƯỚI THU NHỎ TINH TẾ
+                   Đặc trưng theo từng phong cách: Nhỏ gọn, ý nghĩa, vừa vặn không chiếm chỗ
                    ===================================================================== */
                 <motion.div
-                  key="closed-3d-gift-box"
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  key="closed-compact-gift-box"
+                  initial={{ opacity: 0, scale: 0.92, y: 14 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{
                     opacity: 0,
                     scale: 1.08,
-                    filter: 'blur(6px)',
-                    transition: { duration: 0.4 },
+                    filter: 'blur(5px)',
+                    transition: { duration: 0.35 },
                   }}
-                  className="relative flex flex-col items-center justify-center py-4 sm:py-6 select-none"
+                  className="relative flex flex-col items-center justify-center py-2 sm:py-3 select-none"
                 >
-                  {/* Hào quang ánh kim tỏa sáng phía sau hộp quà */}
-                  <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-r from-amber-300/30 via-rose-400/20 to-amber-500/30 blur-3xl animate-pulse" />
+                  {/* Hào quang ánh kim dịu nhẹ phía sau */}
+                  <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-gradient-to-r from-amber-400/20 via-rose-400/15 to-amber-500/20 blur-2xl animate-pulse" />
 
-                  {/* Các hạt kim tuyến & trái tim bay lơ lửng quanh hộp quà */}
-                  {[...Array(6)].map((_, idx) => (
-                    <motion.span
-                      key={idx}
-                      animate={{
-                        y: [0, -24 - (idx % 3) * 10, 0],
-                        x: [0, (idx % 2 === 0 ? 1 : -1) * (8 + idx * 3), 0],
-                        opacity: [0.3, 0.95, 0.3],
-                        scale: [0.8, 1.15, 0.8],
-                      }}
-                      transition={{
-                        duration: 2.6 + (idx % 3) * 0.6,
-                        repeat: Infinity,
-                        delay: idx * 0.25,
-                      }}
-                      style={{
-                        top: `${16 + (idx * 12) % 68}%`,
-                        left: `${16 + (idx * 14) % 68}%`,
-                      }}
-                      className="pointer-events-none absolute text-amber-200 text-sm sm:text-base z-20"
-                    >
-                      {idx % 2 === 0 ? '✨' : '♥'}
-                    </motion.span>
-                  ))}
-
-                  {/* KHỐI HỘP QUÀ 3D TƯƠNG TÁC (CHẠM VÀO ĐỂ BUNG NẮP) */}
+                  {/* KHỐI BIỂU TƯỢNG MỪNG CƯỚI NHỎ GỌN TƯƠNG TÁC (CHẠM VÀO ĐỂ MỞ QR) */}
                   <motion.div
                     onClick={handleOpenGiftBox}
-                    whileHover={{ scale: 1.04, y: -4 }}
+                    whileHover={{ scale: 1.04, y: -3 }}
                     whileTap={{ scale: 0.96 }}
                     animate={
                       isBoxUnwrapping
-                        ? {
-                            rotate: [0, -3, 3, -4, 4, 0],
-                            scale: [1, 1.05, 1.1],
-                          }
-                        : {
-                            y: [0, -7, 0],
-                          }
+                        ? { rotate: [0, -2, 2, -3, 3, 0], scale: [1, 1.04, 1.08] }
+                        : { y: [0, -5, 0] }
                     }
                     transition={
                       isBoxUnwrapping
-                        ? { duration: 0.55 }
+                        ? { duration: 0.5 }
                         : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }
                     }
-                    className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[270px] sm:max-w-[310px] group"
+                    className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[210px] sm:max-w-[225px] group"
                   >
-                    {/* Luồng sáng vàng rực rỡ phóng lên khi nắp hộp bật mở */}
+                    {/* Luồng sáng lóe lên khi mở */}
                     <AnimatePresence>
                       {isBoxUnwrapping && (
                         <motion.div
-                          initial={{ opacity: 0, scale: 0.4, y: 30 }}
-                          animate={{ opacity: 1, scale: 1.5, y: -30 }}
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: 1.4 }}
                           exit={{ opacity: 0 }}
-                          transition={{ duration: 0.55 }}
-                          className="pointer-events-none absolute top-10 inset-x-4 h-40 rounded-full bg-gradient-to-t from-amber-300 via-yellow-100 to-transparent blur-2xl z-20"
+                          className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-t from-amber-300 via-yellow-100 to-transparent blur-xl z-30"
                         />
                       )}
                     </AnimatePresence>
 
-                    {/* 1. CHIẾC NƠ LỤA VÀNG KIM 3D TRÊN ĐỈNH */}
-                    <LuxurySilkBowSVG
-                      isUnwrapping={isBoxUnwrapping}
-                      isIndochine={styleId === 'indochine'}
-                    />
-
-                    {/* 2. NẮP HỘP QUÀ 3D (BẬT MỞ TUNG LÊN KHI CHẠM) */}
-                    <motion.div
-                      animate={
-                        isBoxUnwrapping
-                          ? { y: -70, rotateX: 45, rotateZ: -6, scale: 1.08, opacity: 0 }
-                          : { y: 0, rotateX: 0, rotateZ: 0, scale: 1, opacity: 1 }
-                      }
-                      transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
-                      style={{ background: boxStyleConfig.lidBg }}
-                      className="relative z-20 w-[106%] h-13 sm:h-15 rounded-2xl border-2 border-[#F5D77F] shadow-[0_14px_30px_rgba(0,0,0,0.65)] flex items-center justify-center overflow-hidden"
-                    >
-                      <div className="pointer-events-none absolute inset-1.5 rounded-xl border border-[#FDE68A]/35" />
-                      <div className="pointer-events-none absolute inset-x-0 h-3 bg-gradient-to-r from-[#B88728] via-[#FFF2B2] to-[#B88728] opacity-85" />
-                      <div className="pointer-events-none relative z-10 w-10 sm:w-11 h-full bg-gradient-to-r from-[#B88728] via-[#FFF4C2] to-[#B88728] border-x border-white/50 shadow-md" />
-                    </motion.div>
-
-                    {/* 3. THÂN HỘP QUÀ 3D TINH TẾ — CHỈ CÓ NƠ VÀNG & NÚT BẤM MỞ */}
+                    {/* VỎ HỘP / PHONG BAO MỪNG CƯỚI TINH GỌN THEO TỪNG STYLE */}
                     <div
-                      style={{ background: boxStyleConfig.bodyBg }}
-                      className="relative z-10 w-full h-48 sm:h-52 rounded-b-[28px] rounded-t-[6px] border-2 border-t-0 border-[#F5D77F] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.85)] flex flex-col items-center justify-center overflow-hidden"
+                      className="relative w-full h-34 sm:h-38 rounded-2xl border border-amber-300/40 p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.6)] flex flex-col items-center justify-between overflow-hidden transition-all duration-300 group-hover:border-amber-300/70"
+                      style={{
+                        background:
+                          styleId === 'editorial'
+                            ? 'linear-gradient(145deg, #22201D 0%, #151311 60%, #0A0908 100%)'
+                            : styleId === 'cinematic'
+                            ? 'linear-gradient(145deg, #2A1A38 0%, #170E20 60%, #0C0712 100%)'
+                            : styleId === 'indochine'
+                            ? 'linear-gradient(145deg, #7E141E 0%, #540B13 60%, #30050A 100%)'
+                            : 'linear-gradient(145deg, #741D2C 0%, #4D111D 60%, #2A070F 100%)',
+                      }}
                     >
-                      {/* Khung viền hoa văn góc hộp */}
-                      <div className="pointer-events-none absolute inset-2.5 rounded-[20px] border border-[#FDE68A]/35" />
-                      <span className="pointer-events-none absolute top-3.5 left-3.5 w-3.5 h-3.5 border-t-2 border-l-2 border-[#FDE68A]/80" />
-                      <span className="pointer-events-none absolute top-3.5 right-3.5 w-3.5 h-3.5 border-t-2 border-r-2 border-[#FDE68A]/80" />
-                      <span className="pointer-events-none absolute bottom-3.5 left-3.5 w-3.5 h-3.5 border-b-2 border-l-2 border-[#FDE68A]/80" />
-                      <span className="pointer-events-none absolute bottom-3.5 right-3.5 w-3.5 h-3.5 border-b-2 border-r-2 border-[#FDE68A]/80" />
+                      {/* Khung viền góc thanh nhã */}
+                      <div className="pointer-events-none absolute inset-1.5 rounded-xl border border-amber-300/25" />
+                      <span className="pointer-events-none absolute top-2.5 left-2.5 w-2 h-2 border-t border-l border-amber-300/60" />
+                      <span className="pointer-events-none absolute top-2.5 right-2.5 w-2 h-2 border-t border-r border-amber-300/60" />
+                      <span className="pointer-events-none absolute bottom-2.5 left-2.5 w-2 h-2 border-b border-l border-amber-300/60" />
+                      <span className="pointer-events-none absolute bottom-2.5 right-2.5 w-2 h-2 border-b border-r border-amber-300/60" />
 
-                      {/* Dải ruy-băng lụa vàng chạy dọc & ngang thân hộp */}
-                      <div className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-10 sm:w-11 bg-gradient-to-r from-[#A6781E] via-[#FFF4C2] to-[#A6781E] border-x border-white/40 opacity-95 shadow-lg" />
-                      <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 h-9 sm:h-10 bg-gradient-to-b from-[#A6781E] via-[#FFF4C2] to-[#A6781E] border-y border-white/40 opacity-95 shadow-md" />
+                      {/* Dải ruy-băng hoặc hoa văn ở giữa */}
+                      <div className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-6 bg-gradient-to-r from-amber-600/40 via-amber-200/50 to-amber-600/40 border-x border-amber-200/30 opacity-70" />
 
-                      {/* Khóa Tròn Kim Hoàn & Nút Hướng Dẫn Chạm Mở Hộp ở Tâm */}
-                      <div className="relative z-20 flex flex-col items-center">
-                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#FFF6D1] via-[#E5B85B] to-[#9A6D15] p-1 shadow-[0_10px_25px_rgba(0,0,0,0.6)] border-2 border-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                          <div className="w-full h-full rounded-full bg-[#631523] flex items-center justify-center text-[#FDE68A]">
-                            <Gift className="w-6 h-6 animate-bounce" />
+                      {/* Nắp phong bao chữ V gập nhẹ trên đỉnh */}
+                      <div className="pointer-events-none absolute top-0 inset-x-0 h-6 overflow-hidden">
+                        <svg viewBox="0 0 100 24" className="w-full h-full" preserveAspectRatio="none">
+                          <polygon points="0,0 100,0 50,22" fill="rgba(255,255,255,0.08)" stroke="rgba(251,191,36,0.3)" strokeWidth="0.8" />
+                        </svg>
+                      </div>
+
+                      {/* BIỂU TƯỢNG Ý NGHĨA Ở TRỌNG TÂM THEO TỪNG STYLE */}
+                      <div className="relative z-10 my-auto flex flex-col items-center">
+                        {styleId === 'indochine' ? (
+                          /* Style 4: Huy hiệu Song Hỷ Hoàng Triều 囍 */
+                          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#FFF2B2] via-[#D4AF37] to-[#8C6310] p-0.5 shadow-md border border-amber-100 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <div className="w-full h-full rounded-full bg-[#650F18] flex items-center justify-center text-[#FDE68A]">
+                              <span className="font-serif-luxury text-base font-bold leading-none">囍</span>
+                            </div>
                           </div>
-                        </div>
+                        ) : styleId === 'editorial' ? (
+                          /* Style 2: Biểu tượng Hộp Quà Vogue Tối Giản */
+                          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#ECE8E1] via-[#D4AF37] to-[#99792B] p-0.5 shadow-md border border-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <div className="w-full h-full rounded-full bg-[#181614] flex items-center justify-center text-amber-200">
+                              <Gift className="w-5 h-5" />
+                            </div>
+                          </div>
+                        ) : styleId === 'cinematic' ? (
+                          /* Style 3: Viên Ngọc Ánh Sao Dạ Quang */
+                          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#F5D5FF] via-[#B887FF] to-[#60359E] p-0.5 shadow-[0_0_15px_rgba(184,135,255,0.4)] border border-amber-200 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <div className="w-full h-full rounded-full bg-[#1D102A] flex items-center justify-center text-amber-200">
+                              <Sparkles className="w-5 h-5 text-amber-200 animate-pulse" />
+                            </div>
+                          </div>
+                        ) : (
+                          /* Style 1: Con Dấu Sáp Cánh Bướm Tình Yêu */
+                          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#FFF6D1] via-[#E5B85B] to-[#9A6D15] p-0.5 shadow-md border border-amber-100 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <div className="w-full h-full rounded-full bg-[#5E1420] flex items-center justify-center text-[#FDE68A]">
+                              <Heart className="w-4 h-4 fill-current animate-pulse" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
 
-                        <div className="px-5 py-2.5 rounded-full bg-[#FFFDF8] text-[#631523] border-2 border-[#D4AF37] shadow-[0_10px_25px_rgba(0,0,0,0.55)] inline-flex items-center gap-2 font-serif-luxury italic font-bold text-sm sm:text-base whitespace-nowrap group-hover:bg-amber-50 transition-colors">
-                          <LockOpen className="w-4 h-4 text-[#B88728] shrink-0" />
-                          <span>Chạm Để Mở Hộp Quà</span>
+                      {/* NÚT / DÒNG CHỮ CHẠM ĐỂ MỞ NHỎ GỌN TRANG NHÃ */}
+                      <div className="relative z-10 w-full flex items-center justify-center">
+                        <div className="px-3 py-1 rounded-full bg-black/45 border border-amber-300/40 text-amber-200 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium tracking-wide shadow-sm group-hover:bg-amber-300 group-hover:text-stone-950 transition-colors">
+                          <LockOpen className="w-3 h-3 shrink-0" />
+                          <span>
+                            {styleId === 'indochine'
+                              ? 'Song Hỷ Lâm Môn • Mở QR'
+                              : styleId === 'editorial'
+                              ? 'Vogue Gift • Mở QR'
+                              : styleId === 'cinematic'
+                              ? 'Hộp Quà Ánh Sao • Mở QR'
+                              : 'Hộp Quà Mừng Cưới • Mở QR'}
+                          </span>
                         </div>
                       </div>
                     </div>

@@ -23,6 +23,7 @@ import { GallerySection } from './components/GallerySection';
 import { RsvpWishesSection } from './components/RsvpWishesSection';
 import { ConceptSwitcherDock } from './components/ConceptSwitcherDock';
 import { WhiteMinimalInvitation } from './components/WhiteMinimalInvitation';
+import { AdminGuestModal } from './components/AdminGuestModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,6 +131,7 @@ export function App() {
   const [isGateOpen, setIsGateOpen] = useState<boolean>(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState<boolean>(false);
   const [weddingData, setWeddingData] = useState<WeddingData>(DEFAULT_WEDDING_DATA);
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState<boolean>(false);
 
   // Khởi tạo lời chúc từ localStorage (không tự động sinh dữ liệu mẫu/test)
   const [wishes, setWishes] = useState<WishItem[]>(() => {
@@ -298,6 +300,32 @@ export function App() {
     }).catch(() => {});
   };
 
+  // Cập nhật thông tin khách mời từ Admin (sửa tên, RSVP, lời chúc)
+  const handleUpdateWish = (updatedWish: WishItem) => {
+    setWishes((prev) => {
+      const next = prev.map((w) => (w.id === updatedWish.id ? updatedWish : w));
+      try {
+        window.localStorage.setItem(WISHES_STORAGE_KEY, JSON.stringify(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  };
+
+  // Xóa khách mời khỏi danh sách từ Admin
+  const handleDeleteWish = (id: string) => {
+    setWishes((prev) => {
+      const next = prev.filter((w) => w.id !== id);
+      try {
+        window.localStorage.setItem(WISHES_STORAGE_KEY, JSON.stringify(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  };
+
   const handleResetDefault = () => {
     setWeddingData(DEFAULT_WEDDING_DATA);
     setGuestName('Bạn & Người Thương');
@@ -328,6 +356,7 @@ export function App() {
             isMusicPlaying={isMusicPlaying}
             onToggleMusic={handleToggleMusic}
             guestName={guestName}
+            onOpenAdmin={() => setIsAdminModalOpen(true)}
             onStartMusic={() => {
               if (!soundEngine.getIsPlaying()) {
                 soundEngine.startMusic(0);
@@ -373,6 +402,7 @@ export function App() {
             data={weddingData}
             guestName={guestName}
             hideStyleSwitcher={isLockedSingleStyle}
+            onOpenAdmin={() => setIsAdminModalOpen(true)}
           />
 
           {/* Nội dung chính với hiệu ứng 3D Scrollytelling tối ưu Mobile-First */}
@@ -408,6 +438,16 @@ export function App() {
           />
         </>
       )}
+
+      {/* Modal Quản Trị Khách Mời & RSVP (Mật khẩu: huyducdeptrai) */}
+      <AdminGuestModal
+        isOpen={isAdminModalOpen}
+        onClose={() => setIsAdminModalOpen(false)}
+        wishes={wishes}
+        onAddWish={handleAddWish}
+        onUpdateWish={handleUpdateWish}
+        onDeleteWish={handleDeleteWish}
+      />
     </div>
   );
 }

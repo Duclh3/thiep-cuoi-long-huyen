@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Film, Crown, BookOpen } from 'lucide-react';
+import { Film, Crown, BookOpen, Lock } from 'lucide-react';
 import { StyleId, THEMES, WeddingData } from '../data/weddingData';
 
 interface OpeningGateProps {
@@ -11,6 +11,7 @@ interface OpeningGateProps {
   data: WeddingData;
   guestName: string;
   hideStyleSwitcher?: boolean;
+  onOpenAdmin?: () => void;
 }
 
 /**
@@ -63,6 +64,7 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
   onSelectStyle,
   data,
   hideStyleSwitcher = false,
+  onOpenAdmin,
 }) => {
   const [stage, setStage] = useState<'closed' | 'preview'>('closed');
 
@@ -108,6 +110,21 @@ export const OpeningGate: React.FC<OpeningGateProps> = ({
           className="fixed inset-0 z-50 flex flex-col items-center justify-between overflow-hidden select-none cursor-pointer px-4 py-6 sm:py-8 transition-colors duration-700"
           style={{ background: getScreenBackground() }}
         >
+          {/* Nút Admin kín đáo ngoài màn hình chưa mở thiệp */}
+          {onOpenAdmin && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpenAdmin();
+              }}
+              title="Quản trị"
+              className="cursor-pointer fixed top-3 left-3 z-50 p-2 text-stone-500/25 hover:text-amber-400/80 opacity-25 hover:opacity-100 transition-all rounded-full"
+              aria-label="Admin Login"
+            >
+              <Lock className="w-3.5 h-3.5" />
+            </button>
+          )}
           {/* Họa tiết nền riêng cho từng phong cách */}
           {styleId === 'fairytale' && (
             <div

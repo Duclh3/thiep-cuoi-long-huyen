@@ -180,6 +180,7 @@ export interface WishItem {
   name: string;
   message: string;
   createdAt: string;
+  attendance?: string;
 }
 
 export interface WeddingData {

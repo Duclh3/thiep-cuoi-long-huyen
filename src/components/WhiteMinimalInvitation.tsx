@@ -14,12 +14,14 @@ import {
   Download,
   Gift,
   LockOpen,
+  Lock,
   RotateCcw,
   X,
   Heart,
 } from 'lucide-react';
 import { WeddingData, WishItem } from '../data/weddingData';
 import { soundEngine } from '../utils/soundEngine';
+import { parseWishItem } from '../utils/wishHelper';
 
 interface WhiteMinimalInvitationProps {
   data: WeddingData;
@@ -29,6 +31,7 @@ interface WhiteMinimalInvitationProps {
   onToggleMusic: () => void;
   onStartMusic: () => void;
   guestName?: string;
+  onOpenAdmin?: () => void;
 }
 
 function getInitialGuestName(propName?: string): string {
@@ -194,6 +197,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
   onToggleMusic,
   onStartMusic,
   guestName,
+  onOpenAdmin,
 }) => {
   // Trạng thái mở thiệp: Phải nhấp vào phong bì mới mở khóa toàn bộ nội dung thiệp bên dưới
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
@@ -291,7 +295,8 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
     const newWish: WishItem = {
       id: `wish-${Date.now()}`,
       name: guestInputName.trim(),
-      message: `${guestWish.trim()} — [${attendance}]`,
+      message: guestWish.trim(),
+      attendance: attendance,
       createdAt: formattedTime,
     };
 
@@ -378,6 +383,22 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
 
   return (
     <div className="min-h-screen w-full bg-[#EFECE6] text-[#2B2523] flex justify-center items-start overflow-x-hidden md:py-10 md:px-6">
+      {/* Nút Admin kín đáo ngoài màn hình chưa mở thiệp */}
+      {!isEnvelopeOpen && onOpenAdmin && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenAdmin();
+          }}
+          title="Quản trị"
+          className="cursor-pointer fixed top-3 left-3 z-50 p-2 text-stone-500/25 hover:text-stone-800 opacity-25 hover:opacity-100 transition-all rounded-full"
+          aria-label="Admin Login"
+        >
+          <Lock className="w-3.5 h-3.5" />
+        </button>
+      )}
+
       {/* Khung Thiệp Dọc Chuẩn Mobile-First, Tối Ưu Hiển Thị Sang Trọng Cả Trên Màn Hình Máy Tính */}
       <div
         className={`w-full max-w-[460px] md:max-w-3xl lg:max-w-4xl bg-[#FAF8F5] shadow-[0_0_60px_rgba(0,0,0,0.09)] md:shadow-[0_25px_80px_rgba(43,37,35,0.16)] md:rounded-3xl md:border md:border-[#E5DDD2] relative overflow-hidden transition-all duration-500 ${
@@ -774,7 +795,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                   viewport={{ once: false, amount: 0.3 }}
                   className="font-condensed-minimal text-xs sm:text-sm md:text-base tracking-[0.08em] uppercase text-[#3A302C] leading-relaxed mb-8 max-w-xl mx-auto"
                 >
-                  <p>TRÂN TRỌNG KÍNH MỜI QUÝ KHÁCH</p>
+                  <p>TRÂN TRỌNG KÍNH MỜI BẠN</p>
                   <p>DÀNH THỜI GIAN QUÝ GIÁ THAM DỰ LỄ CƯỚI CỦA</p>
                 </motion.div>
 
@@ -978,7 +999,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                 />
 
                 <p className="font-condensed-minimal text-[11px] sm:text-xs md:text-sm tracking-[0.04em] uppercase text-[#3A302C] leading-relaxed mb-5 pr-12 max-w-xl mx-auto text-center sm:text-left">
-                  HÃY XÁC NHẬN SỰ CÓ MẶT CỦA QUÝ KHÁCH ĐỂ GIA ĐÌNH CHÚNG MÌNH CHUẨN BỊ ĐÓN TIẾP MỘT CÁCH CHU ĐÁO NHẤT. TRÂN TRỌNG!
+                  HÃY XÁC NHẬN SỰ CÓ MẶT CỦA BẠN ĐỂ GIA ĐÌNH CHÚNG MÌNH CHUẨN BỊ ĐÓN TIẾP MỘT CÁCH CHU ĐÁO NHẤT. TRÂN TRỌNG!
                 </p>
 
                 <form onSubmit={handleSubmitForm} className="space-y-3 relative z-20 max-w-xl mx-auto">
@@ -1052,20 +1073,23 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                       LỜI CHÚC TỪ NGƯỜI THƯƠNG ({wishes.length})
                     </p>
                     <div className="max-h-60 overflow-y-auto space-y-2 pr-1">
-                      {wishes.map((w) => (
-                        <div
-                          key={w.id}
-                          className="rounded-xl bg-[#F4EFEA] border border-[#E5DDD3] px-4 py-3 text-left"
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="font-condensed-minimal text-xs uppercase font-medium text-[#2B2523]">
-                              {w.name}
-                            </span>
-                            <span className="text-[10px] text-stone-500">{w.createdAt}</span>
+                      {wishes.map((w) => {
+                        const parsed = parseWishItem(w);
+                        return (
+                          <div
+                            key={w.id}
+                            className="rounded-xl bg-[#F4EFEA] border border-[#E5DDD3] px-4 py-3 text-left"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="font-condensed-minimal text-xs uppercase font-medium text-[#2B2523]">
+                                {parsed.name}
+                              </span>
+                              <span className="text-[10px] text-stone-500">{parsed.createdAt}</span>
+                            </div>
+                            <p className="text-xs text-[#4E433E] mt-1">“{parsed.cleanMessage}”</p>
                           </div>
-                          <p className="text-xs text-[#4E433E] mt-1">“{w.message}”</p>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 )}
@@ -1096,9 +1120,10 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
 
                   <AnimatePresence mode="wait">
                     {!isGiftBoxOpen ? (
-                      /* TRẠNG THÁI 1: HỘP QUÀ 3D ĐÓNG KÍN — ẤN VÀO MỚI BUNG NẮP HIỆN QR */
+                      /* TRẠNG THÁI 1: PHONG BÌ CƯỚI TỐI GIẢN TRẮNG KEM MINI (MINIMAL LINEN ENVELOPE)
+                         Kích thước nhỏ gọn, thanh thoát, hoàn toàn phù hợp với Tone Trắng Minimal */
                       <motion.div
-                        key="minimal-closed-gift-box"
+                        key="minimal-closed-gift-envelope"
                         initial={{ opacity: 0, scale: 0.92, y: 14 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{
@@ -1107,10 +1132,10 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                           filter: 'blur(4px)',
                           transition: { duration: 0.35 },
                         }}
-                        className="relative flex flex-col items-center justify-center py-3 select-none"
+                        className="relative flex flex-col items-center justify-center py-2 select-none"
                       >
-                        {/* Hào quang ấm áp phía sau hộp quà */}
-                        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full bg-gradient-to-r from-amber-300/25 via-rose-300/20 to-amber-400/25 blur-2xl animate-pulse" />
+                        {/* Hào quang ấm áp dịu nhẹ phía sau */}
+                        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-gradient-to-r from-amber-200/30 via-rose-100/25 to-amber-300/30 blur-2xl animate-pulse" />
 
                         <motion.div
                           onClick={handleOpenGiftBox}
@@ -1118,55 +1143,49 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                           whileTap={{ scale: 0.96 }}
                           animate={
                             isBoxUnwrapping
-                              ? { rotate: [0, -3, 3, -4, 4, 0], scale: [1, 1.05, 1.1] }
-                              : { y: [0, -6, 0] }
+                              ? { rotate: [0, -2, 2, -3, 3, 0], scale: [1, 1.04, 1.08] }
+                              : { y: [0, -5, 0] }
                           }
                           transition={
                             isBoxUnwrapping
-                              ? { duration: 0.55 }
+                              ? { duration: 0.5 }
                               : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
                           }
-                          className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[250px] sm:max-w-[270px] group"
+                          className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[210px] sm:max-w-[225px] group"
                         >
-                          {/* 1. Nơ lụa vàng kim 3D trên đỉnh */}
-                          <MinimalSilkBow3D isUnwrapping={isBoxUnwrapping} />
-
-                          {/* 2. Nắp hộp quà 3D */}
-                          <motion.div
-                            animate={
-                              isBoxUnwrapping
-                                ? { y: -65, rotateX: 45, rotateZ: -6, scale: 1.08, opacity: 0 }
-                                : { y: 0, rotateX: 0, rotateZ: 0, scale: 1, opacity: 1 }
-                            }
-                            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                            style={{
-                              background:
-                                'linear-gradient(135deg, #7A2032 0%, #561321 55%, #360913 100%)',
-                            }}
-                            className="relative z-20 w-[106%] h-12 rounded-2xl border-2 border-[#F5D77F] shadow-[0_12px_26px_rgba(45,10,18,0.4)] flex items-center justify-center overflow-hidden"
-                          >
-                            <div className="pointer-events-none absolute inset-1.5 rounded-xl border border-[#FDE68A]/35" />
-                            <div className="pointer-events-none absolute inset-x-0 h-2.5 bg-gradient-to-r from-[#B88728] via-[#FFF2B2] to-[#B88728] opacity-85" />
-                            <div className="pointer-events-none relative z-10 w-9 h-full bg-gradient-to-r from-[#B88728] via-[#FFF4C2] to-[#B88728] border-x border-white/50 shadow-md" />
-                          </motion.div>
-
-                          {/* 3. Thân hộp quà 3D tinh gọn — chỉ có nút hướng dẫn chạm để mở */}
+                          {/* VỎ PHONG BÌ CƯỚI TRẮNG KEM TINH TẾ */}
                           <div
-                            style={{
-                              background:
-                                'linear-gradient(160deg, #6B1A2A 0%, #480F1B 55%, #2B070E 100%)',
-                            }}
-                            className="relative z-10 w-full h-44 rounded-b-[26px] rounded-t-[6px] border-2 border-t-0 border-[#F5D77F] p-5 shadow-[0_22px_50px_rgba(45,10,18,0.38)] flex flex-col items-center justify-center overflow-hidden"
+                            className="relative w-full h-34 sm:h-38 rounded-2xl border border-[#DFD5C8] p-3.5 shadow-[0_14px_35px_rgba(43,37,35,0.08)] flex flex-col items-center justify-between overflow-hidden bg-gradient-to-br from-[#FFFEFC] via-[#FAF7F2] to-[#F2EDE4] transition-all duration-300 group-hover:border-[#C4B5A2]"
                           >
-                            <div className="pointer-events-none absolute inset-2 rounded-[18px] border border-[#FDE68A]/35" />
-                            {/* Ruy-băng dọc & ngang */}
-                            <div className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-9 bg-gradient-to-r from-[#B88728] via-[#FFF4C2] to-[#B88728] border-x border-white/50 shadow-md" />
-                            <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 h-7 bg-gradient-to-b from-[#B88728] via-[#FFF4C2] to-[#B88728] border-y border-white/40 shadow-md" />
+                            {/* Khung viền góc giấy mỹ thuật */}
+                            <div className="pointer-events-none absolute inset-1.5 rounded-xl border border-[#DFD5C8]/50" />
+                            <span className="pointer-events-none absolute top-2.5 left-2.5 w-2 h-2 border-t border-l border-[#A69784]/60" />
+                            <span className="pointer-events-none absolute top-2.5 right-2.5 w-2 h-2 border-t border-r border-[#A69784]/60" />
+                            <span className="pointer-events-none absolute bottom-2.5 left-2.5 w-2 h-2 border-b border-l border-[#A69784]/60" />
+                            <span className="pointer-events-none absolute bottom-2.5 right-2.5 w-2 h-2 border-b border-r border-[#A69784]/60" />
 
-                            {/* Nút hướng dẫn ấn để mở */}
-                            <div className="relative z-20 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FFF6D6] via-[#FDE68A] to-[#F59E0B] text-stone-950 font-condensed-minimal text-xs font-medium tracking-[0.12em] uppercase shadow-[0_10px_25px_rgba(0,0,0,0.45)] border-2 border-white group-hover:scale-105 transition-transform">
-                              <LockOpen className="w-3.5 h-3.5 text-amber-950 animate-bounce shrink-0" />
-                              <span>CHẠM ĐỂ MỞ HỘP QUÀ</span>
+                            {/* Nắp phong bì chữ V gập nhẹ trên đỉnh */}
+                            <div className="pointer-events-none absolute top-0 inset-x-0 h-6 overflow-hidden">
+                              <svg viewBox="0 0 100 24" className="w-full h-full" preserveAspectRatio="none">
+                                <polygon points="0,0 100,0 50,22" fill="#F4EFEA" stroke="#DFD5C8" strokeWidth="0.8" />
+                              </svg>
+                            </div>
+
+                            {/* Con dấu sáp vàng cánh bướm nhỏ nhắn ở tâm */}
+                            <div className="relative z-10 my-auto flex flex-col items-center">
+                              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#FFF6D1] via-[#E5B85B] to-[#9A6D15] p-0.5 shadow-md border border-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                                <div className="w-full h-full rounded-full bg-[#5E1420] flex items-center justify-center text-[#FDE68A]">
+                                  <Heart className="w-4 h-4 fill-current animate-pulse" />
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Nút hướng dẫn mở nhỏ gọn phong cách tối giản */}
+                            <div className="relative z-10 w-full flex items-center justify-center">
+                              <div className="px-3 py-1 rounded-full bg-[#3A302C] text-[#FAF8F5] flex items-center gap-1.5 font-condensed-minimal text-[10px] sm:text-[11px] tracking-wider uppercase shadow-sm group-hover:bg-[#1C1C1C] transition-colors">
+                                <LockOpen className="w-3 h-3 text-[#FDE68A] shrink-0" />
+                                <span>CHẠM ĐỂ MỞ QR</span>
+                              </div>
                             </div>
                           </div>
                         </motion.div>
@@ -1294,7 +1313,7 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     Lời cảm ơn!
                   </h2>
                   <p className="font-condensed-minimal text-[11px] sm:text-xs md:text-sm tracking-[0.04em] uppercase text-[#2B2523] leading-relaxed">
-                    CẢM ƠN QUÝ KHÁCH ĐÃ DÀNH TÌNH CẢM CHO GIA ĐÌNH CHÚNG MÌNH! SỰ HIỆN DIỆN CỦA QUÝ KHÁCH CHÍNH LÀ MÓN QUÀ Ý NGHĨA NHẤT, GIA ĐÌNH CHÚNG MÌNH VÔ CÙNG TRÂN QUÝ KHI ĐƯỢC CÙNG QUÝ KHÁCH CHIA SẺ NIỀM HẠNH PHÚC TRONG NGÀY TRỌNG ĐẠI NÀY.
+                    CẢM ƠN BẠN ĐÃ DÀNH TÌNH CẢM CHO GIA ĐÌNH CHÚNG MÌNH! SỰ HIỆN DIỆN CỦA BẠN CHÍNH LÀ MÓN QUÀ Ý NGHĨA NHẤT, GIA ĐÌNH CHÚNG MÌNH VÔ CÙNG TRÂN QUÝ KHI ĐƯỢC CÙNG BẠN CHIA SẺ NIỀM HẠNH PHÚC TRONG NGÀY TRỌNG ĐẠI NÀY.
                   </p>
                 </div>
               </section>
