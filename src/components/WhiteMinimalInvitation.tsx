@@ -8,7 +8,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-  MoreHorizontal,
   Check,
   Copy,
   Download,
@@ -405,13 +404,11 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
           isEnvelopeOpen ? 'pb-10' : 'min-h-[100dvh] md:min-h-[780px] flex flex-col justify-center'
         }`}
       >
-        {/* Thanh Tiêu Đề Mảnh Trên Đỉnh Giống Hệt Video */}
-        <div className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200/80 px-4 md:px-8 py-3 flex items-center justify-between text-[#2B2523]">
-          <ChevronLeft className="w-4 h-4 opacity-60 shrink-0" />
-          <span className="font-condensed-minimal text-xs sm:text-sm md:text-base tracking-[0.1em] uppercase font-normal truncate px-2">
+        {/* Thanh Tiêu Đề Mảnh Trên Đỉnh Căn Giữa Tối Giản */}
+        <div className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200/80 px-4 md:px-8 py-3 flex items-center justify-center text-[#2B2523]">
+          <span className="font-condensed-minimal text-xs sm:text-sm md:text-base tracking-[0.12em] uppercase font-normal truncate px-2 text-center">
             THIỆP MỜI CƯỚI {data.groom.shortName} &amp; {data.bride.shortName}
           </span>
-          <MoreHorizontal className="w-4 h-4 opacity-60 shrink-0" />
         </div>
 
         {/* =====================================================================
