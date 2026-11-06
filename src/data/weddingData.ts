@@ -492,7 +492,7 @@ export const DUC_HAU_WEDDING_DATA: WeddingData = {
   },
   sectionImages: {
     hero: imgPath('/images/duc-hau/envelope-couple.jpg'),
-    envelopePolaroid: imgPath('/images/duc-hau/envelope-couple.jpg'),
+    envelopePolaroid: imgPath('/images/duc-hau/couple-hero.jpg'),
     kissPhoto: imgPath('/images/duc-hau/kiss-savedate.jpg'),
     heroLeftFloat: imgPath('/images/duc-hau/couple-hero.jpg'),
     heroRightFloat: imgPath('/images/duc-hau/DSC_8556.jpg'),

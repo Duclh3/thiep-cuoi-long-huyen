@@ -106,10 +106,10 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
 
     for (let i = 0; i < count; i++) {
       if (styleId === 'fairytale') {
-        // Phong cách 01 (Fine Art): Trái tim lụa hồng + Cánh hoa đào + Bướm vàng vỗ cánh
-        const rand = i % 7;
+        // Phong cách 01 (Fine Art): Cánh hoa đào + Bướm vàng vỗ cánh + Bụi sao
+        const rand = i % 6;
         const kind: AmbientParticleKind =
-          rand === 0 ? 'butterfly' : rand % 2 === 0 ? 'heart' : 'petal';
+          rand === 0 ? 'butterfly' : rand % 2 === 0 ? 'diamond-star' : 'petal';
         particles.push({
           kind,
           x: Math.random() * width,
@@ -184,8 +184,8 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
           alpha: 0.85,
         });
       } else if (styleId === 'calla') {
-        // Phong cách 07 (Calla Đỏ Bordeaux): Cánh hoa hồng nhung đỏ bordeaux + bụi vàng kim 24K + trái tim
-        const kind: AmbientParticleKind = i % 3 === 0 ? 'diamond-star' : i % 2 === 0 ? 'heart' : 'petal';
+        // Phong cách 07 (Calla Đỏ Bordeaux): Cánh hoa hồng nhung đỏ bordeaux + bụi vàng kim 24K (KHÔNG có trái tim đè mặt dâu rể)
+        const kind: AmbientParticleKind = i % 3 === 0 ? 'diamond-star' : 'petal';
         particles.push({
           kind,
           x: Math.random() * width,
@@ -372,7 +372,7 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
             decay: 0.012 + Math.random() * 0.006,
             color: callaPalette[i % callaPalette.length],
             size: Math.random() * 3.6 + 2.2,
-            shape: 'heart',
+            shape: 'star',
             gravity: 0.05,
           });
         }
@@ -381,7 +381,7 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
           y: cy,
           alpha: 1,
           scale: 0.65,
-          text: '♥',
+          text: '✨',
           color: '#D4AF37',
         });
       } else {
@@ -531,10 +531,16 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
         ctx.globalAlpha = p.alpha;
 
         if (p.kind === 'heart') {
+          // Thay thế hoàn toàn hình trái tim bằng cánh hoa nhẹ nhàng để không che mặt dâu rể
           ctx.translate(p.x, p.y);
-          ctx.rotate(Math.sin(p.phase) * 0.35);
-          ctx.scale(Math.max(0.35, Math.abs(Math.cos(p.phase * 0.7))), 1);
-          drawHeart(0, 0, p.size * 1.35, p.color);
+          ctx.rotate(p.angle);
+          ctx.scale(1, Math.max(0.25, Math.abs(Math.cos(p.phase))));
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.bezierCurveTo(p.size, -p.size * 0.9, p.size * 1.5, p.size * 0.5, 0, p.size * 1.45);
+          ctx.bezierCurveTo(-p.size * 1.5, p.size * 0.5, -p.size, -p.size * 0.9, 0, 0);
+          ctx.fill();
         } else if (p.kind === 'petal') {
           ctx.translate(p.x, p.y);
           ctx.rotate(p.angle);
@@ -680,9 +686,7 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
         ctx.shadowColor = s.color;
         ctx.shadowBlur = 8;
 
-        if (s.shape === 'heart') {
-          drawHeart(s.x, s.y, s.size * 2.2, s.color);
-        } else if (s.shape === 'star') {
+        if (s.shape === 'heart' || s.shape === 'star') {
           drawFourPointStar(s.x, s.y, s.size * 1.6, s.color);
         } else if (s.shape === 'trail') {
           ctx.strokeStyle = s.color;

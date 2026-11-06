@@ -1030,45 +1030,56 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
             </section>
 
             {/* =====================================================================
-                PHẦN 8: LỜI CẢM ƠN (THANK YOU - NỀN ẢNH CÔNG CHÚA HOA LỘNG LẪY)
+                PHẦN 8: LỜI CẢM ƠN (THANK YOU) - TÁCH BIỆT ẢNH CÔNG CHÚA VÀ THIỆP CẢM ƠN
                ===================================================================== */}
-            <section className="relative overflow-hidden rounded-3xl mx-4 sm:mx-8 my-6 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-2 border-white/80 group">
-              <div className="relative w-full min-h-[380px] sm:min-h-[440px] flex items-end justify-center pb-8 pt-20 px-6 sm:px-10">
+            <section className="px-4 sm:px-8 space-y-4 my-6">
+              {/* 1. KHUNG ẢNH CƯỚI CÔNG CHÚA NGUYÊN VẸN 100% - KHÔNG BỊ CHỮ CHE KHUẤT */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                onClick={() => setLightboxUrl(data.sectionImages.thankYouBg)}
+                className="cursor-zoom-in relative w-full aspect-[3/3.8] sm:aspect-[4/4.5] rounded-3xl overflow-hidden shadow-[0_20px_45px_rgba(80,14,30,0.25)] border-2 border-white group"
+              >
                 <img
                   src={data.sectionImages.thankYouBg}
-                  alt="Lời Cảm Ơn"
-                  className="absolute inset-0 w-full h-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
+                  alt="Ảnh cưới công chúa Đức & Hậu"
+                  className="w-full h-full object-cover object-[center_35%] transition-transform duration-700 group-hover:scale-105"
                 />
-                {/* Lớp phủ chuyển sắc nghệ thuật */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/45 to-black/15 backdrop-blur-[0.5px]" />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="px-4 py-1.5 rounded-full bg-black/60 text-white text-xs font-serif-luxury">
+                    Chạm để xem ảnh đầy đủ
+                  </span>
+                </div>
+              </motion.div>
 
-                {/* Khối thiệp cảm ơn nổi bật sang trọng */}
-                <motion.div
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
-                  className="relative z-10 text-center max-w-md mx-auto p-5 sm:p-6 rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.3)] text-white"
-                >
-                  <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-white/20 flex items-center justify-center border border-white/40">
-                    <Heart className="w-5 h-5 text-[#FFE082] fill-current" />
-                  </div>
-                  <h4 className="font-script-luxury text-4xl sm:text-5xl text-[#FFF3D6] mb-2 drop-shadow-md">
-                    Lời cảm ơn!
-                  </h4>
-                  <p className="font-serif-italic text-xs sm:text-sm leading-relaxed text-white/95 drop-shadow-sm">
-                    {data.thankYouText.message}
+              {/* 2. THIỆP LỜI CẢM ƠN TRANG TRỌNG NẰM NGAY BÊN DƯỚI */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.15 }}
+                className="text-center p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#F9F1F4] via-[#F4E3E9] to-[#EAD4DC] border border-[#E2BAC8] shadow-[0_12px_32px_rgba(80,14,30,0.12)] max-w-lg mx-auto"
+              >
+                <div className="w-9 h-9 mx-auto mb-2 rounded-full bg-[#7D1E3A]/10 flex items-center justify-center border border-[#C991A5]/50">
+                  <Heart className="w-4 h-4 text-[#7D1E3A] fill-current" />
+                </div>
+                <h4 className="font-script-luxury text-4xl sm:text-5xl text-[#7D1E3A] mb-2.5 drop-shadow-xs">
+                  Lời cảm ơn!
+                </h4>
+                <p className="font-serif-italic text-xs sm:text-sm leading-relaxed text-[#593944] max-w-md mx-auto">
+                  {data.thankYouText.message}
+                </p>
+                <div className="mt-4 pt-3.5 border-t border-[#C991A5]/30 flex flex-col items-center">
+                  <p className="font-serif-luxury text-xs sm:text-sm tracking-[0.24em] text-[#7D1E3A] font-semibold uppercase">
+                    {data.groom.shortName} &amp; {data.bride.shortName}
                   </p>
-                  <div className="mt-4 pt-3 border-t border-white/25 flex flex-col items-center">
-                    <p className="font-serif-luxury text-xs sm:text-sm tracking-[0.24em] text-[#FFE082] font-semibold uppercase drop-shadow-sm">
-                      {data.groom.shortName} &amp; {data.bride.shortName}
-                    </p>
-                    <p className="font-serif-luxury text-[10px] tracking-[0.16em] text-white/75 uppercase mt-0.5">
-                      Forever &amp; Always • 03.03.2024
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
+                  <p className="font-serif-luxury text-[10px] tracking-[0.16em] text-[#8C3A50] uppercase mt-0.5">
+                    Forever &amp; Always • 03.03.2024
+                  </p>
+                </div>
+              </motion.div>
             </section>
           </motion.div>
         )}
