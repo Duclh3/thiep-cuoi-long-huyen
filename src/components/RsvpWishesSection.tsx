@@ -473,7 +473,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                         ? { duration: 0.5 }
                         : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }
                     }
-                    className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[210px] sm:max-w-[225px] group"
+                    className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[240px] sm:max-w-[260px] group"
                   >
                     {/* Luồng sáng lóe lên khi mở */}
                     <AnimatePresence>
@@ -489,7 +489,7 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
 
                     {/* VỎ HỘP / PHONG BAO MỪNG CƯỚI TINH GỌN THEO TỪNG STYLE */}
                     <div
-                      className="relative w-full h-34 sm:h-38 rounded-2xl border border-amber-300/40 p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.6)] flex flex-col items-center justify-between overflow-hidden transition-all duration-300 group-hover:border-amber-300/70"
+                      className="relative w-full h-36 sm:h-40 rounded-2xl border border-amber-300/40 p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.6)] flex flex-col items-center justify-between overflow-hidden transition-all duration-300 group-hover:border-amber-300/70"
                       style={{
                         background:
                           styleId === 'editorial'
@@ -551,19 +551,11 @@ export const RsvpWishesSection: React.FC<RsvpWishesSectionProps> = ({
                         )}
                       </div>
 
-                      {/* NÚT / DÒNG CHỮ CHẠM ĐỂ MỞ NHỎ GỌN TRANG NHÃ */}
-                      <div className="relative z-10 w-full flex items-center justify-center">
-                        <div className="px-3 py-1 rounded-full bg-black/45 border border-amber-300/40 text-amber-200 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium tracking-wide shadow-sm group-hover:bg-amber-300 group-hover:text-stone-950 transition-colors">
-                          <LockOpen className="w-3 h-3 shrink-0" />
-                          <span>
-                            {styleId === 'indochine'
-                              ? 'Song Hỷ Lâm Môn • Mở QR'
-                              : styleId === 'editorial'
-                              ? 'Vogue Gift • Mở QR'
-                              : styleId === 'cinematic'
-                              ? 'Hộp Quà Ánh Sao • Mở QR'
-                              : 'Hộp Quà Mừng Cưới • Mở QR'}
-                          </span>
+                      {/* NÚT / DÒNG CHỮ CHẠM ĐỂ MỞ NHỎ GỌN CĂN GIỮA HOÀN HẢO */}
+                      <div className="relative z-10 w-full flex items-center justify-center pt-1">
+                        <div className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/60 border border-amber-300/50 text-amber-200 text-xs font-serif-luxury italic whitespace-nowrap shadow-sm group-hover:bg-amber-300 group-hover:text-stone-950 transition-colors text-center">
+                          <LockOpen className="w-3.5 h-3.5 shrink-0" />
+                          <span className="whitespace-nowrap font-semibold">Chạm Để Mở Mã QR</span>
                         </div>
                       </div>
                     </div>

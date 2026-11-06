@@ -1151,11 +1151,11 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                               ? { duration: 0.5 }
                               : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
                           }
-                          className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[210px] sm:max-w-[225px] group"
+                          className="cursor-pointer relative z-20 flex flex-col items-center w-full max-w-[240px] sm:max-w-[260px] group"
                         >
                           {/* VỎ PHONG BÌ CƯỚI TRẮNG KEM TINH TẾ */}
                           <div
-                            className="relative w-full h-34 sm:h-38 rounded-2xl border border-[#DFD5C8] p-3.5 shadow-[0_14px_35px_rgba(43,37,35,0.08)] flex flex-col items-center justify-between overflow-hidden bg-gradient-to-br from-[#FFFEFC] via-[#FAF7F2] to-[#F2EDE4] transition-all duration-300 group-hover:border-[#C4B5A2]"
+                            className="relative w-full h-36 sm:h-40 rounded-2xl border border-[#DFD5C8] p-3.5 shadow-[0_14px_35px_rgba(43,37,35,0.08)] flex flex-col items-center justify-between overflow-hidden bg-gradient-to-br from-[#FFFEFC] via-[#FAF7F2] to-[#F2EDE4] transition-all duration-300 group-hover:border-[#C4B5A2]"
                           >
                             {/* Khung viền góc giấy mỹ thuật */}
                             <div className="pointer-events-none absolute inset-1.5 rounded-xl border border-[#DFD5C8]/50" />
@@ -1180,11 +1180,11 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                               </div>
                             </div>
 
-                            {/* Nút hướng dẫn mở nhỏ gọn phong cách tối giản */}
-                            <div className="relative z-10 w-full flex items-center justify-center">
-                              <div className="px-3 py-1 rounded-full bg-[#3A302C] text-[#FAF8F5] flex items-center gap-1.5 font-condensed-minimal text-[10px] sm:text-[11px] tracking-wider uppercase shadow-sm group-hover:bg-[#1C1C1C] transition-colors">
-                                <LockOpen className="w-3 h-3 text-[#FDE68A] shrink-0" />
-                                <span>CHẠM ĐỂ MỞ QR</span>
+                            {/* Nút hướng dẫn mở nhỏ gọn phong cách tối giản căn giữa hoàn hảo */}
+                            <div className="relative z-10 w-full flex items-center justify-center pt-1">
+                              <div className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#3A302C] text-[#FAF8F5] font-condensed-minimal text-[11px] sm:text-xs tracking-wider uppercase whitespace-nowrap shadow-sm group-hover:bg-[#1C1C1C] transition-colors text-center">
+                                <LockOpen className="w-3.5 h-3.5 text-[#FDE68A] shrink-0" />
+                                <span className="whitespace-nowrap font-medium">CHẠM ĐỂ MỞ MÃ QR</span>
                               </div>
                             </div>
                           </div>
