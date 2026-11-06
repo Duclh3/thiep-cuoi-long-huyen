@@ -238,6 +238,8 @@ export interface WeddingData {
     birthYear: string;
     avatar: string;
     secondaryPhoto: string;
+    fatherName?: string;
+    motherName?: string;
   };
   bride: {
     fullName: string;
@@ -245,6 +247,8 @@ export interface WeddingData {
     birthYear: string;
     avatar: string;
     secondaryPhoto: string;
+    fatherName?: string;
+    motherName?: string;
   };
   weddingDate: {
     isoDate: string;
@@ -461,15 +465,19 @@ export const DUC_HAU_WEDDING_DATA: WeddingData = {
     fullName: 'Lê Huy Đức',
     shortName: 'Huy Đức',
     birthYear: '2000',
-    avatar: imgPath('/images/duc-hau/DSC_8336.jpg'),
+    avatar: imgPath('/images/duc-hau/groom-avatar.jpg'),
     secondaryPhoto: imgPath('/images/duc-hau/DSC_8610.jpg'),
+    fatherName: 'Lê Minh Hải',
+    motherName: 'Đỗ Thị Vân Lĩnh',
   },
   bride: {
     fullName: 'Phan Thị Hậu',
     shortName: 'Phan Hậu',
     birthYear: '2000',
-    avatar: imgPath('/images/duc-hau/DSC_8255.jpg'),
+    avatar: imgPath('/images/duc-hau/bride-avatar.jpg'),
     secondaryPhoto: imgPath('/images/duc-hau/DSC_8483.jpg'),
+    fatherName: 'Phan Văn Đồng',
+    motherName: 'Trịnh Thị Nga',
   },
   weddingDate: {
     isoDate: '2024-03-03T11:00:00',
@@ -483,10 +491,10 @@ export const DUC_HAU_WEDDING_DATA: WeddingData = {
     heroSubHeadline: 'Sự hiện diện của bạn là niềm vinh dự lớn đối với gia đình chúng mình!',
   },
   sectionImages: {
-    hero: imgPath('/images/duc-hau/DSC_8278.jpg'),
-    envelopePolaroid: imgPath('/images/duc-hau/DSC_8278.jpg'),
-    kissPhoto: imgPath('/images/duc-hau/DSC_8802.jpg'),
-    heroLeftFloat: imgPath('/images/duc-hau/DSC_8236.jpg'),
+    hero: imgPath('/images/duc-hau/couple-hero.jpg'),
+    envelopePolaroid: imgPath('/images/duc-hau/couple-hero.jpg'),
+    kissPhoto: imgPath('/images/duc-hau/couple-hero.jpg'),
+    heroLeftFloat: imgPath('/images/duc-hau/couple-hero.jpg'),
     heroRightFloat: imgPath('/images/duc-hau/DSC_8556.jpg'),
     countdown: imgPath('/images/duc-hau/DSC_8854.jpg'),
     loveStoryBg: imgPath('/images/duc-hau/DSC_8947.jpg'),
@@ -546,16 +554,20 @@ export const DUC_HAU_WEDDING_DATA: WeddingData = {
     ],
   },
   carousel3DImages: [
+    { id: 'dh0', url: imgPath('/images/duc-hau/couple-hero.jpg'), caption: 'Hạnh phúc đong đầy' },
     { id: 'dh1', url: imgPath('/images/duc-hau/DSC_8236.jpg'), caption: 'Phút giây chạm mắt' },
-    { id: 'dh2', url: imgPath('/images/duc-hau/DSC_8255.jpg'), caption: 'Nàng thơ của anh' },
+    { id: 'dh2', url: imgPath('/images/duc-hau/bride-avatar.jpg'), caption: 'Nàng thơ của anh' },
     { id: 'dh3', url: imgPath('/images/duc-hau/DSC_8278.jpg'), caption: 'We Are Getting Married' },
-    { id: 'dh4', url: imgPath('/images/duc-hau/DSC_8336.jpg'), caption: 'Chú rể bảnh bao' },
+    { id: 'dh4', url: imgPath('/images/duc-hau/groom-avatar.jpg'), caption: 'Chú rể bảnh bao' },
     { id: 'dh5', url: imgPath('/images/duc-hau/DSC_8556.jpg'), caption: 'Khúc ca tình yêu' },
     { id: 'dh6', url: imgPath('/images/duc-hau/DSC_8802.jpg'), caption: 'Nụ hôn nguyện ước' },
     { id: 'dh7', url: imgPath('/images/duc-hau/DSC_8947.jpg'), caption: 'Bình yên bên em' },
     { id: 'dh8', url: imgPath('/images/duc-hau/DSC_9072.jpg'), caption: 'Mãi mãi bên nhau' },
   ],
   album9Images: [
+    { id: 'alb-dh-0', url: imgPath('/images/duc-hau/couple-hero.jpg'), alt: 'Huy Đức & Phan Hậu - Trái Tim Ngọt Ngào' },
+    { id: 'alb-dh-bride', url: imgPath('/images/duc-hau/bride-avatar.jpg'), alt: 'Phan Thị Hậu - Cô Dâu Xinh Đẹp' },
+    { id: 'alb-dh-groom', url: imgPath('/images/duc-hau/groom-avatar.jpg'), alt: 'Lê Huy Đức - Chú Rể Lịch Lãm' },
     { id: 'alb-dh-1', url: imgPath('/images/duc-hau/DSC_8278.jpg'), alt: 'Huy Đức & Phan Hậu - Ảnh 1' },
     { id: 'alb-dh-2', url: imgPath('/images/duc-hau/DSC_8236.jpg'), alt: 'Huy Đức & Phan Hậu - Ảnh 2' },
     { id: 'alb-dh-3', url: imgPath('/images/duc-hau/DSC_8556.jpg'), alt: 'Huy Đức & Phan Hậu - Ảnh 3' },

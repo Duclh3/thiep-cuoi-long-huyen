@@ -28,6 +28,8 @@ import {
 import { WeddingData, WishItem } from '../data/weddingData';
 import { soundEngine } from '../utils/soundEngine';
 import { AmbientCanvas } from './AmbientCanvas';
+import { CrochetLaceMirrorFrame } from './CrochetLaceMirrorFrame';
+import { LuxuryWeddingEnvelope } from './LuxuryWeddingEnvelope';
 
 interface GardenEmeraldInvitationProps {
   data: WeddingData;
@@ -417,224 +419,21 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
         </div>
 
         {/* =====================================================================
-            PHẦN 1: PHONG BÌ 3D TƯƠNG TÁC MỞ ĐẦU (GARDEN EMERALD 3D ENVELOPE)
-            Mô phỏng 100% video mẫu 1: Chạm sáp -> Nắp mở 3D -> Thiệp & Polaroid trồi lên -> Countdown Begins in
+            PHẦN 1: PHONG BÌ 3D TƯƠNG TÁC MỞ ĐẦU (GARDEN EMERALD 3D LUXURY ENVELOPE)
+            Mô phỏng 100% video mẫu 1: Chạm sáp -> Nắp mở 3D -> Dải 2 ảnh cưới Polaroid + Thiệp trồi lên -> Countdown
            ===================================================================== */}
-        <section
-          className={`relative w-full flex flex-col items-center justify-center transition-all duration-700 px-4 sm:px-6 ${
-            isEnvelopeOpen ? 'py-8 border-b border-[#E0E8DE]' : 'py-12 my-auto'
-          }`}
-        >
-          {/* Lời Mời Trang Trọng & Tên Khách Mời */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-6 sm:mb-8"
-          >
-            <p className="font-serif-luxury text-xs sm:text-sm uppercase tracking-[0.24em] text-[#44684E] mb-2 font-medium">
-              TRÂN TRỌNG KÍNH MỜI
-            </p>
-            <p className="font-script-luxury text-3xl sm:text-4xl md:text-5xl text-[#2D5A3A]">
-              {guestName || 'Bạn & Người Thương'}
-            </p>
-          </motion.div>
-
-          {/* VỎ PHONG BÌ 3D MÀU TRẮNG KEM REN HOA (EMERALD WAX SEAL) */}
-          <div
-            onClick={handleOpenEnvelope}
-            className="cursor-pointer relative w-[295px] sm:w-[335px] h-[198px] sm:h-[220px] my-3 select-none group"
-            style={{ perspective: '1200px' }}
-          >
-            {/* Chùm hoa trắng & lá xanh góc trên trái phong bì (frame_001) */}
-            <WhiteCallaBouquetDecoration className="absolute -top-12 -left-8 z-30 -rotate-6" />
-
-            {/* Chùm hoa calla trắng & ren góc dưới phải (frame_002) */}
-            {isEnvelopeOpen && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="absolute -bottom-14 -right-8 z-30"
-              >
-                <WhiteCallaBouquetDecoration className="rotate-12" />
-              </motion.div>
-            )}
-
-            {/* Nền mặt trong phong bì */}
-            <div
-              className="absolute inset-0 rounded-lg shadow-[0_18px_45px_rgba(25,50,30,0.18)] border border-[#E3ECE3]"
-              style={{ background: 'linear-gradient(180deg, #F3F7F3 0%, #E6EFE6 100%)' }}
-            />
-
-            {/* THIỆP OVAL & 2 TẤM POLAROID TRỒI LÊN TỪ TRONG PHONG BÌ KHI MỞ (GIỐNG HỆT FRAME 002) */}
-            <AnimatePresence>
-              {isEnvelopeOpen && (
-                <>
-                  {/* Polaroid 1 (Nụ hôn dâu rể) trồi lệch sang trái */}
-                  <motion.div
-                    key="garden-polaroid-1"
-                    initial={{ y: 30, x: -10, rotate: 0, opacity: 0, scale: 0.8 }}
-                    animate={{ y: -65, x: -75, rotate: -8, opacity: 1, scale: 1 }}
-                    exit={{ y: 20, opacity: 0 }}
-                    transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute left-1/2 top-2 -translate-x-1/2 z-15 w-[125px] sm:w-[138px] bg-white p-1.5 pb-4 shadow-[0_12px_26px_rgba(0,0,0,0.18)] border border-stone-200"
-                  >
-                    <div className="aspect-[3/3.6] w-full overflow-hidden bg-stone-100">
-                      <img
-                        src={data.sectionImages.kissPhoto}
-                        alt="Đức & Hậu"
-                        className="w-full h-full object-cover object-[center_24%]"
-                      />
-                    </div>
-                    <p className="font-script-luxury text-base text-[#2D5A3A] text-center mt-1 leading-none">
-                      Đức &amp; Hậu
-                    </p>
-                  </motion.div>
-
-                  {/* Polaroid 2 (Chân dung) trồi lệch nhẹ */}
-                  <motion.div
-                    key="garden-polaroid-2"
-                    initial={{ y: 30, x: 0, rotate: 0, opacity: 0, scale: 0.8 }}
-                    animate={{ y: -58, x: -28, rotate: -3, opacity: 1, scale: 1 }}
-                    exit={{ y: 20, opacity: 0 }}
-                    transition={{ duration: 0.8, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute left-1/2 top-2 -translate-x-1/2 z-16 w-[125px] sm:w-[138px] bg-white p-1.5 pb-4 shadow-[0_12px_26px_rgba(0,0,0,0.18)] border border-stone-200"
-                  >
-                    <div className="aspect-[3/3.6] w-full overflow-hidden bg-stone-100">
-                      <img
-                        src={data.sectionImages.hero}
-                        alt="03.03.2024"
-                        className="w-full h-full object-cover object-[center_20%]"
-                      />
-                    </div>
-                    <p className="font-serif-luxury text-[10px] tracking-wider text-[#3E6B47] text-center mt-1.5 leading-none">
-                      03.03.2024
-                    </p>
-                  </motion.div>
-
-                  {/* Thiệp Oval "SAVE THE DATE" Trồi Lên Ở Giữa Lệch Phải (frame_002) */}
-                  <motion.div
-                    key="garden-open-oval-card"
-                    initial={{ y: 35, x: 15, scale: 0.85, opacity: 0 }}
-                    animate={{ y: -62, x: 55, scale: 1, opacity: 1 }}
-                    exit={{ y: 20, opacity: 0 }}
-                    transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute left-1/2 top-2 -translate-x-1/2 z-18 w-[145px] sm:w-[160px] rounded-[50%/42%] bg-gradient-to-b from-white via-[#FAFDFB] to-[#EEF7F0] p-3 border-2 border-dashed border-[#83C294] shadow-[0_14px_30px_rgba(30,70,40,0.18)] flex flex-col items-center text-center"
-                  >
-                    <p className="font-serif-luxury text-[9px] uppercase tracking-[0.2em] text-[#44684E]">
-                      SAVE THE DATE
-                    </p>
-                    <p className="font-serif-luxury font-bold text-xs text-[#2D5A3A] my-0.5">
-                      03 | 03 | 2024
-                    </p>
-                    <p className="font-script-luxury text-xl text-[#2D5A3A] leading-tight">
-                      Huy Đức
-                      <span className="block text-xs font-serif-italic text-[#5C8563]">&amp;</span>
-                      Phan Hậu
-                    </p>
-                  </motion.div>
-                </>
-              )}
-            </AnimatePresence>
-
-            {/* Thân trước phong bì (2 cánh bên + cánh dưới chữ V) */}
-            <svg
-              viewBox="0 0 360 240"
-              className="pointer-events-none absolute inset-0 w-full h-full z-20 rounded-lg overflow-hidden"
-              preserveAspectRatio="none"
-            >
-              <polygon points="0,0 180,126 0,240" fill="#FAFBF9" stroke="#DDE7DD" strokeWidth="1" />
-              <polygon points="360,0 180,126 360,240" fill="#F4F7F4" stroke="#DDE7DD" strokeWidth="1" />
-              <polygon points="0,240 180,118 360,240" fill="#FCFEFC" stroke="#D8E3D8" strokeWidth="1.2" />
-            </svg>
-
-            {/* Nắp trên phong bì (Lật mở 3D 180 độ khi mở thiệp) */}
-            <motion.div
-              initial={false}
-              animate={{ rotateX: isEnvelopeOpen ? 180 : 0 }}
-              transition={{ duration: 0.85, ease: [0.4, 0, 0.2, 1] }}
-              style={{
-                transformOrigin: 'top center',
-                transformStyle: 'preserve-3d',
-                zIndex: isEnvelopeOpen ? 5 : 25,
-              }}
-              className="pointer-events-none absolute top-0 inset-x-0 h-[126px]"
-            >
-              <svg viewBox="0 0 360 126" className="w-full h-full" preserveAspectRatio="none">
-                <polygon points="0,0 360,0 180,126" fill="#F6FAF6" stroke="#D3E0D3" strokeWidth="1.2" />
-                {/* Viền ren hoa mềm mại dọc mép chữ V của nắp (frame_001) */}
-                <path
-                  d="M 10 10 L 180 120 L 350 10"
-                  stroke="#FFFFFF"
-                  strokeWidth="2.5"
-                  strokeDasharray="4,3"
-                  fill="none"
-                />
-              </svg>
-            </motion.div>
-
-            {/* Con Dấu Sáp Xanh Ngọc Bích ở Tâm Phong Bì */}
-            <div className="absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
-              <EmeraldWaxSeal isOpening={isEnvelopeOpen} />
-            </div>
-
-            {/* Vòng sóng hướng dẫn chạm mở thiệp */}
-            {!isEnvelopeOpen && (
-              <motion.div
-                animate={{ scale: [1, 1.45, 1], opacity: [0.8, 0.15, 0.8] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                className="pointer-events-none absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full border-2 border-[#83C294]/70 z-20"
-              />
-            )}
-          </div>
-
-          {/* DÒNG ĐẾM NGƯỢC THỜI GIAN "BEGINS IN..." (GIỐNG HỆT FRAME 002 TRONG VIDEO) */}
-          <div className="text-center mt-5">
-            <p className="font-serif-luxury text-xs tracking-[0.24em] uppercase text-[#44684E] mb-1 font-semibold">
-              BEGINS IN...
-            </p>
-            <div className="flex items-center justify-center gap-2 sm:gap-3 text-lg sm:text-2xl font-serif-luxury font-bold text-[#2D5A3A]">
-              <div className="flex flex-col items-center">
-                <span className="bg-white/90 px-2.5 py-1 rounded-lg border border-[#D5E6D8] shadow-xs">
-                  {timeParts.days}
-                </span>
-                <span className="text-[9px] font-normal text-[#5C8563] uppercase mt-0.5">Ngày</span>
-              </div>
-              <span className="text-[#83C294] font-normal -mt-3">:</span>
-              <div className="flex flex-col items-center">
-                <span className="bg-white/90 px-2.5 py-1 rounded-lg border border-[#D5E6D8] shadow-xs">
-                  {timeParts.hours}
-                </span>
-                <span className="text-[9px] font-normal text-[#5C8563] uppercase mt-0.5">Giờ</span>
-              </div>
-              <span className="text-[#83C294] font-normal -mt-3">:</span>
-              <div className="flex flex-col items-center">
-                <span className="bg-white/90 px-2.5 py-1 rounded-lg border border-[#D5E6D8] shadow-xs">
-                  {timeParts.minutes}
-                </span>
-                <span className="text-[9px] font-normal text-[#5C8563] uppercase mt-0.5">Phút</span>
-              </div>
-              <span className="text-[#83C294] font-normal -mt-3">:</span>
-              <div className="flex flex-col items-center">
-                <span className="bg-white/90 px-2.5 py-1 rounded-lg border border-[#D5E6D8] shadow-xs text-emerald-700">
-                  {timeParts.seconds}
-                </span>
-                <span className="text-[9px] font-normal text-[#5C8563] uppercase mt-0.5">Giây</span>
-              </div>
-            </div>
-
-            {!isEnvelopeOpen && (
-              <motion.p
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 1.6, repeat: Infinity }}
-                className="text-xs text-[#2D5A3A] font-serif-italic mt-3 flex items-center justify-center gap-1.5"
-              >
-                <span>Chạm vào con dấu sáp để mở thiệp</span>
-                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              </motion.p>
-            )}
-          </div>
-        </section>
+        <LuxuryWeddingEnvelope
+          theme="emerald"
+          isOpen={isEnvelopeOpen}
+          onOpen={handleOpenEnvelope}
+          guestName={guestName}
+          weddingDateIso={data.weddingDate.isoDate}
+          heroPhoto={data.sectionImages.hero}
+          kissPhoto={data.sectionImages.kissPhoto}
+          groomShortName={data.groom.shortName}
+          brideShortName={data.bride.shortName}
+          displayDate={data.weddingDate.displayDate}
+        />
 
         {/* =====================================================================
             PHẦN 2: NỘI DUNG THIỆP CHÍNH KHI ĐÃ MỞ (GARDEN EMERALD STYLE)
@@ -677,15 +476,23 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                   <p className="font-serif-luxury font-bold text-xs sm:text-sm tracking-wider text-[#2D5A3A]">
                     NHÀ TRAI
                   </p>
-                  <p className="text-xs sm:text-sm text-[#1F2E23]">Ông. Lê Huy Báu</p>
-                  <p className="text-xs sm:text-sm text-[#1F2E23]">Bà. Nguyễn Thị Nga</p>
+                  <p className="text-xs sm:text-sm text-[#1F2E23]">
+                    Ông. {data.groom.fatherName || 'Lê Minh Hải'}
+                  </p>
+                  <p className="text-xs sm:text-sm text-[#1F2E23]">
+                    Bà. {data.groom.motherName || 'Đỗ Thị Vân Lĩnh'}
+                  </p>
                 </div>
                 <div className="space-y-1">
                   <p className="font-serif-luxury font-bold text-xs sm:text-sm tracking-wider text-[#2D5A3A]">
                     NHÀ GÁI
                   </p>
-                  <p className="text-xs sm:text-sm text-[#1F2E23]">Ông. Phan Văn Hùng</p>
-                  <p className="text-xs sm:text-sm text-[#1F2E23]">Bà. Vũ Thị Mai</p>
+                  <p className="text-xs sm:text-sm text-[#1F2E23]">
+                    Ông. {data.bride.fatherName || 'Phan Văn Đồng'}
+                  </p>
+                  <p className="text-xs sm:text-sm text-[#1F2E23]">
+                    Bà. {data.bride.motherName || 'Trịnh Thị Nga'}
+                  </p>
                 </div>
               </div>
 
@@ -699,55 +506,56 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                 </p>
               </div>
 
-              {/* KHUNG OVAL REN HOA NGỌC TRAI TINH XẢO (frame_004) */}
-              <EmeraldLaceOvalFrame>
+              {/* KHUNG GƯƠNG REN HOA NGỌC TRAI 3D THƯỢNG HẠNG (frame_004) */}
+              <CrochetLaceMirrorFrame theme="emerald">
                 {/* Tên dâu rể bằng chữ script mềm mại bay bổng */}
-                <h3 className="font-script-luxury text-4xl sm:text-5xl text-[#2D5A3A] leading-tight mb-2">
-                  Lê Huy Đức
+                <h3 className="font-script-luxury text-4xl sm:text-5xl text-[#2D5A3A] leading-tight mb-2 drop-shadow-xs">
+                  {data.groom.fullName}
                   <span className="block text-2xl sm:text-3xl font-serif-italic text-[#4D8259] my-0.5">&amp;</span>
-                  Phan Thị Hậu
+                  {data.bride.fullName}
                 </h3>
 
-                <p className="font-serif-luxury text-[11px] sm:text-xs uppercase tracking-[0.16em] text-[#44684E] mt-1">
+                <p className="font-serif-luxury text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-[#44684E] mt-1 font-medium">
                   ĐƯỢC TỔ CHỨC VÀO LÚC
                 </p>
-                <p className="font-serif-luxury font-bold text-sm sm:text-base text-[#1F2E23] tracking-wider">
+                <p className="font-serif-luxury font-bold text-sm sm:text-base text-[#1F2E23] tracking-wider mt-0.5">
                   11:00, CHỦ NHẬT
                 </p>
 
                 {/* Bảng ô lịch Ngày - Tháng - Năm */}
-                <div className="flex items-center justify-center gap-2 sm:gap-3 my-3 text-xs sm:text-sm font-serif-luxury text-[#2D5A3A] border-y border-[#83C294]/50 py-1.5 w-full max-w-[240px]">
+                <div className="flex items-center justify-center gap-2 sm:gap-3 my-2.5 text-xs sm:text-sm font-serif-luxury text-[#2D5A3A] border-y border-[#83C294]/60 py-1.5 w-full max-w-[220px]">
                   <span>THÁNG 03</span>
-                  <span className="font-bold text-xl sm:text-2xl text-[#2D5A3A] px-2 border-x border-[#83C294]/50">
+                  <span className="font-bold text-xl sm:text-2xl text-[#2D5A3A] px-2.5 border-x border-[#83C294]/60">
                     03
                   </span>
                   <span>NĂM 2024</span>
                 </div>
 
-                <p className="text-xs sm:text-sm font-serif-italic text-[#4F6C55] mb-3">
+                <p className="text-[11px] sm:text-xs font-serif-italic text-[#4F6C55] mb-2.5">
                   (Tức ngày 23 tháng 01 năm Giáp Thìn)
                 </p>
 
-                <p className="font-serif-luxury font-bold text-xs sm:text-sm uppercase tracking-wider text-[#2D5A3A]">
+                <p className="font-serif-luxury font-bold text-xs uppercase tracking-wider text-[#2D5A3A]">
                   TẠI TƯ GIA NHÀ TRAI
                 </p>
-                <p className="text-xs sm:text-sm text-[#1F2E23] mt-0.5 mb-4">
-                  Thôn Phú Xá - Xã Văn Môn - Huyện Yên Phong - Bắc Ninh
+                {/* Địa chỉ ngắn gọn, trang nhã, không bao giờ bị tràn hay gãy chữ */}
+                <p className="text-xs sm:text-sm text-[#1F2E23] mt-0.5 mb-3 font-medium">
+                  Phú Xá - Văn Môn - Bắc Ninh
                 </p>
 
-                {/* Nút Chỉ Đường Google Maps */}
+                {/* Nút Chỉ Đường Google Maps thanh lịch, nhỏ gọn */}
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="https://maps.google.com/?q=V%C4%83n+M%C3%B4n,+Y%C3%AAn+Phong,+B%E1%BA%AFc+Ninh"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cursor-pointer inline-flex items-center justify-center gap-2 px-5 py-2 rounded-full bg-[#2D5A3A] text-white text-xs font-serif-luxury uppercase tracking-wider font-semibold shadow-md hover:bg-[#1E3F27] transition-all"
+                  className="cursor-pointer inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-[#2D5A3A] text-white text-[11px] font-serif-luxury uppercase tracking-wider font-semibold shadow-sm hover:bg-[#1E3F27] transition-all"
                 >
                   <MapPin className="w-3.5 h-3.5 text-[#FFE082]" />
                   <span>CHỈ ĐƯỜNG</span>
                 </motion.a>
-              </EmeraldLaceOvalFrame>
+              </CrochetLaceMirrorFrame>
 
               {/* Dòng chữ "Hân hạnh được đón tiếp" (frame_004) */}
               <div className="text-center pt-1">
