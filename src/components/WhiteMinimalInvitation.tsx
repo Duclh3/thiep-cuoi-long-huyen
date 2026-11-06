@@ -590,8 +590,8 @@ export const WhiteMinimalInvitation: React.FC<WhiteMinimalInvitationProps> = ({
                     Thiệp Mời
                   </p>
                   <h1
-                    style={{ fontFamily: "'Lobster', 'Dancing Script', cursive" }}
-                    className="text-2xl sm:text-3xl font-normal tracking-wide text-[#2B2523]"
+                    style={{ fontFamily: "'Dancing Script', 'Playfair Display', cursive" }}
+                    className="text-2xl sm:text-3xl font-semibold tracking-wide text-[#2B2523]"
                   >
                     {data.groom.shortName} &amp; {data.bride.shortName}
                   </h1>

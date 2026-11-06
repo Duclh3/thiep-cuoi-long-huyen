@@ -185,9 +185,9 @@ export const ConceptSwitcherDock: React.FC<ConceptSwitcherDockProps> = ({
               : 'rounded-2xl sm:rounded-full p-1.5 sm:p-2 flex flex-col sm:flex-row items-center gap-1.5'
           }`}
         >
-          {/* 4 Nút Chọn Phong Cách (Ẩn khi mở bằng link đơn phong cách) */}
+          {/* 7 Nút Chọn Phong Cách (Ẩn khi mở bằng link đơn phong cách) */}
           {!hideStyleSwitcher && (
-            <div className="grid grid-cols-4 gap-1 w-full sm:flex-1">
+            <div className="flex items-center overflow-x-auto gap-1 w-full sm:flex-1 py-0.5 scrollbar-none" style={{ scrollbarWidth: 'none' }}>
               {(Object.keys(THEMES) as StyleId[]).map((id) => {
                 const t = THEMES[id];
                 const active = styleId === id;

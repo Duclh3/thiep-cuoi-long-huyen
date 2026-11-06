@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   DEFAULT_WEDDING_DATA,
+  DUC_HAU_WEDDING_DATA,
   StyleId,
   THEMES,
   WeddingData,
@@ -23,6 +24,8 @@ import { GallerySection } from './components/GallerySection';
 import { RsvpWishesSection } from './components/RsvpWishesSection';
 import { ConceptSwitcherDock } from './components/ConceptSwitcherDock';
 import { WhiteMinimalInvitation } from './components/WhiteMinimalInvitation';
+import { GardenEmeraldInvitation } from './components/GardenEmeraldInvitation';
+import { BurgundyCallaInvitation } from './components/BurgundyCallaInvitation';
 import { AdminGuestModal } from './components/AdminGuestModal';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -121,6 +124,32 @@ function detectInitialRouteStyle(): { style: StyleId; isLockedSingleStyle: boole
     return { style: 'minimal', isLockedSingleStyle: true };
   }
 
+  // Style 6: Forest Emerald Garden (Khu Vườn Xanh Ngọc - Đức & Hậu)
+  if (
+    pathname.includes('/garden') ||
+    pathname.includes('/khu-vuon') ||
+    pathname.includes('/style-6') ||
+    queryStyle === 'garden' ||
+    queryStyle === 'khu-vuon' ||
+    queryStyle === 'style-6' ||
+    queryStyle === '6'
+  ) {
+    return { style: 'garden', isLockedSingleStyle: true };
+  }
+
+  // Style 7: Burgundy Calla Lily (Mẫu Thiệp Calla Đỏ - Đức & Hậu)
+  if (
+    pathname.includes('/calla') ||
+    pathname.includes('/calla-do') ||
+    pathname.includes('/style-7') ||
+    queryStyle === 'calla' ||
+    queryStyle === 'calla-do' ||
+    queryStyle === 'style-7' ||
+    queryStyle === '7'
+  ) {
+    return { style: 'calla', isLockedSingleStyle: true };
+  }
+
   return { style: 'fairytale', isLockedSingleStyle: false };
 }
 
@@ -130,7 +159,12 @@ export function App() {
   const [isLockedSingleStyle] = useState<boolean>(routeConfig.isLockedSingleStyle);
   const [isGateOpen, setIsGateOpen] = useState<boolean>(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState<boolean>(false);
-  const [weddingData, setWeddingData] = useState<WeddingData>(DEFAULT_WEDDING_DATA);
+  const [weddingData, setWeddingData] = useState<WeddingData>(() => {
+    if (routeConfig.style === 'garden' || routeConfig.style === 'calla') {
+      return DUC_HAU_WEDDING_DATA;
+    }
+    return DEFAULT_WEDDING_DATA;
+  });
   const [isAdminModalOpen, setIsAdminModalOpen] = useState<boolean>(false);
 
   // Khởi tạo lời chúc từ localStorage (không tự động sinh dữ liệu mẫu/test)
@@ -327,8 +361,24 @@ export function App() {
   };
 
   const handleResetDefault = () => {
-    setWeddingData(DEFAULT_WEDDING_DATA);
+    if (styleId === 'garden' || styleId === 'calla') {
+      setWeddingData(DUC_HAU_WEDDING_DATA);
+    } else {
+      setWeddingData(DEFAULT_WEDDING_DATA);
+    }
     setGuestName('Bạn & Người Thương');
+  };
+
+  const handleSelectStyle = (id: StyleId) => {
+    setStyleId(id);
+    if (id === 'garden' || id === 'calla') {
+      setWeddingData(DUC_HAU_WEDDING_DATA);
+    } else {
+      setWeddingData(DEFAULT_WEDDING_DATA);
+    }
+    if (id === 'minimal' || id === 'garden' || id === 'calla') {
+      setIsGateOpen(true);
+    }
   };
 
   const theme = THEMES[styleId];
@@ -346,7 +396,7 @@ export function App() {
         />
       </div>
 
-      {/* PHONG CÁCH 05 (TONE TRẮNG MINIMAL): GIAO DIỆN NGUYÊN BẢN 100% GIỐNG VIDEO MẪU */}
+      {/* PHONG CÁCH 05 (TONE TRẮNG MINIMAL) */}
       {styleId === 'minimal' ? (
         <>
           <WhiteMinimalInvitation
@@ -367,7 +417,75 @@ export function App() {
           {!isLockedSingleStyle && (
             <ConceptSwitcherDock
               styleId={styleId}
-              onSelectStyle={(id) => setStyleId(id)}
+              onSelectStyle={handleSelectStyle}
+              isMusicPlaying={isMusicPlaying}
+              onToggleMusic={handleToggleMusic}
+              onReplayGate={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              data={weddingData}
+              onUpdateData={setWeddingData}
+              guestName={guestName}
+              onUpdateGuestName={setGuestName}
+              onResetDefault={handleResetDefault}
+              hideStyleSwitcher={isLockedSingleStyle}
+            />
+          )}
+        </>
+      ) : styleId === 'garden' ? (
+        /* PHONG CÁCH 06: FOREST EMERALD GARDEN (VIDEO 1 - ĐỨC & HẬU) */
+        <>
+          <GardenEmeraldInvitation
+            data={weddingData}
+            wishes={wishes}
+            onAddWish={handleAddWish}
+            isMusicPlaying={isMusicPlaying}
+            onToggleMusic={handleToggleMusic}
+            guestName={guestName}
+            onOpenAdmin={() => setIsAdminModalOpen(true)}
+            onStartMusic={() => {
+              if (!soundEngine.getIsPlaying()) {
+                soundEngine.startMusic(0);
+                setIsMusicPlaying(true);
+              }
+            }}
+          />
+          {!isLockedSingleStyle && (
+            <ConceptSwitcherDock
+              styleId={styleId}
+              onSelectStyle={handleSelectStyle}
+              isMusicPlaying={isMusicPlaying}
+              onToggleMusic={handleToggleMusic}
+              onReplayGate={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              data={weddingData}
+              onUpdateData={setWeddingData}
+              guestName={guestName}
+              onUpdateGuestName={setGuestName}
+              onResetDefault={handleResetDefault}
+              hideStyleSwitcher={isLockedSingleStyle}
+            />
+          )}
+        </>
+      ) : styleId === 'calla' ? (
+        /* PHONG CÁCH 07: BURGUNDY CALLA LILY (VIDEO 2 - ĐỨC & HẬU) */
+        <>
+          <BurgundyCallaInvitation
+            data={weddingData}
+            wishes={wishes}
+            onAddWish={handleAddWish}
+            isMusicPlaying={isMusicPlaying}
+            onToggleMusic={handleToggleMusic}
+            guestName={guestName}
+            onOpenAdmin={() => setIsAdminModalOpen(true)}
+            onStartMusic={() => {
+              if (!soundEngine.getIsPlaying()) {
+                soundEngine.startMusic(0);
+                setIsMusicPlaying(true);
+              }
+            }}
+          />
+          {!isLockedSingleStyle && (
+            <ConceptSwitcherDock
+              styleId={styleId}
+              onSelectStyle={handleSelectStyle}
               isMusicPlaying={isMusicPlaying}
               onToggleMusic={handleToggleMusic}
               onReplayGate={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -393,12 +511,7 @@ export function App() {
             isOpen={isGateOpen}
             onUnlock={handleUnlockGate}
             styleId={styleId}
-            onSelectStyle={(id) => {
-              setStyleId(id);
-              if (id === 'minimal') {
-                setIsGateOpen(true);
-              }
-            }}
+            onSelectStyle={handleSelectStyle}
             data={weddingData}
             guestName={guestName}
             hideStyleSwitcher={isLockedSingleStyle}
@@ -425,7 +538,7 @@ export function App() {
           {/* Dynamic Island Music Player (5 bài hát thật) & Thanh Điều Khiển */}
           <ConceptSwitcherDock
             styleId={styleId}
-            onSelectStyle={(id) => setStyleId(id)}
+            onSelectStyle={handleSelectStyle}
             isMusicPlaying={isMusicPlaying}
             onToggleMusic={handleToggleMusic}
             onReplayGate={() => setIsGateOpen(false)}
