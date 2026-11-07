@@ -166,40 +166,62 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
           alpha: 0.8,
         });
       } else if (styleId === 'garden') {
-        // Phong cách 06 (Khu Vườn Xanh Ngọc): Cánh hoa hồng trắng bay lượn + lá ngọc biếc + đốm nắng lung linh
-        const kind: AmbientParticleKind = i % 3 === 0 ? 'diamond-star' : 'petal';
+        // Phong cách 06 (Khu Vườn Xanh Ngọc): Cánh hoa hồng trắng rơi + Trái tim kem phấn bay nhẹ + Đốm sáng ngọc
+        const mod = i % 5;
+        const kind: AmbientParticleKind = mod === 0 ? 'diamond-star' : mod === 1 ? 'heart' : 'petal';
         particles.push({
           kind,
           x: Math.random() * width,
           y: Math.random() * height,
-          size: kind === 'diamond-star' ? Math.random() * 5 + 4 : Math.random() * 7 + 6,
+          size:
+            kind === 'diamond-star'
+              ? Math.random() * 4.5 + 3.5
+              : kind === 'heart'
+              ? Math.random() * 4.5 + 5.5
+              : Math.random() * 6.5 + 5.5,
           vx: (Math.random() - 0.5) * 0.5,
-          vy: Math.random() * 0.75 + 0.35,
+          vy: Math.random() * 0.75 + 0.38,
           angle: Math.random() * Math.PI * 2,
           spin: (Math.random() - 0.5) * 0.02,
           phase: Math.random() * Math.PI * 2,
           phaseSpeed: 0.035,
-          color: i % 2 === 0 ? 'rgba(255, 255, 255, 0.88)' : 'rgba(235, 247, 238, 0.82)',
+          color:
+            kind === 'heart'
+              ? 'rgba(244, 182, 198, 0.55)'
+              : i % 2 === 0
+              ? 'rgba(255, 255, 255, 0.78)'
+              : 'rgba(222, 242, 227, 0.72)',
           secondaryColor: '#C8E6C9',
-          alpha: 0.85,
+          alpha: kind === 'heart' ? 0.58 : 0.78,
         });
       } else if (styleId === 'calla') {
-        // Phong cách 07 (Calla Đỏ Bordeaux): Cánh hoa hồng nhung đỏ bordeaux + bụi vàng kim 24K (KHÔNG có trái tim đè mặt dâu rể)
-        const kind: AmbientParticleKind = i % 3 === 0 ? 'diamond-star' : 'petal';
+        // Phong cách 07 (Calla Đỏ Bordeaux): Cánh hoa rơi + Trái tim hồng phấn trong trẻo + Ánh sao vàng kim
+        const mod = i % 5;
+        const kind: AmbientParticleKind = mod === 0 ? 'diamond-star' : mod === 1 ? 'heart' : 'petal';
         particles.push({
           kind,
           x: Math.random() * width,
           y: Math.random() * height,
-          size: kind === 'diamond-star' ? Math.random() * 6 + 4 : Math.random() * 7 + 6,
+          size:
+            kind === 'diamond-star'
+              ? Math.random() * 5 + 3.5
+              : kind === 'heart'
+              ? Math.random() * 4.5 + 5.5
+              : Math.random() * 6.5 + 5.5,
           vx: (Math.random() - 0.5) * 0.55,
           vy: Math.random() * 0.8 + 0.4,
           angle: Math.random() * Math.PI * 2,
           spin: (Math.random() - 0.5) * 0.025,
           phase: Math.random() * Math.PI * 2,
           phaseSpeed: 0.04,
-          color: i % 2 === 0 ? 'rgba(168, 40, 69, 0.88)' : 'rgba(125, 30, 58, 0.92)',
+          color:
+            kind === 'heart'
+              ? 'rgba(232, 140, 165, 0.52)'
+              : i % 2 === 0
+              ? 'rgba(214, 112, 138, 0.58)'
+              : 'rgba(246, 205, 216, 0.68)',
           secondaryColor: '#D4AF37',
-          alpha: 0.88,
+          alpha: kind === 'heart' ? 0.55 : 0.72,
         });
       } else {
         // Phong cách 04 (Đông Dương Cung Đình): Đèn lồng Hội An bay lên trời + Hoa mai vàng 5 cánh
@@ -531,16 +553,9 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
         ctx.globalAlpha = p.alpha;
 
         if (p.kind === 'heart') {
-          // Thay thế hoàn toàn hình trái tim bằng cánh hoa nhẹ nhàng để không che mặt dâu rể
           ctx.translate(p.x, p.y);
-          ctx.rotate(p.angle);
-          ctx.scale(1, Math.max(0.25, Math.abs(Math.cos(p.phase))));
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.moveTo(0, 0);
-          ctx.bezierCurveTo(p.size, -p.size * 0.9, p.size * 1.5, p.size * 0.5, 0, p.size * 1.45);
-          ctx.bezierCurveTo(-p.size * 1.5, p.size * 0.5, -p.size, -p.size * 0.9, 0, 0);
-          ctx.fill();
+          ctx.rotate(Math.sin(p.phase) * 0.25);
+          drawHeart(0, -p.size * 0.5, p.size, p.color);
         } else if (p.kind === 'petal') {
           ctx.translate(p.x, p.y);
           ctx.rotate(p.angle);
@@ -686,7 +701,9 @@ export const AmbientCanvas: React.FC<AmbientCanvasProps> = ({ styleId }) => {
         ctx.shadowColor = s.color;
         ctx.shadowBlur = 8;
 
-        if (s.shape === 'heart' || s.shape === 'star') {
+        if (s.shape === 'heart') {
+          drawHeart(s.x, s.y, s.size * 2.1, s.color);
+        } else if (s.shape === 'star') {
           drawFourPointStar(s.x, s.y, s.size * 1.6, s.color);
         } else if (s.shape === 'trail') {
           ctx.strokeStyle = s.color;

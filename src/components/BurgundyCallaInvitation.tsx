@@ -3,25 +3,16 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import {
-  Heart,
   Music,
-  MapPin,
-  Calendar,
-  Clock,
-  Sparkles,
   Gift,
   LockOpen,
   Lock,
-  RotateCcw,
   X,
   Copy,
   Check,
-  Download,
   ChevronLeft,
   ChevronRight,
   Send,
-  Navigation,
-  Volume2,
   VolumeX,
 } from 'lucide-react';
 import { WeddingData, WishItem } from '../data/weddingData';
@@ -29,6 +20,16 @@ import { soundEngine } from '../utils/soundEngine';
 import { AmbientCanvas } from './AmbientCanvas';
 import { CrochetLaceMirrorFrame } from './CrochetLaceMirrorFrame';
 import { LuxuryWeddingEnvelope } from './LuxuryWeddingEnvelope';
+import {
+  BotanicalWaxSeal,
+  CameraLineIcon,
+  WeddingRingsLineIcon,
+  BanquetPlateLineIcon,
+  MusicNotesLineIcon,
+  WeeklySaveTheDateSection,
+  ThankYouOpenEnvelopeSection,
+  decorAsset,
+} from './VintageFloralArtwork';
 
 interface BurgundyCallaInvitationProps {
   data: WeddingData;
@@ -55,170 +56,6 @@ function getInitialGuestName(propName?: string): string {
   return '';
 }
 
-/**
- * Con Dấu Sáp Đỏ Rượu 3D (Burgundy Wine Wax Seal)
- */
-const BurgundyWaxSeal: React.FC<{ isOpening?: boolean }> = ({ isOpening }) => (
-  <motion.div
-    animate={
-      isOpening
-        ? { scale: [1, 1.25, 0.2], rotate: [0, -15, 25], opacity: [1, 1, 0] }
-        : { scale: [1, 1.06, 1] }
-    }
-    transition={
-      isOpening
-        ? { duration: 0.6, ease: 'easeInOut' }
-        : { duration: 2.2, repeat: Infinity, ease: 'easeInOut' }
-    }
-    className="relative w-15 h-15 sm:w-18 sm:h-18 rounded-full flex items-center justify-center select-none shadow-[0_10px_25px_rgba(70,12,24,0.6)] cursor-pointer"
-    style={{
-      background: 'radial-gradient(circle at 35% 30%, #A32845 0%, #681427 55%, #350510 100%)',
-      boxShadow:
-        '0 10px 25px rgba(60, 10, 20, 0.6), inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -3px 6px rgba(0,0,0,0.65)',
-    }}
-  >
-    <div className="w-[84%] h-[84%] rounded-full border border-[#E58CA0]/70 shadow-inner flex items-center justify-center">
-      <div className="flex flex-col items-center justify-center text-[#FEE8ED] drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">
-        <span className="font-serif-luxury font-bold text-xs sm:text-sm tracking-wider">Đ &amp; H</span>
-        <Sparkles className="w-2.5 h-2.5 text-[#FCE79C] mt-0.5 animate-pulse" />
-      </div>
-    </div>
-  </motion.div>
-);
-
-/**
- * Nhành hoa Calla Lily Đỏ Tím buông dải ren trang trí góc trái phong bì (giống frame_001)
- */
-const CallaLaceDecoration: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <div className={`relative pointer-events-none select-none ${className}`}>
-    {/* Cành hoa Calla Tím Đỏ */}
-    <div className="relative w-22 sm:w-26 h-24 sm:h-28 flex items-center justify-center">
-      <svg viewBox="0 0 100 120" className="w-full h-full drop-shadow-[0_6px_14px_rgba(0,0,0,0.4)]">
-        <defs>
-          <linearGradient id="callaPetalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#A82845" />
-            <stop offset="60%" stopColor="#661025" />
-            <stop offset="100%" stopColor="#350410" />
-          </linearGradient>
-          <linearGradient id="callaStemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6C835A" />
-            <stop offset="100%" stopColor="#38492C" />
-          </linearGradient>
-          <linearGradient id="goldSpadix" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#FFE082" />
-            <stop offset="100%" stopColor="#D4AF37" />
-          </linearGradient>
-        </defs>
-        {/* Cuống hoa uốn cong mềm mại */}
-        <path d="M 45 45 Q 40 85 30 115" stroke="url(#callaStemGrad)" strokeWidth="4" fill="none" strokeLinecap="round" />
-        <path d="M 52 48 Q 50 85 42 118" stroke="url(#callaStemGrad)" strokeWidth="3" fill="none" strokeLinecap="round" />
-        {/* Nụ hoa Calla vươn cao */}
-        <path
-          d="M 46 45 C 30 40 25 15 48 8 C 65 5 72 25 58 42 Z"
-          fill="url(#callaPetalGrad)"
-          stroke="#E58CA0"
-          strokeWidth="0.6"
-        />
-        {/* Nhụy vàng nhô ra */}
-        <path d="M 48 20 Q 49 14 50 10" stroke="url(#goldSpadix)" strokeWidth="3" fill="none" strokeLinecap="round" />
-        {/* Cánh hoa Calla thứ hai */}
-        <path
-          d="M 32 52 C 20 46 18 28 35 22 C 48 20 52 35 42 50 Z"
-          fill="url(#callaPetalGrad)"
-          opacity="0.9"
-        />
-      </svg>
-    </div>
-
-    {/* Dải ren tua rua rủ xuống mềm mại */}
-    <div className="absolute top-16 left-3 w-10 flex flex-col items-center opacity-85">
-      <svg viewBox="0 0 40 80" className="w-full h-auto drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)]">
-        <path
-          d="M 5 0 Q 8 20 6 40 Q 4 60 8 80 M 15 0 Q 18 25 14 50 Q 12 65 16 80 M 25 0 Q 22 22 26 45 Q 28 65 24 80 M 35 0 Q 32 28 34 55 Q 36 70 33 80"
-          stroke="#8C253E"
-          strokeWidth="1.4"
-          strokeDasharray="2,3"
-          fill="none"
-        />
-        {/* Hạt ngọc trang trí ở đuôi ren */}
-        <circle cx="8" cy="78" r="2" fill="#E6C2CD" />
-        <circle cx="16" cy="76" r="2.5" fill="#FFFFFF" />
-        <circle cx="24" cy="79" r="2" fill="#E6C2CD" />
-        <circle cx="33" cy="77" r="2.5" fill="#FFFFFF" />
-      </svg>
-    </div>
-  </div>
-);
-
-/**
- * Khung Oval Ren Hoa & Chuỗi Ngọc Trai Sang Trọng (Mô phỏng 100% video mẫu 2 frame_004)
- */
-const PearlLaceOvalFrame: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[390px] p-5 sm:p-7">
-    {/* Vòng chuỗi ngọc trai 3D quấn quanh góc ngoài */}
-    <div className="pointer-events-none absolute -top-5 -right-5 sm:-top-7 sm:-right-7 w-32 sm:w-40 h-32 sm:h-40 opacity-75">
-      <svg viewBox="0 0 140 140" className="w-full h-full">
-        {[0, 15, 30, 45, 60, 75, 90, 105, 120, 135].map((pos, idx) => (
-          <circle
-            key={idx}
-            cx={20 + idx * 10}
-            cy={120 - idx * 9}
-            r={idx % 2 === 0 ? 4.5 : 3.5}
-            fill="url(#pearl3dGrad)"
-            stroke="#D9B8C4"
-            strokeWidth="0.5"
-            className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
-          />
-        ))}
-        <defs>
-          <radialGradient id="pearl3dGrad" cx="35%" cy="30%" r="70%">
-            <stop offset="0%" stopColor="#FFFFFF" />
-            <stop offset="55%" stopColor="#F9EEF2" />
-            <stop offset="85%" stopColor="#DFC3CE" />
-            <stop offset="100%" stopColor="#B38D9D" />
-          </radialGradient>
-        </defs>
-      </svg>
-    </div>
-
-    {/* Viền ren hoa Oval chính */}
-    <div
-      className="relative rounded-[50%/42%] p-5 sm:p-7 border-2 border-dashed border-[#C991A5]/60 bg-gradient-to-b from-[#FFFDFC] via-[#FAF4F7] to-[#F7EDF2] shadow-[0_16px_36px_rgba(110,24,46,0.12),inset_0_0_24px_rgba(255,255,255,0.9)]"
-      style={{
-        boxShadow:
-          '0 14px 34px rgba(100, 20, 40, 0.12), inset 0 0 0 6px #FFFFFF, inset 0 0 0 8px rgba(201, 145, 165, 0.35)',
-      }}
-    >
-      {/* Vòng chấm ren hoa văn viền oval */}
-      <div className="pointer-events-none absolute inset-2 rounded-[50%/42%] border border-dotted border-[#AA4D6C]/40" />
-
-      {/* Nội dung bên trong khung oval */}
-      <div className="relative z-10 flex flex-col items-center text-center">
-        {children}
-      </div>
-
-      {/* Bông hoa Calla điểm xuyết góc dưới phải của khung oval (frame_004) */}
-      <div className="pointer-events-none absolute -bottom-5 -right-3 sm:-bottom-7 sm:-right-4 w-18 sm:w-22 h-20 sm:h-24">
-        <svg viewBox="0 0 80 100" className="w-full h-full drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]">
-          <path d="M 20 85 Q 40 55 50 25" stroke="#48603A" strokeWidth="3" fill="none" strokeLinecap="round" />
-          <path
-            d="M 50 25 C 65 20 70 5 52 2 C 38 0 35 15 45 28 Z"
-            fill="url(#callaMiniPetal)"
-          />
-          <path d="M 51 12 Q 52 8 53 5" stroke="#FFE082" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-          <defs>
-            <linearGradient id="callaMiniPetal" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#A82845" />
-              <stop offset="70%" stopColor="#661025" />
-              <stop offset="100%" stopColor="#350410" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    </div>
-  </div>
-);
-
 export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = ({
   data,
   wishes,
@@ -235,37 +72,11 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [lightboxUrl, setLightboxUrl] = useState<string | null>(null);
 
-  // Gallery trượt ngang + xem ảnh lớn (giống frame_008 trong video)
+  // Gallery ảnh cưới (các ảnh chưa sử dụng được xếp lên đầu)
   const [selectedGalleryIdx, setSelectedGalleryIdx] = useState(0);
   const thumbnailScrollRef = useRef<HTMLDivElement>(null);
 
-  // Đếm ngược trực tiếp (Begins in... giống frame_002)
-  const [countdownSeconds, setCountdownSeconds] = useState(33 * 86400 + 6 * 3600 + 50 * 60 + 28);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdownSeconds((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatCountdown = (totalSec: number) => {
-    const days = Math.floor(totalSec / 86400);
-    const hours = Math.floor((totalSec % 86400) / 3600);
-    const minutes = Math.floor((totalSec % 3600) / 60);
-    const seconds = totalSec % 60;
-    const pad = (n: number) => String(n).padStart(2, '0');
-    return {
-      days: pad(days),
-      hours: pad(hours),
-      minutes: pad(minutes),
-      seconds: pad(seconds),
-    };
-  };
-
-  const timeParts = formatCountdown(countdownSeconds);
-
-  // Form gửi lời chúc
+  // Form gửi lời chúc & xác nhận tham dự
   const [guestInputName, setGuestInputName] = useState(() => getInitialGuestName(guestName));
   const [guestWish, setGuestWish] = useState('');
   const [attendance, setAttendance] = useState('Có, chắc chắn mình sẽ tham dự!');
@@ -282,10 +93,10 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
     soundEngine.playOpenChime();
     onStartMusic();
     confetti({
-      particleCount: 95,
+      particleCount: 90,
       spread: 80,
       origin: { y: 0.6 },
-      colors: ['#7D1E3A', '#D4AF37', '#F7D6E0', '#FFFDF9'],
+      colors: ['#721428', '#B83350', '#D4AF37', '#FFFDF9'],
     });
   };
 
@@ -296,7 +107,7 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
     setTimeout(() => {
       setIsGiftBoxOpen(true);
       setIsBoxUnwrapping(false);
-    }, 550);
+    }, 450);
   };
 
   const handleCopy = (key: string, text: string) => {
@@ -321,41 +132,85 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
       id: `wish-${Date.now()}`,
       name: guestInputName.trim(),
       message: guestWish.trim(),
-      attendance: attendance,
+      attendance,
       createdAt: formattedTime,
     };
 
     onAddWish(newWish);
     confetti({
-      particleCount: 75,
-      spread: 80,
+      particleCount: 70,
+      spread: 75,
       origin: { y: 0.7 },
-      colors: ['#7D1E3A', '#D4AF37', '#FADCE6'],
+      colors: ['#721428', '#D4AF37', '#FADCE6'],
     });
     setWishSubmitted(true);
     setGuestWish('');
     setTimeout(() => setWishSubmitted(false), 4000);
   };
 
-  // Danh sách ảnh album của Đức & Hậu
   const galleryPhotos = data.album9Images.map((img) => img.url);
 
+  const goPrevPhoto = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSelectedGalleryIdx((prev) => (prev === 0 ? galleryPhotos.length - 1 : prev - 1));
+  };
+
+  const goNextPhoto = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSelectedGalleryIdx((prev) => (prev === galleryPhotos.length - 1 ? 0 : prev + 1));
+  };
+
+  // Timeline chuẩn 100% v2_frames/frame_005
+  const timelineRows = [
+    {
+      time: '9:00',
+      title: 'ĐÓN KHÁCH',
+      iconLeft: true,
+      icon: <CameraLineIcon color="#6A1427" />,
+    },
+    {
+      time: '10:00',
+      title: 'LỄ THÀNH HÔN',
+      iconLeft: false,
+      icon: <WeddingRingsLineIcon color="#6A1427" />,
+    },
+    {
+      time: '10:15',
+      title: 'KHAI TIỆC',
+      iconLeft: true,
+      icon: <BanquetPlateLineIcon color="#6A1427" />,
+    },
+    {
+      time: '11:30',
+      title: 'ÂM NHẠC',
+      iconLeft: false,
+      icon: <MusicNotesLineIcon color="#6A1427" />,
+    },
+  ];
+
+  // 4 hình tròn màu Dress code chuẩn v2_frames/frame_005
+  const dressCodeColors = [
+    { hex: '#080808' },
+    { hex: '#630B1A' },
+    { hex: '#644E2A' },
+    { hex: '#DCCDC7' },
+  ];
+
   return (
-    <div className="min-h-screen w-full bg-[#200810] text-[#331B23] flex justify-center items-start overflow-x-hidden md:py-10 md:px-6 relative">
-      {/* LỚP 1: NỀN HỒNG TÍM PASTEL NHUNG MỊN TOÀN MÀN HÌNH */}
+    <div className="min-h-screen w-full bg-[#240811] text-[#331B23] flex justify-center items-start overflow-x-hidden md:py-8 md:px-6 relative">
+      {/* NỀN LỤA ĐỎ BORDEAUX TRẦM SANG TRỌNG BÊN NGOÀI KHUNG THIỆP DESKTOP */}
       <div
-        className="fixed inset-0 z-0 bg-cover bg-center pointer-events-none opacity-35 filter blur-[2px]"
+        className="fixed inset-0 z-0 pointer-events-none"
         style={{
-          backgroundImage:
-            'url("https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1600&auto=format&fit=crop")',
+          background:
+            'radial-gradient(circle at 50% 30%, #3F101E 0%, #260710 60%, #170309 100%)',
         }}
       />
-      <div className="fixed inset-0 z-0 bg-gradient-to-b from-[#200810]/90 via-[#350C1A]/80 to-[#200810]/95 pointer-events-none" />
 
-      {/* LỚP 2: ĐỘNG CƠ CÁNH HOA HỒNG NHUNG BORDEAUX & BỤI VÀNG KIM LẤP LÁNH */}
+      {/* ANIMATION HOA RƠI & TRÁI TIM RƠI LÃNG MẠN */}
       <AmbientCanvas styleId="calla" />
 
-      {/* Nút Admin kín đáo ngoài màn hình khi thiệp chưa mở */}
+      {/* Nút Admin kín đáo ngoài màn hình khi chưa mở thiệp */}
       {!isEnvelopeOpen && onOpenAdmin && (
         <button
           type="button"
@@ -364,46 +219,41 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
             onOpenAdmin();
           }}
           title="Quản trị"
-          className="cursor-pointer fixed top-2.5 left-2.5 z-50 p-2 text-white/35 hover:text-white opacity-35 hover:opacity-100 transition-all rounded-full"
+          className="cursor-pointer fixed top-2.5 left-2.5 z-50 p-2 text-[#843045]/45 md:text-white/40 hover:opacity-100 opacity-45 transition-all rounded-full"
           aria-label="Admin"
         >
           <Lock className="w-3.5 h-3.5" />
         </button>
       )}
 
-      {/* Nút Bật/Tắt Nhạc Tròn Nhỏ Gọn Ở Góc Trên Phải */}
-      <div className="fixed top-3 right-3 z-50 flex items-center gap-2">
+      {/* Nút Bật/Tắt Nhạc Nền */}
+      <div className="fixed top-3 right-3 z-50">
         <button
           type="button"
           onClick={onToggleMusic}
-          className="cursor-pointer w-10 h-10 rounded-full bg-stone-900/80 backdrop-blur-md border border-[#E58CA0]/50 shadow-lg flex items-center justify-center text-white hover:scale-105 transition-transform"
+          className="cursor-pointer w-10 h-10 rounded-full bg-[#FAF4F6]/90 backdrop-blur-md border border-[#DFC4CE] shadow-lg flex items-center justify-center text-[#6A1427] hover:scale-105 transition-transform"
           title={isMusicPlaying ? 'Tắt nhạc' : 'Phát nhạc'}
           aria-label="Nhạc nền"
         >
           {isMusicPlaying ? (
-            <Music className="w-4 h-4 text-[#FCE79C] animate-spin" style={{ animationDuration: '4s' }} />
+            <Music className="w-4 h-4 text-[#6A1427] animate-spin" style={{ animationDuration: '4s' }} />
           ) : (
-            <VolumeX className="w-4 h-4 text-stone-300" />
+            <VolumeX className="w-4 h-4 text-stone-500" />
           )}
         </button>
       </div>
 
-      {/* Khung Thiệp Dọc Mobile-First */}
-      <div
-        className={`w-full max-w-[460px] md:max-w-3xl lg:max-w-4xl bg-[#FAF5F7] shadow-[0_25px_80px_rgba(0,0,0,0.65)] md:rounded-3xl md:border md:border-[#EAD3DC] relative z-10 overflow-hidden transition-all duration-500 ${
-          isEnvelopeOpen ? 'pb-14' : 'min-h-[100dvh] md:min-h-[780px] flex flex-col justify-center'
-        }`}
-      >
-        {/* Thanh Tiêu Đề Mảnh Căn Giữa */}
-        <div className="sticky top-0 z-40 bg-[#FAF5F7]/95 backdrop-blur-md border-b border-[#EAD3DC] px-4 md:px-8 py-3 flex items-center justify-center text-[#7D1E3A]">
+      {/* KHUNG THIỆP CƯỚI CHÍNH */}
+      <div className="w-full max-w-[450px] md:max-w-[480px] bg-[#FAF4F6] shadow-[0_25px_80px_rgba(0,0,0,0.6)] md:rounded-2xl relative z-10 overflow-hidden transition-all duration-500">
+        {/* Thanh Tiêu Đề Mảnh Ở Đỉnh Thiệp */}
+        <div className="sticky top-0 z-40 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-[#EAD7DF] px-4 py-3 flex items-center justify-center text-[#6A1427]">
           <span className="font-serif-luxury text-xs sm:text-sm tracking-[0.14em] uppercase font-semibold text-center">
-            THIỆP MỜI CƯỚI {data.groom.shortName} &amp; {data.bride.shortName}
+            {data.groom.shortName} &amp; {data.bride.shortName} Wedding
           </span>
         </div>
 
         {/* =====================================================================
-            PHẦN 1: PHONG BÌ 3D TƯƠNG TÁC MỞ ĐẦU (BURGUNDY CALLA 3D LUXURY ENVELOPE)
-            Mô phỏng 100% video mẫu 2: Chạm sáp -> Nắp mở 3D -> Dải 2 ảnh cưới Polaroid + Thiệp trồi lên -> Countdown
+            PHẦN 1: PHONG BÌ ĐỎ RƯỢU NHUNG TƯƠNG TÁC MỞ ĐẦU (CHUẨN VIDEO 2)
            ===================================================================== */}
         <LuxuryWeddingEnvelope
           theme="burgundy"
@@ -411,145 +261,157 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
           onOpen={handleOpenEnvelope}
           guestName={guestName}
           weddingDateIso={data.weddingDate.isoDate}
-          heroPhoto={data.sectionImages.hero}
-          kissPhoto={data.sectionImages.kissPhoto}
+          heroPhoto={data.sectionImages.envelopePolaroid}
+          kissPhoto={data.sectionImages.heroLeftFloat}
           groomShortName={data.groom.shortName}
           brideShortName={data.bride.shortName}
           displayDate={data.weddingDate.displayDate}
         />
 
         {/* =====================================================================
-            PHẦN 2: NỘI DUNG THIỆP CHÍNH KHI ĐÃ MỞ (BURGUNDY CALLA STYLE)
+            PHẦN 2: TOÀN BỘ NỘI DUNG THIỆP KHI ĐÃ MỞ PHONG BÌ (GIỐNG Y HỆT VIDEO 2)
            ===================================================================== */}
         {isEnvelopeOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 35 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="space-y-12 sm:space-y-16"
+            transition={{ duration: 0.75, ease: 'easeOut' }}
+            className="space-y-12"
           >
-            {/* HERO ẢNH CƯỚI TRÀN VIỀN + DÒNG CHỮ "WE ARE Getting Married" */}
-            <section className="relative w-full aspect-[4/5] sm:aspect-[16/10] overflow-hidden bg-stone-100">
+            {/* 1. ẢNH HERO LỚN TRÀN NGANG "WE ARE Getting Married" (KHÁC ẢNH PHONG BÌ TRÊN) */}
+            <section
+              onClick={() => setLightboxUrl(data.sectionImages.hero)}
+              className="cursor-zoom-in relative w-full aspect-[3/3.9] overflow-hidden bg-stone-100"
+            >
               <motion.img
-                initial={{ scale: 1.08 }}
-                animate={{ scale: 1 }}
+                initial={{ scale: 1.06 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
                 transition={{ duration: 1.2, ease: 'easeOut' }}
                 src={data.sectionImages.hero}
-                alt="Lê Huy Đức & Phan Thị Hậu"
-                className="w-full h-full object-cover object-[center_28%]"
+                alt={`${data.groom.fullName} & ${data.bride.fullName}`}
+                className="w-full h-full object-cover object-[center_24%]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#200810]/85 via-transparent to-black/25 flex flex-col justify-end p-6 sm:p-10 text-white text-center">
-                <p className="font-serif-luxury text-xs sm:text-sm tracking-[0.28em] uppercase text-[#F9DCE4] mb-1">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#24060E]/65 via-black/20 to-transparent flex flex-col items-center justify-end pb-7 px-4 text-white text-center">
+                <p className="font-serif-luxury text-sm sm:text-base tracking-[0.26em] uppercase text-white/95 mb-0.5">
                   WE ARE
                 </p>
-                <h2 className="font-script-luxury text-4xl sm:text-6xl text-[#FFE6EE] drop-shadow-md">
+                <h2 className="font-script-luxury text-5xl sm:text-6xl text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] leading-none">
                   Getting Married
                 </h2>
-                <p className="font-serif-luxury text-xs sm:text-sm tracking-[0.16em] text-white/90 mt-2">
-                  {data.groom.fullName} &amp; {data.bride.fullName}
-                </p>
               </div>
             </section>
 
-            {/* THÔNG TIN HAI BÊN GIA ĐÌNH & KHUNG GƯƠNG OVAL REN HOA NGỌC TRAI 3D (GIỐNG FRAME 004) */}
-            <section className="px-4 sm:px-8 space-y-6">
-              {/* Hai bên gia đình */}
-              <div className="grid grid-cols-2 gap-4 text-center max-w-md mx-auto py-2">
+            {/* 2. THÔNG TIN HAI BÊN GIA ĐÌNH & KHUNG GƯƠNG OVAL VIỀN VẢI REN + NGỌC TRAI + HOA CALLA ĐỎ */}
+            <section className="px-4 sm:px-6 space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.65 }}
+                className="grid grid-cols-2 gap-3 text-center max-w-sm mx-auto"
+              >
                 <div className="space-y-1">
-                  <p className="font-serif-luxury font-bold text-xs sm:text-sm tracking-wider text-[#7D1E3A]">
+                  <p className="font-serif-luxury font-bold text-xs tracking-[0.12em] text-[#6A1427]">
                     NHÀ TRAI
                   </p>
-                  <p className="text-xs sm:text-sm text-[#331B23]">
+                  <p className="font-serif-luxury text-xs sm:text-[13px] text-[#3B1822]">
                     Ông. {data.groom.fatherName || 'Lê Minh Hải'}
                   </p>
-                  <p className="text-xs sm:text-sm text-[#331B23]">
+                  <p className="font-serif-luxury text-xs sm:text-[13px] text-[#3B1822]">
                     Bà. {data.groom.motherName || 'Đỗ Thị Vân Lĩnh'}
                   </p>
                 </div>
                 <div className="space-y-1">
-                  <p className="font-serif-luxury font-bold text-xs sm:text-sm tracking-wider text-[#7D1E3A]">
+                  <p className="font-serif-luxury font-bold text-xs tracking-[0.12em] text-[#6A1427]">
                     NHÀ GÁI
                   </p>
-                  <p className="text-xs sm:text-sm text-[#331B23]">
+                  <p className="font-serif-luxury text-xs sm:text-[13px] text-[#3B1822]">
                     Ông. {data.bride.fatherName || 'Phan Văn Đồng'}
                   </p>
-                  <p className="text-xs sm:text-sm text-[#331B23]">
+                  <p className="font-serif-luxury text-xs sm:text-[13px] text-[#3B1822]">
                     Bà. {data.bride.motherName || 'Trịnh Thị Nga'}
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Lời mời hôn lễ */}
-              <div className="text-center">
-                <p className="font-serif-luxury text-xs sm:text-sm uppercase tracking-[0.18em] text-[#8C3A50]">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-center space-y-0.5"
+              >
+                <p className="font-serif-luxury text-xs uppercase tracking-[0.14em] text-[#6A1427]">
                   TRÂN TRỌNG KÍNH MỜI TỚI DỰ
                 </p>
-                <p className="font-serif-luxury font-bold text-sm sm:text-base text-[#7D1E3A] tracking-wider mt-0.5">
+                <p className="font-serif-luxury text-xs sm:text-sm uppercase tracking-[0.1em] font-semibold text-[#6A1427]">
                   LỄ THÀNH HÔN CỦA GIA ĐÌNH CHÚNG MÌNH
                 </p>
-              </div>
+              </motion.div>
 
-              {/* KHUNG GƯƠNG OVAL REN HOA NGỌC TRAI 3D THƯỢNG HẠNG (frame_004) */}
+              {/* KHUNG GƯƠNG OVAL VIỀN VẢI REN THÊU LỖ + NGỌC TRAI + CÀNH HOA CALLA ĐỎ THẬT (CHUẨN FRAME_004) */}
               <CrochetLaceMirrorFrame theme="burgundy">
                 <motion.div
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.25 }}
                   variants={{
                     hidden: { opacity: 0 },
                     visible: {
                       opacity: 1,
-                      transition: {
-                        staggerChildren: 0.14,
-                        delayChildren: 0.15,
-                      },
+                      transition: { staggerChildren: 0.13, delayChildren: 0.15 },
                     },
                   }}
-                  className="flex flex-col items-center justify-center text-center w-full px-2"
+                  className="flex flex-col items-center justify-center text-center w-full"
                 >
-                  {/* Tên dâu rể bằng chữ script mềm mại bay bổng */}
+                  {/* Tên dâu rể chữ thư pháp lớn mềm mại */}
                   <motion.div
                     variants={{
-                      hidden: { opacity: 0, y: 12, scale: 0.95 },
-                      visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+                      hidden: { opacity: 0, y: 12 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
                     }}
-                    className="mb-1.5 sm:mb-2"
+                    className="mb-3"
                   >
-                    <h3 className="font-script-luxury text-4xl sm:text-5xl text-[#7D1E3A] leading-tight drop-shadow-xs">
-                      {data.groom.fullName}
-                      <span className="block text-2xl sm:text-3xl font-serif-italic text-[#A84A64] my-0.5">&amp;</span>
-                      {data.bride.fullName}
+                    <h3 className="font-script-luxury text-[38px] sm:text-[44px] text-[#6A1427] leading-[1.15]">
+                      <span className="block">{data.groom.fullName}</span>
+                      <span className="block mt-0.5">{data.bride.fullName}</span>
                     </h3>
                   </motion.div>
 
+                  {/* Giờ & Thứ */}
                   <motion.div
                     variants={{
                       hidden: { opacity: 0, y: 8 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
                     }}
-                    className="space-y-0.5"
+                    className="space-y-0.5 mb-2.5"
                   >
-                    <p className="font-serif-luxury text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#8C3A50] font-medium">
+                    <p className="font-serif-luxury text-[11px] uppercase tracking-[0.14em] text-[#7D2C3F]">
                       ĐƯỢC TỔ CHỨC VÀO LÚC
                     </p>
-                    <p className="font-serif-luxury font-bold text-sm sm:text-base text-[#331B23] tracking-wider">
+                    <p className="font-serif-luxury text-xs sm:text-sm font-semibold tracking-[0.12em] text-[#591120]">
                       11:00, CHỦ NHẬT
                     </p>
                   </motion.div>
 
-                  {/* Bảng ô lịch Ngày - Tháng - Năm */}
+                  {/* Cụm Ngày Tháng chuẩn 100% frame_004: [THÁNG 03 kẻ trên dưới]  03  [NĂM 2024 kẻ trên dưới] */}
                   <motion.div
                     variants={{
-                      hidden: { opacity: 0, scale: 0.92 },
+                      hidden: { opacity: 0, scale: 0.94 },
                       visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
                     }}
-                    className="flex items-center justify-center gap-2 sm:gap-3 my-2 text-xs sm:text-sm font-serif-luxury text-[#7D1E3A] border-y border-[#C991A5]/50 py-1.5 w-full max-w-[230px]"
+                    className="flex items-center justify-center gap-3 my-1.5 w-full max-w-[248px]"
                   >
-                    <span>THÁNG 03</span>
-                    <span className="font-bold text-xl sm:text-2xl text-[#7D1E3A] px-3 border-x border-[#C991A5]/50">
+                    <span className="flex-1 py-1 border-y border-[#B26E80]/65 font-serif-luxury text-[11px] sm:text-xs tracking-[0.1em] text-[#6A1427]">
+                      THÁNG 03
+                    </span>
+                    <span className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#6A1427] leading-none px-1">
                       03
                     </span>
-                    <span>NĂM 2024</span>
+                    <span className="flex-1 py-1 border-y border-[#B26E80]/65 font-serif-luxury text-[11px] sm:text-xs tracking-[0.1em] text-[#6A1427]">
+                      NĂM 2024
+                    </span>
                   </motion.div>
 
                   <motion.p
@@ -557,213 +419,317 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                       hidden: { opacity: 0 },
                       visible: { opacity: 1, transition: { duration: 0.5 } },
                     }}
-                    className="text-[11px] sm:text-xs font-serif-italic text-[#694853] mb-2"
+                    className="font-serif-italic text-xs text-[#7D2C3F] mt-1.5 mb-3"
                   >
-                    (Tức ngày 23 tháng 01 năm Giáp Thìn)
+                    ( Tức ngày 23 tháng 01 năm Giáp Thìn )
                   </motion.p>
 
+                  {/* Địa điểm */}
                   <motion.div
                     variants={{
                       hidden: { opacity: 0, y: 8 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
                     }}
-                    className="space-y-0.5 mb-2.5"
+                    className="space-y-0.5 mb-3.5"
                   >
-                    <p className="font-serif-luxury font-bold text-xs uppercase tracking-wider text-[#7D1E3A]">
+                    <p className="font-serif-luxury font-bold text-xs uppercase tracking-[0.1em] text-[#6A1427]">
                       TẠI TƯ GIA NHÀ TRAI
                     </p>
-                    {/* Địa chỉ ngắn gọn, trang nhã, không bao giờ bị tràn hay gãy chữ */}
-                    <p className="text-xs sm:text-sm text-[#331B23] font-medium">
+                    <p className="font-serif-luxury text-xs sm:text-[13px] text-[#4F1624]">
                       Phú Xá - Văn Môn - Bắc Ninh
                     </p>
                   </motion.div>
 
-                  {/* Nút Chỉ Đường Google Maps thanh lịch, nhỏ gọn */}
-                  <motion.div
+                  {/* Cụm Icon Pin Định Vị đặt trên chữ CHỈ ĐƯỜNG giống y hệt frame_004 */}
+                  <motion.a
                     variants={{
-                      hidden: { opacity: 0, scale: 0.9 },
-                      visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+                      hidden: { opacity: 0, y: 6 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
                     }}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.95 }}
+                    href="https://maps.google.com/?q=Ph%C3%BA+X%C3%A1,+V%C4%83n+M%C3%B4n,+Y%C3%AAn+Phong,+B%E1%BA%AFc+Ninh"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer inline-flex flex-col items-center gap-1 text-[#6A1427] hover:text-[#4A0B19] transition-colors group"
                   >
-                    <motion.a
-                      whileHover={{ scale: 1.06 }}
-                      whileTap={{ scale: 0.94 }}
-                      href="https://maps.google.com/?q=V%C4%83n+M%C3%B4n,+Y%C3%AAn+Phong,+B%E1%BA%AFc+Ninh"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cursor-pointer inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-[#7D1E3A] text-white text-[11px] font-serif-luxury uppercase tracking-wider font-semibold shadow-md hover:bg-[#60152B] transition-all"
-                    >
-                      <MapPin className="w-3.5 h-3.5 text-[#FFE082]" />
-                      <span>CHỈ ĐƯỜNG</span>
-                    </motion.a>
-                  </motion.div>
+                    <svg viewBox="0 0 24 28" className="w-5 h-6 fill-current">
+                      <path d="M12 1C6.48 1 2 5.48 2 11c0 7.25 10 16 10 16s10-8.75 10-16c0-5.52-4.48-10-10-10zm0 13.5c-1.93 0-3.5-1.57-3.5-3.5S10.07 7.5 12 7.5s3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
+                    </svg>
+                    <span className="font-serif-luxury text-xs font-semibold uppercase tracking-[0.14em] border-b border-transparent group-hover:border-[#6A1427]">
+                      CHỈ ĐƯỜNG
+                    </span>
+                  </motion.a>
                 </motion.div>
               </CrochetLaceMirrorFrame>
 
-              {/* Dòng chữ "Hân hạnh được đón tiếp" */}
               <div className="text-center pt-1">
-                <p className="font-script-luxury text-3xl sm:text-4xl text-[#7D1E3A]">
-                  Hân hạnh được đón tiếp
+                <p className="font-script-luxury text-3xl sm:text-4xl text-[#6A1427]">
+                  Hân hạnh được đón tiếp!
                 </p>
               </div>
             </section>
 
-            {/* =====================================================================
-                PHẦN 3: "SAVE THE DATE" POSTAGE STAMP PHOTO CARD (GIỐNG HỆT FRAME 012)
-               ===================================================================== */}
-            <section className="px-4 sm:px-8 space-y-4">
-              <div className="text-center">
-                <h3 className="font-script-luxury text-4xl sm:text-5xl text-[#7D1E3A]">
-                  Save the date
-                </h3>
-              </div>
-
-              {/* Phong bì trồi bức ảnh nụ hôn có viền tem răng cưa & dán sáp đỏ */}
-              <div className="relative max-w-sm mx-auto h-[260px] sm:h-[300px] flex items-center justify-center">
-                {/* Vỏ phong bì nhung đỏ bên dưới */}
-                <div
-                  className="absolute bottom-2 inset-x-2 h-36 rounded-xl border border-[#D9A0B1]/60 shadow-md"
-                  style={{ background: 'linear-gradient(180deg, #6B1428 0%, #4D0A1A 100%)' }}
-                >
-                  <CallaLaceDecoration className="absolute -top-6 -left-4 z-20 scale-85" />
-                </div>
-
-                {/* Bức ảnh viền tem răng cưa trồi lên (frame_012) */}
-                <motion.div
-                  initial={{ y: 20, rotate: -3 }}
-                  whileInView={{ y: -20, rotate: 2 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7 }}
-                  className="relative z-15 w-64 sm:w-72 bg-white p-2.5 pb-4 shadow-[0_16px_36px_rgba(70,12,24,0.3)] border-2 border-dashed border-[#C991A5] rounded-sm"
-                >
-                  <div className="aspect-[16/11] overflow-hidden bg-stone-100">
-                    <img
-                      src={data.sectionImages.kissPhoto}
-                      alt="Save the date"
-                      className="w-full h-full object-cover object-[center_35%]"
-                    />
-                  </div>
-                  {/* Con dấu sáp đỏ rượu ghim trên đỉnh ảnh tem */}
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#A32845] via-[#681427] to-[#350510] border border-[#FADCE6] flex items-center justify-center shadow-md">
-                      <Heart className="w-3.5 h-3.5 text-[#FCE79C] fill-current" />
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </section>
-
-            {/* =====================================================================
-                PHẦN 4: OUR STORY & 2 POLAROID DÂU RỂ (GIỐNG HỆT FRAME 007)
-               ===================================================================== */}
-            <section className="px-4 sm:px-8 space-y-6">
-              <div className="text-center">
-                <h3 className="font-script-luxury text-4xl sm:text-5xl text-[#7D1E3A]">
-                  Our story
-                </h3>
-              </div>
-
-              {/* Lời tự sự tình yêu của Đức & Hậu */}
-              <div className="max-w-md mx-auto text-center px-4">
-                <p className="font-serif-italic text-xs sm:text-sm leading-relaxed text-[#593944]">
-                  Tình yêu của Đức và Hậu là một hành trình kỳ diệu, vượt qua bao thử thách để cùng nhau bước đến ngày trọng đại - đám cưới của chúng mình.
-                </p>
-                <p className="font-serif-italic text-xs sm:text-sm leading-relaxed text-[#593944] mt-2.5">
-                  Đám cưới này là lời cam kết chân thành, là sự bắt đầu của một chương mới - nơi chúng mình cùng vun đắp tổ ấm, cùng sẻ chia mọi vui buồn và cùng nắm tay nhau đi đến cuối con đường mang tên hạnh phúc.
-                </p>
-              </div>
-
-              {/* 2 TẤM ẢNH POLAROID NGHIÊNG GẮN DẤU SÁP ĐỎ (frame_007) */}
-              <div className="relative max-w-sm mx-auto h-[320px] sm:h-[360px] flex items-center justify-center">
-                {/* Polaroid Cô Dâu (Nghiêng trái) */}
-                <motion.div
-                  initial={{ rotate: -8, x: -30, opacity: 0 }}
-                  whileInView={{ rotate: -6, x: -35, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="absolute top-2 left-6 sm:left-10 w-40 sm:w-48 bg-white p-2.5 pb-5 rounded shadow-[0_14px_28px_rgba(80,14,30,0.2)] border border-stone-200 z-10"
-                >
-                  <div className="aspect-[3/4] overflow-hidden bg-stone-100 mb-2">
-                    <img
-                      src={data.bride.avatar}
-                      alt={data.bride.fullName}
-                      className="w-full h-full object-cover object-[center_20%]"
-                    />
-                  </div>
-                  <p className="font-script-luxury text-xl text-[#7D1E3A] text-center leading-none">
-                    Cô dâu
-                  </p>
-                  <p className="font-serif-luxury text-[10px] sm:text-xs uppercase tracking-wider text-[#331B23] text-center mt-0.5">
-                    {data.bride.fullName}
-                  </p>
-                </motion.div>
-
-                {/* Polaroid Chú Rể (Nghiêng phải) */}
-                <motion.div
-                  initial={{ rotate: 8, x: 30, opacity: 0 }}
-                  whileInView={{ rotate: 7, x: 35, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.15 }}
-                  className="absolute bottom-2 right-6 sm:right-10 w-40 sm:w-48 bg-white p-2.5 pb-5 rounded shadow-[0_14px_28px_rgba(80,14,30,0.2)] border border-stone-200 z-10"
-                >
-                  <div className="aspect-[3/4] overflow-hidden bg-stone-100 mb-2">
-                    <img
-                      src={data.groom.avatar}
-                      alt={data.groom.fullName}
-                      className="w-full h-full object-cover object-[center_20%]"
-                    />
-                  </div>
-                  <p className="font-script-luxury text-xl text-[#7D1E3A] text-center leading-none">
-                    Chú rể
-                  </p>
-                  <p className="font-serif-luxury text-[10px] sm:text-xs uppercase tracking-wider text-[#331B23] text-center mt-0.5">
-                    {data.groom.fullName}
-                  </p>
-                </motion.div>
-
-                {/* Con Dấu Sáp Đỏ Rượu Ghim Nối 2 Bức Ảnh Ở Tâm */}
-                <div className="relative z-20 pointer-events-none drop-shadow-md">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#A32845] via-[#681427] to-[#350510] border border-[#FADCE6] flex items-center justify-center">
-                    <Heart className="w-4 h-4 text-[#FCE79C] fill-current" />
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* =====================================================================
-                PHẦN 5: ALBUM ẢNH CƯỚI ĐỨC & HẬU (ẢNH LỚN + THUMBNAILS TRƯỢT NGANG GIỐNG FRAME 008)
-               ===================================================================== */}
-            <section className="px-4 sm:px-8 space-y-4">
-              <div className="text-center">
-                <p className="font-serif-luxury text-xs uppercase tracking-[0.2em] text-[#8C3A50]">
-                  SWEET MEMORIES
-                </p>
-                <h3 className="font-script-luxury text-4xl sm:text-5xl text-[#7D1E3A]">
-                  Album Ảnh Cưới
-                </h3>
-              </div>
-
-              {/* KHUNG ẢNH LỚN NỔI BẬT */}
+            {/* 3. ẢNH "Where LOVE BEGINS" + TIMELINE 4 ICON LINE-ART + DRESS CODE (CHUẨN FRAME_005 VIDEO 2) */}
+            <section className="space-y-9">
               <div
-                onClick={() => setLightboxUrl(galleryPhotos[selectedGalleryIdx])}
-                className="cursor-zoom-in relative w-full aspect-[4/5] sm:aspect-[16/11] rounded-2xl overflow-hidden bg-stone-100 shadow-[0_16px_36px_rgba(80,14,30,0.18)] border-2 border-white group"
+                onClick={() => setLightboxUrl(data.sectionImages.loveStoryBg)}
+                className="cursor-zoom-in relative w-full aspect-[16/11] overflow-hidden bg-stone-100"
               >
                 <img
-                  src={galleryPhotos[selectedGalleryIdx]}
-                  alt="Ảnh cưới Đức & Hậu"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  src={data.sectionImages.loveStoryBg}
+                  alt="Where Love Begins"
+                  className="w-full h-full object-cover object-[center_22%]"
                 />
-                <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="px-4 py-1.5 rounded-full bg-black/60 text-white text-xs font-serif-luxury">
-                    Chạm để phóng to
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex flex-col items-center justify-end pb-5 text-white">
+                  <span className="font-script-luxury text-3xl sm:text-4xl leading-none -mb-1">
+                    Where
+                  </span>
+                  <span className="font-serif-luxury text-sm sm:text-base tracking-[0.28em] uppercase">
+                    LOVE BEGINS
                   </span>
                 </div>
               </div>
 
-              {/* THANH TRƯỢT THUMBNAIL NGANG BÊN DƯỚI (GIỐNG HỆT FRAME 008) */}
+              {/* TIMELINE NGHỆ THUẬT */}
+              <div className="px-4 sm:px-8 space-y-7 relative overflow-hidden">
+                <div className="text-center">
+                  <h3 className="font-script-luxury text-5xl text-[#6A1427]">Timeline</h3>
+                </div>
+
+                <div className="relative max-w-[330px] mx-auto py-3">
+                  {/* Trục dọc mảnh màu đỏ rượu ở chính tâm */}
+                  <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1.5px] bg-[#7D2438]" />
+
+                  <div className="space-y-9 relative z-10">
+                    {timelineRows.map((row, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: idx * 0.1 }}
+                        className="grid grid-cols-[1fr_24px_1fr] items-center gap-3"
+                      >
+                        {/* Cột Trái */}
+                        <div className="flex justify-end items-center text-right">
+                          {row.iconLeft ? (
+                            row.icon
+                          ) : (
+                            <div>
+                              <p className="font-serif-luxury font-semibold text-sm text-[#591120]">
+                                {row.time}
+                              </p>
+                              <p className="font-serif-luxury text-xs sm:text-[13px] tracking-[0.08em] uppercase text-[#6A1427]">
+                                {row.title}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Viên Ngọc Trai 3D Ở Tâm Trục */}
+                        <div className="flex items-center justify-center">
+                          <div
+                            className="w-3.5 h-3.5 rounded-full shadow-[0_2px_5px_rgba(70,12,24,0.25)]"
+                            style={{
+                              background:
+                                'radial-gradient(circle at 32% 30%, #FFFFFF 0%, #FAF0F4 55%, #C9AAB7 100%)',
+                            }}
+                          />
+                        </div>
+
+                        {/* Cột Phải */}
+                        <div className="flex justify-start items-center text-left">
+                          {row.iconLeft ? (
+                            <div>
+                              <p className="font-serif-luxury font-semibold text-sm text-[#591120]">
+                                {row.time}
+                              </p>
+                              <p className="font-serif-luxury text-xs sm:text-[13px] tracking-[0.08em] uppercase text-[#6A1427]">
+                                {row.title}
+                              </p>
+                            </div>
+                          ) : (
+                            row.icon
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* DRESS CODE 4 HÌNH TRÒN MÀU */}
+                <div className="text-center pt-2">
+                  <h4 className="font-script-luxury text-4xl sm:text-5xl text-[#6A1427] mb-4">
+                    Dress code
+                  </h4>
+                  <div className="flex items-center justify-center gap-3.5">
+                    {dressCodeColors.map((c, idx) => (
+                      <motion.div
+                        key={idx}
+                        whileHover={{ scale: 1.12, y: -3 }}
+                        className="w-11 h-11 sm:w-12 sm:h-12 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.16)] border border-black/10"
+                        style={{ backgroundColor: c.hex }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 4. ẢNH CHUYỂN TIẾP + LỊCH TUẦN THÁNG 03 + PHONG BAO ĐỎ RƯỢU SAVE THE DATE (ẢNH 1 DSC_9127.JPG) */}
+            <div>
+              <div
+                onClick={() => setLightboxUrl(data.sectionImages.countdown)}
+                className="cursor-zoom-in w-full aspect-[16/11] overflow-hidden bg-stone-100 mb-4"
+              >
+                <img
+                  src={data.sectionImages.countdown}
+                  alt="Huy Đức & Phan Hậu"
+                  className="w-full h-full object-cover object-[center_20%]"
+                />
+              </div>
+
+              <WeeklySaveTheDateSection
+                theme="burgundy"
+                kissPhoto={data.sectionImages.kissPhoto}
+                onImageClick={(url) => setLightboxUrl(url)}
+              />
+            </div>
+
+            {/* 5. OUR STORY + 2 KHUNG POLAROID DÂU RỂ ĐÍNH DẤU SÁP ĐỎ + CÀNH HOA CALLA ĐỎ BÊN PHẢI (CHUẨN FRAME_007) */}
+            <section className="px-4 sm:px-6 space-y-6 relative overflow-hidden">
+              <div className="text-center">
+                <h3 className="font-script-luxury text-5xl text-[#6A1427]">Our story</h3>
+              </div>
+
+              <div className="max-w-sm mx-auto text-center px-2 space-y-2.5">
+                <p className="font-serif-luxury text-xs sm:text-[13px] leading-relaxed text-[#4F2531]">
+                  Tình yêu của Đức và Hậu là một hành trình kỳ diệu, vượt qua bao thử thách để cùng
+                  nhau bước đến ngày trọng đại - đám cưới của chúng mình.
+                </p>
+                <p className="font-serif-luxury text-xs sm:text-[13px] leading-relaxed text-[#4F2531]">
+                  Đám cưới này là lời cam kết chân thành, là sự bắt đầu của một chương mới - nơi
+                  chúng mình cùng vun đắp tổ ấm, cùng sẻ chia mọi vui buồn và cùng nắm tay nhau đi
+                  đến cuối con đường mang tên hạnh phúc.
+                </p>
+              </div>
+
+              {/* Cặp Polaroid Cô dâu & Chú rể đính dấu sáp đỏ ở tâm + Cành Calla đỏ nghiêng bên phải (y hệt v2_frames/frame_007) */}
+              <div className="relative max-w-[360px] mx-auto h-[410px] sm:h-[435px] mt-4">
+                {/* Cành hoa Calla đỏ rượu nghiêng ở góc phải trên */}
+                <img
+                  src={decorAsset('burgundy-calla-single.png')}
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none select-none absolute -top-2 -right-6 w-28 sm:w-32 -rotate-[55deg] z-20 object-contain drop-shadow-md"
+                />
+
+                {/* Khung ảnh Cô dâu (bên trái trên, nghiêng nhẹ) + Tên bên phải */}
+                <motion.div
+                  initial={{ opacity: 0, x: -24, rotate: -8 }}
+                  whileInView={{ opacity: 1, x: 0, rotate: -7 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7 }}
+                  onClick={() => setLightboxUrl(data.bride.avatar)}
+                  className="cursor-zoom-in absolute top-3 left-2 w-[172px] sm:w-[186px] bg-white p-2 pb-3.5 shadow-[0_12px_28px_rgba(70,12,24,0.16)] z-10"
+                >
+                  <div className="aspect-[3/3.6] overflow-hidden bg-stone-100">
+                    <img
+                      src={data.bride.avatar}
+                      alt={data.bride.fullName}
+                      className="w-full h-full object-cover object-[center_18%]"
+                    />
+                  </div>
+                </motion.div>
+
+                <div className="absolute top-[110px] right-3 text-center z-15">
+                  <p className="font-script-luxury text-2xl sm:text-3xl text-[#6A1427] leading-none">
+                    Cô dâu
+                  </p>
+                  <p className="font-serif-luxury text-xs sm:text-sm uppercase tracking-[0.12em] text-[#4F1624] font-semibold mt-1">
+                    {data.bride.fullName}
+                  </p>
+                </div>
+
+                {/* Con dấu sáp đỏ rượu đính nối ở tâm giao điểm 2 khung Polaroid */}
+                <div className="pointer-events-none absolute top-[186px] left-[48%] -translate-x-1/2 -translate-y-1/2 z-30">
+                  <BotanicalWaxSeal theme="burgundy" size="md" />
+                </div>
+
+                {/* Khung ảnh Chú rể (bên phải dưới, nghiêng phải) + Tên bên trái */}
+                <motion.div
+                  initial={{ opacity: 0, x: 24, rotate: 8 }}
+                  whileInView={{ opacity: 1, x: 0, rotate: 6 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: 0.12 }}
+                  onClick={() => setLightboxUrl(data.groom.avatar)}
+                  className="cursor-zoom-in absolute bottom-3 right-2 w-[172px] sm:w-[186px] bg-white p-2 pb-3.5 shadow-[0_12px_28px_rgba(70,12,24,0.16)] z-15"
+                >
+                  <div className="aspect-[3/3.6] overflow-hidden bg-stone-100">
+                    <img
+                      src={data.groom.avatar}
+                      alt={data.groom.fullName}
+                      className="w-full h-full object-cover object-[center_18%]"
+                    />
+                  </div>
+                </motion.div>
+
+                <div className="absolute bottom-[78px] left-3 text-center z-15">
+                  <p className="font-script-luxury text-2xl sm:text-3xl text-[#6A1427] leading-none">
+                    Chú rể
+                  </p>
+                  <p className="font-serif-luxury text-xs sm:text-sm uppercase tracking-[0.12em] text-[#4F1624] font-semibold mt-1">
+                    {data.groom.fullName}
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* 6. ALBUM ẢNH CƯỚI (ĐƯA TOÀN BỘ ẢNH CHƯA SỬ DỤNG LÊN ĐẦU + NÚT CHUYỂN TRÁI/PHẢI + THUMBNAILS) */}
+            <section className="px-4 sm:px-6 space-y-4">
+              <div className="text-center">
+                <p className="font-serif-luxury text-[11px] uppercase tracking-[0.22em] text-[#843045]">
+                  SWEET MEMORIES
+                </p>
+                <h3 className="font-script-luxury text-4xl sm:text-5xl text-[#6A1427]">
+                  Album Ảnh Cưới
+                </h3>
+              </div>
+
+              {/* Khung ảnh lớn kèm nút điều hướng < > */}
+              <div
+                onClick={() => setLightboxUrl(galleryPhotos[selectedGalleryIdx])}
+                className="cursor-zoom-in relative w-full aspect-[3/4] rounded-xl overflow-hidden bg-stone-100 shadow-[0_14px_32px_rgba(70,12,24,0.18)] border-4 border-white group"
+              >
+                <img
+                  src={galleryPhotos[selectedGalleryIdx]}
+                  alt={`Ảnh cưới ${selectedGalleryIdx + 1}`}
+                  className="w-full h-full object-cover object-[center_22%] transition-all duration-500"
+                />
+
+                <button
+                  type="button"
+                  onClick={goPrevPhoto}
+                  className="cursor-pointer absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-[#6A1427] shadow-md flex items-center justify-center transition-transform active:scale-90"
+                  aria-label="Ảnh trước"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={goNextPhoto}
+                  className="cursor-pointer absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-[#6A1427] shadow-md flex items-center justify-center transition-transform active:scale-90"
+                  aria-label="Ảnh tiếp"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Thanh trượt Thumbnails bên dưới */}
               <div
                 ref={thumbnailScrollRef}
-                className="flex items-center gap-2.5 overflow-x-auto py-2 px-1 scrollbar-none scroll-smooth"
+                className="flex items-center gap-2 overflow-x-auto py-1.5 px-0.5 scroll-smooth"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {galleryPhotos.map((photo, idx) => (
@@ -771,32 +737,34 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                     key={idx}
                     type="button"
                     onClick={() => setSelectedGalleryIdx(idx)}
-                    className={`cursor-pointer shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
+                    className={`cursor-pointer shrink-0 w-16 h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
                       selectedGalleryIdx === idx
-                        ? 'border-[#7D1E3A] scale-105 shadow-md shadow-[#7D1E3A]/30'
-                        : 'border-white opacity-70 hover:opacity-100'
+                        ? 'border-[#6A1427] scale-105 shadow-md'
+                        : 'border-white opacity-65 hover:opacity-100'
                     }`}
                   >
-                    <img src={photo} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                    <img
+                      src={photo}
+                      alt={`Thumbnail ${idx + 1}`}
+                      className="w-full h-full object-cover object-[center_20%]"
+                    />
                   </button>
                 ))}
               </div>
             </section>
 
-            {/* =====================================================================
-                PHẦN 6: HỘP QUÀ MỪNG CƯỚI (BURGUNDY CALLA STYLE)
-               ===================================================================== */}
-            <section className="px-4 sm:px-8 space-y-4">
+            {/* 7. HỘP QUÀ MỪNG CƯỚI (MÃ QR CĂN GIỮA GỌN ĐẸP) */}
+            <section className="px-4 sm:px-6">
               <div className="text-center">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#7D1E3A]/10 text-[#7D1E3A] text-xs font-serif-luxury tracking-wider uppercase mb-1">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#6A1427]/10 text-[#6A1427] text-[11px] font-serif-luxury tracking-wider uppercase mb-1">
                   <Gift className="w-3.5 h-3.5" />
                   <span>MỪNG CƯỚI DÂU RỂ</span>
                 </div>
 
-                <h3 className="font-script-luxury text-4xl text-[#7D1E3A] mb-1">
+                <h3 className="font-script-luxury text-4xl text-[#6A1427] mb-1">
                   Hộp Quà Mừng Cưới
                 </h3>
-                <p className="text-xs text-[#694853] mb-5">
+                <p className="text-xs text-[#7D2C3F] mb-4">
                   {!isGiftBoxOpen
                     ? 'Chạm vào phong bao bên dưới để mở mã QR mừng cưới'
                     : 'Chạm vào mã QR để phóng to hoặc sao chép số tài khoản'}
@@ -804,44 +772,41 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
 
                 <AnimatePresence mode="wait">
                   {!isGiftBoxOpen ? (
-                    /* Hộp quà đóng nhỏ gọn */
                     <motion.div
-                      key="closed-calla-box"
+                      key="closed-calla-gift"
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.05 }}
+                      exit={{ opacity: 0, scale: 1.04 }}
                       onClick={handleOpenGiftBox}
-                      className="cursor-pointer relative mx-auto w-full max-w-[240px] sm:max-w-[260px] h-36 sm:h-40 rounded-2xl border border-[#D9A0B1] p-3.5 shadow-lg flex flex-col items-center justify-between overflow-hidden bg-gradient-to-br from-[#7A1C32] via-[#5C1024] to-[#3B0715] group hover:border-[#FCE79C]"
+                      className="cursor-pointer relative mx-auto w-full max-w-[250px] h-40 rounded-2xl border border-[#D9A8B8] p-3.5 shadow-md flex flex-col items-center justify-between overflow-hidden bg-gradient-to-b from-[#6C1022] to-[#4A0714] group hover:border-[#FCE79C]"
                     >
                       <div className="pointer-events-none absolute inset-1.5 rounded-xl border border-white/20" />
                       <div className="relative z-10 my-auto">
-                        <BurgundyWaxSeal />
+                        <BotanicalWaxSeal theme="burgundy" size="sm" />
                       </div>
-
-                      <div className="relative z-10 w-full flex items-center justify-center pt-1">
-                        <div className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FAF5F7] text-[#7D1E3A] text-xs font-serif-luxury italic whitespace-nowrap shadow-sm group-hover:bg-[#FCE79C] group-hover:text-[#3B0715] transition-colors text-center">
-                          <LockOpen className="w-3.5 h-3.5 text-[#7D1E3A] shrink-0" />
-                          <span className="whitespace-nowrap font-semibold">Chạm Để Mở Mã QR</span>
+                      <div className="relative z-10 w-full flex items-center justify-center">
+                        <div className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FAF4F6] text-[#6A1427] text-xs font-serif-luxury whitespace-nowrap shadow-xs group-hover:bg-[#FCE79C] group-hover:text-[#3B0715] transition-colors">
+                          <LockOpen className="w-3.5 h-3.5 shrink-0" />
+                          <span className="font-semibold">Chạm Để Mở Mã QR</span>
                         </div>
                       </div>
                     </motion.div>
                   ) : (
-                    /* Thẻ QR mở ra */
                     <motion.div
-                      key="opened-calla-cards"
-                      initial={{ opacity: 0, y: 15 }}
+                      key="opened-calla-gift"
+                      initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="space-y-4"
                     >
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                         {/* QR Chú rể */}
-                        <div className="bg-white rounded-2xl p-4 border border-[#EAD3DC] shadow-sm text-center">
-                          <p className="font-serif-luxury font-bold text-xs text-[#7D1E3A] mb-1">
+                        <div className="bg-white rounded-2xl p-4 border border-[#EAD7DF] shadow-xs text-center">
+                          <p className="font-serif-luxury font-bold text-xs text-[#6A1427] mb-2">
                             {data.groomQrGift.roleLabel}
                           </p>
                           <div
                             onClick={() => setLightboxUrl(data.groomQrGift.qrImageUrl)}
-                            className="cursor-zoom-in w-36 h-36 mx-auto rounded-xl overflow-hidden border border-stone-200 p-2 bg-stone-50 mb-2.5"
+                            className="cursor-zoom-in w-34 h-34 mx-auto rounded-xl overflow-hidden border border-stone-200 p-2 bg-stone-50 mb-2"
                           >
                             <img
                               src={data.groomQrGift.qrImageUrl}
@@ -857,7 +822,7 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                             <button
                               type="button"
                               onClick={() => handleCopy('groom', data.groomQrGift.accountNumber)}
-                              className="cursor-pointer p-1 text-[#7D1E3A] hover:text-[#60152B]"
+                              className="cursor-pointer p-1 text-[#6A1427]"
                               title="Sao chép STK"
                             >
                               {copiedKey === 'groom' ? (
@@ -867,19 +832,19 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                               )}
                             </button>
                           </div>
-                          <p className="text-[11px] text-[#8C3A50] mt-0.5">
+                          <p className="text-[11px] text-[#843045] mt-0.5">
                             {data.groomQrGift.bankBranch}
                           </p>
                         </div>
 
                         {/* QR Cô dâu */}
-                        <div className="bg-white rounded-2xl p-4 border border-[#EAD3DC] shadow-sm text-center">
-                          <p className="font-serif-luxury font-bold text-xs text-[#7D1E3A] mb-1">
+                        <div className="bg-white rounded-2xl p-4 border border-[#EAD7DF] shadow-xs text-center">
+                          <p className="font-serif-luxury font-bold text-xs text-[#6A1427] mb-2">
                             {data.brideQrGift.roleLabel}
                           </p>
                           <div
                             onClick={() => setLightboxUrl(data.brideQrGift.qrImageUrl)}
-                            className="cursor-zoom-in w-36 h-36 mx-auto rounded-xl overflow-hidden border border-stone-200 p-2 bg-stone-50 mb-2.5"
+                            className="cursor-zoom-in w-34 h-34 mx-auto rounded-xl overflow-hidden border border-stone-200 p-2 bg-stone-50 mb-2"
                           >
                             <img
                               src={data.brideQrGift.qrImageUrl}
@@ -895,7 +860,7 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                             <button
                               type="button"
                               onClick={() => handleCopy('bride', data.brideQrGift.accountNumber)}
-                              className="cursor-pointer p-1 text-[#7D1E3A] hover:text-[#60152B]"
+                              className="cursor-pointer p-1 text-[#6A1427]"
                               title="Sao chép STK"
                             >
                               {copiedKey === 'bride' ? (
@@ -905,7 +870,7 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                               )}
                             </button>
                           </div>
-                          <p className="text-[11px] text-[#8C3A50] mt-0.5">
+                          <p className="text-[11px] text-[#843045] mt-0.5">
                             {data.brideQrGift.bankBranch}
                           </p>
                         </div>
@@ -914,9 +879,9 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                       <button
                         type="button"
                         onClick={() => setIsGiftBoxOpen(false)}
-                        className="cursor-pointer text-xs text-[#7D1E3A] hover:underline"
+                        className="cursor-pointer text-xs text-[#6A1427] hover:underline"
                       >
-                        Đóng hộp quà mừng
+                        Thu gọn hộp quà
                       </button>
                     </motion.div>
                   )}
@@ -924,168 +889,102 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
               </div>
             </section>
 
-            {/* =====================================================================
-                PHẦN 7: GỬI LỜI CHÚC (YOUR WISHES GIỐNG FRAME 010 TRONG VIDEO)
-               ===================================================================== */}
-            <section className="px-4 sm:px-8 space-y-6">
-              <div className="text-center">
-                <h3 className="font-serif-luxury font-bold text-lg sm:text-xl tracking-[0.14em] text-[#7D1E3A] uppercase">
-                  YOUR WISHES
-                </h3>
-                <p className="font-serif-italic text-xs text-[#694853] mt-0.5">
-                  Messages from our loved ones
+            {/* 8. FORM XÁC NHẬN THAM DỰ & GỬI LỜI CHÚC (CHUẨN THIẾT KẾ VIDEO 2) */}
+            <section className="px-5 sm:px-8 space-y-6">
+              <div className="text-center max-w-xs mx-auto">
+                <p className="font-serif-luxury text-xs sm:text-sm leading-relaxed text-[#6A1427]">
+                  Hãy xác nhận sự có mặt của bạn để chúng mình chuẩn bị đón tiếp một cách chu đáo
+                  nhất. Trân trọng!
                 </p>
               </div>
 
-              {/* Form gửi lời nhắn & xác nhận tham dự */}
-              <form
-                onSubmit={handleSubmitForm}
-                className="bg-white rounded-2xl p-5 sm:p-6 border border-[#EAD3DC] shadow-sm max-w-md mx-auto space-y-3.5"
-              >
-                <div>
-                  <label className="block text-xs font-medium text-[#593944] mb-1">
-                    Tên của bạn
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={guestInputName}
-                    onChange={(e) => setGuestInputName(e.target.value)}
-                    placeholder="Nhập họ và tên của bạn..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:outline-none focus:border-[#7D1E3A]"
-                  />
-                </div>
+              <form onSubmit={handleSubmitForm} className="max-w-sm mx-auto space-y-3">
+                <input
+                  type="text"
+                  required
+                  value={guestInputName}
+                  onChange={(e) => setGuestInputName(e.target.value)}
+                  placeholder="Tên của bạn"
+                  className="w-full px-4 py-2.5 rounded-full border border-[#AD687A] bg-white/90 text-xs sm:text-sm text-[#331B23] placeholder:text-[#8E6270] focus:outline-none focus:ring-1 focus:ring-[#6A1427]"
+                />
 
-                <div>
-                  <label className="block text-xs font-medium text-[#593944] mb-1">
-                    Gửi lời nhắn đến cô dâu chú rể
-                  </label>
-                  <textarea
-                    required
-                    rows={3}
-                    value={guestWish}
-                    onChange={(e) => setGuestWish(e.target.value)}
-                    placeholder="Viết lời chúc ngọt ngào nhất gửi tặng Đức & Hậu..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:outline-none focus:border-[#7D1E3A]"
-                  />
-                </div>
+                <textarea
+                  required
+                  rows={3}
+                  value={guestWish}
+                  onChange={(e) => setGuestWish(e.target.value)}
+                  placeholder="Gửi lời nhắn đến cô dâu chú rể"
+                  className="w-full px-4 py-3 rounded-2xl border border-[#AD687A] bg-white/90 text-xs sm:text-sm text-[#331B23] placeholder:text-[#8E6270] focus:outline-none focus:ring-1 focus:ring-[#6A1427]"
+                />
 
-                <div>
-                  <label className="block text-xs font-medium text-[#593944] mb-1">
-                    Bạn sẽ đến tham dự chung vui chứ?
-                  </label>
-                  <select
-                    value={attendance}
-                    onChange={(e) => setAttendance(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-xs sm:text-sm focus:outline-none focus:border-[#7D1E3A] bg-white"
-                  >
-                    <option value="Có, chắc chắn mình sẽ tham dự!">Có, chắc chắn mình sẽ tham dự!</option>
-                    <option value="Rất tiếc, mình bận việc không thể tham dự được">
-                      Rất tiếc, mình bận việc không thể tham dự được
-                    </option>
-                  </select>
-                </div>
+                <select
+                  value={attendance}
+                  onChange={(e) => setAttendance(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-full border border-[#AD687A] bg-white/90 text-xs sm:text-sm text-[#331B23] focus:outline-none focus:ring-1 focus:ring-[#6A1427]"
+                >
+                  <option value="Có, chắc chắn mình sẽ tham dự!">
+                    Có, chắc chắn mình sẽ tham dự!
+                  </option>
+                  <option value="Rất tiếc, mình bận việc không thể tham dự được">
+                    Rất tiếc, mình bận việc không thể tham dự được
+                  </option>
+                </select>
 
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="cursor-pointer w-full py-3 rounded-xl bg-[#7D1E3A] text-white text-xs sm:text-sm font-serif-luxury font-bold uppercase tracking-wider shadow-md hover:bg-[#60152B] transition-all flex items-center justify-center gap-2"
+                  className="cursor-pointer w-full py-3 rounded-full bg-[#6A1427] hover:bg-[#520C1C] text-white text-xs sm:text-sm font-serif-luxury uppercase tracking-[0.12em] font-semibold shadow-md transition-all flex items-center justify-center gap-2"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>GỬI LỜI NHẮN &amp; XÁC NHẬN</span>
                 </motion.button>
 
                 {wishSubmitted && (
-                  <motion.p
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-xs text-center text-emerald-700 font-medium"
-                  >
-                    Cảm ơn bạn thật nhiều! Lời chúc của bạn đã được gửi tới dâu rể.
-                  </motion.p>
+                  <p className="text-xs text-center text-[#6A1427] font-medium pt-1">
+                    Cảm ơn bạn! Lời chúc ngọt ngào của bạn đã được gửi tới dâu rể.
+                  </p>
                 )}
               </form>
 
-              {/* Danh sách lời chúc hiển thị công khai */}
-              <div className="max-w-md mx-auto space-y-3 pt-2">
-                {wishes.slice(0, 8).map((item) => (
-                  <div
-                    key={item.id}
-                    className="p-3.5 rounded-xl bg-white/80 border border-[#EAD3DC] text-left shadow-xs"
-                  >
-                    <div className="flex items-center justify-between mb-1">
-                      <p className="font-serif-luxury font-bold text-xs sm:text-sm text-[#7D1E3A]">
-                        {item.name}
-                      </p>
-                      <Heart className="w-3 h-3 text-[#A82845] fill-current" />
-                    </div>
-                    <p className="text-xs text-[#331B23] leading-relaxed">{item.message}</p>
-                    {item.createdAt && (
-                      <p className="text-[10px] text-stone-400 mt-1">{item.createdAt}</p>
-                    )}
+              {/* Danh sách lời chúc công khai (Ẩn trạng thái tham dự theo yêu cầu, kẻ dòng tinh tế như frame_011) */}
+              {wishes.length > 0 && (
+                <div className="max-w-sm mx-auto pt-3">
+                  <h4 className="font-serif-luxury font-bold text-center text-sm tracking-[0.18em] uppercase text-[#6A1427] mb-3">
+                    YOUR WISHES
+                  </h4>
+                  <div className="divide-y divide-[#E5CFD7] border-y border-[#E5CFD7] max-h-72 overflow-y-auto px-1">
+                    {wishes.slice(0, 12).map((item) => (
+                      <div key={item.id} className="py-3 text-left">
+                        <p className="font-serif-luxury font-bold text-xs sm:text-sm text-[#591120]">
+                          {item.name}
+                        </p>
+                        <p className="font-serif-luxury text-xs text-[#593944] leading-relaxed mt-0.5">
+                          {item.message}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              )}
             </section>
 
-            {/* =====================================================================
-                PHẦN 8: LỜI CẢM ƠN (THANK YOU) - TÁCH BIỆT ẢNH CÔNG CHÚA VÀ THIỆP CẢM ƠN
-               ===================================================================== */}
-            <section className="px-4 sm:px-8 space-y-4 my-6">
-              {/* 1. KHUNG ẢNH CƯỚI CÔNG CHÚA NGUYÊN VẸN 100% - KHÔNG BỊ CHỮ CHE KHUẤT */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                onClick={() => setLightboxUrl(data.sectionImages.thankYouBg)}
-                className="cursor-zoom-in relative w-full aspect-[3/3.8] sm:aspect-[4/4.5] rounded-3xl overflow-hidden shadow-[0_20px_45px_rgba(80,14,30,0.25)] border-2 border-white group"
-              >
-                <img
-                  src={data.sectionImages.thankYouBg}
-                  alt="Ảnh cưới công chúa Đức & Hậu"
-                  className="w-full h-full object-cover object-[center_35%] transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="px-4 py-1.5 rounded-full bg-black/60 text-white text-xs font-serif-luxury">
-                    Chạm để xem ảnh đầy đủ
-                  </span>
-                </div>
-              </motion.div>
-
-              {/* 2. THIỆP LỜI CẢM ƠN TRANG TRỌNG NẰM NGAY BÊN DƯỚI */}
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="text-center p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#F9F1F4] via-[#F4E3E9] to-[#EAD4DC] border border-[#E2BAC8] shadow-[0_12px_32px_rgba(80,14,30,0.12)] max-w-lg mx-auto"
-              >
-                <div className="w-9 h-9 mx-auto mb-2 rounded-full bg-[#7D1E3A]/10 flex items-center justify-center border border-[#C991A5]/50">
-                  <Heart className="w-4 h-4 text-[#7D1E3A] fill-current" />
-                </div>
-                <h4 className="font-script-luxury text-4xl sm:text-5xl text-[#7D1E3A] mb-2.5 drop-shadow-xs">
-                  Lời cảm ơn!
-                </h4>
-                <p className="font-serif-italic text-xs sm:text-sm leading-relaxed text-[#593944] max-w-md mx-auto">
-                  {data.thankYouText.message}
-                </p>
-                <div className="mt-4 pt-3.5 border-t border-[#C991A5]/30 flex flex-col items-center">
-                  <p className="font-serif-luxury text-xs sm:text-sm tracking-[0.24em] text-[#7D1E3A] font-semibold uppercase">
-                    {data.groom.shortName} &amp; {data.bride.shortName}
-                  </p>
-                  <p className="font-serif-luxury text-[10px] tracking-[0.16em] text-[#8C3A50] uppercase mt-0.5">
-                    Forever &amp; Always • 03.03.2024
-                  </p>
-                </div>
-              </motion.div>
-            </section>
+            {/* 9. PHẦN CUỐI TRANG: LỜI CẢM ƠN & PHONG BÌ ĐỎ RƯỢU MỞ NẮP NHỌN LỒNG ẢNH CÔNG CHÚA (CHUẨN FRAME_011) */}
+            <ThankYouOpenEnvelopeSection
+              theme="burgundy"
+              photoUrl={data.sectionImages.thankYouBg}
+              thankYouTitle={data.thankYouText.title}
+              thankYouMessage={data.thankYouText.message}
+              groomShortName={data.groom.shortName}
+              brideShortName={data.bride.shortName}
+              displayDate={data.weddingDate.displayDate}
+              onImageClick={(url) => setLightboxUrl(url)}
+            />
           </motion.div>
         )}
       </div>
 
-      {/* Lightbox phóng to ảnh */}
+      {/* Lightbox phóng to xem ảnh rõ nét 100% */}
       {lightboxUrl &&
         createPortal(
           <div

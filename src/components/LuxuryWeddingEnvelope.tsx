@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { soundEngine } from '../utils/soundEngine';
+import {
+  BotanicalWaxSeal,
+  ClickHandIndicator,
+  decorAsset,
+} from './VintageFloralArtwork';
 
 interface LuxuryWeddingEnvelopeProps {
   theme?: 'emerald' | 'burgundy';
@@ -9,230 +13,12 @@ interface LuxuryWeddingEnvelopeProps {
   onOpen: () => void;
   guestName?: string;
   weddingDateIso: string;
-  heroPhoto: string;
-  kissPhoto: string;
+  heroPhoto: string; // Ảnh 1 trên dải photostrip (DSC_9032.jpg)
+  kissPhoto: string; // Ảnh 2 dưới dải photostrip (couple-hero.jpg)
   groomShortName: string;
   brideShortName: string;
   displayDate: string;
 }
-
-/**
- * Con Dấu Sáp 3D Nổi Khối Tinh Xảo (Wax Seal)
- */
-const LuxuryWaxSeal: React.FC<{ theme: 'emerald' | 'burgundy'; isOpening?: boolean }> = ({
-  theme,
-  isOpening,
-}) => {
-  const isEmerald = theme === 'emerald';
-  return (
-    <motion.div
-      animate={
-        isOpening
-          ? { scale: [1, 1.25, 0.95], rotate: [0, -12, 10] }
-          : { scale: [1, 1.06, 1] }
-      }
-      transition={
-        isOpening
-          ? { duration: 0.6, ease: 'easeInOut' }
-          : { duration: 2.4, repeat: Infinity, ease: 'easeInOut' }
-      }
-      className="relative w-15 h-15 sm:w-17 sm:h-17 rounded-full flex items-center justify-center select-none shadow-[0_10px_25px_rgba(0,0,0,0.45)] cursor-pointer"
-      style={{
-        background: isEmerald
-          ? 'radial-gradient(circle at 35% 30%, #5EA372 0%, #2D633C 55%, #15381E 100%)'
-          : 'radial-gradient(circle at 35% 30%, #B82A48 0%, #751429 55%, #3B0713 100%)',
-        boxShadow: isEmerald
-          ? '0 10px 25px rgba(20, 50, 30, 0.45), inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -3px 6px rgba(0,0,0,0.6)'
-          : '0 10px 25px rgba(60, 10, 20, 0.45), inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -3px 6px rgba(0,0,0,0.6)',
-      }}
-    >
-      <div
-        className="w-[84%] h-[84%] rounded-full border shadow-inner flex items-center justify-center"
-        style={{ borderColor: isEmerald ? 'rgba(154, 230, 175, 0.7)' : 'rgba(255, 190, 205, 0.7)' }}
-      >
-        <div className="flex flex-col items-center justify-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">
-          <span className="font-serif-luxury font-bold text-xs sm:text-sm tracking-wider">Đ &amp; H</span>
-          <Sparkles className="w-2.5 h-2.5 text-[#FFE082] mt-0.5 animate-pulse" />
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-/**
- * Chùm hoa cưới và dải ruy-băng ren buông rủ ở góc dưới bên phải phong bì
- */
-const EnvelopeFloralSpray: React.FC<{ theme: 'emerald' | 'burgundy' }> = ({ theme }) => {
-  const isEmerald = theme === 'emerald';
-  return (
-    <div className="pointer-events-none select-none">
-      <svg
-        viewBox="0 0 140 170"
-        className="w-32 sm:w-38 h-38 sm:h-46 drop-shadow-[0_16px_30px_rgba(0,0,0,0.32)]"
-      >
-        <defs>
-          <linearGradient id={`sprayCallaPetal-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            {isEmerald ? (
-              <>
-                <stop offset="0%" stopColor="#FFFFFF" />
-                <stop offset="55%" stopColor="#F5FAF6" />
-                <stop offset="100%" stopColor="#D2E8D7" />
-              </>
-            ) : (
-              <>
-                <stop offset="0%" stopColor="#C42A4A" />
-                <stop offset="55%" stopColor="#7E1428" />
-                <stop offset="100%" stopColor="#430713" />
-              </>
-            )}
-          </linearGradient>
-          <linearGradient id={`sprayRoseGrad-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            {isEmerald ? (
-              <>
-                <stop offset="0%" stopColor="#FFFFFF" />
-                <stop offset="100%" stopColor="#E3EFE5" />
-              </>
-            ) : (
-              <>
-                <stop offset="0%" stopColor="#E54B6E" />
-                <stop offset="100%" stopColor="#8A152E" />
-              </>
-            )}
-          </linearGradient>
-        </defs>
-
-        {/* 3 Dải ruy băng lụa mềm mại buông rủ dài thướt tha */}
-        <path
-          d="M 68 70 Q 42 120 54 165"
-          fill="none"
-          stroke={isEmerald ? '#FFFFFF' : '#8A152E'}
-          strokeWidth="3.5"
-          strokeDasharray="4,2"
-          opacity="0.95"
-        />
-        <path
-          d="M 72 70 Q 90 115 78 160"
-          fill="none"
-          stroke={isEmerald ? '#E2ECE3' : '#B83250'}
-          strokeWidth="2.5"
-          opacity="0.85"
-        />
-        <path
-          d="M 70 70 Q 60 125 64 168"
-          fill="none"
-          stroke={isEmerald ? '#FFFFFF' : '#DDA0B0'}
-          strokeWidth="1.8"
-          opacity="0.95"
-        />
-
-        {/* Cành lá khuynh diệp xanh ngát */}
-        <path d="M 68 70 Q 95 60 115 50" fill="none" stroke="#2F5C38" strokeWidth="2.2" strokeLinecap="round" />
-        <ellipse cx="90" cy="58" rx="8" ry="4.5" fill="#588D64" transform="rotate(-15 90 58)" />
-        <ellipse cx="106" cy="52" rx="7" ry="4" fill="#42784F" transform="rotate(-20 106 52)" />
-
-        <path d="M 68 70 Q 40 60 20 48" fill="none" stroke="#2F5C38" strokeWidth="2.2" strokeLinecap="round" />
-        <ellipse cx="44" cy="56" rx="8" ry="4.5" fill="#588D64" transform="rotate(20 44 56)" />
-        <ellipse cx="28" cy="50" rx="7" ry="4" fill="#42784F" transform="rotate(25 28 50)" />
-
-        {/* Cuống hoa vươn cao */}
-        <path d="M 68 70 Q 78 45 84 22" fill="none" stroke="#3D6846" strokeWidth="3" strokeLinecap="round" />
-        <path d="M 68 70 Q 56 42 46 18" fill="none" stroke="#2E5236" strokeWidth="2.8" strokeLinecap="round" />
-
-        {/* Bông hoa Calla vươn thẳng */}
-        <path
-          d="M 84 22 C 104 15 110 -5 88 -11 C 71 -13 67 6 77 21 Z"
-          fill={`url(#sprayCallaPetal-${theme})`}
-          stroke={isEmerald ? '#BFD7C3' : '#9E1C37'}
-          strokeWidth="0.8"
-        />
-        <path d="M 85 9 Q 86 -1 87 -7" stroke="#FCE79C" strokeWidth="2" strokeLinecap="round" />
-
-        {/* Bông hoa Calla nghiêng trái */}
-        <path
-          d="M 46 18 C 30 13 22 -5 40 -10 C 54 -10 56 6 49 20 Z"
-          fill={`url(#sprayCallaPetal-${theme})`}
-          stroke={isEmerald ? '#BFD7C3' : '#9E1C37'}
-          strokeWidth="0.8"
-        />
-        <path d="M 44 7 Q 42 -1 40 -6" stroke="#FCE79C" strokeWidth="1.8" strokeLinecap="round" />
-
-        {/* Bông hoa hồng lớn ở tâm bó hoa */}
-        <circle cx="68" cy="62" r="14" fill={`url(#sprayRoseGrad-${theme})`} stroke={isEmerald ? '#CDE5D2' : '#BD2F4F'} strokeWidth="0.8" />
-        <path d="M 62 58 Q 68 52 74 58 Q 78 64 72 68 Q 64 70 60 64 Z" fill="none" stroke={isEmerald ? '#8AB894' : '#6E0E22'} strokeWidth="1.2" />
-
-        {/* Chùm hoa baby trắng xum xuê */}
-        <circle cx="50" cy="50" r="3.2" fill="#FFFFFF" />
-        <circle cx="56" cy="44" r="2.8" fill="#FFFFFF" />
-        <circle cx="84" cy="52" r="3.2" fill="#FFFFFF" />
-        <circle cx="90" cy="46" r="2.8" fill="#FFFFFF" />
-        <circle cx="76" cy="78" r="3" fill="#FFFFFF" />
-        <circle cx="60" cy="78" r="2.8" fill="#FFFFFF" />
-
-        {/* Nơ buộc lụa sang trọng */}
-        <path
-          d="M 68 70 C 50 63 50 78 68 73 C 86 78 86 63 68 70 Z"
-          fill={isEmerald ? '#FFFFFF' : '#A32442'}
-          stroke={isEmerald ? '#CDE5D2' : '#E8A5B5'}
-          strokeWidth="1.2"
-        />
-        <circle cx="68" cy="71" r="3" fill={isEmerald ? '#E0F0E3' : '#D45371'} />
-      </svg>
-    </div>
-  );
-};
-
-/**
- * Chùm hoa cưới vươn nhẹ nhàng ở góc trên bên trái phong bì (tạo thế đối xứng thượng lưu)
- */
-const EnvelopeTopLeftFloral: React.FC<{ theme: 'emerald' | 'burgundy' }> = ({ theme }) => {
-  const isEmerald = theme === 'emerald';
-  return (
-    <div className="pointer-events-none select-none">
-      <svg
-        viewBox="0 0 120 120"
-        className="w-26 sm:w-32 h-26 sm:h-32 drop-shadow-[0_12px_24px_rgba(0,0,0,0.25)]"
-      >
-        <defs>
-          <linearGradient id={`topLeftCallaGrad-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            {isEmerald ? (
-              <>
-                <stop offset="0%" stopColor="#FFFFFF" />
-                <stop offset="60%" stopColor="#F5FAF6" />
-                <stop offset="100%" stopColor="#D5E8D9" />
-              </>
-            ) : (
-              <>
-                <stop offset="0%" stopColor="#C42A4A" />
-                <stop offset="60%" stopColor="#7E1428" />
-                <stop offset="100%" stopColor="#430713" />
-              </>
-            )}
-          </linearGradient>
-        </defs>
-
-        {/* Cành lá khuynh diệp xòe góc trên trái */}
-        <path d="M 65 65 Q 40 40 20 25" fill="none" stroke="#2F5C38" strokeWidth="2" strokeLinecap="round" />
-        <ellipse cx="45" cy="38" rx="8" ry="4.5" fill="#588D64" transform="rotate(-35 45 38)" />
-        <ellipse cx="30" cy="28" rx="7" ry="4" fill="#42784F" transform="rotate(-40 30 28)" />
-
-        <path d="M 65 65 Q 55 35 45 12" fill="none" stroke="#3D6846" strokeWidth="2.5" strokeLinecap="round" />
-        <path
-          d="M 45 12 C 30 8 24 -6 38 -10 C 50 -10 52 4 47 14 Z"
-          fill={`url(#topLeftCallaGrad-${theme})`}
-          stroke={isEmerald ? '#BFD7C3' : '#9E1C37'}
-          strokeWidth="0.8"
-        />
-        <path d="M 43 3 Q 41 -3 39 -8" stroke="#FCE79C" strokeWidth="1.8" strokeLinecap="round" />
-
-        {/* Bông hoa nhỏ và nụ hoa baby */}
-        <circle cx="58" cy="52" r="7" fill={isEmerald ? '#EDF6EF' : '#8A152E'} stroke={isEmerald ? '#CDE5D2' : '#BD2F4F'} strokeWidth="0.8" />
-        <circle cx="52" cy="62" r="3" fill="#FFFFFF" />
-        <circle cx="68" cy="46" r="2.8" fill="#FFFFFF" />
-        <circle cx="42" cy="50" r="2.5" fill="#FFFFFF" />
-      </svg>
-    </div>
-  );
-};
 
 export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
   theme = 'emerald',
@@ -248,29 +34,24 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
 }) => {
   const isEmerald = theme === 'emerald';
 
-  // Live countdown timer ticking từng giây
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const target = new Date(weddingDateIso).getTime();
-
     const updateTimer = () => {
-      const now = Date.now();
-      const diff = Math.max(0, target - now);
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      setTimeLeft({ days, hours, minutes, seconds });
+      const diff = Math.max(0, target - Date.now());
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
     };
-
     updateTimer();
     const interval = setInterval(updateTimer, 1000);
     return () => clearInterval(interval);
@@ -278,342 +59,644 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
 
   const padZero = (n: number) => String(n).padStart(2, '0');
 
-  const handleEnvelopeClick = () => {
+  // Định dạng ngày kiểu "03 | 03 | 2024" cho thiệp Oval Save the date giống hệt frame_002
+  const pipeDate = displayDate.replace(/\./g, ' | ');
+
+  // Tạo bèo vải ren cho nắp phong bì đóng (chạy từ 0,0 xuống 170,122 rồi lên 340,0)
+  const closedFlapLacePath = useMemo(() => {
+    const segs = 13;
+    let dLeft = 'M 0 0 ';
+    for (let i = 0; i < segs; i++) {
+      const t2 = (i + 1) / segs;
+      const tm = (i + 0.5) / segs;
+      const x2 = 170 * t2;
+      const y2 = 122 * t2;
+      const xm = 170 * tm - 6;
+      const ym = 122 * tm + 8.5;
+      dLeft += `Q ${xm.toFixed(1)} ${ym.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)} `;
+    }
+    let dRight = 'M 170 122 ';
+    for (let i = 0; i < segs; i++) {
+      const t2 = (i + 1) / segs;
+      const tm = (i + 0.5) / segs;
+      const x2 = 170 + 170 * t2;
+      const y2 = 122 - 122 * t2;
+      const xm = 170 + 170 * tm + 6;
+      const ym = 122 - 122 * tm + 8.5;
+      dRight += `Q ${xm.toFixed(1)} ${ym.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)} `;
+    }
+    return `${dLeft} L 170 108 Z ${dRight} L 170 108 Z`;
+  }, []);
+
+  // Tạo bèo vải ren Oval cho tấm thiệp Save The Date trồi lên khi mở phong bì (frame_002)
+  const ovalCardLacePath = useMemo(() => {
+    const cx = 105;
+    const cy = 140;
+    const rx = 90;
+    const ry = 122;
+    const n = 38;
+    let d = '';
+    for (let i = 0; i < n; i++) {
+      const t1 = (i / n) * 2 * Math.PI;
+      const t2 = ((i + 1) / n) * 2 * Math.PI;
+      const tm = (t1 + t2) / 2;
+      const x1 = cx + rx * Math.cos(t1);
+      const y1 = cy + ry * Math.sin(t1);
+      const x2 = cx + rx * Math.cos(t2);
+      const y2 = cy + ry * Math.sin(t2);
+      const xm = cx + (rx + 9) * Math.cos(tm);
+      const ym = cy + (ry + 9) * Math.sin(tm);
+      if (i === 0) d += `M ${x1.toFixed(1)} ${y1.toFixed(1)} `;
+      d += `Q ${xm.toFixed(1)} ${ym.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)} `;
+    }
+    return d + 'Z';
+  }, []);
+
+  const handleOpenClick = () => {
     if (!isOpen) {
       soundEngine.playOpenChime();
       onOpen();
     }
   };
 
-  return (
-    <section
-      className={`relative w-full flex flex-col items-center justify-center transition-all duration-700 px-4 sm:px-6 ${
-        isOpen ? 'py-8 border-b border-black/5' : 'py-12 my-auto'
-      }`}
-    >
-      {/* Lời Mời Kính Mời Tên Khách Mời */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-6 sm:mb-8"
-      >
-        <p
-          className={`font-serif-luxury text-xs sm:text-sm uppercase tracking-[0.24em] mb-2 font-medium ${
-            isEmerald ? 'text-[#3E6547]' : 'text-[#872D43]'
-          }`}
-        >
-          TRÂN TRỌNG KÍNH MỜI
-        </p>
-        <p
-          className={`font-script-luxury text-3xl sm:text-4xl md:text-5xl drop-shadow-sm ${
-            isEmerald ? 'text-[#2D5A3A]' : 'text-[#7D1E3A]'
-          }`}
-        >
-          {guestName || 'Bạn & Người Thương'}
-        </p>
-      </motion.div>
+  // ============================================================================
+  // TRẠNG THÁI 1: MÀN HÌNH PHONG BÌ ĐÓNG CHƯA MỞ THIỆP (GIỐNG 100% FRAME_001 VIDEO 1 & 2)
+  // ============================================================================
+  if (!isOpen) {
+    return (
+      <section className="relative w-full min-h-[calc(100dvh-48px)] md:min-h-[730px] flex flex-col items-center justify-center px-5 py-10 overflow-hidden select-none">
+        {/* NỀN MÀN HÌNH CHƯA MỞ THIỆP:
+            - Emerald (Style 6): Tranh sơn dầu hoa hồng trắng & lá xanh thẫm (garden-roses-bg.jpg) y hệt Video 1
+            - Burgundy (Style 7): Nền hồng kem mịn điểm chuỗi ngọc trai mờ sang trọng y hệt Video 2 */}
+        {isEmerald ? (
+          <>
+            <div
+              className="pointer-events-none absolute inset-0 bg-cover bg-center scale-105"
+              style={{ backgroundImage: `url("${decorAsset('garden-roses-bg.jpg')}")` }}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-black/12 to-black/38" />
+          </>
+        ) : (
+          <>
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  'radial-gradient(circle at 50% 35%, #FCF7F9 0%, #F7ECEF 58%, #EFE0E5 100%)',
+              }}
+            />
+            {/* Chuỗi ngọc trai mờ tinh tế ở góc màn hình chờ Style 7 */}
+            <svg
+              viewBox="0 0 120 180"
+              className="pointer-events-none absolute top-6 left-0 w-24 opacity-45"
+            >
+              {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                <circle
+                  key={i}
+                  cx={78 - i * 9}
+                  cy={14 + i * 13}
+                  r="4.5"
+                  fill="#FFFFFF"
+                  stroke="#D8B8C4"
+                  strokeWidth="0.6"
+                />
+              ))}
+            </svg>
+          </>
+        )}
 
-      {/* KHỐI PHONG BÌ 3D TƯƠNG TÁC (CHẠM VÀO ĐỂ MỞ) */}
-      <div
-        onClick={handleEnvelopeClick}
-        className="cursor-pointer relative w-[300px] sm:w-[340px] h-[200px] sm:h-[224px] my-3 select-none group"
-        style={{ perspective: '1200px' }}
+        {/* LỜI MỜI & TÊN KHÁCH MỜI PHÍA TRÊN PHONG BÌ */}
+        <motion.div
+          initial={{ opacity: 0, y: -14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-20 text-center mb-9 sm:mb-11"
+        >
+          <p
+            className={`font-serif-luxury text-xs sm:text-sm uppercase tracking-[0.26em] mb-2 font-medium ${
+              isEmerald
+                ? 'text-[#F6F3EB] drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)]'
+                : 'text-[#843045]'
+            }`}
+          >
+            TRÂN TRỌNG KÍNH MỜI
+          </p>
+          <p
+            className={`font-script-luxury text-4xl sm:text-5xl leading-tight ${
+              isEmerald
+                ? 'text-[#FFFDF7] drop-shadow-[0_3px_10px_rgba(0,0,0,0.7)]'
+                : 'text-[#6D1326]'
+            }`}
+          >
+            {guestName || 'Bạn & Người Thương'}
+          </p>
+        </motion.div>
+
+        {/* KHỐI PHONG BÌ ĐÓNG NẮP TƯƠNG TÁC (CHUẨN 100% FRAME_001) */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 18 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={handleOpenClick}
+          className="cursor-pointer relative z-20 w-[295px] sm:w-[345px] h-[196px] sm:h-[228px] my-2 group"
+        >
+          {/* THÂN PHONG BÌ CHỮ NHẬT ĐÓNG KÍN */}
+          <div className="absolute inset-0 rounded-[3px] shadow-[0_22px_50px_rgba(0,0,0,0.38)] overflow-hidden">
+            <svg viewBox="0 0 340 224" className="w-full h-full" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id={`closedBody-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                  {isEmerald ? (
+                    <>
+                      <stop offset="0%" stopColor="#F6F3EB" />
+                      <stop offset="55%" stopColor="#EDE8DC" />
+                      <stop offset="100%" stopColor="#E2DDD0" />
+                    </>
+                  ) : (
+                    <>
+                      <stop offset="0%" stopColor="#650E1E" />
+                      <stop offset="55%" stopColor="#520917" />
+                      <stop offset="100%" stopColor="#3D0510" />
+                    </>
+                  )}
+                </linearGradient>
+                <linearGradient id={`closedFlap-${theme}`} x1="50%" y1="0%" x2="50%" y2="100%">
+                  {isEmerald ? (
+                    <>
+                      <stop offset="0%" stopColor="#FAF8F2" />
+                      <stop offset="100%" stopColor="#ECE7DB" />
+                    </>
+                  ) : (
+                    <>
+                      <stop offset="0%" stopColor="#721124" />
+                      <stop offset="100%" stopColor="#560A18" />
+                    </>
+                  )}
+                </linearGradient>
+              </defs>
+
+              {/* Nền thân phong bì */}
+              <rect width="340" height="224" fill={`url(#closedBody-${theme})`} />
+
+              {/* Hai đường gấp chéo cánh dưới phong bì */}
+              <polygon
+                points="0,224 170,112 340,224"
+                fill={isEmerald ? 'rgba(255,255,255,0.28)' : 'rgba(255,255,255,0.03)'}
+                stroke={isEmerald ? 'rgba(180,172,155,0.45)' : 'rgba(130,25,45,0.4)'}
+                strokeWidth="0.9"
+              />
+
+              {/* Bèo vải ren chạy dọc 2 cạnh chéo của nắp chữ V (Y hệt frame_001) */}
+              <path
+                d={closedFlapLacePath}
+                fill={isEmerald ? '#FFFFFF' : '#4A0714'}
+                stroke={isEmerald ? '#DCD6C8' : '#35030C'}
+                strokeWidth="0.9"
+                opacity={isEmerald ? 0.95 : 0.92}
+              />
+
+              {/* Nắp tam giác chữ V chúc xuống đè lên trên bèo ren */}
+              <polygon
+                points="0,0 340,0 170,120"
+                fill={`url(#closedFlap-${theme})`}
+                stroke={isEmerald ? '#DFD9CB' : '#85182C'}
+                strokeWidth="0.9"
+              />
+            </svg>
+          </div>
+
+          {/* HOA CƯỚI THẬT ĐÍNH TRÊN PHONG BÌ ĐÓNG (ĐÚNG VỊ TRÍ TỪNG VIDEO!) */}
+          {isEmerald ? (
+            /* Video 1 (frame_001): Cụm lá hồng môn xanh + hoa trắng + dải ren & chuỗi ngọc rủ dọc cạnh trái phong bì */
+            <img
+              src={decorAsset('garden-floral-cluster.png')}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-9 -left-8 sm:-top-11 sm:-left-9 w-28 sm:w-32 z-30 object-contain -rotate-[6deg] drop-shadow-[0_12px_20px_rgba(0,0,0,0.35)]"
+            />
+          ) : (
+            /* Video 2 (frame_001): Cụm hoa lan đỏ & tua rua dài ở góc dưới bên trái + Nhành hoa đỏ ở góc trên bên phải */
+            <>
+              <img
+                src={decorAsset('burgundy-floral-tassel.png')}
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute top-[42%] -left-9 sm:-left-11 w-28 sm:w-32 z-30 object-contain drop-shadow-[0_14px_22px_rgba(40,4,12,0.42)]"
+              />
+              <img
+                src={decorAsset('burgundy-calla-single.png')}
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-12 right-1 sm:right-0 w-20 sm:w-24 z-15 object-contain rotate-[4deg] drop-shadow-[0_8px_14px_rgba(40,4,12,0.3)]"
+              />
+            </>
+          )}
+
+          {/* CON DẤU SÁP DẬP NỔI HOA Ở ĐỈNH NẮP V + ICON BÀN TAY TRẮNG NHẤP NHÁY */}
+          <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
+            <BotanicalWaxSeal theme={theme} size="lg" />
+            <div className="absolute -bottom-4 -right-5 z-40">
+              <ClickHandIndicator />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* NGÀY CƯỚI PHÍA DƯỚI PHONG BÌ (GIỐNG FRAME_001) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.35, duration: 0.8 }}
+          className="relative z-20 mt-12 sm:mt-14 text-center"
+        >
+          <p
+            className={`font-serif-luxury text-base sm:text-lg tracking-[0.28em] font-normal ${
+              isEmerald
+                ? 'text-[#F8F5EE] drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)]'
+                : 'text-[#843045]/85'
+            }`}
+          >
+            {displayDate}
+          </p>
+          <p
+            className={`text-[11px] font-serif-italic mt-1.5 ${
+              isEmerald ? 'text-white/80' : 'text-[#7D2C3F]/75'
+            }`}
+          >
+            Chạm vào dấu sáp để mở thiệp cưới
+          </p>
+        </motion.div>
+      </section>
+    );
+  }
+
+  // ============================================================================
+  // TRẠNG THÁI 2: PHONG BÌ ĐÃ MỞ NẮP Ở ĐẦU TRANG THIỆP + THIỆP OVAL REN + DẢI 2 ẢNH + COUNTDOWN
+  // Mô phỏng 100% giây 00:05 - 00:09 (v1_frames/frame_002.jpg & v2_frames/frame_002.jpg)
+  // ============================================================================
+  return (
+    <section className="relative w-full flex flex-col items-center pt-10 sm:pt-14 pb-8 px-4 sm:px-6 overflow-hidden select-none">
+      {/* Hoa văn Baroque chìm trang nhã ở đỉnh trang thiệp giống hệt đầu frame_002 */}
+      <svg
+        viewBox="0 0 400 44"
+        className="pointer-events-none absolute top-0 inset-x-0 w-full h-10 opacity-20"
+        preserveAspectRatio="none"
       >
-        {/* NỀN SAU CỦA PHONG BÌ (Mặt trong bao thư) */}
+        <path
+          d="M 0 12 Q 50 38 100 12 T 200 12 T 300 12 T 400 12"
+          fill="none"
+          stroke={isEmerald ? '#7A9174' : '#B58292'}
+          strokeWidth="1.2"
+        />
+        <path
+          d="M 0 22 Q 50 44 100 22 T 200 22 T 300 22 T 400 22"
+          fill="none"
+          stroke={isEmerald ? '#7A9174' : '#B58292'}
+          strokeWidth="0.8"
+        />
+      </svg>
+
+      {/* KHỐI PHONG BÌ ĐÃ MỞ NẮP (NẮP NHỌN HƯỚNG LÊN TRÊN) */}
+      <div className="relative w-[305px] sm:w-[350px] h-[340px] sm:h-[380px] flex items-end justify-center mt-2">
+        {/* Dải ruy băng ren (Emerald) hoặc Chuỗi ngọc trai uốn cong hai bên (Burgundy) như frame_002 */}
+        {isEmerald ? (
+          <>
+            <svg
+              viewBox="0 0 90 160"
+              className="pointer-events-none absolute right-[-22px] top-12 w-20 opacity-85 z-5"
+            >
+              <path
+                d="M 10 130 C 38 105 32 52 78 24"
+                fill="none"
+                stroke="#EAE7DF"
+                strokeWidth="13"
+                strokeLinecap="round"
+              />
+              <path
+                d="M 10 130 C 38 105 32 52 78 24"
+                fill="none"
+                stroke="#FFFFFF"
+                strokeWidth="9"
+                strokeDasharray="2,4"
+                strokeLinecap="round"
+              />
+            </svg>
+            <svg
+              viewBox="0 0 90 140"
+              className="pointer-events-none absolute left-[-24px] bottom-8 w-18 opacity-85 z-5"
+            >
+              <path
+                d="M 72 20 C 42 45 48 92 8 118"
+                fill="none"
+                stroke="#EAE7DF"
+                strokeWidth="12"
+                strokeLinecap="round"
+              />
+              <path
+                d="M 72 20 C 42 45 48 92 8 118"
+                fill="none"
+                stroke="#FFFFFF"
+                strokeWidth="8"
+                strokeDasharray="2,4"
+                strokeLinecap="round"
+              />
+            </svg>
+          </>
+        ) : (
+          <>
+            {/* Chuỗi ngọc trai bên phải & bên trái phong bì (frame_002 Video 2) */}
+            <svg
+              viewBox="0 0 80 140"
+              className="pointer-events-none absolute -right-7 top-16 w-16 z-5 opacity-90"
+            >
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                <circle
+                  key={i}
+                  cx={58 - Math.sin((i / 8) * Math.PI) * 26}
+                  cy={14 + i * 13}
+                  r="4"
+                  fill="#FFFFFF"
+                  stroke="#D3B1BE"
+                  strokeWidth="0.6"
+                />
+              ))}
+            </svg>
+            <svg
+              viewBox="0 0 80 140"
+              className="pointer-events-none absolute -left-7 bottom-4 w-16 z-5 opacity-90"
+            >
+              {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                <circle
+                  key={i}
+                  cx={22 + Math.sin((i / 7) * Math.PI) * 22}
+                  cy={18 + i * 13}
+                  r="4"
+                  fill="#FFFFFF"
+                  stroke="#D3B1BE"
+                  strokeWidth="0.6"
+                />
+              ))}
+            </svg>
+          </>
+        )}
+
+        {/* 1. NẮP PHONG BÌ MỞ NHỌN HƯỚNG LÊN TRÊN (Lớp sau cùng của phong bì) */}
+        <div className="pointer-events-none absolute bottom-[172px] sm:bottom-[192px] inset-x-0 h-[112px] sm:h-[126px] z-8">
+          <svg viewBox="0 0 340 125" className="w-full h-full" preserveAspectRatio="none">
+            <polygon
+              points="0,125 170,6 340,125"
+              fill={isEmerald ? '#EFECE3' : '#580B1A'}
+              stroke={isEmerald ? '#DDD7C8' : '#7A1428'}
+              strokeWidth="1"
+            />
+            <polygon
+              points="14,125 170,18 326,125"
+              fill={isEmerald ? '#E7E2D6' : '#460713'}
+            />
+          </svg>
+        </div>
+
+        {/* 2. LÒNG TRONG THÂN PHONG BÌ */}
         <div
-          className="absolute inset-0 rounded-lg shadow-[0_22px_50px_rgba(0,0,0,0.22)] border"
+          className="pointer-events-none absolute bottom-0 inset-x-0 h-[174px] sm:h-[194px] rounded-b-[4px] shadow-[0_18px_40px_rgba(0,0,0,0.16)] z-10"
           style={{
-            background: isEmerald
-              ? 'linear-gradient(180deg, #EDF4EE 0%, #D8E6DB 100%)'
-              : 'linear-gradient(180deg, #4F0E1D 0%, #2D050E 100%)',
-            borderColor: isEmerald ? '#D3E2D5' : '#6B1627',
+            background: isEmerald ? '#E6E1D5' : '#420612',
           }}
         />
 
-        {/* THIỆP & DẢI ẢNH POLAROID TRỒI LÊN TỪ LÒNG PHONG BÌ (Frame 002) */}
-        <AnimatePresence>
-          {isOpen && (
-            <>
-              {/* DẢI 2 ẢNH CƯỚI POLAROID LIỀN NHAU (Photo Strip) TRỒI LỆCH TRÁI */}
-              <motion.div
-                key="envelope-photo-strip"
-                initial={{ y: 50, x: -35, rotate: 0, opacity: 0, scale: 0.8 }}
-                animate={{ y: -78, x: -68, rotate: -10, opacity: 1, scale: 1 }}
-                exit={{ y: 30, opacity: 0 }}
-                transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute left-1/2 top-2 -translate-x-1/2 z-15 w-[122px] sm:w-[134px] bg-white p-1.5 pb-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.25)] border border-stone-200/90 rounded-[2px]"
+        {/* 3. THIỆP OVAL VIỀN VẢI REN "SAVE THE DATE" TRỒI CAO Ở GIỮA - LỆCH PHẢI (Y HỆT FRAME_002) */}
+        <motion.div
+          initial={{ y: 75, opacity: 0, scale: 0.9 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute bottom-[68px] sm:bottom-[76px] right-[14px] sm:right-[18px] w-[196px] sm:w-[222px] z-15"
+        >
+          <div className="relative w-full">
+            <svg
+              viewBox="0 0 210 280"
+              className="w-full h-auto drop-shadow-[0_10px_24px_rgba(0,0,0,0.12)]"
+            >
+              {/* Viền bèo vải ren trắng xốp */}
+              <path
+                d={ovalCardLacePath}
+                fill="#FFFFFF"
+                stroke={isEmerald ? '#E2DDD2' : '#EAD9DF'}
+                strokeWidth="1"
+              />
+              {/* Lòng thiệp Oval */}
+              <ellipse
+                cx="105"
+                cy="140"
+                rx="82"
+                ry="114"
+                fill={isEmerald ? '#FCFBF8' : '#FFFDFD'}
+                stroke={isEmerald ? '#E5E0D5' : '#EFE0E5'}
+                strokeWidth="1"
+              />
+              {/* Hai chiếc lá Calla dập nổi trắng ngà ở đáy thiệp Oval (chi tiết đắt giá trong frame_002!) */}
+              <g opacity="0.85">
+                <path
+                  d="M 104 228 C 118 206 142 195 158 205 C 145 224 126 232 104 228 Z"
+                  fill="#F5F3EE"
+                  stroke="#DCD7CC"
+                  strokeWidth="1"
+                />
+                <path
+                  d="M 104 228 Q 128 214 148 207"
+                  fill="none"
+                  stroke="#E3DFD5"
+                  strokeWidth="0.9"
+                />
+                <path
+                  d="M 96 232 C 84 214 82 196 93 188 C 103 198 104 216 96 232 Z"
+                  fill="#F5F3EE"
+                  stroke="#DCD7CC"
+                  strokeWidth="1"
+                />
+              </g>
+            </svg>
+
+            {/* Chữ bên trong Thiệp Oval */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-5 pb-5 text-center">
+              <p
+                className={`font-serif-luxury text-[9px] sm:text-[10px] uppercase tracking-[0.2em] mb-1 ${
+                  isEmerald ? 'text-[#4A6642]' : 'text-[#7A283B]'
+                }`}
               >
-                {/* Ảnh 1: Chân dung dâu rể Đức & Hậu đưa tay làm tim bên má */}
-                <div className="aspect-[4/3.8] w-full overflow-hidden bg-stone-100 mb-1 rounded-[1px]">
-                  <img
-                    src={heroPhoto}
-                    alt={`${groomShortName} & ${brideShortName}`}
-                    className="w-full h-full object-cover object-[center_28%]"
-                  />
-                </div>
-                {/* Ảnh 2: Nụ hôn ngọt ngào */}
-                <div className="aspect-[4/3.8] w-full overflow-hidden bg-stone-100 mb-1.5 rounded-[1px]">
-                  <img
-                    src={kissPhoto}
-                    alt="Happy Wedding"
-                    className="w-full h-full object-cover object-[center_22%]"
-                  />
-                </div>
-                <p
-                  className={`font-script-luxury text-base text-center leading-none mt-0.5 ${
-                    isEmerald ? 'text-[#2D5A3A]' : 'text-[#7D1E3A]'
-                  }`}
-                >
-                  {groomShortName} &amp; {brideShortName}
-                </p>
-              </motion.div>
-
-              {/* THIỆP OVAL "SAVE THE DATE" TRỒI LỆCH PHẢI (Frame 002) */}
-              <motion.div
-                key="envelope-save-date-card"
-                initial={{ y: 55, x: 20, scale: 0.85, opacity: 0 }}
-                animate={{ y: -82, x: 50, scale: 1, opacity: 1 }}
-                exit={{ y: 30, opacity: 0 }}
-                transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute left-1/2 top-2 -translate-x-1/2 z-16 w-[150px] sm:w-[165px] aspect-[1/1.38] rounded-[50%/42%] p-3.5 shadow-[0_18px_36px_rgba(0,0,0,0.22)] flex flex-col items-center justify-center text-center border-2 border-dashed"
-                style={{
-                  background: isEmerald
-                    ? 'radial-gradient(circle at 50% 30%, #FFFFFF 0%, #FAFDFB 60%, #EBF4ED 100%)'
-                    : 'radial-gradient(circle at 50% 30%, #FFFFFF 0%, #FFFDFC 60%, #F8ECF1 100%)',
-                  borderColor: isEmerald ? '#85C396' : '#D99FB1',
-                }}
+                SAVE THE DATE
+              </p>
+              <p
+                className={`font-serif-luxury text-xs sm:text-sm font-semibold tracking-wider mb-2.5 ${
+                  isEmerald ? 'text-[#334F2C]' : 'text-[#5C1022]'
+                }`}
               >
-                <p
-                  className={`font-serif-luxury text-[9px] uppercase tracking-[0.22em] font-medium ${
-                    isEmerald ? 'text-[#3E6547]' : 'text-[#872D43]'
-                  }`}
-                >
-                  SAVE THE DATE
-                </p>
-                <p
-                  className={`font-serif-luxury font-bold text-xs my-0.5 ${
-                    isEmerald ? 'text-[#2D5A3A]' : 'text-[#7D1E3A]'
-                  }`}
-                >
-                  {displayDate}
-                </p>
-                <h4
-                  className={`font-script-luxury text-2xl leading-tight mt-0.5 ${
-                    isEmerald ? 'text-[#2D5A3A]' : 'text-[#7D1E3A]'
-                  }`}
-                >
-                  {groomShortName}
-                  <span className="block text-xs font-serif-italic opacity-70 my-0.5">&amp;</span>
-                  {brideShortName}
-                </h4>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-
-        {/* THÂN TRƯỚC PHONG BÌ (TÚI PHONG BÌ HÌNH CHỮ V CHE CHÂN ẢNH) */}
-        <div className="pointer-events-none absolute inset-0 z-20 rounded-lg overflow-hidden">
-          <svg viewBox="0 0 340 224" className="w-full h-full" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id={`envLeftGrad-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                {isEmerald ? (
-                  <>
-                    <stop offset="0%" stopColor="#F5F8F5" />
-                    <stop offset="100%" stopColor="#E6EDE7" />
-                  </>
-                ) : (
-                  <>
-                    <stop offset="0%" stopColor="#6E1528" />
-                    <stop offset="100%" stopColor="#4A0B19" />
-                  </>
-                )}
-              </linearGradient>
-              <linearGradient id={`envRightGrad-${theme}`} x1="100%" y1="0%" x2="0%" y2="100%">
-                {isEmerald ? (
-                  <>
-                    <stop offset="0%" stopColor="#EFF4F0" />
-                    <stop offset="100%" stopColor="#DFE8E0" />
-                  </>
-                ) : (
-                  <>
-                    <stop offset="0%" stopColor="#631223" />
-                    <stop offset="100%" stopColor="#3F0914" />
-                  </>
-                )}
-              </linearGradient>
-              <linearGradient id={`envBottomGrad-${theme}`} x1="50%" y1="100%" x2="50%" y2="0%">
-                {isEmerald ? (
-                  <>
-                    <stop offset="0%" stopColor="#FCFEFC" />
-                    <stop offset="100%" stopColor="#E8F1EA" />
-                  </>
-                ) : (
-                  <>
-                    <stop offset="0%" stopColor="#7E192F" />
-                    <stop offset="100%" stopColor="#550D1D" />
-                  </>
-                )}
-              </linearGradient>
-            </defs>
-
-            {/* Cánh gập bên trái */}
-            <polygon points="0,0 170,118 0,224" fill={`url(#envLeftGrad-${theme})`} />
-            {/* Cánh gập bên phải */}
-            <polygon points="340,0 170,118 340,224" fill={`url(#envRightGrad-${theme})`} />
-            {/* Cánh dưới chữ V gập lên (Túi đựng) */}
-            <polygon
-              points="0,224 170,110 340,224"
-              fill={`url(#envBottomGrad-${theme})`}
-              stroke={isEmerald ? '#D3E2D5' : '#8A1F35'}
-              strokeWidth="0.8"
-            />
-          </svg>
-        </div>
-
-        {/* NẮP PHONG BÌ TRÊN (Mở lật 180 độ 3D khi chạm) */}
-        <motion.div
-          initial={false}
-          animate={{ rotateX: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.85, ease: [0.4, 0, 0.2, 1] }}
-          style={{
-            transformOrigin: 'top center',
-            transformStyle: 'preserve-3d',
-            zIndex: isOpen ? 5 : 25,
-          }}
-          className="pointer-events-none absolute top-0 inset-x-0 h-[118px]"
-        >
-          <svg viewBox="0 0 340 118" className="w-full h-full" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id={`envFlapGrad-${theme}`} x1="50%" y1="0%" x2="50%" y2="100%">
-                {isEmerald ? (
-                  <>
-                    <stop offset="0%" stopColor="#FFFFFF" />
-                    <stop offset="100%" stopColor="#EDF5EE" />
-                  </>
-                ) : (
-                  <>
-                    <stop offset="0%" stopColor="#8A1B33" />
-                    <stop offset="100%" stopColor="#5C0F20" />
-                  </>
-                )}
-              </linearGradient>
-            </defs>
-            {/* Nắp tam giác chữ V */}
-            <polygon
-              points="0,0 340,0 170,118"
-              fill={`url(#envFlapGrad-${theme})`}
-              stroke={isEmerald ? '#CFDFD2' : '#99223B'}
-              strokeWidth="1"
-            />
-            {/* Viền ren móc hoa tinh xảo viền theo cạnh chữ V của nắp (frame_001) */}
-            <path
-              d="M 6 6 L 170 112 L 334 6"
-              stroke={isEmerald ? '#FFFFFF' : '#FCE7EE'}
-              strokeWidth="2.8"
-              strokeDasharray="5,3"
-              fill="none"
-              opacity="0.9"
-            />
-          </svg>
+                {pipeDate}
+              </p>
+              <h4
+                className={`font-script-luxury text-[28px] sm:text-[33px] leading-[1.15] ${
+                  isEmerald ? 'text-[#3A5A32]' : 'text-[#6B1326]'
+                }`}
+              >
+                <span className="block">{groomShortName}</span>
+                <span className="block mt-0.5">{brideShortName}</span>
+              </h4>
+            </div>
+          </div>
         </motion.div>
 
-        {/* CHÙM HOA CƯỚI GÓC TRÊN BÊN TRÁI PHONG BÌ (Tạo vẻ đẹp cân xứng, lộng lẫy thượng lưu) */}
-        <div className="absolute -top-7 -left-7 z-30 pointer-events-none">
-          <EnvelopeTopLeftFloral theme={theme} />
-        </div>
-
-        {/* CHÙM HOA CƯỚI & RUY BĂNG REN GÓC DƯỚI BÊN PHẢI PHONG BÌ (frame_001 & 002) */}
-        <div className="absolute -bottom-12 -right-8 z-30 pointer-events-none">
-          <EnvelopeFloralSpray theme={theme} />
-        </div>
-
-        {/* HẠT BỤI VÀNG VÀ CÁNH HOA LƠ LỬNG LÃNG MẠN (Sparkles & Floating Petals) */}
+        {/* 4. DẢI PHOTOBOOTH 2 ẢNH CƯỚI NGHIÊNG BÊN TRÁI TRỒI LÊN TỪ PHONG BÌ (Y HỆT FRAME_002) */}
         <motion.div
-          animate={{ y: [-4, 6, -4], opacity: [0.6, 0.9, 0.6] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -top-4 right-1/4 pointer-events-none z-20"
+          initial={{ y: 80, rotate: -3, opacity: 0 }}
+          animate={{ y: 0, rotate: -11, opacity: 1 }}
+          transition={{ duration: 0.95, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute bottom-[64px] sm:bottom-[74px] left-[22px] sm:left-[26px] w-[104px] sm:w-[118px] bg-white p-1.5 pb-2.5 shadow-[0_14px_28px_rgba(0,0,0,0.2)] rounded-[2px] z-18"
         >
-          <Sparkles className="w-4 h-4 text-[#FCE79C]" />
-        </motion.div>
-        <motion.div
-          animate={{ y: [6, -5, 6], opacity: [0.5, 0.85, 0.5] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          className="absolute -bottom-6 left-1/4 pointer-events-none z-20"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-[#FCE79C]" />
-        </motion.div>
-
-        {/* CON DẤU SÁP 3D GẮN Ở ĐỈNH V CỦA TÚI PHONG BÌ */}
-        <div className="absolute top-[51%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
-          <LuxuryWaxSeal theme={theme} isOpening={isOpen} />
-        </div>
-
-        {/* Hướng dẫn chạm mở khi phong bì chưa mở */}
-        {!isOpen && (
-          <motion.div
-            animate={{ scale: [1, 1.4, 1], opacity: [0.7, 0.1, 0.7] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-            className={`absolute top-[51%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border pointer-events-none z-25 ${
-              isEmerald ? 'border-[#5EA372]' : 'border-[#C42A4A]'
+          {/* Hoa điểm xuyết trên đỉnh dải ảnh Photobooth (như trong frame_002) */}
+          <img
+            src={
+              isEmerald
+                ? decorAsset('garden-floral-cluster.png')
+                : decorAsset('burgundy-calla-single.png')
+            }
+            alt=""
+            aria-hidden="true"
+            className={`pointer-events-none absolute z-25 object-contain drop-shadow-md ${
+              isEmerald
+                ? '-top-8 left-4 w-14 h-16 rotate-[22deg] object-top'
+                : '-top-9 right-1 w-14 h-16 -rotate-[20deg]'
             }`}
           />
-        )}
+
+          {/* Ảnh 1 (trên): Phong bao ban đầu dùng Ảnh 2 (DSC_9032.jpg - sạch 100%) */}
+          <div className="aspect-[4/4.3] w-full overflow-hidden bg-stone-100 mb-1.5">
+            <img
+              src={heroPhoto}
+              alt={`${groomShortName} & ${brideShortName}`}
+              className="w-full h-full object-cover object-[center_20%]"
+            />
+          </div>
+          {/* Ảnh 2 (dưới): Ảnh đôi tình cảm thứ 2 (couple-hero.jpg) */}
+          <div className="aspect-[4/4.3] w-full overflow-hidden bg-stone-100">
+            <img
+              src={kissPhoto}
+              alt={`${groomShortName} & ${brideShortName}`}
+              className="w-full h-full object-cover object-[center_24%]"
+            />
+          </div>
+        </motion.div>
+
+        {/* 5. MẶT TRƯỚC TÚI PHONG BÌ CHỮ V GẬP LÊN CHE CHÂN DẢI ẢNH & THIỆP OVAL */}
+        <div className="pointer-events-none absolute bottom-0 inset-x-0 h-[174px] sm:h-[194px] rounded-b-[4px] overflow-hidden z-20">
+          <svg viewBox="0 0 340 194" className="w-full h-full" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id={`openLeft-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                {isEmerald ? (
+                  <>
+                    <stop offset="0%" stopColor="#F6F3EB" />
+                    <stop offset="100%" stopColor="#EAE5D8" />
+                  </>
+                ) : (
+                  <>
+                    <stop offset="0%" stopColor="#690F20" />
+                    <stop offset="100%" stopColor="#4D0816" />
+                  </>
+                )}
+              </linearGradient>
+              <linearGradient id={`openRight-${theme}`} x1="100%" y1="0%" x2="0%" y2="100%">
+                {isEmerald ? (
+                  <>
+                    <stop offset="0%" stopColor="#F3EFE6" />
+                    <stop offset="100%" stopColor="#E6E0D2" />
+                  </>
+                ) : (
+                  <>
+                    <stop offset="0%" stopColor="#610C1D" />
+                    <stop offset="100%" stopColor="#470713" />
+                  </>
+                )}
+              </linearGradient>
+              <linearGradient id={`openBottom-${theme}`} x1="50%" y1="100%" x2="50%" y2="0%">
+                {isEmerald ? (
+                  <>
+                    <stop offset="0%" stopColor="#F9F7F1" />
+                    <stop offset="100%" stopColor="#EFECE2" />
+                  </>
+                ) : (
+                  <>
+                    <stop offset="0%" stopColor="#721225" />
+                    <stop offset="100%" stopColor="#580B1A" />
+                  </>
+                )}
+              </linearGradient>
+            </defs>
+
+            {/* Cánh trái */}
+            <polygon points="0,0 170,104 0,194" fill={`url(#openLeft-${theme})`} />
+            {/* Cánh phải */}
+            <polygon points="340,0 170,104 340,194" fill={`url(#openRight-${theme})`} />
+            {/* Túi chữ V dưới */}
+            <polygon
+              points="0,194 170,88 340,194"
+              fill={`url(#openBottom-${theme})`}
+              stroke={isEmerald ? '#DFD9CB' : '#86192E'}
+              strokeWidth="0.9"
+            />
+          </svg>
+        </div>
+
+        {/* 6. CON DẤU SÁP DẬP NỔI HOA GẮN Ở TÂM TÚI PHONG BÌ */}
+        <div className="pointer-events-none absolute bottom-[64px] sm:bottom-[72px] left-1/2 -translate-x-1/2 z-25">
+          <BotanicalWaxSeal theme={theme} size="md" />
+        </div>
+
+        {/* 7. CỤM HOA CƯỚI THẬT & DẢI REN / TUA RUA RỦ DÀI Ở GÓC DƯỚI BÊN PHẢI PHONG BÌ (Y HỆT FRAME_002) */}
+        <motion.img
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.85, delay: 0.15 }}
+          src={
+            isEmerald
+              ? decorAsset('garden-floral-cluster.png')
+              : decorAsset('burgundy-floral-tassel.png')
+          }
+          alt=""
+          aria-hidden="true"
+          className={`pointer-events-none absolute z-30 object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.24)] ${
+            isEmerald
+              ? '-bottom-24 -right-6 sm:-bottom-28 sm:-right-8 w-30 sm:w-36'
+              : '-bottom-20 -right-6 sm:-bottom-24 sm:-right-7 w-26 sm:w-32'
+          }`}
+        />
       </div>
 
-      {/* DÒNG HƯỚNG DẪN HOẶC BẢNG ĐẾM NGƯỢC THỜI GIAN THỰC (BEGINS IN...) */}
-      <div className="min-h-[72px] flex flex-col items-center justify-center mt-3 sm:mt-5 text-center">
-        {!isOpen ? (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className={`text-xs font-serif-italic flex items-center justify-center gap-1.5 ${
-              isEmerald ? 'text-[#2D5A3A]' : 'text-[#7D1E3A]'
-            }`}
-          >
-            <span>Chạm vào con dấu sáp để mở thiệp cưới</span>
-            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] animate-pulse" />
-          </motion.p>
-        ) : (
-          /* BẢNG ĐẾM NGƯỢC THỜI GIAN THỰC (BEGINS IN... - Frame 002) */
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-center"
-          >
-            <p
-              className={`font-serif-luxury text-[11px] sm:text-xs uppercase tracking-[0.26em] mb-1 font-medium ${
-                isEmerald ? 'text-[#3E6547]' : 'text-[#872D43]'
-              }`}
-            >
-              BEGINS IN...
-            </p>
-            <div
-              className={`font-serif-luxury text-2xl sm:text-3xl font-light tracking-widest flex items-center gap-2 ${
-                isEmerald ? 'text-[#1F3D27]' : 'text-[#5E1223]'
-              }`}
-            >
-              <span>{padZero(timeLeft.days)}</span>
-              <span className="opacity-40 text-lg">:</span>
-              <span>{padZero(timeLeft.hours)}</span>
-              <span className="opacity-40 text-lg">:</span>
-              <span>{padZero(timeLeft.minutes)}</span>
-              <span className="opacity-40 text-lg">:</span>
-              <span className="font-medium text-[#D4AF37]">{padZero(timeLeft.seconds)}</span>
-            </div>
-            <div
-              className={`flex items-center gap-6 text-[9px] uppercase tracking-wider opacity-65 mt-0.5 font-serif-luxury ${
-                isEmerald ? 'text-[#3E6547]' : 'text-[#872D43]'
-              }`}
-            >
-              <span>Ngày</span>
-              <span>Giờ</span>
-              <span>Phút</span>
-              <span>Giây</span>
-            </div>
-          </motion.div>
-        )}
-      </div>
+      {/* BẢNG ĐẾM NGƯỢC THỜI GIAN THỰC "BEGINS IN..." (CHUẨN TYPOGRAPHY FRAME_002) */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        className="mt-10 sm:mt-12 flex flex-col items-center text-center relative z-10"
+      >
+        <p
+          className={`font-serif-luxury text-xs sm:text-sm uppercase tracking-[0.22em] mb-2 ${
+            isEmerald ? 'text-[#3F5E37]' : 'text-[#6E1629]'
+          }`}
+        >
+          BEGINS IN...
+        </p>
+        <div
+          className={`font-serif-luxury text-3xl sm:text-4xl font-normal tracking-[0.14em] flex items-center gap-2.5 sm:gap-3.5 ${
+            isEmerald ? 'text-[#3B5933]' : 'text-[#591120]'
+          }`}
+        >
+          <span>{padZero(timeLeft.days)}</span>
+          <span className="opacity-55 text-xl">:</span>
+          <span>{padZero(timeLeft.hours)}</span>
+          <span className="opacity-55 text-xl">:</span>
+          <span>{padZero(timeLeft.minutes)}</span>
+          <span className="opacity-55 text-xl">:</span>
+          <span>{padZero(timeLeft.seconds)}</span>
+        </div>
+      </motion.div>
     </section>
   );
 };

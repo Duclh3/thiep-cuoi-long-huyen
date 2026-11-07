@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { decorAsset } from './VintageFloralArtwork';
 
 interface CrochetLaceMirrorFrameProps {
   theme?: 'emerald' | 'burgundy';
@@ -12,285 +13,267 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
 }) => {
   const isEmerald = theme === 'emerald';
 
-  // Tính toán trước đường cong ren móc (Scalloped Crochet Lace Path) cho elip khổ lớn
-  const { scallopedPath, eyelets, innerPearls, pearlDrapesRight, pearlDrapesLeft } = useMemo(() => {
-    const cx = 215;
-    const cy = 315;
-    const rx = 175;
-    const ry = 265;
-    const n = 44;
+  // Tạo đường viền vải ren thêu lỗ nhiều lớp (Broderie Anglaise Eyelet Ruffle Lace) giống 100% frame_004
+  const { outerLacePath, midLacePath, eyeletFlowers, pearlDrapesRight, pearlDrapesLeft } =
+    useMemo(() => {
+      const cx = 215;
+      const cy = 315;
+      const rxOuter = 178;
+      const ryOuter = 268;
+      const rxMid = 165;
+      const ryMid = 254;
+      const n = 52;
 
-    let d = '';
-    const eyeletPoints: Array<{ x: number; y: number }> = [];
-    const pearlPoints: Array<{ x: number; y: number; r: number }> = [];
+      let dOuter = '';
+      let dMid = '';
+      const flowers: Array<{
+        x: number;
+        y: number;
+        petals: Array<{ x: number; y: number }>;
+      }> = [];
 
-    for (let i = 0; i < n; i++) {
-      const t1 = (i / n) * 2 * Math.PI;
-      const t2 = ((i + 1) / n) * 2 * Math.PI;
-      const tm = (t1 + t2) / 2;
+      for (let i = 0; i < n; i++) {
+        const t1 = (i / n) * 2 * Math.PI;
+        const t2 = ((i + 1) / n) * 2 * Math.PI;
+        const tm = (t1 + t2) / 2;
 
-      const x1 = cx + rx * Math.cos(t1);
-      const y1 = cy + ry * Math.sin(t1);
-      const x2 = cx + rx * Math.cos(t2);
-      const y2 = cy + ry * Math.sin(t2);
+        // Cánh sò ren lớp ngoài cùng
+        const ox1 = cx + rxOuter * Math.cos(t1);
+        const oy1 = cy + ryOuter * Math.sin(t1);
+        const ox2 = cx + rxOuter * Math.cos(t2);
+        const oy2 = cy + ryOuter * Math.sin(t2);
+        const oxm = cx + (rxOuter + 13.5) * Math.cos(tm);
+        const oym = cy + (ryOuter + 13.5) * Math.sin(tm);
 
-      const bump = 11.5;
-      const xm = cx + (rx + bump) * Math.cos(tm);
-      const ym = cy + (ry + bump) * Math.sin(tm);
+        if (i === 0) dOuter += `M ${ox1.toFixed(1)} ${oy1.toFixed(1)} `;
+        dOuter += `Q ${oxm.toFixed(1)} ${oym.toFixed(1)} ${ox2.toFixed(1)} ${oy2.toFixed(1)} `;
 
-      if (i === 0) d += `M ${x1.toFixed(1)} ${y1.toFixed(1)} `;
-      d += `Q ${xm.toFixed(1)} ${ym.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)} `;
+        // Cánh sò ren lớp thứ hai bên trong
+        const mx1 = cx + rxMid * Math.cos(t1);
+        const my1 = cy + ryMid * Math.sin(t1);
+        const mx2 = cx + rxMid * Math.cos(t2);
+        const my2 = cy + ryMid * Math.sin(t2);
+        const mxm = cx + (rxMid + 7.5) * Math.cos(tm);
+        const mym = cy + (ryMid + 7.5) * Math.sin(tm);
 
-      // Lỗ ren kim thêu (needlepoint eyelet)
-      eyeletPoints.push({
-        x: cx + (rx + 4.2) * Math.cos(tm),
-        y: cy + (ry + 4.2) * Math.sin(tm),
-      });
+        if (i === 0) dMid += `M ${mx1.toFixed(1)} ${my1.toFixed(1)} `;
+        dMid += `Q ${mxm.toFixed(1)} ${mym.toFixed(1)} ${mx2.toFixed(1)} ${my2.toFixed(1)} `;
 
-      // Vòng ngọc trai nhỏ đính viền trong
-      pearlPoints.push({
-        x: cx + (rx - 9) * Math.cos(tm),
-        y: cy + (ry - 9) * Math.sin(tm),
-        r: 2.2,
-      });
-    }
-    d += 'Z';
+        // Cụm lỗ thêu hoa 4 cánh trên từng múi ren (Broderie Anglaise)
+        const fx = cx + (rxOuter + 3) * Math.cos(tm);
+        const fy = cy + (ryOuter + 3) * Math.sin(tm);
+        const petals = [0, 1, 2, 3].map((k) => {
+          const pa = tm + (k * Math.PI) / 2;
+          return {
+            x: fx + 2.8 * Math.cos(pa),
+            y: fy + 2.8 * Math.sin(pa),
+          };
+        });
+        flowers.push({ x: fx, y: fy, petals });
+      }
+      dOuter += 'Z';
+      dMid += 'Z';
 
-    // Chuỗi ngọc trai 3D rủ xuống từ góc trên bên phải (khổ lớn)
-    const rightStrand = [
-      { x: 342, y: 80, r: 7.5 },
-      { x: 355, y: 100, r: 8.5 },
-      { x: 362, y: 122, r: 7.5 },
-      { x: 364, y: 145, r: 6.5 },
-      { x: 362, y: 168, r: 5.5 },
-      { x: 356, y: 190, r: 5.0 },
-      { x: 351, y: 212, r: 4.5 },
-      { x: 349, y: 234, r: 4.0 },
-      { x: 351, y: 256, r: 3.8 },
-      { x: 355, y: 275, r: 3.5 },
-    ];
+      // Chuỗi ngọc trai uốn cong góc trên phải (giống frame_004 Video 2)
+      const rightStrand = [
+        { x: 355, y: 70, r: 5.5 },
+        { x: 372, y: 66, r: 5.5 },
+        { x: 388, y: 74, r: 5.5 },
+        { x: 396, y: 90, r: 5.5 },
+        { x: 394, y: 108, r: 5.2 },
+        { x: 385, y: 124, r: 5.0 },
+        { x: 379, y: 141, r: 4.8 },
+        { x: 380, y: 158, r: 4.6 },
+        { x: 385, y: 175, r: 4.4 },
+      ];
 
-    // Chuỗi ngọc trai 3D rủ cong ở góc dưới bên trái (khổ lớn)
-    const leftStrand = [
-      { x: 92, y: 480, r: 4.0 },
-      { x: 84, y: 502, r: 4.5 },
-      { x: 82, y: 524, r: 5.0 },
-      { x: 86, y: 546, r: 5.5 },
-      { x: 100, y: 566, r: 6.0 },
-      { x: 120, y: 582, r: 6.5 },
-      { x: 145, y: 592, r: 6.0 },
-      { x: 172, y: 596, r: 5.0 },
-    ];
+      // Chuỗi ngọc trai uốn cong góc dưới trái (giống frame_004 Video 2)
+      const leftStrand = [
+        { x: 58, y: 455, r: 4.6 },
+        { x: 46, y: 470, r: 4.8 },
+        { x: 42, y: 488, r: 5.0 },
+        { x: 48, y: 506, r: 5.2 },
+        { x: 60, y: 521, r: 5.2 },
+        { x: 74, y: 536, r: 5.0 },
+        { x: 82, y: 554, r: 4.8 },
+        { x: 78, y: 572, r: 4.6 },
+        { x: 66, y: 586, r: 4.4 },
+      ];
 
-    return {
-      scallopedPath: d,
-      eyelets: eyeletPoints,
-      innerPearls: pearlPoints,
-      pearlDrapesRight: rightStrand,
-      pearlDrapesLeft: leftStrand,
-    };
-  }, []);
+      return {
+        outerLacePath: dOuter,
+        midLacePath: dMid,
+        eyeletFlowers: flowers,
+        pearlDrapesRight: rightStrand,
+        pearlDrapesLeft: leftStrand,
+      };
+    }, []);
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.94, y: 30 }}
+      initial={{ opacity: 0, scale: 0.94, y: 26 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className="relative mx-auto w-full max-w-[385px] sm:max-w-[440px] md:max-w-[465px] select-none"
+      className="relative mx-auto w-full max-w-[390px] sm:max-w-[440px] md:max-w-[465px] select-none"
     >
-      {/* Hiệu ứng lơ lửng nhẹ nhàng tự nhiên (Floating Animation) */}
       <motion.div
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+        animate={{ y: [0, -5, 0] }}
+        transition={{ duration: 5.8, repeat: Infinity, ease: 'easeInOut' }}
         className="relative w-full"
       >
-        {/* LỚP NỀN SVG KHUNG GƯƠNG REN HOA & CHUỖI NGỌC TRAI 3D */}
+        {/* LỚP NỀN SVG KHUNG GƯƠNG VẢI REN THÊU LỖ & NGỌC TRAI */}
         <svg
           viewBox="0 0 430 630"
-          className="w-full h-auto drop-shadow-[0_24px_50px_rgba(0,0,0,0.14)]"
+          className="w-full h-auto drop-shadow-[0_18px_38px_rgba(0,0,0,0.09)]"
           style={{ overflow: 'visible' }}
         >
           <defs>
-            {/* Gradient Mặt Gương Trong Suốt Nhẹ */}
-            <radialGradient id={`mirrorGlassGrad-${theme}`} cx="40%" cy="30%" r="75%">
-              <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="55%" stopColor={isEmerald ? '#FAFDFB' : '#FFFDFC'} />
-              <stop offset="85%" stopColor={isEmerald ? '#F2F7F3' : '#FBF3F6'} />
-              <stop offset="100%" stopColor={isEmerald ? '#E5EFE7' : '#F6E4EB'} />
+            <radialGradient id={`mirrorCenterPaper-${theme}`} cx="45%" cy="35%" r="72%">
+              <stop offset="0%" stopColor={isEmerald ? '#FDFDFB' : '#FFFDFD'} />
+              <stop offset="70%" stopColor={isEmerald ? '#F9F8F3' : '#FCF5F7'} />
+              <stop offset="100%" stopColor={isEmerald ? '#F2EFE8' : '#F6EAEF'} />
             </radialGradient>
 
-            {/* Gradient Ngọc Trai 3D Ánh Xà Cừ Cao Cấp */}
-            <radialGradient id={`pearl3DGrad-${theme}`} cx="32%" cy="28%" r="68%">
+            <radialGradient id={`pearlBead-${theme}`} cx="32%" cy="28%" r="68%">
               <stop offset="0%" stopColor="#FFFFFF" />
-              <stop offset="25%" stopColor="#FFFFFF" />
-              <stop offset="60%" stopColor={isEmerald ? '#F6FAF7' : '#FDF6F8'} />
-              <stop offset="85%" stopColor={isEmerald ? '#D8E8DC' : '#E8CBD6'} />
-              <stop offset="100%" stopColor={isEmerald ? '#A6C6AD' : '#BA91A2'} />
+              <stop offset="30%" stopColor="#FFFFFF" />
+              <stop offset="68%" stopColor={isEmerald ? '#F4F6F2' : '#FAF0F4'} />
+              <stop offset="100%" stopColor={isEmerald ? '#BCC5B8' : '#C9AAB7'} />
             </radialGradient>
-
-            {/* Gradient Cánh Hoa Calla */}
-            <linearGradient id={`callaPetalGrad-${theme}`} x1="0%" y1="0%" x2="100%" y2="100%">
-              {isEmerald ? (
-                <>
-                  <stop offset="0%" stopColor="#FFFFFF" />
-                  <stop offset="60%" stopColor="#F5FAF6" />
-                  <stop offset="100%" stopColor="#D5E8D9" />
-                </>
-              ) : (
-                <>
-                  <stop offset="0%" stopColor="#B32442" />
-                  <stop offset="50%" stopColor="#7E1428" />
-                  <stop offset="100%" stopColor="#450813" />
-                </>
-              )}
-            </linearGradient>
-
-            {/* Gradient Cuống Hoa Xanh Ngọc / Xanh Rêu */}
-            <linearGradient id={`callaStemGrad-${theme}`} x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#558A60" />
-              <stop offset="100%" stopColor="#2E5236" />
-            </linearGradient>
           </defs>
 
-          {/* 1. LỚP ĐỆM REN NGOÀI CÙNG (Crochet Scalloped Ruffle) */}
+          {/* TRANG TRÍ GÓC NGOÀI: Dải ruy-băng ren mềm (Style 6) hoặc Chuỗi ngọc trai 3D (Style 7) */}
+          {isEmerald ? (
+            <g opacity="0.88">
+              {/* Dải ruy băng ren góc trên phải (giống v1_frames/frame_004) */}
+              <path
+                d="M 358 180 C 378 145 365 92 405 68"
+                fill="none"
+                stroke="#EAE8E1"
+                strokeWidth="14"
+                strokeLinecap="round"
+              />
+              <path
+                d="M 358 180 C 378 145 365 92 405 68"
+                fill="none"
+                stroke="#FFFFFF"
+                strokeWidth="10"
+                strokeDasharray="2,4"
+                strokeLinecap="round"
+              />
+              {/* Dải ruy băng ren góc dưới trái */}
+              <path
+                d="M 78 465 C 58 505 66 556 22 575"
+                fill="none"
+                stroke="#EAE8E1"
+                strokeWidth="14"
+                strokeLinecap="round"
+              />
+              <path
+                d="M 78 465 C 58 505 66 556 22 575"
+                fill="none"
+                stroke="#FFFFFF"
+                strokeWidth="10"
+                strokeDasharray="2,4"
+                strokeLinecap="round"
+              />
+            </g>
+          ) : (
+            <g className="drop-shadow-[0_3px_5px_rgba(80,20,35,0.16)]">
+              {pearlDrapesRight.map((p, idx) => (
+                <circle
+                  key={`pr-${idx}`}
+                  cx={p.x}
+                  cy={p.y}
+                  r={p.r}
+                  fill={`url(#pearlBead-${theme})`}
+                />
+              ))}
+              {pearlDrapesLeft.map((p, idx) => (
+                <circle
+                  key={`pl-${idx}`}
+                  cx={p.x}
+                  cy={p.y}
+                  r={p.r}
+                  fill={`url(#pearlBead-${theme})`}
+                />
+              ))}
+            </g>
+          )}
+
+          {/* 1. LỚP BÈO VẢI REN LỚN NGOÀI CÙNG (Outer Eyelet Lace Ruffle) */}
           <path
-            d={scallopedPath}
+            d={outerLacePath}
+            fill={isEmerald ? '#FDFCF9' : '#FFFDFE'}
+            stroke={isEmerald ? '#E2DFD7' : '#ECDCE2'}
+            strokeWidth="1.1"
+          />
+
+          {/* 2. CÁC BÔNG HOA LỖ THÊU KIM TRÊN BÈO REN (Broderie Anglaise Eyelets) */}
+          {eyeletFlowers.map((fl, idx) => (
+            <g key={`ef-${idx}`} fill={isEmerald ? '#DCD8CE' : '#E5CFD7'} opacity="0.82">
+              <circle cx={fl.x.toFixed(1)} cy={fl.y.toFixed(1)} r="1.2" />
+              {fl.petals.map((pt, k) => (
+                <circle key={k} cx={pt.x.toFixed(1)} cy={pt.y.toFixed(1)} r="1.05" />
+              ))}
+            </g>
+          ))}
+
+          {/* 3. LỚP BÈO REN THỨ HAI XẾP TẦNG MỀM MẠI */}
+          <path
+            d={midLacePath}
             fill="#FFFFFF"
-            stroke={isEmerald ? '#9AC4A1' : '#D9AAB9'}
-            strokeWidth="1.2"
-            className="drop-shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
-          />
-
-          {/* 2. CÁC LỖ REN THÊU TAY (Eyelets) */}
-          {eyelets.map((pt, idx) => (
-            <circle
-              key={`eyelet-${idx}`}
-              cx={pt.x.toFixed(1)}
-              cy={pt.y.toFixed(1)}
-              r="1.4"
-              fill={isEmerald ? '#6B9D73' : '#B87289'}
-              opacity="0.45"
-            />
-          ))}
-
-          {/* 3. VIỀN OVAL KÉP TRONG SUỐT (Lace Inner Ring) */}
-          <ellipse
-            cx="215"
-            cy="315"
-            rx="170"
-            ry="260"
-            fill="none"
-            stroke={isEmerald ? '#A9CFB0' : '#E2B8C6'}
-            strokeWidth="0.8"
-            strokeDasharray="3,2"
-          />
-
-          {/* 4. MẶT GƯƠNG OVAL CHÍNH (Mirror Body) */}
-          <ellipse
-            cx="215"
-            cy="315"
-            rx="166"
-            ry="256"
-            fill={`url(#mirrorGlassGrad-${theme})`}
-            stroke={isEmerald ? '#6E9E76' : '#9E3C56'}
+            stroke={isEmerald ? '#E7E4DC' : '#EFE0E6'}
             strokeWidth="1"
-            className="drop-shadow-inner"
           />
 
-          {/* 5. VÒNG CHUỖI NGỌC TRAI NHỎ CHẠY QUANH MẶT TRONG */}
-          {innerPearls.map((pt, idx) => (
-            <circle
-              key={`inner-pearl-${idx}`}
-              cx={pt.x.toFixed(1)}
-              cy={pt.y.toFixed(1)}
-              r={pt.r}
-              fill={`url(#pearl3DGrad-${theme})`}
-              stroke={isEmerald ? '#97BFA0' : '#D6A6B7'}
-              strokeWidth="0.3"
-            />
-          ))}
+          {/* 4. LÒNG KHUNG OVAL GIẤY MỸ THUẬT MỊN MÀNG Ở TÂM */}
+          <ellipse
+            cx="215"
+            cy="315"
+            rx="157"
+            ry="246"
+            fill={`url(#mirrorCenterPaper-${theme})`}
+            stroke={isEmerald ? '#DDD9CE' : '#E8D5DC'}
+            strokeWidth="1.2"
+          />
 
-          {/* 6. CHUỖI NGỌC TRAI 3D RỦ TỰ NHIÊN GÓC TRÊN BÊN PHẢI */}
-          <g className="filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.18)]">
-            <path
-              d="M 342 80 Q 365 140 349 234"
-              fill="none"
-              stroke="#E8E8E8"
-              strokeWidth="0.6"
-              opacity="0.6"
-            />
-            {pearlDrapesRight.map((p, idx) => (
-              <circle
-                key={`pearl-r-${idx}`}
-                cx={p.x}
-                cy={p.y}
-                r={p.r}
-                fill={`url(#pearl3DGrad-${theme})`}
-                stroke={isEmerald ? '#BDD9C2' : '#DEB7C6'}
-                strokeWidth="0.4"
-              />
-            ))}
-          </g>
-
-          {/* 7. CHUỖI NGỌC TRAI 3D RỦ CONG GÓC DƯỚI BÊN TRÁI */}
-          <g className="filter drop-shadow-[0_3px_6px_rgba(0,0,0,0.15)]">
-            <path
-              d="M 92 480 Q 75 540 172 596"
-              fill="none"
-              stroke="#E8E8E8"
-              strokeWidth="0.6"
-              opacity="0.6"
-            />
-            {pearlDrapesLeft.map((p, idx) => (
-              <circle
-                key={`pearl-l-${idx}`}
-                cx={p.x}
-                cy={p.y}
-                r={p.r}
-                fill={`url(#pearl3DGrad-${theme})`}
-                stroke={isEmerald ? '#BDD9C2' : '#DEB7C6'}
-                strokeWidth="0.4"
-              />
-            ))}
-          </g>
-
-          {/* 8. BÔNG HOA CALLA SỐNG ĐỘNG GÓC DƯỚI PHẢI */}
-          <g className="filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.22)]">
-            <path
-              d="M 355 600 Q 375 555 352 480"
-              fill="none"
-              stroke={`url(#callaStemGrad-${theme})`}
-              strokeWidth="4"
-              strokeLinecap="round"
-            />
-            <path
-              d="M 352 480 C 378 470 392 436 363 424 C 336 418 325 448 341 482 Z"
-              fill={`url(#callaPetalGrad-${theme})`}
-              stroke={isEmerald ? '#BDD9C2' : '#8A152E'}
-              strokeWidth="0.8"
-            />
-            <path
-              d="M 352 456 Q 354 442 358 430"
-              fill="none"
-              stroke="#FAD02C"
-              strokeWidth="2.8"
-              strokeLinecap="round"
-            />
-          </g>
+          {/* Đường chỉ chần tinh tế sát mép trong ren */}
+          <ellipse
+            cx="215"
+            cy="315"
+            rx="152"
+            ry="241"
+            fill="none"
+            stroke={isEmerald ? 'rgba(92,122,82,0.22)' : 'rgba(138,40,65,0.2)'}
+            strokeWidth="0.8"
+          />
         </svg>
 
-        {/* LỚP ÁNH SÁNG LƯỚT QUA MẶT GƯƠNG (Shimmer Reflection Sweep) */}
-        <div className="pointer-events-none absolute inset-x-8 inset-y-12 rounded-[50%/44%] overflow-hidden">
+        {/* CÀNH HOA CALLA THẬT (PHOTOREALISTIC PNG) ĐẶT NGHIÊNG ÔM VIỀN DƯỚI BÊN PHẢI GƯƠNG (Y HỆT FRAME_004) */}
+        <img
+          src={
+            isEmerald
+              ? decorAsset('white-calla-single.png')
+              : decorAsset('burgundy-calla-single.png')
+          }
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none select-none absolute -bottom-3 right-1 sm:right-2 w-32 sm:w-38 z-20 object-contain rotate-[14deg] drop-shadow-[0_8px_16px_rgba(0,0,0,0.2)]"
+        />
+
+        {/* LỚP ÁNH SÁNG LƯỚT QUA MẶT GƯƠNG MƯỢT MÀ */}
+        <div className="pointer-events-none absolute inset-x-12 inset-y-14 rounded-[50%/45%] overflow-hidden">
           <motion.div
-            animate={{ x: ['-120%', '220%'] }}
-            transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 3.5, ease: 'easeInOut' }}
-            className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12"
+            animate={{ x: ['-130%', '230%'] }}
+            transition={{ duration: 3.2, repeat: Infinity, repeatDelay: 4, ease: 'easeInOut' }}
+            className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/45 to-transparent -skew-x-12"
           />
         </div>
 
-        {/* NỘI DUNG CHÍNH NẰM TRỌN TRONG KHUNG GƯƠNG VỚI KHÔNG GIAN THOÁNG ĐÃNG */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-6 sm:px-10 py-8 sm:py-10 text-center z-10">
+        {/* NỘI DUNG CHÍNH NẰM TRỌN BÊN TRONG KHUNG GƯƠNG RỘNG RÃI */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-8 sm:px-12 py-10 sm:py-12 text-center z-10">
           {children}
         </div>
       </motion.div>
