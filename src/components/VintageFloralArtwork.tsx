@@ -298,15 +298,15 @@ export const WeeklySaveTheDateSection: React.FC<{
   const primaryColor = isEmerald ? '#3B5933' : '#6A1427';
   const subTextColor = isEmerald ? '#4C6744' : '#7D2C3F';
 
-  // Tuần lễ thực tế của Chủ Nhật ngày 03/03/2024 (năm nhuận 2024: 29/02 là Thứ Năm)
+  // Tuần lễ thực tế của Tháng 03 năm 2027 (Ngày 02/03 Thứ Ba ăn cỗ trước, Ngày 03/03 Thứ Tư Lễ thành hôn)
   const weekDays = [
-    { label: 'THU', num: '29', isWedding: false },
-    { label: 'FRI', num: '1', isWedding: false },
-    { label: 'SAT', num: '2', isWedding: false },
-    { label: 'SUN', num: '3', isWedding: true },
-    { label: 'MON', num: '4', isWedding: false },
-    { label: 'TUE', num: '5', isWedding: false },
-    { label: 'WED', num: '6', isWedding: false },
+    { label: 'MON', num: '1', isWedding: false, isEve: false },
+    { label: 'TUE', num: '2', isWedding: false, isEve: true },
+    { label: 'WED', num: '3', isWedding: true, isEve: false },
+    { label: 'THU', num: '4', isWedding: false, isEve: false },
+    { label: 'FRI', num: '5', isWedding: false, isEve: false },
+    { label: 'SAT', num: '6', isWedding: false, isEve: false },
+    { label: 'SUN', num: '7', isWedding: false, isEve: false },
   ];
 
   // Răng cưa tem thư (Postage Stamp Perforated Border) bằng CSS radial-gradient mask chuẩn xác
@@ -400,6 +400,27 @@ export const WeeklySaveTheDateSection: React.FC<{
                     />
                   </motion.svg>
                 </div>
+              ) : d.isEve ? (
+                /* Ngày ăn cỗ trước 02/03/2027 */
+                <div className="relative flex flex-col items-center">
+                  <div
+                    className="w-7 h-7 rounded-full border flex items-center justify-center font-serif-luxury text-sm sm:text-base font-semibold shadow-xs"
+                    style={{
+                      borderColor: primaryColor,
+                      backgroundColor: isEmerald ? '#EDF4EB' : '#FBF0F3',
+                      color: primaryColor,
+                    }}
+                    title="Bữa cơm thân mật (Ăn cỗ trước)"
+                  >
+                    {d.num}
+                  </div>
+                  <span
+                    className="text-[9px] font-serif-luxury font-medium mt-1 leading-tight whitespace-nowrap"
+                    style={{ color: primaryColor }}
+                  >
+                    Ăn cỗ trước
+                  </span>
+                </div>
               ) : (
                 <span
                   className="font-serif-luxury text-sm sm:text-base mt-0.5"
@@ -414,11 +435,45 @@ export const WeeklySaveTheDateSection: React.FC<{
 
         {/* Chữ thư pháp Save the date nằm ngay dưới chân đường thẳng trái tim */}
         <h4
-          className="font-script-luxury text-4xl sm:text-5xl -mt-1 mb-6"
+          className="font-script-luxury text-4xl sm:text-5xl -mt-1 mb-2.5"
           style={{ color: primaryColor }}
         >
           Save the date
         </h4>
+
+        {/* Bảng chi tiết 2 ngày: 02/03 Ăn cỗ trước & 03/03 Lễ Thành Hôn */}
+        <div
+          className="inline-flex flex-col items-center justify-center gap-1 px-4 py-2 rounded-xl border text-center mb-6 max-w-[320px] mx-auto shadow-xs"
+          style={{
+            borderColor: isEmerald ? 'rgba(59,89,51,0.2)' : 'rgba(106,20,39,0.2)',
+            backgroundColor: isEmerald ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.7)',
+          }}
+        >
+          <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-serif-luxury">
+            <span
+              className="inline-block w-2 h-2 rounded-full"
+              style={{ backgroundColor: primaryColor }}
+            />
+            <span className="font-semibold" style={{ color: primaryColor }}>
+              Ăn cỗ trước:
+            </span>
+            <span style={{ color: subTextColor }}>
+              Thứ Ba, 02.03.2027 (25.01 ÂL)
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-serif-luxury">
+            <span
+              className="inline-block w-2 h-2 rounded-full"
+              style={{ backgroundColor: primaryColor }}
+            />
+            <span className="font-semibold" style={{ color: primaryColor }}>
+              Lễ thành hôn:
+            </span>
+            <span style={{ color: subTextColor }}>
+              11:00, Thứ Tư, 03.03.2027 (26.01 ÂL)
+            </span>
+          </div>
+        </div>
       </motion.div>
 
       {/* 2. PHONG BAO NGANG ĐÍNH HOA THẬT + KHUNG ẢNH VIỀN TEM RĂNG CƯA NGHIÊNG ĐÍNH SÁP */}
@@ -498,7 +553,7 @@ export const WeeklySaveTheDateSection: React.FC<{
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           onClick={() => onImageClick?.(kissPhoto)}
-          className="cursor-zoom-in relative z-20 ml-8 sm:ml-10 w-[235px] sm:w-[268px] p-[9px] drop-shadow-[0_14px_28px_rgba(0,0,0,0.22)] group"
+          className="cursor-zoom-in relative z-35 ml-8 sm:ml-10 w-[235px] sm:w-[268px] p-[9px] drop-shadow-[0_14px_28px_rgba(0,0,0,0.22)] group"
           style={stampBgStyle}
         >
           <div className="bg-white p-1.5 shadow-xs">
@@ -506,6 +561,8 @@ export const WeeklySaveTheDateSection: React.FC<{
               <img
                 src={kissPhoto}
                 alt="Save the date"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover object-[center_22%] transition-transform duration-500 group-hover:scale-105"
               />
             </div>
@@ -649,12 +706,14 @@ export const ThankYouOpenEnvelopeSection: React.FC<{
           {/* BỨC ẢNH CƯỚI CÔNG CHÚA TRỒI LÊN SÁNG RÕ TRỌN VẸN GƯƠNG MẶT DÂU RỂ */}
           <div
             onClick={() => onImageClick?.(photoUrl)}
-            className="cursor-zoom-in relative z-10 -mt-14 sm:-mt-16 mx-auto w-[92%] aspect-[3/3.6] rounded-t-xl overflow-hidden bg-white p-1.5 shadow-[0_-8px_28px_rgba(0,0,0,0.18)] group"
+            className="cursor-zoom-in relative z-35 -mt-14 sm:-mt-16 mx-auto w-[92%] aspect-[3/3.6] rounded-t-xl overflow-hidden bg-white p-1.5 shadow-[0_-8px_28px_rgba(0,0,0,0.18)] group"
           >
             <div className="w-full h-full overflow-hidden rounded-t-lg relative">
               <img
                 src={photoUrl}
                 alt={`${groomShortName} & ${brideShortName} - Thank you`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover object-[center_28%] transition-transform duration-700 group-hover:scale-105"
               />
               {/* Chữ thư pháp mảnh "Thank you!" đặt thật nhẹ ở mép dưới chân váy trắng - KHÔNG CHE MẶT HAY THÂN NGƯỜI */}

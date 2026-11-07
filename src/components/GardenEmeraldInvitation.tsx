@@ -87,6 +87,29 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
     if (initial) setGuestInputName(initial);
   }, [guestName]);
 
+  // Tối ưu hiệu năng: Tải ngầm toàn bộ ảnh chính ngay khi ở màn hình chờ mở phong bì
+  useEffect(() => {
+    const imagesToPreload = [
+      data.sectionImages.hero,
+      data.sectionImages.loveStoryBg,
+      ...(data.sectionImages.dressCodePhotos || [data.sectionImages.countdown]),
+      data.sectionImages.envelopePolaroid,
+      data.sectionImages.heroLeftFloat,
+      data.sectionImages.kissPhoto,
+      data.groom.avatar,
+      data.bride.avatar,
+      decorAsset('garden-floral-cluster.png'),
+      decorAsset('white-calla-single.png'),
+    ];
+
+    imagesToPreload.forEach((src) => {
+      if (!src) return;
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = src;
+    });
+  }, [data]);
+
   const handleOpenEnvelope = () => {
     if (isEnvelopeOpen) return;
     setIsEnvelopeOpen(true);
@@ -279,7 +302,7 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
             {/* 1. ẢNH HERO LỚN TRÀN NGANG "WE ARE Getting Married" (KHÁC ẢNH PHONG BÌ TRÊN) */}
             <section
               onClick={() => setLightboxUrl(data.sectionImages.hero)}
-              className="cursor-zoom-in relative w-full aspect-[3/3.9] overflow-hidden bg-stone-100"
+              className="cursor-zoom-in relative z-35 w-full aspect-[3/3.9] overflow-hidden bg-stone-100"
             >
               <motion.img
                 initial={{ scale: 1.06 }}
@@ -288,6 +311,9 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                 transition={{ duration: 1.2, ease: 'easeOut' }}
                 src={data.sectionImages.hero}
                 alt={`${data.groom.fullName} & ${data.bride.fullName}`}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-cover object-[center_24%]"
               />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/55 via-black/20 to-transparent flex flex-col items-center justify-end pb-7 px-4 text-white text-center">
@@ -384,17 +410,17 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                         hidden: { opacity: 0, y: 8 },
                         visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
                       }}
-                      className="space-y-0.5 mb-2.5"
+                      className="space-y-0.5 mb-2"
                     >
                       <p className="font-serif-luxury text-[11px] uppercase tracking-[0.14em] text-[#4C6744]">
                         ĐƯỢC TỔ CHỨC VÀO LÚC
                       </p>
                       <p className="font-serif-luxury text-xs sm:text-sm font-semibold tracking-[0.12em] text-[#3B5933]">
-                        11:00, CHỦ NHẬT
+                        11:00, THỨ TƯ
                       </p>
                     </motion.div>
 
-                    {/* Cụm Ngày Tháng: [THÁNG 03 kẻ trên dưới]  03  [NĂM 2024 kẻ trên dưới] */}
+                    {/* Cụm Ngày Tháng: [THÁNG 03 kẻ trên dưới]  03  [NĂM 2027 kẻ trên dưới] */}
                     <motion.div
                       variants={{
                         hidden: { opacity: 0, scale: 0.94 },
@@ -409,7 +435,7 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                         03
                       </span>
                       <span className="flex-1 py-1 border-y border-[#6B8762]/65 font-serif-luxury text-[11px] sm:text-xs tracking-[0.08em] text-[#3B5933]">
-                        NĂM 2024
+                        NĂM 2027
                       </span>
                     </motion.div>
 
@@ -418,10 +444,21 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                         hidden: { opacity: 0 },
                         visible: { opacity: 1, transition: { duration: 0.5 } },
                       }}
-                      className="font-serif-italic text-xs text-[#4C6744] mt-1.5 mb-3"
+                      className="font-serif-italic text-xs text-[#4C6744] mt-1 mb-2"
                     >
-                      ( Tức ngày 23 tháng 01 năm Giáp Thìn )
+                      ( Tức ngày 26 tháng 01 năm Đinh Mùi )
                     </motion.p>
+
+                    {/* Thông tin ngày ăn cỗ trước trang nhã */}
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, scale: 0.96 },
+                        visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+                      }}
+                      className="my-1.5 px-3 py-1 rounded-full bg-[#3B5933]/10 border border-[#3B5933]/20 text-[10.5px] sm:text-[11.5px] font-serif-luxury text-[#2C4524] shadow-2xs"
+                    >
+                      <span className="font-semibold text-[#3B5933]">Ăn cỗ trước:</span> Thứ Ba, 02.03.2027 (25.01 ÂL)
+                    </motion.div>
 
                     {/* Địa điểm */}
                     <motion.div
@@ -474,11 +511,13 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
             <section className="space-y-9">
               <div
                 onClick={() => setLightboxUrl(data.sectionImages.loveStoryBg)}
-                className="cursor-zoom-in relative w-full aspect-[2/3] overflow-hidden bg-stone-100"
+                className="cursor-zoom-in relative z-35 w-full aspect-[2/3] overflow-hidden bg-stone-100"
               >
                 <img
                   src={data.sectionImages.loveStoryBg}
                   alt="Where Love Begins"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent flex flex-col items-start justify-end pl-6 sm:pl-8 pb-6 text-white">
@@ -580,7 +619,7 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
             {/* 4. CẶP 2 ẢNH NGAY BÊN DƯỚI DRESS CODE (DSC_9037 & DSC_9112) + LỊCH TUẦN THÁNG 03 + PHONG BAO NHỎ SAVE THE DATE */}
             <div>
               {data.sectionImages.dressCodePhotos ? (
-                <div className="grid grid-cols-2 gap-2 sm:gap-2.5 px-3 sm:px-4 mb-5">
+                <div className="grid grid-cols-2 gap-2 sm:gap-2.5 px-3 sm:px-4 mb-5 relative z-35">
                   {data.sectionImages.dressCodePhotos.map((photoUrl, idx) => (
                     <motion.div
                       key={idx}
@@ -594,6 +633,8 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                       <img
                         src={photoUrl}
                         alt={`Huy Đức & Phan Hậu ${idx + 1}`}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       />
                     </motion.div>
@@ -602,11 +643,13 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
               ) : (
                 <div
                   onClick={() => setLightboxUrl(data.sectionImages.countdown)}
-                  className="cursor-zoom-in w-full aspect-[16/11] overflow-hidden bg-stone-100 mb-4"
+                  className="cursor-zoom-in relative z-35 w-full aspect-[16/11] overflow-hidden bg-stone-100 mb-4"
                 >
                   <img
                     src={data.sectionImages.countdown}
                     alt="Huy Đức & Phan Hậu"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-[center_20%]"
                   />
                 </div>
@@ -638,7 +681,7 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
               </div>
 
               {/* Cặp Polaroid Chú rể & Cô dâu đính dấu sáp xanh rêu ở tâm + Cành Calla trắng nghiêng bên phải */}
-              <div className="relative max-w-[360px] mx-auto h-[410px] sm:h-[435px] mt-4">
+              <div className="relative z-35 max-w-[360px] mx-auto h-[410px] sm:h-[435px] mt-4">
                 {/* Cành hoa Calla trắng nghiêng ở góc phải trên (y hệt v1_frames/frame_008) */}
                 <img
                   src={decorAsset('white-calla-single.png')}
@@ -660,6 +703,8 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                     <img
                       src={data.groom.avatar}
                       alt={data.groom.fullName}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-[center_18%]"
                     />
                   </div>
@@ -692,6 +737,8 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                     <img
                       src={data.bride.avatar}
                       alt={data.bride.fullName}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-[center_18%]"
                     />
                   </div>
@@ -722,11 +769,13 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
               {/* Khung ảnh lớn kèm nút điều hướng < > */}
               <div
                 onClick={() => setLightboxUrl(galleryPhotos[selectedGalleryIdx])}
-                className="cursor-zoom-in relative w-full aspect-[3/4] rounded-xl overflow-hidden bg-stone-100 shadow-[0_14px_32px_rgba(20,45,25,0.16)] border-4 border-white group"
+                className="cursor-zoom-in relative z-35 w-full aspect-[3/4] rounded-xl overflow-hidden bg-stone-100 shadow-[0_14px_32px_rgba(20,45,25,0.16)] border-4 border-white group"
               >
                 <img
                   src={galleryPhotos[selectedGalleryIdx]}
                   alt={`Ảnh cưới ${selectedGalleryIdx + 1}`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-[center_22%] transition-all duration-500"
                 />
 
@@ -751,7 +800,7 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
               {/* Thanh trượt Thumbnails bên dưới */}
               <div
                 ref={thumbnailScrollRef}
-                className="flex items-center gap-2 overflow-x-auto py-1.5 px-0.5 scroll-smooth"
+                className="flex items-center gap-2 overflow-x-auto py-1.5 px-0.5 scroll-smooth relative z-35"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {galleryPhotos.map((photo, idx) => (
@@ -768,6 +817,8 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                     <img
                       src={photo}
                       alt={`Thumbnail ${idx + 1}`}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-[center_20%]"
                     />
                   </button>

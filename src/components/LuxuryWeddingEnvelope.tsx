@@ -485,7 +485,7 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
           initial={{ y: 75, opacity: 0, scale: 0.9 }}
           animate={{ y: 0, opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute bottom-[68px] sm:bottom-[76px] right-[14px] sm:right-[18px] w-[196px] sm:w-[222px] z-15"
+          className="absolute bottom-[98px] sm:bottom-[108px] right-[24px] sm:right-[30px] w-[196px] sm:w-[222px] z-26"
         >
           <div className="relative w-full">
             <svg
@@ -532,8 +532,8 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
               </g>
             </svg>
 
-            {/* Chữ bên trong Thiệp Oval */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-5 pb-5 text-center">
+            {/* Chữ bên trong Thiệp Oval - Căn chỉnh cao thoáng, 100% không bị hoa che */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pt-1 pb-10 sm:pb-12 text-center">
               <p
                 className={`font-serif-luxury text-[9px] sm:text-[10px] uppercase tracking-[0.2em] mb-1 ${
                   isEmerald ? 'text-[#4A6642]' : 'text-[#7A283B]'
@@ -542,19 +542,19 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
                 SAVE THE DATE
               </p>
               <p
-                className={`font-serif-luxury text-xs sm:text-sm font-semibold tracking-wider mb-2.5 ${
+                className={`font-serif-luxury text-xs sm:text-sm font-semibold tracking-wider mb-2 ${
                   isEmerald ? 'text-[#334F2C]' : 'text-[#5C1022]'
                 }`}
               >
                 {pipeDate}
               </p>
               <h4
-                className={`font-script-luxury text-[28px] sm:text-[33px] leading-[1.15] ${
+                className={`font-script-luxury text-[27px] sm:text-[32px] leading-[1.12] ${
                   isEmerald ? 'text-[#3A5A32]' : 'text-[#6B1326]'
                 }`}
               >
-                <span className="block">{groomShortName}</span>
-                <span className="block mt-0.5">{brideShortName}</span>
+                <span className="block whitespace-nowrap">{groomShortName}</span>
+                <span className="block mt-0.5 whitespace-nowrap">{brideShortName}</span>
               </h4>
             </div>
           </div>
@@ -681,8 +681,8 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
           aria-hidden="true"
           className={`pointer-events-none absolute z-30 object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.24)] ${
             isEmerald
-              ? '-bottom-24 -right-6 sm:-bottom-28 sm:-right-8 w-30 sm:w-36'
-              : 'top-[54%] -right-5 sm:-right-6 w-[94px] sm:w-[108px]'
+              ? 'top-[64%] -right-4 sm:-right-5 w-[80px] sm:w-[92px]'
+              : 'top-[60%] -right-4 sm:-right-5 w-[84px] sm:w-[94px]'
           }`}
         />
       </div>

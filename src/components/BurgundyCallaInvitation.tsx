@@ -87,6 +87,31 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
     if (initial) setGuestInputName(initial);
   }, [guestName]);
 
+  // Tối ưu hiệu năng: Tải ngầm toàn bộ ảnh chính ngay khi ở màn hình chờ mở phong bì
+  useEffect(() => {
+    const imagesToPreload = [
+      data.sectionImages.hero,
+      data.sectionImages.loveStoryBg,
+      ...(data.sectionImages.dressCodePhotos || [data.sectionImages.countdown]),
+      data.sectionImages.envelopePolaroid,
+      data.sectionImages.heroLeftFloat,
+      data.sectionImages.kissPhoto,
+      data.groom.avatar,
+      data.bride.avatar,
+      decorAsset('burgundy-floral-tassel.png'),
+      decorAsset('burgundy-calla-single.png'),
+      decorAsset('burgundy-anthurium-main.png'),
+      decorAsset('burgundy-floral-corner.png'),
+    ];
+
+    imagesToPreload.forEach((src) => {
+      if (!src) return;
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = src;
+    });
+  }, [data]);
+
   const handleOpenEnvelope = () => {
     if (isEnvelopeOpen) return;
     setIsEnvelopeOpen(true);
@@ -281,7 +306,7 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
             {/* 1. ẢNH HERO LỚN TRÀN NGANG "WE ARE Getting Married" (KHÁC ẢNH PHONG BÌ TRÊN) */}
             <section
               onClick={() => setLightboxUrl(data.sectionImages.hero)}
-              className="cursor-zoom-in relative w-full aspect-[3/3.9] overflow-hidden bg-stone-100"
+              className="cursor-zoom-in relative z-35 w-full aspect-[3/3.9] overflow-hidden bg-stone-100"
             >
               <motion.img
                 initial={{ scale: 1.06 }}
@@ -290,6 +315,8 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                 transition={{ duration: 1.2, ease: 'easeOut' }}
                 src={data.sectionImages.hero}
                 alt={`${data.groom.fullName} & ${data.bride.fullName}`}
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover object-[center_24%]"
               />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#24060E]/65 via-black/20 to-transparent flex flex-col items-center justify-end pb-7 px-4 text-white text-center">
@@ -386,17 +413,17 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                         hidden: { opacity: 0, y: 8 },
                         visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
                       }}
-                      className="space-y-0.5 mb-2.5"
+                      className="space-y-0.5 mb-2"
                     >
                       <p className="font-serif-luxury text-[11px] uppercase tracking-[0.14em] text-[#7D2C3F]">
                         ĐƯỢC TỔ CHỨC VÀO LÚC
                       </p>
                       <p className="font-serif-luxury text-xs sm:text-sm font-semibold tracking-[0.12em] text-[#591120]">
-                        11:00, CHỦ NHẬT
+                        11:00, THỨ TƯ
                       </p>
                     </motion.div>
 
-                    {/* Cụm Ngày Tháng: [THÁNG 03 kẻ trên dưới]  03  [NĂM 2024 kẻ trên dưới] */}
+                    {/* Cụm Ngày Tháng: [THÁNG 03 kẻ trên dưới]  03  [NĂM 2027 kẻ trên dưới] */}
                     <motion.div
                       variants={{
                         hidden: { opacity: 0, scale: 0.94 },
@@ -411,7 +438,7 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                         03
                       </span>
                       <span className="flex-1 py-1 border-y border-[#B26E80]/65 font-serif-luxury text-[11px] sm:text-xs tracking-[0.08em] text-[#6A1427]">
-                        NĂM 2024
+                        NĂM 2027
                       </span>
                     </motion.div>
 
@@ -420,10 +447,21 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                         hidden: { opacity: 0 },
                         visible: { opacity: 1, transition: { duration: 0.5 } },
                       }}
-                      className="font-serif-italic text-xs text-[#7D2C3F] mt-1.5 mb-3"
+                      className="font-serif-italic text-xs text-[#7D2C3F] mt-1 mb-2"
                     >
-                      ( Tức ngày 23 tháng 01 năm Giáp Thìn )
+                      ( Tức ngày 26 tháng 01 năm Đinh Mùi )
                     </motion.p>
+
+                    {/* Thông tin ngày ăn cỗ trước trang nhã */}
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, scale: 0.96 },
+                        visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+                      }}
+                      className="my-1.5 px-3 py-1 rounded-full bg-[#7D1E3A]/10 border border-[#7D1E3A]/20 text-[10.5px] sm:text-[11.5px] font-serif-luxury text-[#591120] shadow-2xs"
+                    >
+                      <span className="font-semibold text-[#7D1E3A]">Ăn cỗ trước:</span> Thứ Ba, 02.03.2027 (25.01 ÂL)
+                    </motion.div>
 
                     {/* Địa điểm */}
                     <motion.div
@@ -476,11 +514,13 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
             <section className="space-y-9">
               <div
                 onClick={() => setLightboxUrl(data.sectionImages.loveStoryBg)}
-                className="cursor-zoom-in relative w-full aspect-[2/3] overflow-hidden bg-stone-100"
+                className="cursor-zoom-in relative z-35 w-full aspect-[2/3] overflow-hidden bg-stone-100"
               >
                 <img
                   src={data.sectionImages.loveStoryBg}
                   alt="Where Love Begins"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent flex flex-col items-start justify-end pl-6 sm:pl-8 pb-6 text-white">
@@ -582,7 +622,7 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
             {/* 4. CẶP 2 ẢNH NGAY BÊN DƯỚI DRESS CODE (DSC_9037 & DSC_9112) + LỊCH TUẦN THÁNG 03 + PHONG BAO ĐỎ RƯỢU SAVE THE DATE */}
             <div>
               {data.sectionImages.dressCodePhotos ? (
-                <div className="grid grid-cols-2 gap-2 sm:gap-2.5 px-3 sm:px-4 mb-5">
+                <div className="grid grid-cols-2 gap-2 sm:gap-2.5 px-3 sm:px-4 mb-5 relative z-35">
                   {data.sectionImages.dressCodePhotos.map((photoUrl, idx) => (
                     <motion.div
                       key={idx}
@@ -596,6 +636,8 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                       <img
                         src={photoUrl}
                         alt={`Huy Đức & Phan Hậu ${idx + 1}`}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       />
                     </motion.div>
@@ -604,11 +646,13 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
               ) : (
                 <div
                   onClick={() => setLightboxUrl(data.sectionImages.countdown)}
-                  className="cursor-zoom-in w-full aspect-[16/11] overflow-hidden bg-stone-100 mb-4"
+                  className="cursor-zoom-in relative z-35 w-full aspect-[16/11] overflow-hidden bg-stone-100 mb-4"
                 >
                   <img
                     src={data.sectionImages.countdown}
                     alt="Huy Đức & Phan Hậu"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-[center_20%]"
                   />
                 </div>
@@ -640,7 +684,7 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
               </div>
 
               {/* Cặp Polaroid Cô dâu & Chú rể đính dấu sáp đỏ ở tâm + Cành Calla đỏ nghiêng bên phải (y hệt v2_frames/frame_007) */}
-              <div className="relative max-w-[360px] mx-auto h-[410px] sm:h-[435px] mt-4">
+              <div className="relative z-35 max-w-[360px] mx-auto h-[410px] sm:h-[435px] mt-4">
                 {/* Cành hoa Calla đỏ rượu nghiêng ở góc phải trên */}
                 <img
                   src={decorAsset('burgundy-calla-single.png')}
@@ -662,6 +706,8 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                     <img
                       src={data.bride.avatar}
                       alt={data.bride.fullName}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-[center_18%]"
                     />
                   </div>
@@ -694,6 +740,8 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                     <img
                       src={data.groom.avatar}
                       alt={data.groom.fullName}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-[center_18%]"
                     />
                   </div>
@@ -724,11 +772,13 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
               {/* Khung ảnh lớn kèm nút điều hướng < > */}
               <div
                 onClick={() => setLightboxUrl(galleryPhotos[selectedGalleryIdx])}
-                className="cursor-zoom-in relative w-full aspect-[3/4] rounded-xl overflow-hidden bg-stone-100 shadow-[0_14px_32px_rgba(70,12,24,0.18)] border-4 border-white group"
+                className="cursor-zoom-in relative z-35 w-full aspect-[3/4] rounded-xl overflow-hidden bg-stone-100 shadow-[0_14px_32px_rgba(70,12,24,0.18)] border-4 border-white group"
               >
                 <img
                   src={galleryPhotos[selectedGalleryIdx]}
                   alt={`Ảnh cưới ${selectedGalleryIdx + 1}`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-[center_22%] transition-all duration-500"
                 />
 
@@ -753,7 +803,7 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
               {/* Thanh trượt Thumbnails bên dưới */}
               <div
                 ref={thumbnailScrollRef}
-                className="flex items-center gap-2 overflow-x-auto py-1.5 px-0.5 scroll-smooth"
+                className="flex items-center gap-2 overflow-x-auto py-1.5 px-0.5 scroll-smooth relative z-35"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {galleryPhotos.map((photo, idx) => (
@@ -770,6 +820,8 @@ export const BurgundyCallaInvitation: React.FC<BurgundyCallaInvitationProps> = (
                     <img
                       src={photo}
                       alt={`Thumbnail ${idx + 1}`}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-[center_20%]"
                     />
                   </button>

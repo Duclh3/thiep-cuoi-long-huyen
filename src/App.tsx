@@ -240,6 +240,15 @@ export function App() {
     };
   }, []);
 
+  // Cập nhật tiêu đề trang web / tiêu đề in-app webview điện thoại theo dâu rể thực tế
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      const groom = weddingData.groom.shortName || weddingData.groom.fullName;
+      const bride = weddingData.bride.shortName || weddingData.bride.fullName;
+      document.title = `THIỆP CƯỚI ${groom.toUpperCase()} & ${bride.toUpperCase()}`;
+    }
+  }, [weddingData]);
+
   // Tự động kích hoạt nhạc ở cú chạm đầu tiên nếu trình duyệt chặn autoplay khi thiệp tự mở
   useEffect(() => {
     const unlockAudioOnFirstGesture = () => {
