@@ -268,6 +268,7 @@ export interface WeddingData {
     heroLeftFloat: string;
     heroRightFloat: string;
     countdown: string;
+    dressCodePhotos?: [string, string];
     loveStoryBg: string;
     wishesBg: string;
     thankYouBg: string;
@@ -496,8 +497,12 @@ export const DUC_HAU_WEDDING_DATA: WeddingData = {
     kissPhoto: imgPath('/images/duc-hau/DSC_9127.jpg'),
     heroLeftFloat: imgPath('/images/duc-hau/couple-hero.jpg'),
     heroRightFloat: imgPath('/images/duc-hau/DSC_8278.jpg'),
-    countdown: imgPath('/images/duc-hau/DSC_8731.jpg'),
-    loveStoryBg: imgPath('/images/duc-hau/DSC_7927.jpg'),
+    countdown: imgPath('/images/duc-hau/DSC_9037.jpg'),
+    dressCodePhotos: [
+      imgPath('/images/duc-hau/DSC_9037.jpg'),
+      imgPath('/images/duc-hau/DSC_9112.jpg'),
+    ],
+    loveStoryBg: imgPath('/images/duc-hau/DSC_8923.jpg'),
     wishesBg: imgPath('/images/duc-hau/DSC_8966.jpg'),
     thankYouBg: imgPath('/images/duc-hau/DSC_8483.jpg'),
   },
@@ -557,35 +562,34 @@ export const DUC_HAU_WEDDING_DATA: WeddingData = {
     { id: 'dh0', url: imgPath('/images/duc-hau/DSC_8966.jpg'), caption: 'Hạnh phúc đong đầy' },
     { id: 'dh1', url: imgPath('/images/duc-hau/DSC_8854.jpg'), caption: 'Phút giây chạm mắt' },
     { id: 'dh2', url: imgPath('/images/duc-hau/DSC_8278.jpg'), caption: 'Tình yêu cổ tích' },
-    { id: 'dh3', url: imgPath('/images/duc-hau/DSC_8923.jpg'), caption: 'Trái tim ngọt ngào' },
+    { id: 'dh3', url: imgPath('/images/duc-hau/DSC_7927.jpg'), caption: 'Trái tim ngọt ngào' },
     { id: 'dh4', url: imgPath('/images/duc-hau/DSC_8998.jpg'), caption: 'Tay trong tay' },
     { id: 'dh5', url: imgPath('/images/duc-hau/DSC_9001.jpg'), caption: 'We Are Getting Married' },
-    { id: 'dh6', url: imgPath('/images/duc-hau/DSC_9037.jpg'), caption: 'Khúc ca tình yêu' },
+    { id: 'dh6', url: imgPath('/images/duc-hau/DSC_8731.jpg'), caption: 'Khúc ca tình yêu' },
     { id: 'dh7', url: imgPath('/images/duc-hau/DSC_9072.jpg'), caption: 'Bình yên bên em' },
-    { id: 'dh8', url: imgPath('/images/duc-hau/DSC_9112.jpg'), caption: 'Mãi mãi bên nhau' },
+    { id: 'dh8', url: imgPath('/images/duc-hau/DSC_9052.jpg'), caption: 'Mãi mãi bên nhau' },
   ],
   album9Images: [
     // Đưa toàn bộ các ảnh đôi đẹp CHƯA SỬ DỤNG ở bất kỳ section nào phía trên lên đầu để không trùng lặp
     { id: 'alb-dh-1', url: imgPath('/images/duc-hau/DSC_8966.jpg'), alt: 'Huy Đức & Phan Hậu - Nụ Hôn Dịu Dàng' },
     { id: 'alb-dh-2', url: imgPath('/images/duc-hau/DSC_8854.jpg'), alt: 'Huy Đức & Phan Hậu - Khung Cửa Nắng Ấm' },
     { id: 'alb-dh-3', url: imgPath('/images/duc-hau/DSC_8278.jpg'), alt: 'Huy Đức & Phan Hậu - Lâu Đài Tinh Khôi' },
-    { id: 'alb-dh-4', url: imgPath('/images/duc-hau/DSC_8923.jpg'), alt: 'Huy Đức & Phan Hậu - Khoảnh Khắc Cổ Điển' },
-    { id: 'alb-dh-5', url: imgPath('/images/duc-hau/DSC_8998.jpg'), alt: 'Huy Đức & Phan Hậu - Tình Yêu Vĩnh Cửu' },
-    { id: 'alb-dh-6', url: imgPath('/images/duc-hau/DSC_9001.jpg'), alt: 'Huy Đức & Phan Hậu - Duyên Trời Định' },
-    { id: 'alb-dh-7', url: imgPath('/images/duc-hau/DSC_9037.jpg'), alt: 'Huy Đức & Phan Hậu - Chung Nhịp Đập' },
+    { id: 'alb-dh-4', url: imgPath('/images/duc-hau/DSC_7927.jpg'), alt: 'Huy Đức & Phan Hậu - Khu Vườn Tình Yêu' },
+    { id: 'alb-dh-5', url: imgPath('/images/duc-hau/DSC_8731.jpg'), alt: 'Huy Đức & Phan Hậu - Váy Cưới Lộng Lẫy' },
+    { id: 'alb-dh-6', url: imgPath('/images/duc-hau/DSC_8998.jpg'), alt: 'Huy Đức & Phan Hậu - Tình Yêu Vĩnh Cửu' },
+    { id: 'alb-dh-7', url: imgPath('/images/duc-hau/DSC_9001.jpg'), alt: 'Huy Đức & Phan Hậu - Duyên Trời Định' },
     { id: 'alb-dh-8', url: imgPath('/images/duc-hau/DSC_9039.jpg'), alt: 'Huy Đức & Phan Hậu - Nắm Tay Trọn Đời' },
     { id: 'alb-dh-9', url: imgPath('/images/duc-hau/DSC_9052.jpg'), alt: 'Huy Đức & Phan Hậu - Hạnh Phúc Ngọt Ngào' },
     { id: 'alb-dh-10', url: imgPath('/images/duc-hau/DSC_9072.jpg'), alt: 'Huy Đức & Phan Hậu - Hạnh Phúc Viên Mãn' },
     { id: 'alb-dh-11', url: imgPath('/images/duc-hau/DSC_9082.jpg'), alt: 'Huy Đức & Phan Hậu - Yêu Thương Đong Đầy' },
     { id: 'alb-dh-12', url: imgPath('/images/duc-hau/DSC_9088.jpg'), alt: 'Huy Đức & Phan Hậu - Nụ Cười Hạnh Phúc' },
-    { id: 'alb-dh-13', url: imgPath('/images/duc-hau/DSC_9112.jpg'), alt: 'Huy Đức & Phan Hậu - Kỷ Niệm Ngày Chung Đôi' },
-    { id: 'alb-dh-14', url: imgPath('/images/duc-hau/DSC_9118.jpg'), alt: 'Huy Đức & Phan Hậu - Ánh Mắt Tình Si' },
-    { id: 'alb-dh-15', url: imgPath('/images/duc-hau/DSC_8255.jpg'), alt: 'Huy Đức & Phan Hậu - Khúc Giao Hưởng' },
-    { id: 'alb-dh-16', url: imgPath('/images/duc-hau/DSC_8610.jpg'), alt: 'Huy Đức & Phan Hậu - Bên Nhau Mãi Mãi' },
-    { id: 'alb-dh-17', url: imgPath('/images/duc-hau/DSC_8611.jpg'), alt: 'Huy Đức & Phan Hậu - Nguyện Ước Trăm Năm' },
-    { id: 'alb-dh-18', url: imgPath('/images/duc-hau/DSC_8739.jpg'), alt: 'Huy Đức & Phan Hậu - Rạng Rỡ Ngày Vui' },
-    { id: 'alb-dh-19', url: imgPath('/images/duc-hau/DSC_8633.jpg'), alt: 'Phan Thị Hậu - Cô Dâu Dịu Dàng' },
-    { id: 'alb-dh-20', url: imgPath('/images/duc-hau/DSC_8947.jpg'), alt: 'Phan Thị Hậu - Nàng Thơ Tinh Khôi' },
+    { id: 'alb-dh-13', url: imgPath('/images/duc-hau/DSC_9118.jpg'), alt: 'Huy Đức & Phan Hậu - Ánh Mắt Tình Si' },
+    { id: 'alb-dh-14', url: imgPath('/images/duc-hau/DSC_8255.jpg'), alt: 'Huy Đức & Phan Hậu - Khúc Giao Hưởng' },
+    { id: 'alb-dh-15', url: imgPath('/images/duc-hau/DSC_8610.jpg'), alt: 'Huy Đức & Phan Hậu - Bên Nhau Mãi Mãi' },
+    { id: 'alb-dh-16', url: imgPath('/images/duc-hau/DSC_8611.jpg'), alt: 'Huy Đức & Phan Hậu - Nguyện Ước Trăm Năm' },
+    { id: 'alb-dh-17', url: imgPath('/images/duc-hau/DSC_8739.jpg'), alt: 'Huy Đức & Phan Hậu - Rạng Rỡ Ngày Vui' },
+    { id: 'alb-dh-18', url: imgPath('/images/duc-hau/DSC_8633.jpg'), alt: 'Phan Thị Hậu - Cô Dâu Dịu Dàng' },
+    { id: 'alb-dh-19', url: imgPath('/images/duc-hau/DSC_8947.jpg'), alt: 'Phan Thị Hậu - Nàng Thơ Tinh Khôi' },
   ],
   thankYouText: {
     title: 'Lời cảm ơn!',

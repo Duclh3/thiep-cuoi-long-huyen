@@ -301,13 +301,13 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
             </section>
 
             {/* 2. THÔNG TIN HAI BÊN GIA ĐÌNH & KHUNG GƯƠNG OVAL VIỀN VẢI REN + HOA CALLA TRẮNG */}
-            <section className="px-4 sm:px-6 space-y-6">
+            <section className="space-y-6">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.65 }}
-                className="grid grid-cols-2 gap-3 text-center max-w-sm mx-auto"
+                className="grid grid-cols-2 gap-3 text-center max-w-sm mx-auto px-4 sm:px-6"
               >
                 <div className="space-y-1">
                   <p className="font-serif-luxury font-bold text-xs tracking-[0.12em] text-[#3B5933]">
@@ -338,7 +338,7 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-center space-y-0.5"
+                className="text-center space-y-0.5 px-4 sm:px-6"
               >
                 <p className="font-serif-luxury text-xs uppercase tracking-[0.14em] text-[#3B5933]">
                   TRÂN TRỌNG KÍNH MỜI TỚI DỰ
@@ -348,143 +348,144 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
                 </p>
               </motion.div>
 
-              {/* KHUNG GƯƠNG OVAL VIỀN VẢI REN THÊU LỖ + CÀNH HOA CALLA THẬT (CHUẨN FRAME_004) */}
-              <CrochetLaceMirrorFrame theme="emerald">
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.25 }}
-                  variants={{
-                    hidden: { opacity: 0 },
-                    visible: {
-                      opacity: 1,
-                      transition: { staggerChildren: 0.13, delayChildren: 0.15 },
-                    },
-                  }}
-                  className="flex flex-col items-center justify-center text-center w-full"
-                >
-                  {/* Tên dâu rể chữ thư pháp lớn mềm mại */}
+              {/* KHUNG GƯƠNG OVAL PHÓNG LỚN ÔM TRỌN NỘI DUNG + CÀNH HOA CALLA THẬT */}
+              <div className="px-1.5 sm:px-2.5">
+                <CrochetLaceMirrorFrame theme="emerald">
                   <motion.div
-                    variants={{
-                      hidden: { opacity: 0, y: 12 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-                    }}
-                    className="mb-3"
-                  >
-                    <h3 className="font-script-luxury text-[38px] sm:text-[44px] text-[#3B5933] leading-[1.15]">
-                      <span className="block">{data.groom.fullName}</span>
-                      <span className="block mt-0.5">{data.bride.fullName}</span>
-                    </h3>
-                  </motion.div>
-
-                  {/* Giờ & Thứ */}
-                  <motion.div
-                    variants={{
-                      hidden: { opacity: 0, y: 8 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
-                    }}
-                    className="space-y-0.5 mb-2.5"
-                  >
-                    <p className="font-serif-luxury text-[11px] uppercase tracking-[0.14em] text-[#4C6744]">
-                      ĐƯỢC TỔ CHỨC VÀO LÚC
-                    </p>
-                    <p className="font-serif-luxury text-xs sm:text-sm font-semibold tracking-[0.12em] text-[#3B5933]">
-                      11:00, CHỦ NHẬT
-                    </p>
-                  </motion.div>
-
-                  {/* Cụm Ngày Tháng chuẩn 100% frame_004: [THÁNG 03 kẻ trên dưới]  03  [NĂM 2024 kẻ trên dưới] */}
-                  <motion.div
-                    variants={{
-                      hidden: { opacity: 0, scale: 0.94 },
-                      visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
-                    }}
-                    className="flex items-center justify-center gap-3 my-1.5 w-full max-w-[248px]"
-                  >
-                    <span className="flex-1 py-1 border-y border-[#6B8762]/65 font-serif-luxury text-[11px] sm:text-xs tracking-[0.1em] text-[#3B5933]">
-                      THÁNG 03
-                    </span>
-                    <span className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#3B5933] leading-none px-1">
-                      03
-                    </span>
-                    <span className="flex-1 py-1 border-y border-[#6B8762]/65 font-serif-luxury text-[11px] sm:text-xs tracking-[0.1em] text-[#3B5933]">
-                      NĂM 2024
-                    </span>
-                  </motion.div>
-
-                  <motion.p
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.25 }}
                     variants={{
                       hidden: { opacity: 0 },
-                      visible: { opacity: 1, transition: { duration: 0.5 } },
+                      visible: {
+                        opacity: 1,
+                        transition: { staggerChildren: 0.13, delayChildren: 0.15 },
+                      },
                     }}
-                    className="font-serif-italic text-xs text-[#4C6744] mt-1.5 mb-3"
+                    className="flex flex-col items-center justify-center text-center w-full"
                   >
-                    ( Tức ngày 23 tháng 01 năm Giáp Thìn )
-                  </motion.p>
+                    {/* Tên dâu rể chữ thư pháp lớn mềm mại nằm gọn trong lòng gương */}
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, y: 12 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+                      }}
+                      className="mb-3 px-2"
+                    >
+                      <h3 className="font-script-luxury text-[35px] sm:text-[41px] text-[#3B5933] leading-[1.18]">
+                        <span className="block whitespace-nowrap">{data.groom.fullName}</span>
+                        <span className="block mt-0.5 whitespace-nowrap">{data.bride.fullName}</span>
+                      </h3>
+                    </motion.div>
 
-                  {/* Địa điểm */}
-                  <motion.div
-                    variants={{
-                      hidden: { opacity: 0, y: 8 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
-                    }}
-                    className="space-y-0.5 mb-3.5"
-                  >
-                    <p className="font-serif-luxury font-bold text-xs uppercase tracking-[0.1em] text-[#3B5933]">
-                      TẠI TƯ GIA NHÀ TRAI
-                    </p>
-                    <p className="font-serif-luxury text-xs sm:text-[13px] text-[#3B5933]">
-                      Phú Xá - Văn Môn - Bắc Ninh
-                    </p>
+                    {/* Giờ & Thứ */}
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, y: 8 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+                      }}
+                      className="space-y-0.5 mb-2.5"
+                    >
+                      <p className="font-serif-luxury text-[11px] uppercase tracking-[0.14em] text-[#4C6744]">
+                        ĐƯỢC TỔ CHỨC VÀO LÚC
+                      </p>
+                      <p className="font-serif-luxury text-xs sm:text-sm font-semibold tracking-[0.12em] text-[#3B5933]">
+                        11:00, CHỦ NHẬT
+                      </p>
+                    </motion.div>
+
+                    {/* Cụm Ngày Tháng: [THÁNG 03 kẻ trên dưới]  03  [NĂM 2024 kẻ trên dưới] */}
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, scale: 0.94 },
+                        visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
+                      }}
+                      className="flex items-center justify-center gap-2.5 my-1.5 w-full max-w-[232px] sm:max-w-[260px]"
+                    >
+                      <span className="flex-1 py-1 border-y border-[#6B8762]/65 font-serif-luxury text-[11px] sm:text-xs tracking-[0.08em] text-[#3B5933]">
+                        THÁNG 03
+                      </span>
+                      <span className="font-serif-luxury text-3xl sm:text-4xl font-normal text-[#3B5933] leading-none px-1">
+                        03
+                      </span>
+                      <span className="flex-1 py-1 border-y border-[#6B8762]/65 font-serif-luxury text-[11px] sm:text-xs tracking-[0.08em] text-[#3B5933]">
+                        NĂM 2024
+                      </span>
+                    </motion.div>
+
+                    <motion.p
+                      variants={{
+                        hidden: { opacity: 0 },
+                        visible: { opacity: 1, transition: { duration: 0.5 } },
+                      }}
+                      className="font-serif-italic text-xs text-[#4C6744] mt-1.5 mb-3"
+                    >
+                      ( Tức ngày 23 tháng 01 năm Giáp Thìn )
+                    </motion.p>
+
+                    {/* Địa điểm */}
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, y: 8 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+                      }}
+                      className="space-y-0.5 mb-3.5"
+                    >
+                      <p className="font-serif-luxury font-bold text-xs uppercase tracking-[0.1em] text-[#3B5933]">
+                        TẠI TƯ GIA NHÀ TRAI
+                      </p>
+                      <p className="font-serif-luxury text-xs sm:text-[13px] text-[#3B5933]">
+                        Phú Xá - Văn Môn - Bắc Ninh
+                      </p>
+                    </motion.div>
+
+                    {/* Cụm Icon Pin Định Vị đặt trên chữ CHỈ ĐƯỜNG */}
+                    <motion.a
+                      variants={{
+                        hidden: { opacity: 0, y: 6 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                      }}
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.95 }}
+                      href="https://maps.google.com/?q=Ph%C3%BA+X%C3%A1,+V%C4%83n+M%C3%B4n,+Y%C3%AAn+Phong,+B%E1%BA%AFc+Ninh"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cursor-pointer inline-flex flex-col items-center gap-1 text-[#3B5933] hover:text-[#243B1E] transition-colors group"
+                    >
+                      <svg viewBox="0 0 24 28" className="w-5 h-6 fill-current">
+                        <path d="M12 1C6.48 1 2 5.48 2 11c0 7.25 10 16 10 16s10-8.75 10-16c0-5.52-4.48-10-10-10zm0 13.5c-1.93 0-3.5-1.57-3.5-3.5S10.07 7.5 12 7.5s3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
+                      </svg>
+                      <span className="font-serif-luxury text-xs font-semibold uppercase tracking-[0.14em] border-b border-transparent group-hover:border-[#3B5933]">
+                        CHỈ ĐƯỜNG
+                      </span>
+                    </motion.a>
                   </motion.div>
+                </CrochetLaceMirrorFrame>
+              </div>
 
-                  {/* Cụm Icon Pin Định Vị đặt trên chữ CHỈ ĐƯỜNG giống y hệt frame_004 */}
-                  <motion.a
-                    variants={{
-                      hidden: { opacity: 0, y: 6 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-                    }}
-                    whileHover={{ scale: 1.08 }}
-                    whileTap={{ scale: 0.95 }}
-                    href="https://maps.google.com/?q=Ph%C3%BA+X%C3%A1,+V%C4%83n+M%C3%B4n,+Y%C3%AAn+Phong,+B%E1%BA%AFc+Ninh"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cursor-pointer inline-flex flex-col items-center gap-1 text-[#3B5933] hover:text-[#243B1E] transition-colors group"
-                  >
-                    <svg viewBox="0 0 24 28" className="w-5 h-6 fill-current">
-                      <path d="M12 1C6.48 1 2 5.48 2 11c0 7.25 10 16 10 16s10-8.75 10-16c0-5.52-4.48-10-10-10zm0 13.5c-1.93 0-3.5-1.57-3.5-3.5S10.07 7.5 12 7.5s3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
-                    </svg>
-                    <span className="font-serif-luxury text-xs font-semibold uppercase tracking-[0.14em] border-b border-transparent group-hover:border-[#3B5933]">
-                      CHỈ ĐƯỜNG
-                    </span>
-                  </motion.a>
-                </motion.div>
-              </CrochetLaceMirrorFrame>
-
-              <div className="text-center pt-1">
+              <div className="text-center pt-1 px-4 sm:px-6">
                 <p className="font-script-luxury text-3xl sm:text-4xl text-[#3B5933]">
                   Hân hạnh được đón tiếp!
                 </p>
               </div>
             </section>
 
-            {/* 3. ẢNH "Where LOVE BEGINS" + TIMELINE 4 ICON LINE-ART + DRESS CODE (CHUẨN FRAME_006) */}
+            {/* 3. ẢNH DƯỚI HÂN HẠNH ĐÓN TIẾP (ẢNH 3 DSC_8923.JPG) + TIMELINE + DRESS CODE */}
             <section className="space-y-9">
-              {/* Ảnh đôi ngang giữa cổng hoa "Where LOVE BEGINS" */}
               <div
                 onClick={() => setLightboxUrl(data.sectionImages.loveStoryBg)}
-                className="cursor-zoom-in relative w-full aspect-[16/11] overflow-hidden bg-stone-100"
+                className="cursor-zoom-in relative w-full aspect-[2/3] overflow-hidden bg-stone-100"
               >
                 <img
                   src={data.sectionImages.loveStoryBg}
                   alt="Where Love Begins"
-                  className="w-full h-full object-cover object-[center_22%]"
+                  className="w-full h-full object-cover object-center"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex flex-col items-center justify-end pb-5 text-white">
-                  <span className="font-script-luxury text-3xl sm:text-4xl leading-none -mb-1">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent flex flex-col items-start justify-end pl-6 sm:pl-8 pb-6 text-white">
+                  <span className="font-script-luxury text-3xl sm:text-4xl leading-none -mb-0.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                     Where
                   </span>
-                  <span className="font-serif-luxury text-sm sm:text-base tracking-[0.28em] uppercase">
+                  <span className="font-serif-luxury text-xs sm:text-sm tracking-[0.26em] uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
                     LOVE BEGINS
                   </span>
                 </div>
@@ -576,18 +577,40 @@ export const GardenEmeraldInvitation: React.FC<GardenEmeraldInvitationProps> = (
               </div>
             </section>
 
-            {/* 4. ẢNH CHUYỂN TIẾP + LỊCH TUẦN THÁNG 03 + PHONG BAO NHỎ SAVE THE DATE (ẢNH 1 DSC_9127.JPG) */}
+            {/* 4. CẶP 2 ẢNH NGAY BÊN DƯỚI DRESS CODE (DSC_9037 & DSC_9112) + LỊCH TUẦN THÁNG 03 + PHONG BAO NHỎ SAVE THE DATE */}
             <div>
-              <div
-                onClick={() => setLightboxUrl(data.sectionImages.countdown)}
-                className="cursor-zoom-in w-full aspect-[16/11] overflow-hidden bg-stone-100 mb-4"
-              >
-                <img
-                  src={data.sectionImages.countdown}
-                  alt="Huy Đức & Phan Hậu"
-                  className="w-full h-full object-cover object-[center_20%]"
-                />
-              </div>
+              {data.sectionImages.dressCodePhotos ? (
+                <div className="grid grid-cols-2 gap-2 sm:gap-2.5 px-3 sm:px-4 mb-5">
+                  {data.sectionImages.dressCodePhotos.map((photoUrl, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 18 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.65, delay: idx * 0.12 }}
+                      onClick={() => setLightboxUrl(photoUrl)}
+                      className="cursor-zoom-in aspect-[2/3] w-full overflow-hidden rounded-lg bg-stone-100 shadow-[0_8px_20px_rgba(20,45,25,0.12)] group"
+                    >
+                      <img
+                        src={photoUrl}
+                        alt={`Huy Đức & Phan Hậu ${idx + 1}`}
+                        className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <div
+                  onClick={() => setLightboxUrl(data.sectionImages.countdown)}
+                  className="cursor-zoom-in w-full aspect-[16/11] overflow-hidden bg-stone-100 mb-4"
+                >
+                  <img
+                    src={data.sectionImages.countdown}
+                    alt="Huy Đức & Phan Hậu"
+                    className="w-full h-full object-cover object-[center_20%]"
+                  />
+                </div>
+              )}
 
               <WeeklySaveTheDateSection
                 theme="emerald"

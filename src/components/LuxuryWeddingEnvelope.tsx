@@ -62,30 +62,36 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
   // Định dạng ngày kiểu "03 | 03 | 2024" cho thiệp Oval Save the date giống hệt frame_002
   const pipeDate = displayDate.replace(/\./g, ' | ');
 
-  // Tạo bèo vải ren cho nắp phong bì đóng (chạy từ 0,0 xuống 170,122 rồi lên 340,0)
-  const closedFlapLacePath = useMemo(() => {
+  // Tạo bèo vải ren cho nắp phong bì đóng (chạy từ 0,0 xuống 170,124 rồi lên 340,0)
+  const { closedFlapLacePath, closedFlapEyelets } = useMemo(() => {
     const segs = 13;
+    const dots: Array<{ x: number; y: number }> = [];
     let dLeft = 'M 0 0 ';
     for (let i = 0; i < segs; i++) {
       const t2 = (i + 1) / segs;
       const tm = (i + 0.5) / segs;
       const x2 = 170 * t2;
-      const y2 = 122 * t2;
-      const xm = 170 * tm - 6;
-      const ym = 122 * tm + 8.5;
+      const y2 = 124 * t2;
+      const xm = 170 * tm - 7.5;
+      const ym = 124 * tm + 11.5;
       dLeft += `Q ${xm.toFixed(1)} ${ym.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)} `;
+      dots.push({ x: 170 * tm - 3.2, y: 124 * tm + 4.8 });
     }
-    let dRight = 'M 170 122 ';
+    let dRight = 'M 170 124 ';
     for (let i = 0; i < segs; i++) {
       const t2 = (i + 1) / segs;
       const tm = (i + 0.5) / segs;
       const x2 = 170 + 170 * t2;
-      const y2 = 122 - 122 * t2;
-      const xm = 170 + 170 * tm + 6;
-      const ym = 122 - 122 * tm + 8.5;
+      const y2 = 124 - 124 * t2;
+      const xm = 170 + 170 * tm + 7.5;
+      const ym = 124 - 124 * tm + 11.5;
       dRight += `Q ${xm.toFixed(1)} ${ym.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)} `;
+      dots.push({ x: 170 + 170 * tm + 3.2, y: 124 - 124 * tm + 4.8 });
     }
-    return `${dLeft} L 170 108 Z ${dRight} L 170 108 Z`;
+    return {
+      closedFlapLacePath: `${dLeft} L 170 106 Z ${dRight} L 170 106 Z`,
+      closedFlapEyelets: dots,
+    };
   }, []);
 
   // Tạo bèo vải ren Oval cho tấm thiệp Save The Date trồi lên khi mở phong bì (frame_002)
@@ -124,7 +130,7 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
   // ============================================================================
   if (!isOpen) {
     return (
-      <section className="relative w-full min-h-[calc(100dvh-48px)] md:min-h-[730px] flex flex-col items-center justify-center px-5 py-10 overflow-hidden select-none">
+      <section className="relative w-full min-h-[calc(100dvh-48px)] md:min-h-[760px] flex flex-col items-center justify-center px-5 pt-10 pb-24 sm:pb-28 overflow-hidden select-none">
         {/* NỀN MÀN HÌNH CHƯA MỞ THIỆP:
             - Emerald (Style 6): Tranh sơn dầu hoa hồng trắng & lá xanh thẫm (garden-roses-bg.jpg) y hệt Video 1
             - Burgundy (Style 7): Nền hồng kem mịn điểm chuỗi ngọc trai mờ sang trọng y hệt Video 2 */}
@@ -247,14 +253,24 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
                 strokeWidth="0.9"
               />
 
-              {/* Bèo vải ren chạy dọc 2 cạnh chéo của nắp chữ V (Y hệt frame_001) */}
+              {/* Bèo vải ren thêu lỗ chạy dọc 2 cạnh chéo của nắp chữ V (Y hệt Ảnh 5 & frame_001) */}
               <path
                 d={closedFlapLacePath}
-                fill={isEmerald ? '#FFFFFF' : '#4A0714'}
-                stroke={isEmerald ? '#DCD6C8' : '#35030C'}
+                fill={isEmerald ? '#FFFFFF' : '#450511'}
+                stroke={isEmerald ? '#DCD6C8' : '#2D020A'}
                 strokeWidth="0.9"
-                opacity={isEmerald ? 0.95 : 0.92}
+                opacity={isEmerald ? 0.95 : 0.94}
               />
+              {closedFlapEyelets.map((pt, idx) => (
+                <circle
+                  key={idx}
+                  cx={pt.x.toFixed(1)}
+                  cy={pt.y.toFixed(1)}
+                  r="1.35"
+                  fill={isEmerald ? '#DFD9CB' : '#6A1122'}
+                  opacity="0.75"
+                />
+              ))}
 
               {/* Nắp tam giác chữ V chúc xuống đè lên trên bèo ren */}
               <polygon
@@ -266,7 +282,7 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
             </svg>
           </div>
 
-          {/* HOA CƯỚI THẬT ĐÍNH TRÊN PHONG BÌ ĐÓNG (ĐÚNG VỊ TRÍ TỪNG VIDEO!) */}
+          {/* HOA CƯỚI THẬT ĐÍNH TRÊN PHONG BÌ ĐÓNG (CHUẨN XÁC 100% ẢNH 5 & VIDEO 1) */}
           {isEmerald ? (
             /* Video 1 (frame_001): Cụm lá hồng môn xanh + hoa trắng + dải ren & chuỗi ngọc rủ dọc cạnh trái phong bì */
             <img
@@ -276,19 +292,19 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
               className="pointer-events-none absolute -top-9 -left-8 sm:-top-11 sm:-left-9 w-28 sm:w-32 z-30 object-contain -rotate-[6deg] drop-shadow-[0_12px_20px_rgba(0,0,0,0.35)]"
             />
           ) : (
-            /* Video 2 (frame_001): Cụm hoa lan đỏ & tua rua dài ở góc dưới bên trái + Nhành hoa đỏ ở góc trên bên phải */
+            /* Ảnh 5 (Calla Đỏ): Cụm Hồng môn đỏ rượu + Calla tím sẫm + Hoa dền rủ & dây ngọc trai ở góc dưới trái VÀ góc trên phải */
             <>
               <img
                 src={decorAsset('burgundy-floral-tassel.png')}
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute top-[42%] -left-9 sm:-left-11 w-28 sm:w-32 z-30 object-contain drop-shadow-[0_14px_22px_rgba(40,4,12,0.42)]"
+                className="pointer-events-none absolute top-[35%] -left-9 sm:-left-10 w-[114px] sm:w-[130px] z-30 object-contain drop-shadow-[0_14px_22px_rgba(35,3,10,0.45)]"
               />
               <img
-                src={decorAsset('burgundy-calla-single.png')}
+                src={decorAsset('burgundy-floral-corner.png')}
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute -top-12 right-1 sm:right-0 w-20 sm:w-24 z-15 object-contain rotate-[4deg] drop-shadow-[0_8px_14px_rgba(40,4,12,0.3)]"
+                className="pointer-events-none absolute -top-11 -right-4 sm:-top-12 sm:-right-5 w-[68px] sm:w-[78px] z-30 object-contain drop-shadow-[0_10px_16px_rgba(35,3,10,0.38)]"
               />
             </>
           )}
@@ -335,7 +351,7 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
   // Mô phỏng 100% giây 00:05 - 00:09 (v1_frames/frame_002.jpg & v2_frames/frame_002.jpg)
   // ============================================================================
   return (
-    <section className="relative w-full flex flex-col items-center pt-10 sm:pt-14 pb-8 px-4 sm:px-6 overflow-hidden select-none">
+    <section className="relative w-full flex flex-col items-center pt-10 sm:pt-14 pb-12 px-4 sm:px-6 overflow-hidden select-none">
       {/* Hoa văn Baroque chìm trang nhã ở đỉnh trang thiệp giống hệt đầu frame_002 */}
       <svg
         viewBox="0 0 400 44"
@@ -549,39 +565,41 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
           initial={{ y: 80, rotate: -3, opacity: 0 }}
           animate={{ y: 0, rotate: -11, opacity: 1 }}
           transition={{ duration: 0.95, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute bottom-[64px] sm:bottom-[74px] left-[22px] sm:left-[26px] w-[104px] sm:w-[118px] bg-white p-1.5 pb-2.5 shadow-[0_14px_28px_rgba(0,0,0,0.2)] rounded-[2px] z-18"
+          className="absolute bottom-[64px] sm:bottom-[74px] left-[22px] sm:left-[26px] w-[104px] sm:w-[118px] z-18"
         >
-          {/* Hoa điểm xuyết trên đỉnh dải ảnh Photobooth (như trong frame_002) */}
+          {/* Hoa hồng môn & Calla điểm xuyết lấp ló phía trên đỉnh dải ảnh Photobooth (y hệt frame_002) */}
           <img
             src={
               isEmerald
                 ? decorAsset('garden-floral-cluster.png')
-                : decorAsset('burgundy-calla-single.png')
+                : decorAsset('burgundy-floral-head.png')
             }
             alt=""
             aria-hidden="true"
-            className={`pointer-events-none absolute z-25 object-contain drop-shadow-md ${
+            className={`pointer-events-none absolute object-contain drop-shadow-md ${
               isEmerald
-                ? '-top-8 left-4 w-14 h-16 rotate-[22deg] object-top'
-                : '-top-9 right-1 w-14 h-16 -rotate-[20deg]'
+                ? '-top-8 left-4 w-14 h-16 rotate-[22deg] object-top z-20'
+                : '-top-11 -right-2 w-16 sm:w-[72px] rotate-[10deg] z-0'
             }`}
           />
 
-          {/* Ảnh 1 (trên): Phong bao ban đầu dùng Ảnh 2 (DSC_9032.jpg - sạch 100%) */}
-          <div className="aspect-[4/4.3] w-full overflow-hidden bg-stone-100 mb-1.5">
-            <img
-              src={heroPhoto}
-              alt={`${groomShortName} & ${brideShortName}`}
-              className="w-full h-full object-cover object-[center_20%]"
-            />
-          </div>
-          {/* Ảnh 2 (dưới): Ảnh đôi tình cảm thứ 2 (couple-hero.jpg) */}
-          <div className="aspect-[4/4.3] w-full overflow-hidden bg-stone-100">
-            <img
-              src={kissPhoto}
-              alt={`${groomShortName} & ${brideShortName}`}
-              className="w-full h-full object-cover object-[center_24%]"
-            />
+          <div className="relative z-10 bg-white p-1.5 pb-2.5 shadow-[0_14px_28px_rgba(0,0,0,0.2)] rounded-[2px]">
+            {/* Ảnh 1 (trên): Phong bao ban đầu dùng Ảnh 2 (DSC_9032.jpg - sạch 100%) */}
+            <div className="aspect-[4/4.3] w-full overflow-hidden bg-stone-100 mb-1.5">
+              <img
+                src={heroPhoto}
+                alt={`${groomShortName} & ${brideShortName}`}
+                className="w-full h-full object-cover object-[center_20%]"
+              />
+            </div>
+            {/* Ảnh 2 (dưới): Ảnh đôi tình cảm thứ 2 (couple-hero.jpg) */}
+            <div className="aspect-[4/4.3] w-full overflow-hidden bg-stone-100">
+              <img
+                src={kissPhoto}
+                alt={`${groomShortName} & ${brideShortName}`}
+                className="w-full h-full object-cover object-[center_24%]"
+              />
+            </div>
           </div>
         </motion.div>
 
@@ -649,7 +667,7 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
           <BotanicalWaxSeal theme={theme} size="md" />
         </div>
 
-        {/* 7. CỤM HOA CƯỚI THẬT & DẢI REN / TUA RUA RỦ DÀI Ở GÓC DƯỚI BÊN PHẢI PHONG BÌ (Y HỆT FRAME_002) */}
+        {/* 7. CỤM HOA CƯỚI THẬT & DẢI REN / HOA DỀN RỦ + DÂY NGỌC TRAI Ở GÓC DƯỚI BÊN PHẢI PHONG BÌ (Y HỆT FRAME_002) */}
         <motion.img
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -664,7 +682,7 @@ export const LuxuryWeddingEnvelope: React.FC<LuxuryWeddingEnvelopeProps> = ({
           className={`pointer-events-none absolute z-30 object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.24)] ${
             isEmerald
               ? '-bottom-24 -right-6 sm:-bottom-28 sm:-right-8 w-30 sm:w-36'
-              : '-bottom-20 -right-6 sm:-bottom-24 sm:-right-7 w-26 sm:w-32'
+              : 'top-[54%] -right-5 sm:-right-6 w-[94px] sm:w-[108px]'
           }`}
         />
       </div>

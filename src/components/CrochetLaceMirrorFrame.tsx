@@ -13,16 +13,16 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
 }) => {
   const isEmerald = theme === 'emerald';
 
-  // Tạo đường viền vải ren thêu lỗ nhiều lớp (Broderie Anglaise Eyelet Ruffle Lace) giống 100% frame_004
+  // Khung gương Oval phóng lớn tối đa chiều ngang & chiều dọc để toàn bộ chữ nằm gọn gàng bên trong
   const { outerLacePath, midLacePath, eyeletFlowers, pearlDrapesRight, pearlDrapesLeft } =
     useMemo(() => {
-      const cx = 215;
-      const cy = 315;
-      const rxOuter = 178;
-      const ryOuter = 268;
-      const rxMid = 165;
-      const ryMid = 254;
-      const n = 52;
+      const cx = 220;
+      const cy = 345;
+      const rxOuter = 202;
+      const ryOuter = 320;
+      const rxMid = 190;
+      const ryMid = 307;
+      const n = 58;
 
       let dOuter = '';
       let dMid = '';
@@ -42,8 +42,8 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
         const oy1 = cy + ryOuter * Math.sin(t1);
         const ox2 = cx + rxOuter * Math.cos(t2);
         const oy2 = cy + ryOuter * Math.sin(t2);
-        const oxm = cx + (rxOuter + 13.5) * Math.cos(tm);
-        const oym = cy + (ryOuter + 13.5) * Math.sin(tm);
+        const oxm = cx + (rxOuter + 13) * Math.cos(tm);
+        const oym = cy + (ryOuter + 13) * Math.sin(tm);
 
         if (i === 0) dOuter += `M ${ox1.toFixed(1)} ${oy1.toFixed(1)} `;
         dOuter += `Q ${oxm.toFixed(1)} ${oym.toFixed(1)} ${ox2.toFixed(1)} ${oy2.toFixed(1)} `;
@@ -60,13 +60,13 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
         dMid += `Q ${mxm.toFixed(1)} ${mym.toFixed(1)} ${mx2.toFixed(1)} ${my2.toFixed(1)} `;
 
         // Cụm lỗ thêu hoa 4 cánh trên từng múi ren (Broderie Anglaise)
-        const fx = cx + (rxOuter + 3) * Math.cos(tm);
-        const fy = cy + (ryOuter + 3) * Math.sin(tm);
+        const fx = cx + (rxOuter + 2.8) * Math.cos(tm);
+        const fy = cy + (ryOuter + 2.8) * Math.sin(tm);
         const petals = [0, 1, 2, 3].map((k) => {
           const pa = tm + (k * Math.PI) / 2;
           return {
-            x: fx + 2.8 * Math.cos(pa),
-            y: fy + 2.8 * Math.sin(pa),
+            x: fx + 2.7 * Math.cos(pa),
+            y: fy + 2.7 * Math.sin(pa),
           };
         });
         flowers.push({ x: fx, y: fy, petals });
@@ -74,30 +74,30 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
       dOuter += 'Z';
       dMid += 'Z';
 
-      // Chuỗi ngọc trai uốn cong góc trên phải (giống frame_004 Video 2)
+      // Chuỗi ngọc trai uốn cong góc trên phải
       const rightStrand = [
-        { x: 355, y: 70, r: 5.5 },
-        { x: 372, y: 66, r: 5.5 },
-        { x: 388, y: 74, r: 5.5 },
-        { x: 396, y: 90, r: 5.5 },
-        { x: 394, y: 108, r: 5.2 },
-        { x: 385, y: 124, r: 5.0 },
-        { x: 379, y: 141, r: 4.8 },
-        { x: 380, y: 158, r: 4.6 },
-        { x: 385, y: 175, r: 4.4 },
+        { x: 374, y: 66, r: 5.4 },
+        { x: 391, y: 62, r: 5.4 },
+        { x: 407, y: 70, r: 5.4 },
+        { x: 416, y: 86, r: 5.2 },
+        { x: 414, y: 104, r: 5.0 },
+        { x: 405, y: 121, r: 4.8 },
+        { x: 399, y: 138, r: 4.6 },
+        { x: 401, y: 155, r: 4.4 },
+        { x: 407, y: 172, r: 4.2 },
       ];
 
-      // Chuỗi ngọc trai uốn cong góc dưới trái (giống frame_004 Video 2)
+      // Chuỗi ngọc trai uốn cong góc dưới trái
       const leftStrand = [
-        { x: 58, y: 455, r: 4.6 },
-        { x: 46, y: 470, r: 4.8 },
-        { x: 42, y: 488, r: 5.0 },
-        { x: 48, y: 506, r: 5.2 },
-        { x: 60, y: 521, r: 5.2 },
-        { x: 74, y: 536, r: 5.0 },
-        { x: 82, y: 554, r: 4.8 },
-        { x: 78, y: 572, r: 4.6 },
-        { x: 66, y: 586, r: 4.4 },
+        { x: 40, y: 505, r: 4.6 },
+        { x: 28, y: 520, r: 4.8 },
+        { x: 24, y: 538, r: 5.0 },
+        { x: 30, y: 556, r: 5.2 },
+        { x: 42, y: 572, r: 5.2 },
+        { x: 56, y: 587, r: 5.0 },
+        { x: 64, y: 605, r: 4.8 },
+        { x: 60, y: 623, r: 4.6 },
+        { x: 48, y: 638, r: 4.4 },
       ];
 
       return {
@@ -111,20 +111,20 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.94, y: 26 }}
+      initial={{ opacity: 0, scale: 0.95, y: 24 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className="relative mx-auto w-full max-w-[390px] sm:max-w-[440px] md:max-w-[465px] select-none"
+      className="relative mx-auto w-full max-w-[442px] sm:max-w-[468px] select-none"
     >
       <motion.div
-        animate={{ y: [0, -5, 0] }}
+        animate={{ y: [0, -4, 0] }}
         transition={{ duration: 5.8, repeat: Infinity, ease: 'easeInOut' }}
         className="relative w-full"
       >
-        {/* LỚP NỀN SVG KHUNG GƯƠNG VẢI REN THÊU LỖ & NGỌC TRAI */}
+        {/* LỚP NỀN SVG KHUNG GƯƠNG VẢI REN THÊU LỖ & NGỌC TRAI PHÓNG LỚN */}
         <svg
-          viewBox="0 0 430 630"
+          viewBox="0 0 440 690"
           className="w-full h-auto drop-shadow-[0_18px_38px_rgba(0,0,0,0.09)]"
           style={{ overflow: 'visible' }}
         >
@@ -146,32 +146,30 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
           {/* TRANG TRÍ GÓC NGOÀI: Dải ruy-băng ren mềm (Style 6) hoặc Chuỗi ngọc trai 3D (Style 7) */}
           {isEmerald ? (
             <g opacity="0.88">
-              {/* Dải ruy băng ren góc trên phải (giống v1_frames/frame_004) */}
               <path
-                d="M 358 180 C 378 145 365 92 405 68"
+                d="M 380 175 C 398 140 386 88 424 62"
                 fill="none"
                 stroke="#EAE8E1"
                 strokeWidth="14"
                 strokeLinecap="round"
               />
               <path
-                d="M 358 180 C 378 145 365 92 405 68"
+                d="M 380 175 C 398 140 386 88 424 62"
                 fill="none"
                 stroke="#FFFFFF"
                 strokeWidth="10"
                 strokeDasharray="2,4"
                 strokeLinecap="round"
               />
-              {/* Dải ruy băng ren góc dưới trái */}
               <path
-                d="M 78 465 C 58 505 66 556 22 575"
+                d="M 60 515 C 40 555 48 606 14 626"
                 fill="none"
                 stroke="#EAE8E1"
                 strokeWidth="14"
                 strokeLinecap="round"
               />
               <path
-                d="M 78 465 C 58 505 66 556 22 575"
+                d="M 60 515 C 40 555 48 606 14 626"
                 fill="none"
                 stroke="#FFFFFF"
                 strokeWidth="10"
@@ -202,7 +200,7 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
             </g>
           )}
 
-          {/* 1. LỚP BÈO VẢI REN LỚN NGOÀI CÙNG (Outer Eyelet Lace Ruffle) */}
+          {/* 1. LỚP BÈO VẢI REN LỚN NGOÀI CÙNG */}
           <path
             d={outerLacePath}
             fill={isEmerald ? '#FDFCF9' : '#FFFDFE'}
@@ -210,7 +208,7 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
             strokeWidth="1.1"
           />
 
-          {/* 2. CÁC BÔNG HOA LỖ THÊU KIM TRÊN BÈO REN (Broderie Anglaise Eyelets) */}
+          {/* 2. CÁC BÔNG HOA LỖ THÊU KIM TRÊN BÈO REN */}
           {eyeletFlowers.map((fl, idx) => (
             <g key={`ef-${idx}`} fill={isEmerald ? '#DCD8CE' : '#E5CFD7'} opacity="0.82">
               <circle cx={fl.x.toFixed(1)} cy={fl.y.toFixed(1)} r="1.2" />
@@ -228,12 +226,12 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
             strokeWidth="1"
           />
 
-          {/* 4. LÒNG KHUNG OVAL GIẤY MỸ THUẬT MỊN MÀNG Ở TÂM */}
+          {/* 4. LÒNG KHUNG OVAL GIẤY MỸ THUẬT RỘNG RÃI Ở TÂM */}
           <ellipse
-            cx="215"
-            cy="315"
-            rx="157"
-            ry="246"
+            cx="220"
+            cy="345"
+            rx="181"
+            ry="297"
             fill={`url(#mirrorCenterPaper-${theme})`}
             stroke={isEmerald ? '#DDD9CE' : '#E8D5DC'}
             strokeWidth="1.2"
@@ -241,17 +239,17 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
 
           {/* Đường chỉ chần tinh tế sát mép trong ren */}
           <ellipse
-            cx="215"
-            cy="315"
-            rx="152"
-            ry="241"
+            cx="220"
+            cy="345"
+            rx="175"
+            ry="291"
             fill="none"
             stroke={isEmerald ? 'rgba(92,122,82,0.22)' : 'rgba(138,40,65,0.2)'}
-            strokeWidth="0.8"
+            strokeWidth="0.85"
           />
         </svg>
 
-        {/* CÀNH HOA CALLA THẬT (PHOTOREALISTIC PNG) ĐẶT NGHIÊNG ÔM VIỀN DƯỚI BÊN PHẢI GƯƠNG (Y HỆT FRAME_004) */}
+        {/* CÀNH HOA CALLA THẬT ĐẶT NGHIÊNG ÔM VIỀN DƯỚI BÊN PHẢI GƯƠNG */}
         <img
           src={
             isEmerald
@@ -260,11 +258,11 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
           }
           alt=""
           aria-hidden="true"
-          className="pointer-events-none select-none absolute -bottom-3 right-1 sm:right-2 w-32 sm:w-38 z-20 object-contain rotate-[14deg] drop-shadow-[0_8px_16px_rgba(0,0,0,0.2)]"
+          className="pointer-events-none select-none absolute -bottom-3 right-2.5 sm:right-3.5 w-28 sm:w-34 z-20 object-contain rotate-[12deg] drop-shadow-[0_8px_16px_rgba(0,0,0,0.2)]"
         />
 
         {/* LỚP ÁNH SÁNG LƯỚT QUA MẶT GƯƠNG MƯỢT MÀ */}
-        <div className="pointer-events-none absolute inset-x-12 inset-y-14 rounded-[50%/45%] overflow-hidden">
+        <div className="pointer-events-none absolute inset-x-10 inset-y-12 rounded-[50%/46%] overflow-hidden">
           <motion.div
             animate={{ x: ['-130%', '230%'] }}
             transition={{ duration: 3.2, repeat: Infinity, repeatDelay: 4, ease: 'easeInOut' }}
@@ -273,7 +271,7 @@ export const CrochetLaceMirrorFrame: React.FC<CrochetLaceMirrorFrameProps> = ({
         </div>
 
         {/* NỘI DUNG CHÍNH NẰM TRỌN BÊN TRONG KHUNG GƯƠNG RỘNG RÃI */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-8 sm:px-12 py-10 sm:py-12 text-center z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-11 sm:px-14 py-12 sm:py-14 text-center z-10">
           {children}
         </div>
       </motion.div>

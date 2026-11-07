@@ -317,7 +317,7 @@ export const WeeklySaveTheDateSection: React.FC<{
   };
 
   return (
-    <section className="relative px-4 sm:px-8 pt-4 pb-6 overflow-hidden">
+    <section className="relative px-4 sm:px-8 pt-4 pb-12 overflow-hidden">
       {/* Dải ngọc trai / dải ren trang trí mép phải như trong video */}
       {!isEmerald && (
         <svg
@@ -452,6 +452,22 @@ export const WeeklySaveTheDateSection: React.FC<{
               stroke={isEmerald ? 'rgba(185,176,160,0.5)' : 'rgba(138,30,52,0.45)'}
               strokeWidth="0.8"
             />
+            {!isEmerald && (
+              <>
+                <path
+                  d="M 28 0 Q 52 28 70 44 Q 90 64 112 80 Q 128 92 140 102 Q 152 92 168 80 Q 190 64 210 44 Q 228 28 252 0 Z"
+                  fill="#440510"
+                  stroke="#2B0209"
+                  strokeWidth="0.9"
+                />
+                <polygon
+                  points="36,0 140,92 244,0"
+                  fill="#6B1022"
+                  stroke="#87192E"
+                  strokeWidth="0.8"
+                />
+              </>
+            )}
           </svg>
         </motion.div>
 
@@ -470,8 +486,8 @@ export const WeeklySaveTheDateSection: React.FC<{
           aria-hidden="true"
           className={`pointer-events-none select-none absolute z-25 object-contain drop-shadow-[0_10px_18px_rgba(0,0,0,0.25)] ${
             isEmerald
-              ? '-left-3 sm:-left-4 bottom-0 w-24 sm:w-28'
-              : '-left-2 sm:-left-3 -bottom-2 w-24 sm:w-28'
+              ? '-left-1 sm:left-0 bottom-0 w-24 sm:w-28'
+              : 'left-0.5 sm:left-1 top-[68px] sm:top-[76px] w-[86px] sm:w-[98px]'
           }`}
         />
 
